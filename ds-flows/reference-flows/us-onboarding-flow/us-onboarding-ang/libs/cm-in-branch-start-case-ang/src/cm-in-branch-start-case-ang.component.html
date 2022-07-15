@@ -1,0 +1,22 @@
+
+  <div [ngClass]="customClassName">
+    <bb-button-ui color="primary" (click)="openModal()" i18n="Button to start a new case|Label for button to start case with form including icon@@bb.start-case-ang.main-btn">
+      <i aria-hidden="true" class="bicon bicon-add mr-2"></i>
+      Start new case
+    </bb-button-ui>
+  </div>
+
+
+<bb-modal-ui *ngIf="isModalOpen" [isOpen]="isModalOpen" (cancel)="closeModal()">
+  <ng-container [ngSwitch]="currentStep">
+
+    <bb-product-selection *ngSwitchCase="'select-products'" (cancelled)="closeModal()"
+      (next)="goToStep($event)">
+    </bb-product-selection>
+    <bb-personal-information *ngSwitchCase="'personal-info'" (cancelled)="closeModal()"
+      (next)="finish()">
+    </bb-personal-information>
+
+  </ng-container>
+
+</bb-modal-ui>

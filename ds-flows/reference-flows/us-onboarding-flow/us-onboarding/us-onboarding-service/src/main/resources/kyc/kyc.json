@@ -1,0 +1,186 @@
+[
+  {
+    "type": "dropdown-single-select",
+    "key": "occupation",
+    "templateOptions": {
+      "label": "Occupation",
+      "placeholder": "Please select",
+      "required": true,
+      "options": [
+        {
+          "label": "Clerical",
+          "value": "Clerical"
+        },
+        {
+          "label": "Consultant",
+          "value": "Consultant"
+        },
+        {
+          "label": "Government",
+          "value": "Government"
+        },
+        {
+          "label": "Homemaker",
+          "value": "Homemaker"
+        },
+        {
+          "label": "Laborer",
+          "value": "Laborer"
+        },
+        {
+          "label": "Management",
+          "value": "Management"
+        },
+        {
+          "label": "Medical services",
+          "value": "Medical services"
+        },
+        {
+          "label": "Military",
+          "value": "Military"
+        },
+        {
+          "label": "Professional",
+          "value": "Professional"
+        },
+        {
+          "label": "Retired",
+          "value": "Retired"
+        },
+        {
+          "label": "Sales",
+          "value": "Sales"
+        },
+        {
+          "label": "Service",
+          "value": "Service"
+        },
+        {
+          "label": "Student",
+          "value": "Student"
+        },
+        {
+          "label": "Teacher",
+          "value": "Teacher"
+        },
+        {
+          "label": "Technology",
+          "value": "Technology"
+        },
+        {
+          "label": "Other",
+          "value": "Other"
+        }
+      ]
+    },
+    "validators": {
+      "validation": [
+        "singleOption"
+      ]
+    }
+  },
+  {
+    "type": "dropdown-single-select",
+    "key": "sourceOfIncome",
+    "templateOptions": {
+      "label": "Primary source of income",
+      "placeholder": "Please select",
+      "required": true,
+      "options": [
+        {
+          "label": "Payroll",
+          "value": "Payroll"
+        },
+        {
+          "label": "Beneficiary of Insurance",
+          "value": "Beneficiary of Insurance"
+        },
+        {
+          "label": "Gift / Inheritance",
+          "value": "Gift / Inheritance"
+        },
+        {
+          "label": "Loan Proceeds",
+          "value": "Loan Proceeds"
+        },
+        {
+          "label": "Proceeds from investments",
+          "value": "Proceeds from investments"
+        },
+        {
+          "label": "Rental income",
+          "value": "Rental income"
+        },
+        {
+          "label": "Sale of real estate",
+          "value": "Sale of real estate"
+        },
+        {
+          "label": "Savings",
+          "value": "Savings"
+        }
+      ]
+    },
+    "validators": {
+      "validation": [
+        "singleOption"
+      ]
+    }
+  },
+  {
+    "type": "dropdown-single-select",
+    "key": "purpose",
+    "templateOptions": {
+      "label": "Purpose of account",
+      "placeholder": "Please select",
+      "required": true,
+      "options": [
+        {
+          "label": "Salary and salary compensation",
+          "value": "Salary and salary compensation"
+        },
+        {
+          "label": "Pension",
+          "value": "Pension"
+        },
+        {
+          "label": "Scholarships, student work payments",
+          "value": "Scholarships, student work payments"
+        },
+        {
+          "label": "Pocket money",
+          "value": "Pocket money"
+        },
+        {
+          "label": "Royalties",
+          "value": "Royalties"
+        },
+        {
+          "label": "Unemployment benefits",
+          "value": "Unemployment benefits"
+        },
+        {
+          "label": "Social transfers",
+          "value": "Social transfers"
+        },
+        {
+          "label": "Foster care, alimony",
+          "value": "Foster care, alimony"
+        },
+        {
+          "label": "Transfer of funds from other accounts in the United States",
+          "value": "Transfer of funds from other accounts in the United States"
+        },
+        {
+          "label": "Transfer of funds from other accounts outside the United States",
+          "value": "Transfer of funds from other accounts outside the United States"
+        }
+      ]
+    },
+    "validators": {
+      "validation": [
+        "singleOption"
+      ]
+    }
+  }
+]

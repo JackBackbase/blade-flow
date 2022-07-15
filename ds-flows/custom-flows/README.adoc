@@ -1,0 +1,33 @@
+= Create a New Flow
+
+Follow the instructions below to use the archetype
+
+== 1. Navigate to the flow directory in the development environment.
+[source,bash]
+----
+cd <backbase_start_dir>/ono-flows/custom-flows/
+----
+
+== 2. Create a new flow using the maven archetype
+Within the custom-flows directory, run the following command:
+[source,bash]
+----
+mvn archetype:generate \
+-DarchetypeGroupId=com.backbase.flow.archetypes \
+-DarchetypeArtifactId=simple-journey-archetype \
+-DarchetypeVersion=[current-archetype-version] \
+-DserviceName="Simple Flow" \
+-DservicePackageName=com.example.flow \
+-DgroupId=com.example.flow \
+-DartifactId=simple-flow \
+-Dversion=0.0.1-SNAPSHOT
+----
+NOTE: Please ensure that you are making use of the latest version of the Maven Archetype. This can be cross-checked within the Backbase repository.
+
+== 3. Build the Flow
+Navigate to the newly created flow. The name of the directory should be the same name as the artifactId you provided in the previous command:
+[source,bash]
+----
+cd <artifactId>
+mvn clean install
+----

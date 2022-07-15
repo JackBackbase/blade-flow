@@ -1,0 +1,57 @@
+{
+  "key": "finalize-onboarding",
+  "version": 1,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "onboarding",
+  "caseDefinitionVersion": 1,
+  "steps": [
+    {
+      "name": "otp-verification",
+      "enabled": "true",
+      "entryPoint": true,
+      "handlers": [
+        {
+          "name": "request-otp"
+        },
+        {
+          "name": "verify-otp-finalize",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "credentials"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "credentials",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "setup-credentials",
+          "transitions": [
+            {
+              "condition": "success() && actionResult.body.isJointAccount && actionResult.body.isMainApplicantFlow",
+              "step": "successfully-done-co-applicant"
+            },
+            {
+              "condition": "success()",
+              "step": "successfully-done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "successfully-done",
+      "enabled": "true",
+      "exitPoint": true
+    },
+    {
+      "name": "successfully-done-co-applicant",
+      "enabled": "true",
+      "exitPoint": true
+    }
+  ]
+}

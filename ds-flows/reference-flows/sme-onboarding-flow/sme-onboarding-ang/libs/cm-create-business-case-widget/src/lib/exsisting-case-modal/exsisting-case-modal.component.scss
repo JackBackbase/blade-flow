@@ -1,0 +1,30 @@
+.info-container {
+    display: inline-grid;
+    grid-template-columns: 1fr 11fr;
+    align-content: center;
+    row-gap: 4px;
+   
+    .user {
+        &-icon {
+            grid-column-start: 1;
+            align-self: center;
+            margin-right: 12px;
+        }
+        &-link {
+            grid-row-start: 1;
+            grid-column-start: 2;
+            margin-bottom: 0;
+        }
+        &-status {
+            grid-row-start: 1;
+            grid-column-start: 2;
+            margin-left: 12px;
+        }
+        &-info {
+            grid-row-start: 2;
+            grid-column-start: 2;
+            font-size: 14px;
+        }
+    }
+}
+

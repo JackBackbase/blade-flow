@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1utyohk" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <decision id="decide-on-kyc" name="Decide on retail onboarding for additional owners" camunda:versionTag="0.1.0">
+    <informationRequirement id="InformationRequirement_13l44f0">
+      <requiredInput href="#InputData_1ai0zfa" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0u1ajpe">
+      <requiredInput href="#InputData_00u22nr" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1sl9hko">
+      <requiredInput href="#InputData_1y30dld" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1iotlv1" hitPolicy="FIRST">
+      <input id="Input_1" label="Control person" biodi:width="192" camunda:inputVariable="applicant">
+        <inputExpression id="InputExpression_1" typeRef="boolean" expressionLanguage="juel">
+          <text>applicant.get("control_person")</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0x5ktmj" label="Ownership" camunda:inputVariable="applicant">
+        <inputExpression id="LiteralExpression_1caxj1a" typeRef="double" expressionLanguage="juel">
+          <text>applicant.get("ownership_percentage")</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_143kxas" label="Role" camunda:inputVariable="applicant">
+        <inputExpression id="LiteralExpression_0i9vo9c" typeRef="string" expressionLanguage="juel">
+          <text>applicant.get("role")</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_09yszds">
+          <text>"Director","Treasurer","CFO","CEO","Secretary"</text>
+        </inputValues>
+      </input>
+      <output id="Output_1" label="KYC required" name="kycRequired" typeRef="boolean" />
+      <rule id="DecisionRule_1jirddd">
+        <description>if the applicant is a control person, regardless of ownership and role they have to go through KYC</description>
+        <inputEntry id="UnaryTests_0uxki0f">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0upz68f">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kaht1w">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1iyj3ju">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0unj0o9">
+        <description>if the applicant  has more or equal to 25% ownership then they are an UBO and have to go through KYC</description>
+        <inputEntry id="UnaryTests_07aebf2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0tt9289">
+          <text>&gt;25</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_167uaj9">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fahe7z">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1o0zj3h">
+        <description>if the main applicant has a specific role, regardless of ownership and being a control person or not, they have to go through KYC</description>
+        <inputEntry id="UnaryTests_0a9zkt6">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wv1so6">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c6z6qv">
+          <text>"Director"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05gq7pl">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1cqn80w">
+        <description>additional example of potential configuration looking at the role and ownership %, depending on the FIs policies.</description>
+        <inputEntry id="UnaryTests_0lilpdn">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08m002r">
+          <text>&gt;15</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1b93ldz">
+          <text>"CFO","CEO"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12pqyuu">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1qz0ix8">
+        <description>the HIT policy is first so the rules have to be prioritised according to the targeted outcome</description>
+        <inputEntry id="UnaryTests_1scfo35">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nbntwi">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kio0uz">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_105awfy">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1ai0zfa" name="Control_person_flag" />
+  <inputData id="InputData_00u22nr" name="Ownership" />
+  <inputData id="InputData_1y30dld" name="Role" />
+  <textAnnotation id="TextAnnotation_14tsaul">
+    <text>saved as number in business relations journey</text>
+  </textAnnotation>
+  <association id="Association_1xcl6zd">
+    <sourceRef href="#TextAnnotation_14tsaul" />
+    <targetRef href="#InputData_00u22nr" />
+  </association>
+  <textAnnotation id="TextAnnotation_1l0fb5h">
+    <text>saved as boolean in business relations journey</text>
+  </textAnnotation>
+  <association id="Association_0zxpvtj">
+    <sourceRef href="#TextAnnotation_1l0fb5h" />
+    <targetRef href="#InputData_1ai0zfa" />
+  </association>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="decide-on-kyc">
+        <dc:Bounds height="80" width="180" x="300" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1uleyk3" dmnElementRef="InputData_1ai0zfa">
+        <dc:Bounds height="45" width="125" x="497" y="278" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1tgd3yg" dmnElementRef="InformationRequirement_13l44f0">
+        <di:waypoint x="560" y="278" />
+        <di:waypoint x="435" y="200" />
+        <di:waypoint x="435" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0l3z15h" dmnElementRef="InputData_00u22nr">
+        <dc:Bounds height="45" width="125" x="327" y="279" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0s4o65c" dmnElementRef="InformationRequirement_0u1ajpe">
+        <di:waypoint x="390" y="279" />
+        <di:waypoint x="390" y="200" />
+        <di:waypoint x="390" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1mn1wib" dmnElementRef="InputData_1y30dld">
+        <dc:Bounds height="45" width="125" x="158" y="280" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0ksftya" dmnElementRef="InformationRequirement_1sl9hko">
+        <di:waypoint x="221" y="280" />
+        <di:waypoint x="345" y="200" />
+        <di:waypoint x="345" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0ov46xx" dmnElementRef="TextAnnotation_14tsaul">
+        <dc:Bounds height="50" width="130" x="340" y="360" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0ussqo1" dmnElementRef="Association_1xcl6zd">
+        <di:waypoint x="390" y="360" />
+        <di:waypoint x="390" y="324" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_002z5we" dmnElementRef="TextAnnotation_1l0fb5h">
+        <dc:Bounds height="50" width="150" x="510" y="360" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0hmjinf" dmnElementRef="Association_0zxpvtj">
+        <di:waypoint x="560" y="360" />
+        <di:waypoint x="560" y="323" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

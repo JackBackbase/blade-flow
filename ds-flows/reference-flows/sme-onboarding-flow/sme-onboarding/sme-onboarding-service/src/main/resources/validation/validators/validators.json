@@ -1,0 +1,10 @@
+[
+  {
+    "name": "age",
+    "type": "IMPL",
+    "error": {
+      "code": "FLOW-AGE-INVALID",
+      "message": "Customer's age should be between 18 and 100 years old."
+    }
+  }
+]

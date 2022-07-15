@@ -1,0 +1,487 @@
+{
+  "name": "container-bb-manageable-area-_-yucjwi",
+  "properties": {
+    "title": "Manageable Area",
+    "autoExtend": true
+  },
+  "children": [
+    {
+      "name": "bb-us-journey-ang-_-kgxsmo",
+      "properties": {
+        "title": "Journey Angular App Container",
+        "render.requires": "render-bb-ssr",
+        "render.strategy": "render-bb-widget-3",
+        "versionOfDependencies": "{\"case-management-ui-ang\":\"3.0.0\",\"flow-interaction-sdk-ang\":\"3.0.0\",\"flow-interaction-openapi-data\":\"2.0.17\",\"foundation-ang\":\"6.13.1\",\"ono-journey-collection-ang\":\"0.2.1-SNAPSHOT.4\",\"ui-ang\":\"6.16.2\",\"universal-ang\":\"7.0.1\",\"cm-aml-results-widget\":\"0.2.0\",\"ds-shared-ang\":\"2.1.1-SNAPSHOT.1\"}"
+      },
+      "children": [
+        {
+          "name": "bb-flow-interaction-container-ang-_-wqjlm",
+          "properties": {
+            "classId": "FlowInteractionContainerComponent",
+            "title": "Flow Interaction Container",
+            "apiVersion": "v2",
+            "deploymentPath": "interactions",
+            "input.apiVersion": "model apiVersion",
+            "input.deploymentPath": "model deploymentPath",
+            "input.interactionName": "model interactionName",
+            "input.servicePath": "model servicePath",
+            "interactionName": "origination",
+            "outletName": "",
+            "render.requires": "render-bb-widget-3",
+            "servicePath": "us-onboarding/client-api/interaction",
+            "version": "2.0.0"
+          },
+          "children": [
+            {
+              "name": "bb-us-ds-layout-container-ang-_-4vbn0d",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "init",
+                "backgroundImageL": "",
+                "backgroundImageM": "",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": "origination",
+                "notifyScreen": false,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-us-ono-loading-widget-ang-_-r5foib",
+                  "properties": {
+                    "classId": "OnoLoadingWidgetAngComponent",
+                    "title": "OnoLoadingWidgetAng Widget",
+                    "fetchCustomer": true,
+                    "render.requires": "render-bb-widget-3",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-l55m0s",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "select-products",
+                "backgroundImageL": "cs:@default:7b3ea671030c31d58ca778b67b5ede19",
+                "backgroundImageM": "cs:@default:4920595ab246f9cd3b93abb37a20c6e0",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": "origination",
+                "notifyScreen": false,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-product-selection-journey-ang-_-dupwcg",
+                  "properties": {
+                    "classId": "ProductSelectionJourneyAngComponent",
+                    "title": "ProductSelectionJourneyAng Widget",
+                    "multipleSelection": false,
+                    "product1": "cs:contentRepository:bc31d2116ae879bff5d2912d83dc7d64",
+                    "product2": "cs:contentRepository:90c10044bd397f9a18415501db6d038e",
+                    "product3": "cs:contentRepository:c5fc67f6d968ab554f1b3f981dfd89e2",
+                    "productBackgroundColor": "",
+                    "productType": "",
+                    "query": "{}",
+                    "render.requires": "render-bb-widget-3",
+                    "selectionType": "single",
+                    "version": "0.5.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-2gtid",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "terms-and-conditions",
+                "backgroundImageL": "cs:@default:9c6f6d28f1928be9b229776d77d212f5",
+                "backgroundImageM": "cs:@default:4f72a8ba5520f42de3409bfc21d3b8bf",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": "origination",
+                "notifyScreen": false,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-tac-journey-ang-_-u5xpdi",
+                  "properties": {
+                    "classId": "OnoTacJourneyAngComponent",
+                    "title": "OnoTacJourneyAng Widget",
+                    "input.stepName": "model stepName",
+                    "modalStepImage1": "cs:@default:4c80b2decc92e60677afe8c467421465",
+                    "modalStepImage2": "cs:@default:01878d4153f61f465b5e54475e1836ec",
+                    "modalStepImage3": "cs:@default:f3422bd934ad96c49c5567a25c7c6bfd",
+                    "render.requires": "render-bb-widget-3",
+                    "stepName": "terms-and-conditions",
+                    "tncPrivacyStatementLinkText": "Privacy Statement",
+                    "tncPrivacyStatementLinkUrl": "https://www.backbase.com/",
+                    "tncTermsConditionsLinkText": "Terms and Conditions",
+                    "tncTermsConditionsLinkUrl": "https://www.backbase.com/",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-98rb8",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "address",
+                "backgroundImageL": "cs:@default:9c6f6d28f1928be9b229776d77d212f5",
+                "backgroundImageM": "cs:@default:4f72a8ba5520f42de3409bfc21d3b8bf",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": "origination",
+                "notifyScreen": false,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-address-journey-ang-_-uj7pu",
+                  "properties": {
+                    "classId": "OnoAddressJourneyAngComponent",
+                    "title": "OnoAddressJourney Widget",
+                    "description": "",
+                    "header": "",
+                    "input.stepName": "model stepName",
+                    "isCoApplicant": false,
+                    "render.requires": "render-bb-widget-3",
+                    "stepName": "address",
+                    "version": "0.2.2"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-k1uudk",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "co-applicant",
+                "backgroundImageL": "cs:@default:9c6f6d28f1928be9b229776d77d212f5",
+                "backgroundImageM": "cs:@default:4f72a8ba5520f42de3409bfc21d3b8bf",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": "origination",
+                "notifyScreen": false,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-add-co-applicant-journey-ang-_-a1twje",
+                  "properties": {
+                    "classId": "OnoAddCoApplicantJourneyAngComponent",
+                    "title": "OnoAddCoApplicantAng Widget",
+                    "input.stepName": "model stepName",
+                    "render.requires": "render-bb-widget-3",
+                    "stepName": "co-applicant",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-rwqir2",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "co-applicant-data",
+                "backgroundImageL": "cs:@default:1ec7c8021ac4ee5000c1f15f37641749",
+                "backgroundImageM": "cs:@default:fdaae0b9f82554015ad602ab997f4815",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": "origination",
+                "notifyScreen": false,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-anchor-journey-ang-_-z27oxn",
+                  "properties": {
+                    "classId": "OnoAnchorJourneyAngComponent",
+                    "title": "OnoAnchorJourney Widget",
+                    "isCoApplicant": true,
+                    "render.requires": "render-bb-widget-3",
+                    "version": "0.0.3"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-jedfv7",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "co-applicant-address",
+                "backgroundImageL": "cs:@default:9c6f6d28f1928be9b229776d77d212f5",
+                "backgroundImageM": "cs:@default:4f72a8ba5520f42de3409bfc21d3b8bf",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": "origination",
+                "notifyScreen": false,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-address-journey-ang-_-061uz",
+                  "properties": {
+                    "classId": "OnoAddressJourneyAngComponent",
+                    "title": "OnoAddressJourney Widget",
+                    "description": "",
+                    "header": "",
+                    "input.stepName": "model stepName",
+                    "isCoApplicant": true,
+                    "render.requires": "render-bb-widget-3",
+                    "stepName": "address",
+                    "version": "0.2.2"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-p0lmtr",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "kyc",
+                "backgroundImageL": "cs:@default:96201b0a6e6661d0e4d414c0240e4d09",
+                "backgroundImageM": "cs:@default:a72997999fc57833c10ed95c3f4636ac",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": "origination",
+                "notifyScreen": false,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-on-kyc-journey-ang-_-2a5g68",
+                  "properties": {
+                    "classId": "OnoKycJourneyAngComponent",
+                    "title": "OnoKycJourneyAng Widget",
+                    "render.requires": "render-bb-widget-3",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-o7ft7q",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "Response - OnoStepContainerAng Container",
+                "route": "identity-verified",
+                "backgroundImageL": "cs:@default:3fa91c3bd924aa5609a06efe18cb116d",
+                "backgroundImageM": "cs:@default:931baf24a5fc6e5a103f68df0be1dc95",
+                "backgroundImageS": "cs:@default:2901f1579fb0b538c0de5fd523f70cdc",
+                "headline": "",
+                "interactionName": false,
+                "notifyScreen": true,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-response-journey-ang-_-ok8f9g",
+                  "properties": {
+                    "classId": "OnoResponseJourneyAngComponent",
+                    "title": "OnoResponseJourneyAng Widget",
+                    "primaryButtonAction": "empty-handler",
+                    "primaryButtonLabel": "Continue",
+                    "render.requires": "render-bb-widget-3",
+                    "secondaryButtonAction": "save-for-later",
+                    "secondaryButtonLabel": "Save for later",
+                    "textDocument": "cs:@default:9c28a39beb4c26ad48a5b81a697cb158",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-142w8o",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "Response - OnoStepContainerAng Container",
+                "route": "successfully-done",
+                "backgroundImageL": "cs:@default:6366c2d9237af02b8a1a62823473f343",
+                "backgroundImageM": "cs:@default:0d06a62e9bed632571c0f5e73cb1058c",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": false,
+                "notifyScreen": true,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-response-journey-ang-_-hs8eyg",
+                  "properties": {
+                    "classId": "OnoResponseJourneyAngComponent",
+                    "title": "OnoResponseJourneyAng Widget",
+                    "primaryButtonAction": "go-to-my-account",
+                    "primaryButtonLabel": "Go to my account",
+                    "render.requires": "render-bb-widget-3",
+                    "secondaryButtonAction": "",
+                    "secondaryButtonLabel": "",
+                    "textDocument": "cs:@default:1c4d79871e91b3793d4f8c2b585468ee",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-buspv",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "Response - OnoStepContainerAng Container",
+                "route": "successfully-done-co-applicant",
+                "backgroundImageL": "cs:@default:6366c2d9237af02b8a1a62823473f343",
+                "backgroundImageM": "cs:@default:0d06a62e9bed632571c0f5e73cb1058c",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": false,
+                "notifyScreen": true,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-response-journey-ang-_-t1y4i9",
+                  "properties": {
+                    "classId": "OnoResponseJourneyAngComponent",
+                    "title": "OnoResponseJourneyAng Widget",
+                    "primaryButtonAction": "go-to-my-account",
+                    "primaryButtonLabel": "Ok, keep me posted!",
+                    "render.requires": "render-bb-widget-3",
+                    "secondaryButtonAction": "",
+                    "secondaryButtonLabel": "",
+                    "textDocument": "cs:@default:334acffb6acb4d05fd2042065c110434",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-jjegfa",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "Response - OnoStepContainerAng Container",
+                "route": "in-review-done",
+                "backgroundImageL": "cs:@default:87b65bf7ef5366ce0905a17d3576e31d",
+                "backgroundImageM": "cs:@default:94bb5ccc2db5466a3134d7ed65451a2b",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": false,
+                "notifyScreen": true,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-response-journey-ang-_-x70n58",
+                  "properties": {
+                    "classId": "OnoResponseJourneyAngComponent",
+                    "title": "OnoResponseJourneyAng Widget",
+                    "primaryButtonAction": "got-it",
+                    "primaryButtonLabel": "Got it",
+                    "render.requires": "render-bb-widget-3",
+                    "secondaryButtonAction": "",
+                    "secondaryButtonLabel": "",
+                    "textDocument": "cs:@default:96d799b0622e12bd7a0f7b5ffda34ceb",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-h7c2tp",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "Response Retry - OnoStepContainerAng Container",
+                "route": "retry",
+                "backgroundImageL": "cs:@default:68c4d27f4eec0317de0db3c1fb3795e3",
+                "backgroundImageM": "cs:@default:ad6c9e64de40a3eac7d3f9a080a31ec4",
+                "backgroundImageS": "cs:@default:6cc4a7fadcd570d1f93404a24882ead9",
+                "headline": "",
+                "interactionName": false,
+                "notifyScreen": true,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-response-retry-journey-ang-_-dzb1aif",
+                  "properties": {
+                    "classId": "OnoResponseRetryJourneyAngComponent",
+                    "title": "OnoResponseRetryJourneyAng Widget",
+                    "render.requires": "render-bb-widget-3",
+                    "textDocument": "cs:@default:e3e4b346ad16a1487d6e8eb54809d1a5",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-us-ds-layout-container-ang-_-ronwnp",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "Response Declined - OnoStepContainerAng Container",
+                "route": "declined",
+                "backgroundImageL": "cs:@default:fc15e992ee1e969f8312e86734ba1c5d",
+                "backgroundImageM": "cs:@default:f563c7b44e7584e68094897b7deff8f8",
+                "backgroundImageS": "",
+                "headline": "",
+                "interactionName": false,
+                "notifyScreen": true,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.0-SNAPSHOT.0"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-response-declined-journey-ang-_-e54fvj",
+                  "properties": {
+                    "classId": "OnoResponseDeclinedJourneyAngComponent",
+                    "title": "OnoResponseDeclinedJourneyAngComponent Widget",
+                    "customerServiceUrl": "",
+                    "localBranchUrl": "",
+                    "productsListhUrl": "",
+                    "render.requires": "render-bb-widget-3",
+                    "version": "1.0.0"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

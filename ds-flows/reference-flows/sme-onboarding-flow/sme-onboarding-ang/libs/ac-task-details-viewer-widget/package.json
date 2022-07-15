@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@backbase/ac-task-details-viewer-widget",
+  "version": "2.0.4",
+  "description": "Widget to view task details in Application center",
+  "peerDependencies": {
+    "@angular/common": "^10.2.0 || ^11.2.0",
+    "@angular/core": "^10.2.0 || ^11.2.0",
+    "@angular/router": "^10.2.0 || ^11.2.0",
+    "@angular/platform-browser": "^10.2.0 || ^11.2.0",
+    "@angular/forms": "^10.2.0 || ^11.2.0",
+    "rxjs": "~6.6.6",
+    "@backbase/foundation-ang": "^6.9.0",
+    "@backbase/ui-ang": "^6.0.0",
+    "@backbase/case-management-ui-ang": "^3.0.0",
+    "@backbase/ac-common-ang": "^1.0.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "dest": "../../dist/libs/ac-task-details-viewer-widget"
+  }
+}

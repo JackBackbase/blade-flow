@@ -1,0 +1,7 @@
+# This configuration file enables the use of Audit
+
+backbase:
+  audit:
+    enabled: true
+    mode: sync
+  flow.audit.impl: DBS

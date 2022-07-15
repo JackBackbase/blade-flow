@@ -1,0 +1,44 @@
+<ng-container *bbDataLoader="requestsOrError$ | async as requestsReferenceGroup; errorHandler requestsLoadingError">
+  <div class="px-2 mt-4" *ngFor="let requestsOverviewGroup of requestsReferenceGroup | keyvalue">
+    <small>{{ requestsOverviewGroup.key }}</small>
+    <ng-container *ngIf="totalTasksCounter$ | async; else noTasksTpl">
+      <ng-container *ngIf="requestsOverviewGroup.value[documentRequestOverviewGroup.Open] as requests">
+        <bb-header-ui headingType="h6" i18n-heading="@@bb.ac-document-request-viewer-widget.open-tasks-section-header"
+          heading="OPEN" headingClasses="text-muted mt-4"></bb-header-ui>
+        <bb-document-request *ngFor="let request of requests" [documentRequest]="request" [assignee]="customer$ | async"
+          (click)="documentRequestId.emit(request.internalId)" class="mb-3">
+        </bb-document-request>
+      </ng-container>
+
+      <ng-container *ngIf="requestsOverviewGroup.value[documentRequestOverviewGroup.Done] as requests">
+        <bb-header-ui headingType="h6" i18n-heading="@@bb.ac-document-request-viewer-widget.open-tasks-section-header"
+          heading="DONE" headingClasses="text-muted mt-4"></bb-header-ui>
+
+        <bb-document-request *ngFor="let request of requests" [documentRequest]="request" [assignee]="customer$ | async"
+          (click)="documentRequestId.emit(request.internalId)" class="mb-3">
+        </bb-document-request>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-container>
+
+
+<ng-template #requestsLoadingError let-error>
+  <div data-role="document-requests-loading-http-error-state">
+    <bb-empty-state-ui title="Unknown Error"
+      i18n-title="@@bb.ac-document-request-viewer-widget.fileset-container.unknown-error-title"
+      subtitle="Try to reload the page or contact the system administrator" iconModifier="error-outline"
+      i18n-subtitle="@@bb.ac-document-request-viewer-widget.fileset-container.unknown-error-subtitle" iconSize="xxl">
+    </bb-empty-state-ui>
+  </div>
+</ng-template>
+
+<ng-template #noTasksTpl>
+  <div class="flex-column d-flex align-items-center my-5">
+    <bb-icon-ui name="assignment-turned-in" size="xxl"></bb-icon-ui>
+    <strong class="mt-3" i18n="@@bb.ac-document-request-viewer-widget.no-tasks-text">No tasks</strong>
+    <small class="text-muted" i18n="@@bb.ac-document-request-viewer-widget.no-tasks-explanation">There's no action
+      you can
+      take</small>
+  </div>
+</ng-template>

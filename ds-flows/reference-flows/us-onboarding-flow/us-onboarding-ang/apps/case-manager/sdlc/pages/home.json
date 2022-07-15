@@ -1,0 +1,618 @@
+{
+  "extends": "container-bb-manageable-area",
+  "children": [
+    {
+      "extends": "bb-us-case-manager-ang",
+      "area": "0",
+      "children": [
+        {
+          "classId": "LayoutContainerComponent",
+          "children": [
+            {
+              "classId": "PanelContainerComponent",
+              "title": "Branding Area",
+              "children": []
+            },
+            {
+              "classId": "PanelContainerComponent",
+              "title": "Right Topbar Area",
+              "children": [
+                {
+                  "classId": "CmLogoutWidgetComponent",
+                  "serviceUrl": "us-onboarding"
+                }
+              ]
+            },
+            {
+              "classId": "PanelContainerComponent",
+              "title": "Sidebar Area",
+              "children": [
+                {
+                  "classId": "NavigationSpaWidgetComponent",
+                  "sourceRoutesName": "bb-deck-container-ang-_-5953cf11f91a"
+                }
+              ]
+            },
+            {
+              "classId": "PanelContainerComponent",
+              "title": "Header Area",
+              "children": []
+            },
+            {
+              "classId": "PanelContainerComponent",
+              "title": "Main Content Area",
+              "children": [
+                {
+                  "name": "bb-deck-container-ang-_-5953cf11f91a",
+                  "classId": "DeckContainerComponent",
+                  "children": [
+                    {
+                      "name": "bb-panel-container-ang-_-e6332dbfb2d6",
+                      "classId": "PanelContainerComponent",
+                      "title": "Dashboard",
+                      "route": "dashboard",
+                      "cssClasses": "",
+                      "navIcon": "dashboard",
+                      "children": [
+                        {
+                          "classId": "CmPlatformContainerComponent",
+                          "bb.caseData.servicePath": "/us-onboarding",
+                          "bb.iam.servicePath": "/us-onboarding",
+                          "bb.interaction.apiVersion": "v2",
+                          "bb.interaction.deploymentPath": "interactions",
+                          "bb.interaction.servicePath": "/us-onboarding/client-api/interaction",
+                          "bb.journeyName": "onboarding",
+                          "bb.process.servicePath": "/us-onboarding",
+                          "children": [
+                            {
+                              "classId": "PanelContainerComponent",
+                              "children": [
+                                {
+                                  "classId": "CmHeaderWidgetComponent"
+                                },
+                                {
+                                  "classId": "ColumnContainerComponent",
+                                  "children": [
+                                    {
+                                      "classId": "PanelContainerComponent",
+                                      "title": "Column 1",
+                                      "columnClass": "col-8",
+                                      "children": [
+                                        {
+                                          "classId": "CmUserDashboardWidgetComponent",
+                                          "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-0f792c190cb9",
+                                          "output.taskInstanceId": "navigation:bb-panel-container-ang-_-e6332dbfb2d6"
+                                        },
+                                        {
+                                          "classId": "SidebarOverlayContainerComponent",
+                                          "bb.routeParamTrigger": "taskInstanceId",
+                                          "children": [
+                                            {
+                                              "classId": "CmTaskDetailsWidgetComponent"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "classId": "PanelContainerComponent",
+                                      "title": "Column 2",
+                                      "columnClass": "col-4",
+                                      "children": [
+                                        {
+                                          "classId": "PanelContainerComponent",
+                                          "cssClasses": "d-block card card-body shadow-none",
+                                          "children": [
+                                            {
+                                              "classId": "CmTaskCountSummaryWidgetComponent",
+                                              "bb.processDefinitionId": "us-onboarding",
+                                              "bb.taskCountSummary.subtitle": "",
+                                              "bb.taskCountSummary.title": "Task Progress"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "classId": "PanelContainerComponent",
+                                          "cssClasses": "d-block card card-body shadow-none mt-4",
+                                          "children": [
+                                            {
+                                              "classId": "CmLiveInsightsWidgetComponent",
+                                              "bb.caseDefinitionKey": "onboarding@1"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "classId": "PanelContainerComponent",
+                      "title": "Retail Onboarding",
+                      "route": "retail-onboarding",
+                      "navIcon": "user",
+                      "children": [
+                        {
+                          "classId": "CmPlatformContainerComponent",
+                          "bb.caseData.servicePath": "/us-onboarding",
+                          "bb.comments.servicePath": "/us-onboarding",
+                          "bb.iam.servicePath": "/us-onboarding",
+                          "bb.interaction.apiVersion": "v2",
+                          "bb.interaction.deploymentPath": "interactions",
+                          "bb.interaction.servicePath": "/us-onboarding/client-api/interaction",
+                          "bb.journeyName": "onboarding",
+                          "bb.process.servicePath": "/us-onboarding",
+                          "children": [
+                            {
+                              "classId": "DeckContainerComponent",
+                              "children": [
+                                {
+                                  "classId": "PanelContainerComponent",
+                                  "title": "CaseDefinitionOverview",
+                                  "route": "",
+                                  "children": [
+                                    {
+                                      "classId": "PanelContainerComponent",
+                                      "cssClasses": "",
+                                      "children": [
+                                        {
+                                          "classId": "CmInBranchStartCaseAngComponent",
+                                          "customClassName": "float-right",
+                                          "apiVersion": "v2",
+                                          "servicePath": "us-onboarding/client-api/interaction",
+                                          "deploymentPath": "interactions",
+                                          "interactionName": "in-branch-onboarding",
+                                          "output.caseInstanceKey": "navigation:bb-case-overview-container-ang-_-31a522bb4c8b"
+                                        },
+                                        {
+                                          "classId": "HeadingWidgetComponent",
+                                          "customClassName": "d-flex justify-content-between p-0",
+                                          "heading": "Retail onboarding",
+                                          "headingType": "h1"
+                                        },
+                                        {
+                                          "classId": "TabContainerComponent",
+                                          "children": [
+                                            {
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Cases",
+                                              "route": "",
+                                              "children": [
+                                                {
+                                                  "classId": "PanelContainerComponent",
+                                                  "cssClasses": "d-block card card-body mt-4",
+                                                  "children": [{
+                                                    "classId": "CmCaseOverviewListWidgetComponent",
+                                                    "bb.caseDefinitionKey": "onboarding@1",
+                                                    "output.caseInstanceKey": "navigation:bb-case-overview-container-ang-_-31a522bb4c8b"
+                                                  }
+                                                ]}
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-db178c061d8c",
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Tasks",
+                                              "route": "",
+                                              "cssClasses": "d-block card card-body",
+                                              "children": [
+                                                {
+                                                  "classId": "ModalOverlayContainerComponent",
+                                                  "children": [
+                                                    {
+                                                      "classId": "CmViewInteractionTaskWidgetComponent",
+                                                      "apiVersion": "v2",
+                                                      "bb.showStepper": true,
+                                                      "deploymentPath": "interactions",
+                                                      "interactionName": "address-validation-idt",
+                                                      "servicePath": "us-onboarding/client-api/interaction"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "classId": "SidebarOverlayContainerComponent",
+                                                  "bb.routeParamTrigger": "taskInstanceId",
+                                                  "children": [
+                                                    {
+                                                      "classId": "CmTaskDetailsWidgetComponent"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "classId": "CmTaskOverviewListWidgetComponent",
+                                                  "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-0f792c190cb9",
+                                                  "output.taskInstanceId": "navigation:bb-panel-container-ang-_-db178c061d8c"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "classId": "PanelContainerComponent",
+                                  "title": "CaseOverview",
+                                  "route": "",
+                                  "children": [
+                                    {
+                                      "name": "bb-case-overview-container-ang-_-31a522bb4c8b",
+                                      "classId": "CmCaseOverviewContainerComponent",
+                                      "children": [
+                                        {
+                                          "classId": "TabContainerComponent",
+                                          "children": [
+                                            {
+                                              "name": "bb-panel-container-ang-_-d8c990d86348",
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Overview",
+                                              "route": "",
+                                              "children": [
+                                                {
+                                                  "classId": "PanelContainerComponent",
+                                                  "cssClasses": "d-block card card-body mb-4",
+                                                  "children": [
+                                                    {
+                                                      "classId": "CmCaseInfoWidgetComponent"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "classId": "ColumnContainerComponent",
+                                                  "containerClasses": "px-0",
+                                                  "children": [
+                                                    {
+                                                      "classId": "PanelContainerComponent",
+                                                      "title": "Column 1",
+                                                      "columnClass": "col",
+                                                      "cssClasses": "col mt-4",
+                                                      "children": [
+                                                        {
+                                                          "classId": "CmCaseDataOverviewWidgetComponent"
+                                                        },
+                                                        {
+                                                          "classId": "CmApplicantsListWidgetComponent",
+                                                          "showGoToApplicantLink": true
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "classId": "PanelContainerComponent",
+                                                      "title": "Column 2",
+                                                      "columnClass": "col",
+                                                      "cssClasses": "col mt-4",
+                                                      "children": [
+                                                        {
+                                                          "classId": "PanelContainerComponent",
+                                                          "cssClasses": "d-block card card-body",
+                                                          "children": [
+                                                            {
+                                                              "classId": "ModalOverlayContainerComponent",
+                                                              "children": [
+                                                                {
+                                                                  "classId": "CmViewInteractionTaskWidgetComponent",
+                                                                  "apiVersion": "v2",
+                                                                  "bb.showStepper": true,
+                                                                  "deploymentPath": "interactions",
+                                                                  "interactionName": "address-validation-idt",
+                                                                  "servicePath": "us-onboarding/client-api/interaction"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "classId": "SidebarOverlayContainerComponent",
+                                                              "bb.routeParamTrigger": "taskInstanceId",
+                                                              "children": [
+                                                                {
+                                                                  "classId": "CmTaskDetailsWidgetComponent"
+                                                                },
+                                                                {
+                                                                  "classId": "PanelContainerComponent",
+                                                                  "cssClasses": "d-block my-4 container",
+                                                                  "children": [
+                                                                    {
+                                                                      "classId": "CmCommentsWidgetComponent",
+                                                                      "bb.caseDefinitionKey": "onboarding@1"
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "classId": "CmEventsAndTasksWidgetComponent",
+                                                              "output.eventLogLinkClick": "navigation:bb-panel-container-ang-_-c30035fdaa08",
+                                                              "output.taskInstanceId": "navigation:bb-panel-container-ang-_-d8c990d86348"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "classId": "PanelContainerComponent",
+                                                          "cssClasses": "d-block card card-body my-4",
+                                                          "children": [
+                                                            {
+                                                              "classId": "CmCommentsWidgetComponent",
+                                                              "bb.caseDefinitionKey": "onboarding@1"
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-d8c990d86300",
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Applicants",
+                                              "route": "applicants",
+                                              "children": [
+                                                {
+                                                  "classId": "ColumnContainerComponent",
+                                                  "containerClasses": "px-0",
+                                                  "children": [
+                                                    {
+                                                      "classId": "PanelContainerComponent",
+                                                      "title": "Column 1",
+                                                      "columnClass": "col",
+                                                      "cssClasses": "d-block col-md-6 mt-4",
+                                                      "children": [
+                                                        {
+                                                          "classId": "CmCaseDataOverviewWidgetComponent",
+                                                          "showApplicants": true
+                                                        }
+                                                        
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-cac43754f1f6",
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Tasks",
+                                              "route": "",
+                                              "cssClasses": "d-block m-5",
+                                              "children": [
+                                                {
+                                                  "classId": "ModalOverlayContainerComponent",
+                                                  "children": [
+                                                    {
+                                                      "classId": "CmViewInteractionTaskWidgetComponent",
+                                                      "apiVersion": "v2",
+                                                      "bb.showStepper": true,
+                                                      "deploymentPath": "interactions",
+                                                      "interactionName": "address-validation-idt",
+                                                      "servicePath": "us-onboarding/client-api/interaction"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "classId": "SidebarOverlayContainerComponent",
+                                                  "bb.routeParamTrigger": "taskInstanceId",
+                                                  "children": [
+                                                    {
+                                                      "classId": "CmTaskDetailsWidgetComponent"
+                                                    },
+                                                    {
+                                                      "classId": "PanelContainerComponent",
+                                                      "cssClasses": "d-block my-4 container",
+                                                      "children": [
+                                                        {
+                                                          "classId": "CmCommentsWidgetComponent"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "classId": "PanelContainerComponent",
+                                                  "title": "Tasks",
+                                                  "cssClasses": "d-block card card-body m-5",
+                                                  "children": [
+                                                    {
+                                                      "classId": "CmCaseTaskListWidgetComponent",
+                                                      "output.taskInstanceId": "navigation:bb-panel-container-ang-_-cac43754f1f6"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "classId": "PanelContainerComponent",
+                                                  "title": "Tasks",
+                                                  "cssClasses": "d-block card card-body m-5",
+                                                  "children": [
+                                                    {
+                                                      "classId": "CmCaseTaskListWidgetComponent",
+                                                      "filter": "done"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Diagram",
+                                              "route": "",
+                                              "children": [
+                                                {
+                                                  "classId": "CmProcessDiagramWidgetComponent",
+                                                  "bb.journeyName": "onboarding",
+                                                  "bb.processDefinitionIds": "us-onboarding,aml,idv,archive-case,enroll-customer,enrollment"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Documents",
+                                              "route": "",
+                                              "cssClasses": "d-block card-body",
+                                              "children": [
+                                                {
+                                                  "classId": "CmCaseFilesetListWidgetComponent"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Comments",
+                                              "route": "",
+                                              "cssClasses": "d-block p-4 container--fixed-width m-auto",
+                                              "children": [
+                                                {
+                                                  "classId": "CmCommentsWidgetComponent",
+                                                  "bb.caseDefinitionKey": "onboarding@1",
+                                                  "bb.showThreadsSelect": true
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-c30035fdaa08",
+                                              "classId": "PanelContainerComponent",
+                                              "title": "Event Logs",
+                                              "route": "",
+                                              "cssClasses": "d-block p-4 container--fixed-width m-auto",
+                                              "children": [
+                                                {
+                                                  "classId": "CmEventLogWidgetComponent",
+                                                  "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-d8c990d86348"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "classId": "PanelContainerComponent",
+                      "title": "Insights Dashboard",
+                      "route": "insights-dashboard",
+                      "cssClasses": "",
+                      "navIcon": "dashboard",
+                      "children": [
+                        {
+                          "classId": "CmPlatformContainerComponent",
+                          "bb.caseData.servicePath": "/us-onboarding",
+                          "bb.iam.servicePath": "/us-onboarding",
+                          "bb.process.servicePath": "/us-onboarding",
+                          "children": [
+                            {
+                              "classId": "PanelContainerComponent",
+                              "children": [
+                                {
+                                  "classId": "CmHeaderWidgetComponent"
+                                },
+                                {
+                                  "classId": "CmProcessOverviewContainerComponent",
+                                  "output.dmnInsights": "navigation:bb-panel-container-ang-_-91e1aadf95bb",
+                                  "output.processesInsights": "navigation:bb-panel-container-ang-_-42f102d17706",
+                                  "children": [
+                                    {
+                                      "classId": "PanelContainerComponent",
+                                      "cssClasses": "d-block card card-body",
+                                      "children": [
+                                        {
+                                          "classId": "CmProcessInsightsCardWidgetComponent",
+                                          "bb.caseDefinitionKey": "onboarding@1",
+                                          "bb.journeyName": "Retail onboarding"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-42f102d17706",
+                      "classId": "PanelContainerComponent",
+                      "title": "Process Definitions",
+                      "route": "process-definitions",
+                      "cssClasses": "",
+                      "navIcon": "label",
+                      "children": [
+                        {
+                          "classId": "CmPlatformContainerComponent",
+                          "bb.caseData.servicePath": "/us-onboarding",
+                          "bb.iam.servicePath": "/us-onboarding",
+                          "bb.process.servicePath": "/us-onboarding",
+                          "children": [
+                            {
+                              "classId": "HeadingWidgetComponent",
+                              "customClassName": "d-flex justify-content-between p-0 mb-3",
+                              "heading": "Retail onboarding",
+                              "headingType": "h1"
+                            },
+                            {
+                              "classId": "PanelContainerComponent",
+                              "cssClasses": "card card-body",
+                              "children": [
+                                {
+                                  "classId": "CmProcessDiagramSelectorWidgetComponent"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-91e1aadf95bb",
+                      "classId": "PanelContainerComponent",
+                      "title": "Decision Definitions",
+                      "route": "decision-definitions",
+                      "cssClasses": "",
+                      "navIcon": "line-style",
+                      "children": [
+                        {
+                          "classId": "CmPlatformContainerComponent",
+                          "bb.caseData.servicePath": "/us-onboarding",
+                          "bb.iam.servicePath": "/us-onboarding",
+                          "bb.process.servicePath": "/us-onboarding",
+                          "children": [
+                            {
+                              "classId": "HeadingWidgetComponent",
+                              "customClassName": "d-flex justify-content-between p-0 mb-3",
+                              "heading": "Retail onboarding",
+                              "headingType": "h1"
+                            },
+                            {
+                              "classId": "PanelContainerComponent",
+                              "cssClasses": "card card-body",
+                              "children": [
+                                {
+                                  "classId": "CmDmnInsightsWidgetComponent"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

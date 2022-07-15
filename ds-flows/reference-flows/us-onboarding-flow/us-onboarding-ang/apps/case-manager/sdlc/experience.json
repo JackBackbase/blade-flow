@@ -1,0 +1,174 @@
+{
+  "$schema": "../../../node_modules/@bb-cli/bb/node_modules/@backbase/sdlc-schema/experience.schema.json",
+  "name": "us-onboarding-case-manager",
+  "title": "US Onboarding Case Manager",
+  "locales": [
+    "en-US"
+  ],
+  "properties": {
+    "AccessDeniedPage": "us-onboarding-case-manager/login?error=accessdenied",
+    "DefaultLandingPage": "us-onboarding-case-manager/index",
+    "ErrorPage": "us-onboarding-case-manager/error",
+    "LoginPage": "us-onboarding-case-manager/login",
+    "RedirectLoginPage": "us-onboarding-case-manager/redirect",
+    "TypeOfTags": "tracking",
+    "thumbnailUrl": "/case-management-portal/"
+  },
+  "cxSources": [
+    "node_modules/@backbase",
+    "dist",
+    "collections/collection-bb-web-sdk-1.16.4.zip"
+  ],
+  "contentDirs": {
+    "default": "apps/case-manager/sdlc/content",
+    "shared": "shared"
+  },
+  "environments": {
+    "default": {
+      "authorization": {
+        "authUrl": "http://localhost:8180/auth",
+        "clientId": "bb-web-client",
+        "scope": "openid",
+        "kind": "hybrid",
+        "realm": "us-onboarding",
+        "landingPageUrl": "us-onboarding-case-manager/",
+        "loginPageUrl": "us-onboarding-case-manager/redirect",
+        "maxInactivityDuration": 300
+      },
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "dist/experience/case-manager-identity",
+        "staticResourcesRoot": "/gateway/api/portal/static/items",
+        "linkRoot": "/gateway",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_user": "CONSUMER",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN"
+          },
+          "userConsumer": {
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    },
+    "bas": {
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "dist/experience/case-manager",
+        "staticResourcesRoot": "/gateway/api/portal/static/items",
+        "linkRoot": "/gateway",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_user": "CONSUMER",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN"
+          },
+          "userConsumer": {
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    },
+    "docker": {
+      "provisioning": {
+        "type": "nginx", 
+        "outputDir": "dist/experience/case-manager-docker",
+        "baseHref": "http://localhost:4202/us-onboarding-case-manager",
+        "apiRoot": "https://localhost/api"
+      },
+      "authorization": {
+        "authUrl": "http://localhost:8180/auth",
+        "clientId": "bb-web-client",
+        "scope": "openid",
+        "kind": "hybrid",
+        "realm": "us-onboarding",
+        "landingPageUrl": "us-onboarding-case-manager/",
+        "loginPageUrl": "us-onboarding-case-manager/redirect",
+        "maxInactivityDuration": 300
+      }
+    }
+  },
+  "menus": {
+    "master-pages": [
+      {
+        "section": "page-bb-default",
+        "title": "Lean Page",
+        "page": {
+          "extends": "page-bb-default",
+          "name": "page-bb-default",
+          "children": [
+            {
+              "fragment": "./pages/lean-page.json"
+            }
+          ]
+        }
+      }
+    ],
+    "special-pages": [
+      {
+        "section": "login",
+        "title": "Login",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Login",
+          "children": [
+            {
+              "fragment": "./pages/login.json"
+            }
+          ]
+        }
+      },
+      {
+        "section": "error",
+        "title": "Error",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Something went wrong",
+          "children": [
+            {
+              "fragment": "./pages/something-went-wrong.json"
+            }
+          ]
+        }
+      },
+      {
+        "section": "redirect",
+        "title": "Redirect",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Redirect"
+        }
+      }
+    ],
+    "main": [
+      {
+        "section": "index",
+        "friendlyUrl": "us-onboarding-case-manager",
+        "title": "Home",
+        "permission": "userConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "children": [
+            {
+              "fragment": "./pages/home.json"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

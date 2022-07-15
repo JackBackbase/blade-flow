@@ -1,0 +1,31 @@
+[
+  {
+    "type": "Sole proprietorship",
+    "subtypes": []
+  },
+  {
+    "type": "Partnership",
+    "subtypes": [
+      "Limited",
+      "General",
+      "Joint Venture"
+    ]
+  },
+  {
+    "type": "LLC",
+    "subtypes": [
+      "Single member",
+      "Multiple member"
+    ]
+  },
+  {
+    "type": "Corporation",
+    "subtypes": [
+      "S Corp",
+      "C Corp",
+      "B Corp",
+      "Non profit",
+      "Close corp"
+    ]
+  }
+]

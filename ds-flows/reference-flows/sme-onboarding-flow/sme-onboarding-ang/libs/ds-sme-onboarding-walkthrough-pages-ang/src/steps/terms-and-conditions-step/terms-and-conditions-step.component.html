@@ -1,0 +1,25 @@
+<bb-header-ui heading="One last thing before we get started."
+              headingType="h2"
+              i18n="Walkthrough. Step 5 modal heading | Step 5 modal heading@bb.ds-anchor-journey-ang.walkthrough.step5.heading">
+</bb-header-ui>
+
+<p
+   i18n="Walkthrough. Step 5 modal subheading | Step 5 modal subheading@bb.ds-anchor-journey-ang.walkthrough.step5.subheading">
+  You're just minutes away from opening your account.</p>
+
+<form class="panel">
+  <bb-input-checkbox-ui [formControl]="confirmCheckbox"
+                        i18n-label>
+    <div
+         i18n="Walkthrough. Step 5 modal bodyText | Step 5 modal bodyText@bb.ds-anchor-journey-ang.walkthrough.step5.bodyText">
+      By tapping "Get started" you agree to our
+      <a rel="noopener"
+         href="{{ tncLink }}"
+         target="_blank">{{ tncLinkText }}</a>
+      as well as our
+      <a rel="noopener"
+         href="{{ privacyLink }}"
+         target="_blank">{{ privacyLinkText }}</a>.
+    </div>
+  </bb-input-checkbox-ui>
+</form>

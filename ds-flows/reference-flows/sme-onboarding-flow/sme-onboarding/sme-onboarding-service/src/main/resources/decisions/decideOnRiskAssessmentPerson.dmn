@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0s9dobn" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <inputData id="InputData_1gjymkh" name="AML KYC result" />
+  <inputData id="InputData_0e4kh7i" name="AML KYC task outcome" />
+  <decision id="calculatePersonRiskScore" name="[Person] 01_Decide on AML Person calculation">
+    <informationRequirement id="InformationRequirement_0oo1pu3">
+      <requiredInput href="#InputData_0e4kh7i" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_14cuiw5">
+      <requiredInput href="#InputData_1gjymkh" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_11gt8dp">
+      <input id="InputClause_1ejfp92" label="AML KYC Match Status" biodi:width="322" camunda:inputVariable="amlKycMatchStatus">
+        <inputExpression id="LiteralExpression_0tjq6kd" typeRef="string">
+          <text>amlKycMatchStatus</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1ee37bg">
+          <text>"no_match","potential_match","true_positive","false_positive"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_036gszi" label="Review AML KYC Task Outcome" biodi:width="196" camunda:inputVariable="reviewAmlKycTaskOutcome">
+        <inputExpression id="LiteralExpression_05d5cwb" typeRef="string">
+          <text>reviewAmlKycTaskOutcome</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1tffd9y">
+          <text>"true","false"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_00zxetr" label="Risk required person AML" name="riskPerson" typeRef="integer" biodi:width="167" />
+      <output id="OutputClause_075olz8" label="AML KYC Risk Level" name="amlKycRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_02bzp1o">
+          <text>"low","high","undefined"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_0kg4lbi" label="Task AML KYC result" name="taskAmlKycResult" typeRef="string" biodi:width="274">
+        <outputValues id="UnaryTests_1o6vol2">
+          <text>"no_match","match","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_0j57405">
+        <inputEntry id="UnaryTests_0zwfxnp">
+          <text>"no_match"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_173ptsd">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1a15oqj">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_121dm9w">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0l1ftn5">
+          <text>"no_match"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1d8gx7j">
+        <inputEntry id="UnaryTests_0gd8bzt">
+          <text>"potential_match","true_positive","false_positive"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04aisvf">
+          <text>"true"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jpcvbe">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1u9oeoq">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0crdw30">
+          <text>"no_match"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0g6aqkp">
+        <inputEntry id="UnaryTests_1ch9nhf">
+          <text>"potential_match","true_positive","false_positive"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r5u04v">
+          <text>"false"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ksm0y5">
+          <text>10</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qaw8d0">
+          <text>"high"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_10i8nws">
+          <text>"match"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1a4nca0">
+        <inputEntry id="UnaryTests_1y3ybxq">
+          <text>null</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00iydg6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hoplkj">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0yh69sb">
+          <text>"undefined"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1qqjnt0">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ahx1s0">
+        <inputEntry id="UnaryTests_0g7jkid">
+          <text>"potential_match","true_positive","false_positive"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0whxq35">
+          <text>null</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1n1lkka">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_07qfppe">
+          <text>"undefined"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18yyf6p">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <textAnnotation id="TextAnnotation_1rxx3o1">
+    <text>AML integration</text>
+  </textAnnotation>
+  <association id="Association_1hpq5p0">
+    <sourceRef href="#TextAnnotation_1rxx3o1" />
+    <targetRef href="#InputData_1gjymkh" />
+  </association>
+  <textAnnotation id="TextAnnotation_07rvhop">
+    <text>case data - CSR decision</text>
+  </textAnnotation>
+  <association id="Association_1hzfecl">
+    <sourceRef href="#TextAnnotation_07rvhop" />
+    <targetRef href="#InputData_0e4kh7i" />
+  </association>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_19aktyj" dmnElementRef="InputData_1gjymkh">
+        <dc:Bounds height="45" width="125" x="187" y="226" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1wn8eti" dmnElementRef="TextAnnotation_1rxx3o1">
+        <dc:Bounds height="50" width="100" x="200" y="304" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0vst0jr" dmnElementRef="Association_1hpq5p0">
+        <di:waypoint x="250" y="304" />
+        <di:waypoint x="250" y="271" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0fj7i6j" dmnElementRef="InformationRequirement_14cuiw5">
+        <di:waypoint x="250" y="226" />
+        <di:waypoint x="300" y="180" />
+        <di:waypoint x="300" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0imozm5" dmnElementRef="InputData_0e4kh7i">
+        <dc:Bounds height="45" width="125" x="347" y="226" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_15oxp8w" dmnElementRef="InformationRequirement_0oo1pu3">
+        <di:waypoint x="410" y="226" />
+        <di:waypoint x="360" y="180" />
+        <di:waypoint x="360" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_12edn60" dmnElementRef="TextAnnotation_07rvhop">
+        <dc:Bounds height="50" width="100" x="360" y="304" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1knze5j" dmnElementRef="Association_1hzfecl">
+        <di:waypoint x="410" y="304" />
+        <di:waypoint x="410" y="271" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0wwfuxr" dmnElementRef="calculatePersonRiskScore">
+        <dc:Bounds height="80" width="180" x="240" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

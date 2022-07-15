@@ -1,0 +1,590 @@
+{
+  "key": "sme-onboarding",
+  "version": 9,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "sme",
+  "caseDefinitionVersion": 19,
+  "steps": [
+    {
+      "name": "sme-onboarding-walkthrough",
+      "entryPoint": true,
+      "handlers": [
+        {
+          "name": "sme-onboarding-init",
+          "transitions": [
+            {
+              "condition": "failure()",
+              "step": "sme-onboarding-walkthrough"
+            },
+            {
+              "condition": "!actionResult.body.anchorDataReceived",
+              "step": "sme-onboarding-anchor"
+            },
+            {
+              "condition": "actionResult.body.anchorDataReceived",
+              "step": "otp-verification"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sme-onboarding-anchor",
+      "handlers": [
+        {
+          "name": "sme-onboarding-anchor-data",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "otp-verification"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "otp-verification",
+      "handlers": [
+        {
+          "name": "available-otp-channels"
+        },
+        {
+          "name": "request-otp"
+        },
+        {
+          "name": "fetch-otp-email"
+        },
+        {
+          "name": "verify-otp",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "sme-onboarding-check-case"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sme-onboarding-check-case",
+      "handlers": [
+        {
+          "name": "sme-onboarding-check-case-exist",
+          "transitions": [
+            {
+              "condition": "!actionResult.body.caseExist",
+              "step": "select-products"
+            },
+            {
+              "condition": "actionResult.body.caseExist && !actionResult.body.identityCredentialExist",
+              "step": "save-and-resume"
+            },
+            {
+              "condition": "actionResult.body.caseExist && actionResult.body.identityCredentialExist",
+              "step": "sme-onboarding-landing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "select-products",
+      "handlers": [
+        {
+          "name": "get-product-list",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "select-products"
+            }
+          ]
+        },
+        {
+          "name": "select-products",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-structure"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-structure",
+      "back": [
+        {
+          "condition": "true",
+          "step": "select-products"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "business-structure",
+          "transitions": [
+            {
+              "condition": "actionResult.isSuccessful() && actionResult.body.performCompanyLookup",
+              "step": "company-lookup"
+            },
+            {
+              "condition": "actionResult.isSuccessful() && !actionResult.body.performCompanyLookup",
+              "step": "business-details"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "company-lookup",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-structure"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "company-lookup"
+        },
+        {
+          "name": "company-details",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-details"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-details",
+      "back": [
+        {
+          "condition": "caseData.companyLookupInfo.performCompanyLookup",
+          "step": "company-lookup"
+        },
+        {
+          "condition": "false == caseData.companyLookupInfo.performCompanyLookup",
+          "step": "business-structure"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "business-details",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-address"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-address",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-details"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "submit-address",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-identity"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-identity",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-address"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "business-identity",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "check-business-relation-and-document-request"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "check-business-relation-and-document-request",
+      "handlers": [
+        {
+          "name": "check-business-relation-and-document-requests-conditions",
+          "transitions": [
+            {
+              "condition": "failure()",
+              "step": "check-business-relation-and-document-request"
+            },
+            {
+              "condition": "actionResult.body.businessRelationRequired",
+              "step": "relation-type"
+            },
+            {
+              "condition": "!actionResult.body.businessRelationRequired && actionResult.body.documentRequired",
+              "step": "document-request-journey"
+            },
+            {
+              "condition": "!actionResult.body.businessRelationRequired && !actionResult.body.documentRequired",
+              "step": "identity-verification-initiation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "relation-type",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-identity"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "select-relation-type",
+          "transitions": [
+            {
+              "condition": "errors.size() == 0 and actionResult.body.relationType.equals('OWNER')",
+              "step": "update-current-user-owner-step"
+            },
+            {
+              "condition": "errors.size() == 0 and actionResult.body.relationType.equals('CONTROL_PERSON')",
+              "step": "update-current-user-control-person-step"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "update-current-user-owner-step",
+      "back": [
+        {
+          "condition": "true",
+          "step": "relation-type"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-roles"
+        },
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "update-current-user-owner",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-owners"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "update-current-user-control-person-step",
+      "back": [
+        {
+          "condition": "true",
+          "step": "relation-type"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-roles"
+        },
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "update-current-user-control-person",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-owners"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-owners",
+      "back": [
+        {
+          "condition": "true",
+          "step": "relation-type"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-roles"
+        },
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "update-owner"
+        },
+        {
+          "name": "delete-business-person"
+        },
+        {
+          "name": "complete-business-owners-step",
+          "transitions": [
+            {
+              "condition": "errors.size() == 0 and actionResult.body.relationType.equals('OWNER')",
+              "step": "control-persons"
+            },
+            {
+              "condition": "errors.size() == 0 and actionResult.body.relationType.equals('CONTROL_PERSON')",
+              "step": "business-summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "control-persons",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-owners"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-roles"
+        },
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "update-control-person"
+        },
+        {
+          "name": "delete-business-person"
+        },
+        {
+          "name": "select-control-person",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-summary",
+      "back": [
+        {
+          "condition": "caseData.businessRelations.businessRelationType.name().equals('OWNER')",
+          "step": "control-persons"
+        },
+        {
+          "condition": "caseData.businessRelations.businessRelationType.name().equals('CONTROL_PERSON')",
+          "step": "business-owners"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "complete-summary-step",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "document-request-journey"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "document-request-journey",
+      "back": [
+        {
+          "condition": "caseData.businessRelationRequired",
+          "step": "business-summary"
+        },
+        {
+          "condition": "!caseData.businessRelationRequired",
+          "step": "business-identity"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "load-document-requests"
+        },
+        {
+          "name": "load-document-request"
+        },
+        {
+          "name": "upload-document"
+        },
+        {
+          "name": "download-document"
+        },
+        {
+          "name": "complete-task"
+        },
+        {
+          "name": "delete-temp-document"
+        },
+        {
+          "name": "mark-document-for-deletion"
+        },
+        {
+          "name": "submit-document-requests",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "identity-verification-initiation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "identity-verification-initiation",
+      "back": [
+        {
+          "condition": "caseData.documentRequired",
+          "step": "document-request-journey"
+        },
+        {
+          "condition": "caseData.businessRelationRequired",
+          "step": "business-summary"
+        },
+        {
+          "condition": "!caseData.businessRelationRequired",
+          "step": "business-identity"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "verification-type"
+        },
+        {
+          "name": "identity-verification-initiation",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "identity-verification-result"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "identity-verification-result",
+      "back": [
+        {
+          "condition": "true",
+          "step": "identity-verification-initiation"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "identity-verification-result",
+          "postExecutions": [
+            {
+              "name": "complete-idv-idt"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "sme-onboarding-personal-address"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sme-onboarding-personal-address",
+      "back": [
+        {
+          "condition": "true",
+          "step": "identity-verification-initiation"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "fetch-address"
+        },
+        {
+          "name": "submit-address",
+          "postExecutions": [
+            {
+              "name": "complete-address-validation-idt"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "sme-onboarding-ssn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sme-onboarding-ssn",
+      "back": [
+        {
+          "condition": "true",
+          "step": "sme-onboarding-personal-address"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "submit-ssn",
+          "preExecutions": [
+            {
+              "name": "idv-retrieve-results"
+            }
+          ],
+          "postExecutions": [
+            {
+              "name": "idv-personal-information-results"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "sme-onboarding-landing"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sme-onboarding-landing",
+      "exitPoint": true,
+      "handlers": [
+        {
+          "name": "sme-onboarding-landing-data"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+.bb-page-layout--vertical-nav .bb-page-layout__topbar {
+  background: #FFF;
+  height: 4rem;
+  box-shadow: 0 0 0.5em 0.3em #dedede;
+}
+
+bb-ds-logout-widget-ang a {
+  cursor: pointer;
+}

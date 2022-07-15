@@ -1,0 +1,10 @@
+@import "../styles/utilities-mixin";
+
+.onboarding-type {
+  @include icon-with-description;
+  margin: 1rem 0;
+}
+
+.description {
+  @include description-text;
+}

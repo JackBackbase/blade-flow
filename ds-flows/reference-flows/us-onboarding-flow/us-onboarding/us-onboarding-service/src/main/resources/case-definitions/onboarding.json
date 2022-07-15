@@ -1,0 +1,593 @@
+{
+  "$id": "onboarding",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "onboarding",
+  "version": 1,
+  "type": "object",
+  "properties": {
+    "isJointAccount": {
+      "type": "boolean",
+      "default": false
+    },
+    "mainApplicantPhoneNumber": {
+      "type": "string",
+      "_flow_calculated_property": true,
+      "_flow_value": "mainApplicant?.phoneNumber",
+      "_flow_index": "mainApplicant.phoneNumber"
+    },
+    "mainApplicantEmail": {
+      "type": "string",
+      "_flow_calculated_property": true,
+      "_flow_value": "mainApplicant?.email",
+      "_flow_index": "mainApplicant.email"
+    },
+    "mainApplicant": {
+      "$ref": "#/definitions/applicant"
+    },
+    "coApplicantId": {
+      "type": "string",
+      "_flow_index": "coApplicantId"
+    },
+    "isMainApplicantFlow": {
+      "type": "boolean",
+      "_flow_calculated_property": true,
+      "_flow_value": "coApplicantId == null"
+    },
+    "coApplicantPhoneNumber": {
+      "type": "string",
+      "_flow_calculated_property": true,
+      "_flow_value": "coApplicant?.phoneNumber",
+      "_flow_index": "coApplicant.phoneNumber"
+    },
+    "coApplicantEmail": {
+      "type": "string",
+      "_flow_calculated_property": true,
+      "_flow_value": "coApplicant?.email",
+      "_flow_index": "coApplicant.email"
+    },
+    "coApplicant": {
+      "$ref": "#/definitions/applicant"
+    },
+    "productSelection": {
+      "title": "Product selection data",
+      "$ref": "#/definitions/productSelection"
+    },
+    "caseTitle": {
+      "type": "string",
+      "description": "Case title. Only available for root object (not for any co-applicants)",
+      "_flow_calculated_property": true,
+      "_flow_value": "mainApplicant?.firstName + ' ' + mainApplicant?.lastName",
+      "_flow_case_title": true,
+      "_flow_index": "fullName"
+    }
+  },
+  "definitions": {
+    "applicant": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "phoneNumberVerified": {
+          "type": "boolean",
+          "description": "Indicates whether the phoneNumber is verified or not.",
+          "default": false
+        },
+        "email": {
+          "type": "string"
+        },
+        "emailVerified": {
+          "type": "boolean",
+          "description": "Indicates whether the email is verified or not.",
+          "default": false
+        },
+        "citizenship": {
+          "$ref": "#/definitions/citizenshipInfo"
+        },
+        "identityVerificationInitiation": {
+          "$ref": "#/definitions/identityVerificationInitiation"
+        },
+        "identityVerificationResult": {
+          "$ref": "#/definitions/identityVerificationResult"
+        },
+        "kycInformation": {
+          "$ref": "#/definitions/kycAnswers"
+        },
+        "agreements": {
+          "$ref": "#/definitions/agreements"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "antiMoneyLaunderingInfo": {
+          "$ref": "#/definitions/onboardingAntiMoneyLaunderingInfo"
+        },
+        "customerApproved": {
+          "type": "boolean",
+          "description": "Used for evaluating if the case must be archived or not"
+        }
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "numberAndStreet": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "apt": {
+          "type": "string"
+        }
+      }
+    },
+    "onboardingAntiMoneyLaunderingInfo": {
+      "type": "object",
+      "properties": {
+        "amlPersonApplicant": {
+          "type": "object",
+          "properties": {
+            "fullName": {
+              "type": "string",
+              "description": "Value fullName used in search."
+            },
+            "yearOfBirth": {
+              "type": "integer",
+              "description": "Value year used in search."
+            }
+          }
+        },
+        "amlBusinessApplicant": {
+          "type": "object",
+          "properties": {
+            "businessName": {
+              "type": "string",
+              "description": "Value businessName used in search."
+            }
+          }
+        },
+        "reviewNeeded": {
+          "type": "boolean",
+          "description": "Set by DMN table based on the matchStatus value."
+        },
+        "reviewApproved": {
+          "type": "boolean",
+          "description": "Value set by user when 'reviewNeeded' is true."
+        },
+        "riskLevel": {
+          "title": "Risk level",
+          "type": "string",
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ],
+          "description": "Review Risk level."
+        },
+        "reviewApprovedReason": {
+          "type": "object",
+          "properties": {
+            "comment": {
+              "type": "string",
+              "description": "Value set when CSR approve AML review."
+            },
+            "matchTypes": {
+              "type": "array",
+              "description": "List of alerts associated with confirmed match",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "reviewDeclinedComment": {
+          "type": "string",
+          "description": "Value set when CSR decline AML review."
+        },
+        "status": {
+          "title": "Status",
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "IN_REVIEW",
+            "SUCCESS",
+            "FAILED"
+          ],
+          "description": "Status of AML verification."
+        },
+        "amlResult": {
+          "type": "object",
+          "properties": {
+            "requestDate": {
+              "type": "string",
+              "description": "Value get from AML response 'created_at' field."
+            },
+            "matchStatus": {
+              "type": "string",
+              "description": "Value get from AML response 'match_status' field."
+            },
+            "shareUrl": {
+              "type": "string",
+              "description": "AML search data url."
+            },
+            "matches": {
+              "type": "array",
+              "description": "Potential matches",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "matchId": {
+                    "type": "string"
+                  },
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "fullNameMatchStatus": {
+                    "type": "string"
+                  },
+                  "datesOfBirth": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "dateOfBirthMatchStatus": {
+                    "type": "string"
+                  },
+                  "entityType": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "peps": {
+                    "type": "array",
+                    "description": "PEP list.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sanctions": {
+                    "type": "array",
+                    "description": "Sanctions list.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "listingStarted": {
+                          "type": "string"
+                        },
+                        "listingEnded": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "media": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string"
+                        },
+                        "snippet": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "confirmed": {
+                    "type": "boolean",
+                    "description": "Value set when CSR selects potential match."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "identityVerificationResult": {
+      "type": "object",
+      "description": "Result of Identity Verification Process",
+      "properties": {
+        "verificationId": {
+          "type": "string",
+          "description": "ID for vendor verification process result"
+        },
+        "documentStatus": {
+          "type": "string",
+          "description": "Document Verification Status"
+        },
+        "identitySimilarityStatus": {
+          "type": "string",
+          "description": "Selfie Image and Document Image Similarity"
+        },
+        "identityValidityStatus": {
+          "type": "string",
+          "description": "Selfie Image Quality Status"
+        },
+        "rejectReasonCode": {
+          "type": "string",
+          "description": "Reject Reason Code for Document"
+        },
+        "rejectReasonDescription": {
+          "type": "string",
+          "description": "Reject Reason Description for Document"
+        },
+        "identityReason": {
+          "type": "string",
+          "description": "Reject Reason for Identity Verification"
+        },
+        "manualReviewResult": {
+          "type": "string",
+          "description": "Manual Review Result for Identity Verification"
+        },
+        "filesetNameSuffix": {
+          "type": "string",
+          "description": "Images Fileset name"
+        }
+      }
+    },
+    "citizenshipInfo": {
+      "type": "object",
+      "description": "Applicant's citizenship information",
+      "properties": {
+        "citizenshipType": {
+          "type": "string",
+          "enum": [
+            "US_CITIZEN",
+            "PERMANENT_RESIDENT",
+            "NON_RESIDENT_ALIEN"
+          ]
+        },
+        "citizenshipReview": {
+          "type": "object",
+          "properties": {
+            "needed": {
+              "type": "boolean",
+              "description": "Set by Action hook if citizenshipType equals NON_RESIDENT_ALIEN."
+            },
+            "approved": {
+              "type": "boolean",
+              "description": "Value set by user when needed is true."
+            },
+            "comment": {
+              "type": "string",
+              "description": "Value set by user when review is not approved."
+            }
+          }
+        },
+        "ssn": {
+          "type": "string",
+          "description": "Applicant's Social Security Number if the Applicant is US Citizen or Permanent Resident"
+        },
+        "nonResident": {
+          "$ref": "#/definitions/nonResidentInfo"
+        },
+        "nationalTin": {
+          "type": "string",
+          "description": "Resident's National Tax Identification Number"
+        },
+        "foreignTin": {
+          "type": "string",
+          "description": "Resident's Foreign Tax Identification Number"
+        },
+        "withholdingTaxAccepted": {
+          "type": "boolean",
+          "description": "Reduced Withholding Tax Rate on US Source Income policy acceptance"
+        },
+        "w8ben": {
+          "type": "object",
+          "description": "W-8BEN policy acceptance",
+          "properties": {
+            "accepted": {
+              "type": "boolean"
+            },
+            "acceptedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "nonResidentInfo": {
+      "type": "object",
+      "description": "Non Resident Alien Information",
+      "properties": {
+        "citizenshipCountryCode": {
+          "type": "string",
+          "description": "ISO code of resident's citizenship country"
+        },
+        "citizenshipCountry": {
+          "type": "string",
+          "description": "Name of resident's citizenship country"
+        },
+        "residencyAddress": {
+          "type": "object",
+          "description": "Address of resident",
+          "properties": {
+            "countryCode": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "numberAndStreet": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "zipCode": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "identityVerificationInitiation": {
+      "type": "object",
+      "description": "Initiation ID's of Identity Verification Process",
+      "properties": {
+        "userReference": {
+          "type": "string",
+          "description": "Internally generated ID of the user. Unique for each case"
+        },
+        "transactionReference": {
+          "type": "string",
+          "description": "Internally generated ID of Jumio transaction. Unique for each IDV initiation request"
+        },
+        "verificationType": {
+          "type": "string",
+          "enum": [
+            "ID",
+            "ID_AND_IDENTITY"
+          ],
+          "description": "Type of verification that might include ID verification only or ID and Identity verification"
+        }
+      }
+    },
+    "agreements": {
+      "type": "array",
+      "description": "Information about policies acceptance",
+      "items": {
+        "$ref": "#/definitions/agreementInfo"
+      }
+    },
+    "agreementInfo": {
+      "type": "object",
+      "description": "Information about policy acceptance",
+      "properties": {
+        "policyType": {
+          "type": "string",
+          "enum": [
+            "PRIVACY_POLICY",
+            "TERMS_AND_CONDITIONS"
+          ]
+        },
+        "accepted": {
+          "type": "boolean",
+          "default": false
+        },
+        "acceptedAt": {
+          "type": "array",
+          "description": "Date and time that the policy was accepted",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "kycAnswers": {
+      "type": "object",
+      "properties": {
+        "answers": {
+          "type": "array",
+          "description": "KYC answer groups",
+          "items": {
+            "type": "array",
+            "description": "KYC answers",
+            "items": {
+              "type": "object",
+              "description": "KYC answer object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The ID of the question, to be searched on if necessary, when the back button is pressed."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "The label of the question, which most often matches the question itself."
+                },
+                "answers": {
+                  "type": "array",
+                  "description": "List of KYC answers",
+                  "items": {
+                    "type": "string",
+                    "description": "The customer's answer to their KYC questions."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "productSelection": {
+      "type": "object",
+      "properties": {
+        "selectedProducts": {
+          "title": "Selected products",
+          "description": "Selected products",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "referenceId": {
+                "title": "Selected product Id",
+                "type": "string",
+                "description": "Selected product Id",
+                "_flow_audit": true
+              },
+              "productName": {
+                "title": "Selected product name",
+                "type": "string",
+                "description": "Selected product name",
+                "_flow_audit": true
+              },
+              "quantity": {
+                "title": "Quantity of selected product",
+                "type": "integer",
+                "description": "Quantity of selected product.",
+                "_flow_audit": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

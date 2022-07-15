@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@backbase/ds-sme-onboarding-walkthrough-pages-ang",
+  "version": "0.0.3",
+  "description": "Walkthrough Journey Widget (Prospect Portal)",
+  "peerDependencies": {
+    "@angular/common": "^11.2.0",
+    "@angular/core": "^11.2.0",
+    "@angular/cdk": "^11.2.0",
+    "rxjs": "~6.6.6",
+    "@ng-bootstrap/ng-bootstrap": "~9.0.2",
+    "@backbase/ui-ang": "^6.0.0",
+    "@backbase/foundation-ang": "^6.9.0",
+    "@backbase/ono-common-ang": "0.0.12",
+    "@backbase/content-ang": "^4.0.0",
+    "@backbase/ds-shared-ang": "^2.0.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "dest": "../../dist/libs/ds-sme-onboarding-walkthrough-pages-ang"
+  }
+}

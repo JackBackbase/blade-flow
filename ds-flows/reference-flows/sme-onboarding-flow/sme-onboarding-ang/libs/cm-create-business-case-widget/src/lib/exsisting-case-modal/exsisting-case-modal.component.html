@@ -1,0 +1,35 @@
+<bb-modal-ui [isOpen]="openDialog"
+             (cancel)="onCloseDialog()">
+    <bb-modal-header-ui title="Existing application"></bb-modal-header-ui>
+    <bb-modal-body-ui>
+        <ng-template bbCustomModalBody>
+            <p>An existing case for this customer has been found.</p>
+            <div class="info-container">
+                <bb-icon-ui name="user"
+                            color="primary"
+                            class="user-icon"></bb-icon-ui>
+                <p class="user-link ">
+                    <bb-button-ui color="link-text"
+                                  (click)="onGoToCase()"
+                                  i18n>
+                        Application for {{businessInformation?.firstName}} {{businessInformation?.lastName}}
+                    </bb-button-ui>
+                    <bb-badge-ui class="user-status pl-2"
+                                 [text]="_matchDataViewService.matchDataText(caseStatus)"
+                                 [color]="_matchDataViewService.matchDataColor(caseStatus)"></bb-badge-ui>
+                </p>
+                <p class="user-info">
+                    {{businessInformation?.firstName}} {{businessInformation?.lastName}},
+                    {{businessInformation?.emailAddress}}
+                </p>
+            </div>
+        </ng-template>
+    </bb-modal-body-ui>
+    <bb-modal-footer-ui>
+        <ng-template bbCustomModalFooter>
+            <bb-button-ui (click)="onGoToCase()"
+                          data-testid="go-to-case-btn"
+                          i18n>Go to case</bb-button-ui>
+        </ng-template>
+    </bb-modal-footer-ui>
+</bb-modal-ui>

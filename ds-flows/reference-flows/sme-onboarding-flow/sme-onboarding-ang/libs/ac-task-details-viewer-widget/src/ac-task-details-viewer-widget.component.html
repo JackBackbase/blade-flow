@@ -1,0 +1,61 @@
+<ng-container *ngIf="documentRequestId$ | async as documentRequestId; else noDocumentRequestIdFoundTpl">
+  <ng-container *ngIf="request$ | async as request">
+    <div class="bg-primary p-4">
+      <div class="d-flex">
+        <bb-header-ui headingType="h3" [heading]="request.documentType" headingClasses="text-white mr-2"></bb-header-ui>
+        <bb-request-status-badge [status]="request.status" [text]="request.status"></bb-request-status-badge>
+      </div>
+      <div class="mt-4 d-md-flex justify-content-between text-light">
+        <div *ngIf="customer$ | async as customer" class="mb-2">
+          <bb-avatar-ui [name]="customer.fullName" size="sm"></bb-avatar-ui>
+          <small class="ml-2">{{ customer.fullName }}</small>
+        </div>
+        <div class="">
+          <small><span i18n="@@bb.ac-task-details-viewer-widget.due-date-label">Due</span>
+            {{request.deadline | date: 'short'}}</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-4">
+      <div class="py-4">
+        <bb-fileset-container [documentRequest]="request" (upload)="onUpload()">
+        </bb-fileset-container>
+      </div>
+      <ng-container *ngIf="isActionable$ | async; else notActionableTpl">
+        <bb-header-ui headingType="h5" heading="Notes"
+          i18n-heading="Notes section heading@bb.ac-task-details-viewer-widget.notes-section-heading">
+        </bb-header-ui>
+        <div *ngFor="let note of comments$ | async">
+          <div class="text-secondary">
+            <small>{{note.createdBy}}</small>, <small>{{note.createdAt | date: 'short'}}</small>
+          </div>
+          <div>{{note.content}}</div>
+        </div>
+        <div class="mt-4">
+          <bb-textarea-ui [minLength]="3" [maxLength]="512" [rows]="3" [cols]="50" [(ngModel)]="note"
+            placeholder="Optionally leave a note"
+            i18n-placeholder="Note input placeholder@bb.ac-task-details-viewer-widget.note-input-placeholder"
+            aria-label="add note" i18n-aria-label="@bb.ac-task-details-viewer-widget.add-note-aria-label">
+          </bb-textarea-ui>
+        </div>
+        <div class="mt-3">
+          <bb-button-ui i18n="Submit note button@@bb.ac-task-details-viewer-widget.submit-note-button-label"
+            data-role="submit-note-button" aria-label="Submit note"
+            i18n-aria-label="@bb.ac-task-details-viewer-widget.aria-label.submit-note-btn"
+            [disabled]="!(canCompleteTask$ | async)" (click)="completeTask()">Submit</bb-button-ui>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #noDocumentRequestIdFoundTpl>
+  <bb-empty-state-ui data-role="document-request-id-not-found-state" title="No document request id found"
+    i18n-title="@@bb.ac-task-details-viewer-widget.no-document-request-id-found-title" iconModifies="error">
+  </bb-empty-state-ui>
+</ng-template>
+
+<ng-template #notActionableTpl>
+  <bb-comments [comments]="comments$ | async"></bb-comments>
+</ng-template>

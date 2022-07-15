@@ -1,0 +1,88 @@
+{
+  "key": "citizenship-idt",
+  "version": 1,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "onboarding",
+  "caseDefinitionVersion": 1,
+  "steps": [
+    {
+      "name": "citizenship",
+      "entryPoint": true,
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "citizenship-selector",
+          "transitions": [
+            {
+              "condition": "success() && (actionResult.body.citizenshipType.name() == 'US_CITIZEN' || actionResult.body.citizenshipType.name() == 'PERMANENT_RESIDENT')",
+              "step": "ssn"
+            },
+            {
+              "condition": "success() && actionResult.body.citizenshipType.name() == 'NON_RESIDENT_ALIEN'",
+              "step": "non-resident-data"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ssn",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "true",
+          "step": "citizenship"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "submit-ssn",
+          "preExecutions": [
+            {
+              "name": "is-citizenship-review-needed"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "non-resident-data",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "true",
+          "step": "citizenship"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "country-list"
+        },
+        {
+          "name": "submit-non-resident-data",
+          "preExecutions": [
+            {
+              "name": "is-citizenship-review-needed"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

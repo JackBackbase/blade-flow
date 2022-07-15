@@ -1,0 +1,21 @@
+@import "~@backbase/backbase-theme/scss/1-variables/variables";
+@import "../styles/utilities-mixin";
+
+.checks {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 0.5rem;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+.description {
+  @include description-text;
+}
+
+.panel {
+  background-color: $color-neutral-lightest;
+  border-radius: $border-radius;
+  padding: $spacer;
+}

@@ -1,0 +1,52 @@
+{
+    "extends": "container-bb-manageable-area",
+    "children": [
+      {
+        "extends": "bb-us-journey-ang",
+        "area": "0",
+        "children": [
+          {
+            "classId": "FlowInteractionContainerComponent",
+            "deploymentPath": "interactions",
+            "interactionName": "co-applicant-welcome",
+            "apiVersion": "v2",
+            "servicePath": "us-onboarding/client-api/interaction",
+            "children": [
+              {
+                "classId": "DsLayoutContainerAngComponent",
+                "route": "welcome",
+                "interactionName": "co-applicant-welcome",
+                "backgroundImageL": {
+                  "kind": "content",
+                  "path": "img-large-continue.jpg",
+                  "repo": "default"
+                },
+                "backgroundImageM": {
+                  "kind": "content",
+                  "path": "img-medium-continue.jpg",
+                  "repo": "default"
+                },
+                "backgroundImageS": {
+                  "kind": "content",
+                  "path": "img-small-continue.jpg",
+                  "repo": "default"
+                },
+                "notifyScreen": true,
+                "children": [
+                  {
+                    "classId": "OnoCoApplicantWelcomeJourneyAngComponent",
+                    "getStartedUrl": "/onboarding-us",
+                    "productImage": {
+                      "kind": "content",
+                      "path": "img-small-continue.jpg",
+                      "repo": "default"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

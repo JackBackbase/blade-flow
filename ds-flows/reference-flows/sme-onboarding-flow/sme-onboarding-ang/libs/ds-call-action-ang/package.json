@@ -1,0 +1,19 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@backbase/ds-call-action-ang",
+  "version": "1.0.5",
+  "description": "DsCallActionAng Component",
+  "peerDependencies": {
+    "@angular/common": "^10.2.0 || ^11.2.0",
+    "@angular/core": "^10.2.0 || ^11.2.0",
+    "@backbase/foundation-ang": "^6.9.0",
+    "@backbase/ui-ang": "^6.0.0",
+    "@backbase/flow-interaction-sdk-ang": "^3.0.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "dest": "../../dist/libs/ds-call-action-ang"
+  }
+}

@@ -1,0 +1,65 @@
+[
+  {
+    "referenceId": "premium-savings",
+    "name": "High-Rate Savings",
+    "maxQuantity": 1,
+    "description": "This product is the best one for you if you are looking for best APY",
+    "benefits": [
+      "$5 Minimum Deposit",
+      "No monthly fees",
+      "Competitive APY of 0.55%, compounded daily"
+    ],
+    "costsFrequency": "monthly",
+    "cost": {
+      "value": 9.99,
+      "currency": "$"
+    },
+    "annualPercentageRate": 0.55,
+    "imageName": "premium-savings.png",
+    "detailedProductDescriptionUrl": "https://www.backbase.com/",
+    "productTypeReferenceId": "saving-account",
+    "productType": "Saving account"
+  },
+  {
+    "referenceId": "online-saving",
+    "name": "Online Savings Account",
+    "maxQuantity": 3,
+    "description": "This product is the best one for you if you are looking for online-only savings",
+    "benefits": [
+      "Above nation-wide average APY (0.50%)",
+      "$0 minimum balance",
+      "Best online banking experience"
+    ],
+    "costsFrequency": "monthly",
+    "cost": {
+      "value": 10.99,
+      "currency": "$"
+    },
+    "annualPercentageRate": 0.50,
+    "imageName": "online-saving.png",
+    "detailedProductDescriptionUrl": "https://www.backbase.com/",
+    "productTypeReferenceId": "saving-account",
+    "productType": "Saving account"
+  },
+  {
+    "referenceId": "cds",
+    "name": "5-Year CDs",
+    "maxQuantity": 5,
+    "description": "This product is the best one for you if you are looking for CD's",
+    "benefits": [
+      "Very competitive yields (1.01% APY)",
+      "CD accounts can be opened online",
+      "You can open a CD with just $1,000"
+    ],
+    "costsFrequency": "monthly",
+    "cost": {
+      "value": 13.33,
+      "currency": "$"
+    },
+    "annualPercentageRate": 1.01,
+    "imageName": "cds.png",
+    "detailedProductDescriptionUrl": "https://www.backbase.com/",
+    "productTypeReferenceId": "saving-account",
+    "productType": "Saving account"
+  }
+]

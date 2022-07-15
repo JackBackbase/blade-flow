@@ -1,0 +1,4 @@
+**/test.ts
+dist
+**/proxy.conf.js
+coverage

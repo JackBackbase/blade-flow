@@ -1,0 +1,13 @@
+<bb-header-ui headingType="h5" heading="Task comments"
+  i18n-heading="Comments section heading@@bb.ac-task-details-viewer-widget.comments.heading"></bb-header-ui>
+<div class="comments">
+  <div class="comment d-flex mt-3" *ngFor="let comment of comments">
+    <bb-avatar-ui [name]="comment.createdBy"></bb-avatar-ui>
+    <div class="ml-3">
+      <div class="text-secondary">
+        <small>{{comment.createdBy}}</small>, <small>{{comment.createdAt | date: 'short'}}</small>
+      </div>
+      <div>{{comment.content}}</div>
+    </div>
+  </div>
+</div>

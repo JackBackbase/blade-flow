@@ -1,0 +1,16 @@
+# This configuration file enables the use of IPS
+
+# API Registry client configuration
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    healthCheckUrlPath: /actuator/health
+    statusPageUrlPath: /actuator/info
+    nonSecurePort: ${server.port}
+    metadata-map:
+      public: true
+      role: live
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://${REGISTRY_HOST:localhost}:${REGISTRY_PORT:8080}/registry/eureka/

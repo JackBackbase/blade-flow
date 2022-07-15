@@ -1,0 +1,49 @@
+== SME Onboarding
+
+== Run service locally without external dependencies
+=== Prerequisites:
+
+* Java 11
+* Maven
+
+=== Run service
+Run the following command inside the path `sme-onboarding-service`.
+
+[source]
+----
+mvn clean spring-boot:run -Dspring-boot.run.profiles=local
+----
+
+== Postman collections formatting
+
+To reduce the risk of potential git merge conflicts and to make the review process of changed Postman collection
+files easier the JSON files has to be formatted before committing them. To check if the Postman collection is
+properly formatted before commit one may use `mvn formatter:validate` goal which will fail with appropriate message
+if some file(s) needs to be formatted. If so, running `mvn formatter:format` goal will perform the formatting.
+
+NOTE: If the changed Postman collection file will not be formatted as described and committed as is the CI build will
+most likely fail during `mvn verify` phase.
+
+== Postman collections running
+
+To allow quick check if all collections ca be run w/o errors you can use `newman` tool:
+https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/
+
+Then you will be able organize your collection into a folders, according to path, you would like to test. When all your paths will be organized in folders, you can explicitly tell, what path (folders) would you like to run:
+eg: to run happy path scenario for `SoleProp` w/o uploading any documents you can run:
+
+`newman run sme-onboarding-sole.json -e sme-onboarding-local.postman_environment.json --delay-request 50 --verbose --folder 'Gateway' --folder 'Sole proprietorship' --folder 'Company Lookup without license' --folder 'IDV and Personal Details' --folder 'Get Cases'`
+
+or to check scenarion with `document-request-journey` you can run:
+
+`newman run sme-onboarding-sole.json -e sme-onboarding-local.postman_environment.json --delay-request 50 --verbose --folder 'Gateway' --folder 'Sole proprietorship' --folder 'Company Lookup with license' --folder 'IDV and Personal Details' --folder 'Get Cases'`
+
+With this approach we have supported following scenarios:
+
+1) we can perform automatic upload of documents, what is not achieveable by Postman running collections
+
+2) we can easily test several paths of flow, by splitting it into separate sub-folders and then execute them in requested order
+
+3) common parts can be gathered within one folder, and only requests that make a difference can be moved to separate folders
+
+NOTE: All `newman` options are described in https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/

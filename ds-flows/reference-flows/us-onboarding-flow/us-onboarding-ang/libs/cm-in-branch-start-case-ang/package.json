@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@backbase/cm-in-branch-start-case-ang",
+  "version": "0.0.1",
+  "description": "CmInBranchStartCaseAng (US Onboarding)",
+  "peerDependencies": {
+    "@angular/common": "^10.2.0 || ^11.2.0",
+    "@angular/core": "^10.2.0 || ^11.2.0",
+    "@backbase/foundation-ang": "^6.10.0",
+    "@backbase/ui-ang": "^6.0.0",
+    "@backbase/case-management-ui-ang": "^2.9.3",
+    "@backbase/cm-ui-components-lib": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "../../dist/libs/cm-in-branch-start-case-ang"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "dest": "../../dist/libs/cm-in-branch-start-case-ang"
+  }
+}

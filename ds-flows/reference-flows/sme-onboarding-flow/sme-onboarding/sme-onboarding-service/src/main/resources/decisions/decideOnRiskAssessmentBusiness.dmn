@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="decideOnRiskAssessmentBusiness" name="Decide On Risk Assessment Business" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.11.1">
+  <decision id="Decision_0ps9psu" name="[Business] 01_Decide on Business Status Risk score">
+    <informationRequirement id="InformationRequirement_161hyzk">
+      <requiredInput href="#InputData_0lo5m7n" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1beeu09">
+      <input id="Input_1" label="Business status" camunda:inputVariable="businessStatus">
+        <inputExpression id="InputExpression_1" typeRef="string" expressionLanguage="juel">
+          <text>businessStatus</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Business Status Risk Score" name="businessStatusRiskScore" typeRef="integer" />
+      <output id="OutputClause_1l2tskw" label="Business Status Risk Level" name="businessStatusRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_0f2dama">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_11l2dd9">
+        <inputEntry id="UnaryTests_0haq2kq">
+          <text>"active","other"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1nqnnke">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_02bfufn">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1p1nvqk">
+        <inputEntry id="UnaryTests_18hw2mz">
+          <text>"deleted"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xrgifa">
+          <text>10</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19x16xa">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0w7qkf6">
+        <inputEntry id="UnaryTests_09kipna">
+          <text>"inProcess"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0qwz245">
+          <text>6</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_13co0vn">
+          <text>"medium"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00f72xd">
+        <inputEntry id="UnaryTests_0a05ffs">
+          <text>null</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_127a9zo">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0k5lgox">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0lo5m7n" name="Business Status" />
+  <inputData id="InputData_1v46f2u" name="Business Industry" />
+  <decision id="decision_business_industries" name="[Business] 02_Decide on Business Industry Risk score">
+    <informationRequirement id="InformationRequirement_1vlhb6p">
+      <requiredInput href="#InputData_1v46f2u" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_170nxap" hitPolicy="FIRST">
+      <input id="InputClause_1g90e5j" label="Business Industry" biodi:width="429" camunda:inputVariable="businessIndustries">
+        <inputExpression id="LiteralExpression_1s45c61" typeRef="string">
+          <text>businessIndustries</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1gxht6y">
+          <text>"firearms","accountant","photography","other"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_1r6qbw9" label="Business Industry Risk Score" name="businessIndustryRiskScore" typeRef="integer" />
+      <output id="OutputClause_0od7ztf" label="Business Industry Risk Level" name="businessIndustryRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_0czhkgb">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_1vky94v">
+        <inputEntry id="UnaryTests_1kincwj">
+          <text>null</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1tnkq6p">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1cd120l">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0j483z4">
+        <description>53</description>
+        <inputEntry id="UnaryTests_0ivvvyn">
+          <text>contains(businessIndustries, "Real Estate and Rental and Leasing")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1y05lx8">
+          <text>10</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_109lvm3">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00k3r4j">
+        <description>23</description>
+        <inputEntry id="UnaryTests_0jp9j2d">
+          <text>contains(businessIndustries, "Construction")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0dj5tt8">
+          <text>6</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1dx1mq5">
+          <text>"medium"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_03nx8th">
+        <description>52</description>
+        <inputEntry id="UnaryTests_0r9czz0">
+          <text>contains(businessIndustries, "Finance and Insurance")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1f282wh">
+          <text>6</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1k51g7d">
+          <text>"medium"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18llz91">
+        <description>11</description>
+        <inputEntry id="UnaryTests_0rtjvnd">
+          <text>contains(businessIndustries, "Agriculture, Forestry, Fishing and Hunting")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_140zb7z">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cqcucv">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1jzrftm">
+        <description>21</description>
+        <inputEntry id="UnaryTests_1j70f09">
+          <text>contains(businessIndustries, "Mining, Quarrying, and Oil and Gas Extraction")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1eujnfp">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0x1mp3w">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17wot1l">
+        <description>22</description>
+        <inputEntry id="UnaryTests_009whvx">
+          <text>contains(businessIndustries, "Utilities")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0aidkvx">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1uz8fjn">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1q67xdk">
+        <description>31-33</description>
+        <inputEntry id="UnaryTests_02hcxxg">
+          <text>contains(businessIndustries, "Manufacturing")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kziusi">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0fpjl6i">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1mebpzo">
+        <description>42</description>
+        <inputEntry id="UnaryTests_052bira">
+          <text>contains(businessIndustries, "Wholesale Trade")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hrbdwa">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ou14zm">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0kc7ggr">
+        <description>44-45</description>
+        <inputEntry id="UnaryTests_0p4z0dd">
+          <text>contains(businessIndustries, "Retail Trade")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_01mkt2d">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_043752h">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yv7lmy">
+        <description>51</description>
+        <inputEntry id="UnaryTests_0a3zygx">
+          <text>contains(businessIndustries, "Information")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xfjs7l">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_18dtvrs">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1jjf8k1">
+        <description>101010</description>
+        <inputEntry id="UnaryTests_1jk06jp">
+          <text>contains(businessIndustries, "Other")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1v9ns2f">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0sz2o4c">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Decision_1v7b1q7" name="[Business] 03_Decide on Business Country Registered In Risk score">
+    <informationRequirement id="InformationRequirement_0gfz9sx">
+      <requiredInput href="#InputData_1qkbklj" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0uq2wav">
+      <input id="InputClause_03hdot4" label="Business Country Registered In" camunda:inputVariable="businessCountryRegisteredIn">
+        <inputExpression id="LiteralExpression_172fefl" typeRef="string">
+          <text>businessCountryRegisteredIn</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0m1rycz">
+          <text>"UnitedStates","syria","afganistan","iraq","other"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_0ceo5vd" label="Business Country Registered In Risk Score" name="businessCountryRegisteredInRiskScore" typeRef="integer" />
+      <output id="OutputClause_13iupq2" label="Business Country Registered In Risk Level" name="businessCountryRegisteredInRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_0qvxn1p">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_0ukh0gd">
+        <inputEntry id="UnaryTests_0u10fnx">
+          <text>"UnitedStates"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1s4fl6r">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1w15vdm">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1r7fqop">
+        <inputEntry id="UnaryTests_019imfx">
+          <text>"syria"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0cls5xf">
+          <text>10</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1n3z2ww">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1jcireb">
+        <inputEntry id="UnaryTests_0b2nesp">
+          <text>"afganistan"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0205mi3">
+          <text>9</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0u5q47b">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18nlk0t">
+        <inputEntry id="UnaryTests_158hcv3">
+          <text>"iraq"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18jco0g">
+          <text>6</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19f7ofg">
+          <text>"medium"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yctbmd">
+        <inputEntry id="UnaryTests_1qhfxa5">
+          <text>"other"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05z6s7o">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0r3lmym">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06aae03">
+        <inputEntry id="UnaryTests_0q52ni7">
+          <text>null</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vjr3pm">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ha044t">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1qkbklj" name="Business Country Registered In" />
+  <inputData id="InputData_115z89m" name="Organisational Structure" />
+  <decision id="Decision_0pbmyza" name="[Business] 05_Decide on Organisational Structure Risk Score">
+    <informationRequirement id="InformationRequirement_1hwacdn">
+      <requiredInput href="#InputData_115z89m" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1waejwj">
+      <input id="InputClause_0nazx5b" label="Organisational Structure is Complex" camunda:inputVariable="orgStructureComplex">
+        <inputExpression id="LiteralExpression_0jdi0un" typeRef="boolean">
+          <text>orgStructureComplex</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1do7olq" label="Organisation Structure Risk Score" name="orgStructureRiskScore" typeRef="integer" />
+      <output id="OutputClause_09ocuxi" label="Organisation Structure Risk Level" name="orgStructureRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_11ym88l">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_0sy7clv">
+        <inputEntry id="UnaryTests_1ma4qkb">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1au86gn">
+          <text>10</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_12qbpsh">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1rwcwjr">
+        <inputEntry id="UnaryTests_0p5l8tt">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fq4zzt">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_124r8xg">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0x4pdcr">
+        <inputEntry id="UnaryTests_0vrl7ax">
+          <text>null</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1m4l4uc">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0aochmj">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decision_business_countries_doing_business_with" name="[Business] 04_Decide on Countries Doing Business With Risk score">
+    <informationRequirement id="InformationRequirement_125mtzw">
+      <requiredInput href="#InputData_0lv9u8w" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1d15j6n" hitPolicy="FIRST">
+      <input id="InputClause_03e9jjj" label="Business Countries Doing Business With" biodi:width="407" camunda:inputVariable="businessCountriesDoingBusinessWith">
+        <inputExpression id="LiteralExpression_0tsjmqz" typeRef="string">
+          <text>businessCountriesDoingBusinessWith</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_17wx3h0">
+          <text>"syria","iran","iraq","afganistan","other"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_1omzwst" label="Business Countries Doing Business With Risk Score" name="businessCountriesDoingBusinessWithRiskScore" typeRef="integer" />
+      <output id="OutputClause_13zmjci" label="Business Countries Doing Business With Risk Level" name="businessCountriesDoingBusinessWithRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_03e6b8y">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_0inf6zf">
+        <inputEntry id="UnaryTests_13dnwrc">
+          <text>null</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0s8q4pp">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1cbjwkp">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1imfqw6">
+        <inputEntry id="UnaryTests_1vgytww">
+          <text>contains(businessCountriesDoingBusinessWith, "syria")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fikoze">
+          <text>10</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1f59enb">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16ovlnv">
+        <inputEntry id="UnaryTests_02frkn0">
+          <text>contains(businessCountriesDoingBusinessWith, "iran")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0i6wmjn">
+          <text>8</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0kfzccu">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05zyuzy">
+        <inputEntry id="UnaryTests_1i5jeah">
+          <text>contains(businessCountriesDoingBusinessWith, "iraq")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xou11p">
+          <text>7</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1xlsrha">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_025qhg0">
+        <inputEntry id="UnaryTests_1r0rgkj">
+          <text>contains(businessCountriesDoingBusinessWith, "afghanistan")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12e2mxj">
+          <text>6</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0mzol1r">
+          <text>"medium"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0kib98f">
+        <inputEntry id="UnaryTests_0x8uplz">
+          <text>contains(businessCountriesDoingBusinessWith, "other")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0x05enj">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0lyjxjg">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0lv9u8w" name="Business Countries doing business with" />
+  <inputData id="InputData_0hzjq2n" name="AML KYB Task Outcome" />
+  <inputData id="InputData_15cnfuf" name="AML KYB result" />
+  <decision id="Decision_0d2wp1v" name="[Business] 06_Decide on AML Risk Score">
+    <informationRequirement id="InformationRequirement_1lxsfh2">
+      <requiredInput href="#InputData_15cnfuf" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1u340p2">
+      <requiredInput href="#InputData_0hzjq2n" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1gbsdg8">
+      <input id="InputClause_1k2l4u6" label="AML KYB Match Status" biodi:width="322" camunda:inputVariable="businessAmlKybMatchStatus">
+        <inputExpression id="LiteralExpression_0mpu24v" typeRef="string">
+          <text>businessAmlKybMatchStatus</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0np10fu">
+          <text>"no_match","true_positive","false_positive","potential_match"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1wf4pbx" label="Review AML KYB Task Outcome" biodi:width="308" camunda:inputVariable="businessReviewAmlKybTaskOutcome">
+        <inputExpression id="LiteralExpression_0ggxapa" typeRef="string">
+          <text>businessReviewAmlKybTaskOutcome</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_05473wx">
+          <text>"true","false"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_095xpuw" label="Risk required business AML" name="amlKybRiskScore" typeRef="integer" biodi:width="166" />
+      <output id="OutputClause_0sp9n9b" label="AML KYB Risk Level" name="amlKybRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_14ldj5b">
+          <text>"low","high","undefined"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_1yy0zh9" label="Task AML KYB result" name="taskAmlKybResult" typeRef="string" biodi:width="192">
+        <outputValues id="UnaryTests_1cif4dk">
+          <text>"no_match","match","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_1bwh560">
+        <inputEntry id="UnaryTests_1629qco">
+          <text>"no_match"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_197wnr2">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1r5q387">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_03o05v7">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1x3ey5z">
+          <text>"no_match"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1tvqufy">
+        <inputEntry id="UnaryTests_1gocl20">
+          <text>"potential_match","true_positive","false_positive"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1vwwh99">
+          <text>"true"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0osvtdp">
+          <text>1</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_07h359m">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1bsiogh">
+          <text>"no_match"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xd6jyf">
+        <inputEntry id="UnaryTests_0if1ys8">
+          <text>"potential_match","true_positive","false_positive"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_104vd21">
+          <text>"false"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1x926x2">
+          <text>10</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1m3nq5e">
+          <text>"high"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0zembfi">
+          <text>"match"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1wd09vl">
+        <inputEntry id="UnaryTests_07924g6">
+          <text>null</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17t1fdg">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1i8ga3e">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19eir5p">
+          <text>"undefined"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ozf4od">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1eu6awu">
+        <inputEntry id="UnaryTests_14nbe0h">
+          <text>"potential_match","true_positive","false_positive"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kvqvu5">
+          <text>null</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ltfgqe">
+          <text>0</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0op0dlq">
+          <text>"undefined"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00biu34">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="calculateBusinessRiskScore" name="[Business] 07_Calculate Max Risk score business">
+    <informationRequirement id="InformationRequirement_18o08cv">
+      <requiredDecision href="#Decision_0ps9psu" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0gw9b6i">
+      <requiredDecision href="#decision_business_industries" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_05etn05">
+      <requiredDecision href="#Decision_1v7b1q7" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1505103">
+      <requiredDecision href="#Decision_0pbmyza" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1982seq">
+      <requiredDecision href="#decision_business_countries_doing_business_with" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_04flcvb">
+      <requiredDecision href="#Decision_0d2wp1v" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_04veauw" hitPolicy="ANY">
+      <input id="InputClause_15m94lh" camunda:inputVariable="businessStatusRiskScore">
+        <inputExpression id="LiteralExpression_19wkkxz" typeRef="integer" expressionLanguage="juel">
+          <text>businessStatusRiskScore</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1bi0gms" camunda:inputVariable="businessStatusRiskLevel">
+        <inputExpression id="LiteralExpression_18wl85c" typeRef="string" expressionLanguage="juel">
+          <text>businessStatusRiskLevel</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_142xe09" name="businessStatusRiskScore" typeRef="integer" />
+      <output id="OutputClause_1744cq2" name="businessStatusRiskLevel" typeRef="string" />
+      <output id="OutputClause_19ow7wg" label="businessIndustryRiskScore" name="businessIndustryRiskScore" typeRef="integer" />
+      <output id="OutputClause_1h41ss2" label="businessIndustryRiskLevel" name="businessIndustryRiskLevel" typeRef="string" />
+      <output id="OutputClause_06yxzaw" label="businessCountryRegisteredRiskScore" name="businessCountryRegisteredInRiskScore" typeRef="integer" />
+      <output id="OutputClause_1lvcmit" label="businessCountryRegisteredInRiskLevel" name="businessCountryRegisteredInRiskLevel" typeRef="string" />
+      <output id="OutputClause_11x6kbq" label="businessCountriesDoingBusinessWithRiskScore" name="businessCountriesDoingBusinessWithRiskScore" typeRef="integer" />
+      <output id="OutputClause_16mzjks" label="businessCountriesDoingBusinessWithRiskLevel" name="businessCountriesDoingBusinessWithRiskLevel" typeRef="string" />
+      <output id="OutputClause_1t19hyn" label="orgStructureRiskScore" name="orgStructureRiskScore" typeRef="integer" />
+      <output id="OutputClause_046hvoc" label="orgStructureRiskLevel" name="orgStructureRiskLevel" typeRef="string" />
+      <output id="OutputClause_0x92nn0" label="amlKybRiskScore" name="amlKybRiskScore" typeRef="integer" />
+      <output id="OutputClause_1ph9xsg" label="amlKybRiskLevel" name="amlKybRiskLevel" typeRef="string" />
+      <output id="OutputClause_091buni" label="taskAmlKybResult" name="taskAmlKybResult" typeRef="string" />
+      <rule id="DecisionRule_09xmce1">
+        <inputEntry id="UnaryTests_1sydied">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ewgylo">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0g79xke">
+          <text>businessStatusRiskScore</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05c0xio">
+          <text>businessStatusRiskLevel</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1bdc3u2">
+          <text>businessIndustryRiskScore</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1dfi1n5">
+          <text>businessIndustryRiskLevel</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1aetbq8">
+          <text>businessCountryRegisteredInRiskScore</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ilefzq">
+          <text>businessCountryRegisteredInRiskLevel</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0740f5c">
+          <text>businessCountriesDoingBusinessWithRiskScore</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06216xo">
+          <text>businessCountriesDoingBusinessWithRiskLevel</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0frzd3c">
+          <text>orgStructureRiskScore</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0yhl8ys">
+          <text>orgStructureRiskLevel</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1kvh0g6">
+          <text>amlKybRiskScore</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0rqgb7t">
+          <text>amlKybRiskLevel</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0fa7ngf">
+          <text>taskAmlKybResult</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_0ps9psu">
+        <dc:Bounds height="80" width="180" x="160" y="360" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_10lzn33" dmnElementRef="InputData_0lo5m7n">
+        <dc:Bounds height="45" width="125" x="187" y="517" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0m4wuii" dmnElementRef="InformationRequirement_161hyzk">
+        <di:waypoint x="250" y="517" />
+        <di:waypoint x="250" y="460" />
+        <di:waypoint x="250" y="440" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0vswwx7" dmnElementRef="InformationRequirement_18o08cv">
+        <di:waypoint x="250" y="360" />
+        <di:waypoint x="843" y="180" />
+        <di:waypoint x="843" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1stlgir" dmnElementRef="InputData_1v46f2u">
+        <dc:Bounds height="45" width="125" x="408" y="518" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1ekrjr3" dmnElementRef="InformationRequirement_1vlhb6p">
+        <di:waypoint x="471" y="518" />
+        <di:waypoint x="470" y="460" />
+        <di:waypoint x="470" y="440" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1p84p3p" dmnElementRef="decision_business_industries">
+        <dc:Bounds height="80" width="180" x="380" y="360" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1vbz745" dmnElementRef="InformationRequirement_0gw9b6i">
+        <di:waypoint x="470" y="360" />
+        <di:waypoint x="868" y="180" />
+        <di:waypoint x="868" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0q8rdnl" dmnElementRef="Decision_1v7b1q7">
+        <dc:Bounds height="80" width="180" x="610" y="360" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0d296qq" dmnElementRef="InputData_1qkbklj">
+        <dc:Bounds height="45" width="125" x="638" y="518" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1687pvd" dmnElementRef="InformationRequirement_0gfz9sx">
+        <di:waypoint x="701" y="518" />
+        <di:waypoint x="700" y="460" />
+        <di:waypoint x="700" y="440" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1mbm5dn" dmnElementRef="InformationRequirement_05etn05">
+        <di:waypoint x="700" y="360" />
+        <di:waypoint x="894" y="180" />
+        <di:waypoint x="894" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_15ydrey" dmnElementRef="InputData_115z89m">
+        <dc:Bounds height="45" width="125" x="1097" y="518" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1n3geqs" dmnElementRef="InformationRequirement_1hwacdn">
+        <di:waypoint x="1160" y="518" />
+        <di:waypoint x="1160" y="460" />
+        <di:waypoint x="1160" y="440" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0o20wa7" dmnElementRef="Decision_0pbmyza">
+        <dc:Bounds height="80" width="180" x="1070" y="360" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0aj0b4g" dmnElementRef="InformationRequirement_1505103">
+        <di:waypoint x="1160" y="360" />
+        <di:waypoint x="946" y="180" />
+        <di:waypoint x="946" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0lnzaek" dmnElementRef="decision_business_countries_doing_business_with">
+        <dc:Bounds height="80" width="180" x="840" y="360" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_18oznf4" dmnElementRef="InputData_0lv9u8w">
+        <dc:Bounds height="45" width="125" x="868" y="518" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1dnre75" dmnElementRef="InformationRequirement_125mtzw">
+        <di:waypoint x="931" y="518" />
+        <di:waypoint x="930" y="460" />
+        <di:waypoint x="930" y="440" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0fal90f" dmnElementRef="InformationRequirement_1982seq">
+        <di:waypoint x="930" y="360" />
+        <di:waypoint x="920" y="180" />
+        <di:waypoint x="920" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0r0xqu5" dmnElementRef="InputData_0hzjq2n">
+        <dc:Bounds height="45" width="125" x="1447" y="517" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1x2rnaw" dmnElementRef="InputData_15cnfuf">
+        <dc:Bounds height="45" width="125" x="1277" y="517" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_00q2ub9" dmnElementRef="InformationRequirement_1lxsfh2">
+        <di:waypoint x="1340" y="517" />
+        <di:waypoint x="1380" y="460" />
+        <di:waypoint x="1380" y="440" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_062oqfm" dmnElementRef="InformationRequirement_1u340p2">
+        <di:waypoint x="1510" y="517" />
+        <di:waypoint x="1440" y="460" />
+        <di:waypoint x="1440" y="440" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_11hai86" dmnElementRef="Decision_0d2wp1v">
+        <dc:Bounds height="80" width="180" x="1320" y="360" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0qc866p" dmnElementRef="InformationRequirement_04flcvb">
+        <di:waypoint x="1410" y="360" />
+        <di:waypoint x="971" y="180" />
+        <di:waypoint x="971" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0mqguh4" dmnElementRef="calculateBusinessRiskScore">
+        <dc:Bounds height="80" width="180" x="817" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

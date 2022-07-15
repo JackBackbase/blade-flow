@@ -1,0 +1,169 @@
+{
+  "$schema": "../../../node_modules/@backbase/sdlc-convert/node_modules/@backbase/sdlc-schema/experience.schema.json",
+  "name": "sme-onboarding-employee",
+  "title": "SME Onboarding Employee Web App",
+  "locales": [
+    "en-US"
+  ],
+  "properties": {
+    "AccessDeniedPage": "sme-onboarding-employee/login?error=accessdenied",
+    "DefaultLandingPage": "sme-onboarding-employee/index",
+    "ErrorPage": "sme-onboarding-employee/error",
+    "LoginPage": "sme-onboarding-employee/login",
+    "TypeOfTags": "tracking",
+    "thumbnailUrl": "/sme-onboarding-employee/"
+  },
+  "cxSources": [
+    "node_modules/@backbase",
+    "collections/collection-bb-web-sdk-1.16.4.zip",
+    "dist"
+  ],
+  "contentDirs": {
+    "default": "apps/employee/sdlc/content"
+  },
+  "environments": {
+    "docker": {
+      "provisioning": {
+        "type": "nginx",
+        "outputDir": "dist/experiences/sme-onboarding-employee/docker",
+        "baseHref": "http://localhost:4200/sme-onboarding-employee",
+        "apiRoot": "https://localhost/api"
+      },
+      "authorization": {
+        "authUrl": "http://localhost:8180/auth",
+        "clientId": "bb-web-client",
+        "scope": "openid",
+        "kind": "hybrid",
+        "realm": "backbase",
+        "landingPageUrl": "sme-onboarding-employee/",
+        "loginPageUrl": "sme-onboarding-employee/redirect",
+        "maxInactivityDuration": 300
+      }
+    },
+    "default": {
+      "authorization": {
+        "authUrl": "http://localhost:8180/auth",
+        "clientId": "bb-web-client",
+        "scope": "openid",
+        "kind": "hybrid",
+        "realm": "backbase",
+        "landingPageUrl": "sme-onboarding-employee/",
+        "loginPageUrl": "sme-onboarding-employee/redirect",
+        "maxInactivityDuration": 300
+      },
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "./dist/zoz/employee-identity",
+        "staticResourcesRoot": "/api/portal/static/items",
+        "linkRoot": "",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          },
+          "userConsumer": {
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    },
+    "bas": {
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "./dist/zoz/employee",
+        "staticResourcesRoot": "/api/portal/static/items",
+        "linkRoot": "",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          },
+          "userConsumer": {
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    }
+  },
+  "menus": {
+    "master-pages": [
+      {
+        "section": "page-bb-default",
+        "title": "Lean Page",
+        "page": {
+          "extends": "page-bb-default",
+          "name": "page-bb-default",
+          "children": [
+            {
+              "fragment": "../../sdlc-common/pages/lean-page.json"
+            }
+          ]
+        }
+      }
+    ],
+    "special-pages": [
+      {
+        "section": "login",
+        "title": "Login",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Login",
+          "children": [
+            {
+              "fragment": "../../sdlc-common/pages/login.json"
+            }
+          ]
+        }
+      },
+      {
+        "section": "redirect",
+        "title": "Redirect",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Redirect"
+        }
+      },
+      {
+        "section": "error",
+        "title": "Error",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Something went wrong",
+          "children": [
+            {
+              "fragment": "../../sdlc-common/pages/something-went-wrong.json"
+            }
+          ]
+        }
+      }
+    ],
+    "main": [
+      {
+        "section": "index",
+        "friendlyUrl": "sme-onboarding-employee",
+        "title": "SME Onboarding Employee",
+        "permission": "userConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "SME Onboarding Employee",
+          "children": [
+            {
+              "fragment": "./pages/home.json"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

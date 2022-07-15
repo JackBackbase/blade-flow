@@ -1,0 +1,2177 @@
+{
+    "info" : {
+        "_postman_id" : "5fa299ae-da0a-467c-b31f-c9e4cd16d862",
+        "name" : "SME Onboarding [Online Flow] LLC",
+        "schema" : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item" : [
+        {
+            "name" : "Gateway",
+            "item" : [
+                {
+                    "name" : "Manager login",
+                    "event" : [
+                        {
+                            "listen" : "test",
+                            "script" : {
+                                "exec" : [
+                                    "var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+                                    "postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+                                    "var jwtToken = postman.getResponseCookie(\"Authorization\").value;",
+                                    "postman.setEnvironmentVariable(\"jwtToken\", jwtToken);",
+                                    "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                ],
+                                "type" : "text/javascript"
+                            }
+                        }
+                    ],
+                    "request" : {
+                        "method" : "POST",
+                        "header" : [
+                            {
+                                "key" : "Authorization",
+                                "value" : "Basic"
+                            },
+                            {
+                                "key" : "Content-Type",
+                                "value" : "application/x-www-form-urlencoded"
+                            }
+                        ],
+                        "body" : {
+                            "mode" : "urlencoded",
+                            "urlencoded" : [
+                                {
+                                    "key" : "username",
+                                    "value" : "manager",
+                                    "type" : "text"
+                                },
+                                {
+                                    "key" : "password",
+                                    "value" : "manager",
+                                    "type" : "text"
+                                },
+                                {
+                                    "key" : "submit",
+                                    "value" : "Login",
+                                    "type" : "text"
+                                }
+                            ]
+                        },
+                        "url" : {
+                            "raw" : "{{gateway-url}}/api/auth/login",
+                            "host" : [
+                                "{{gateway-url}}"
+                            ],
+                            "path" : [
+                                "api",
+                                "auth",
+                                "login"
+                            ]
+                        },
+                        "description" : "Login to Gateway"
+                    },
+                    "response" : [ ]
+                }
+            ],
+            "event" : [
+                {
+                    "listen" : "prerequest",
+                    "script" : {
+                        "type" : "text/javascript",
+                        "exec" : [
+                            ""
+                        ]
+                    }
+                },
+                {
+                    "listen" : "test",
+                    "script" : {
+                        "type" : "text/javascript",
+                        "exec" : [
+                            ""
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name" : "LLC Company Onboarding",
+            "item" : [
+                {
+                    "name" : "Step 1: Initialization",
+                    "item" : [
+                        {
+                            "name" : "1.1 Initialize Interaction",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "pm.test(\"Property is there\", function() {",
+                                            "    var body = JSON.parse(responseBody);",
+                                            "    pm.expect(body).to.have.property(\"interactionId\");",
+                                            "});",
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);",
+                                            "var response = JSON.parse(responseBody);",
+                                            "postman.setEnvironmentVariable(\"interaction-id\", response.interactionId);",
+                                            "postman.setEnvironmentVariable(\"case-key\", response.body.caseKey);",
+                                            ""
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "protocolProfileBehavior" : {
+                                "disabledSystemHeaders" : { }
+                            },
+                            "request" : {
+                                "auth" : {
+                                    "type" : "noauth"
+                                },
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "value" : "application/json",
+                                        "type" : "text"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"payload\": {\n        \"accepted\": true\n    }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/sme-onboarding-init",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "sme-onboarding-init"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ],
+                    "event" : [
+                        {
+                            "listen" : "prerequest",
+                            "script" : {
+                                "type" : "text/javascript",
+                                "exec" : [
+                                    ""
+                                ]
+                            }
+                        },
+                        {
+                            "listen" : "test",
+                            "script" : {
+                                "type" : "text/javascript",
+                                "exec" : [
+                                    ""
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 2: Anchor Data",
+                    "item" : [
+                        {
+                            "name" : "2.1 Submit Anchor Data",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"firstName\": \"sssss\",\n        \"lastName\": \"xxxxx\",\n        \"dateOfBirth\": \"1975-02-08\",\n        \"emailAddress\": \"{{interaction-id}}@backbase.com\",\n        \"phoneNumber\": \"12345678901\"\n    }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/sme-onboarding-anchor-data",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "sme-onboarding-anchor-data"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 3: OTP Verification",
+                    "item" : [
+                        {
+                            "name" : "3.1 Available OTP Channels",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"_comment\": \"The payload can either contain phoneNumber or email, not both. The channel is an enum. SMS and EMAIL for now.\",\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/available-otp-channels",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "available-otp-channels"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.2 Fetch OTP Email",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/fetch-otp-email",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "fetch-otp-email"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.3 Request OTP",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"_comment\": \"The payload can either contain phoneNumber or email, not both. The channel is an enum. SMS and EMAIL for now.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"+123456789\",\n\t\t\"channel\": \"SMS\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/request-otp",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "request-otp"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.4 Verify OTP",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"_comment\": \"Setting channel to SMS or EMAIL will set one of those fields to verified in caseData.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"+123456789\",\n\t\t\"channel\": \"SMS\",\n\t\t\"otp\": \"123456\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/verify-otp",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "verify-otp"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 4: Select Product",
+                    "item" : [
+                        {
+                            "name" : "4.1. Verfiy Case",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n   \n}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/sme-onboarding-check-case-exist",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "sme-onboarding-check-case-exist"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "4.2. Get Product List",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n    \"productType\": \"Business Checking\"\n  }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/get-product-list",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "get-product-list"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "4.3. Select Products",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n    \"selection\": [{\n        \"referenceId\": \"product-1\",\n        \"productName\": \"Business Checking\"\n    }\n    ]\n}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/select-products",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "select-products"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 5: Company Look Up",
+                    "item" : [
+                        {
+                            "name" : "5.1 Select business structure",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n        \"type\": \"LLC\",\n        \"subtype\": \"Multiple member\"\n\t}\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/business-structure",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "business-structure"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "5.2 Company-lookup",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n        \"name\": \"Backbase-3\",\n        \"countryCode\":\"US\",\n        \"jurisdictionCode\": \"US-AL\"\n\t}\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/company-lookup",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "company-lookup"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "5.3 Company-details",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n        \"number\": \"999999999\",\n        \"jurisdictionCode\": \"US-AL\"\n\t}\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/company-details",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "company-details"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "5.4 Business Details",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n        \"businessStructureInfo\": {\n            \"type\": \"LLC\",\n            \"subtype\": \"Multiple member\"\n        },\n        \"legalName\": \"potential_match\",\n        \"ein\": \"123456789\",\n        \"dateEstablished\": \"1998-03-27\",\n        \"stateOperatingIn\": \"TX\"\n\t}\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/business-details",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "business-details"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "5.5 Business Address",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n        \"numberAndStreet\":\"12 Saint James street\",\n        \"apt\":\"2A\",\n        \"zipCode\":\"12345\",\n        \"city\":\"Alabama\",\n        \"state\":\"AL\",\n        \"addressName\": \"Business\"\n    }\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/submit-address",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "submit-address"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "5.6  Business Identity",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"description\": \"The real estate\",\n        \"website\": \"www.home.pl\",\n        \"industries\": [\n            {\n                \"code\": \"23\",\n                \"description\": \"Construction\"\n            }\n        ]\n    }\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/business-identity",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "business-identity"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "5.7 Check Business Relation",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {}\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/check-business-relation-and-document-requests-conditions",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "check-business-relation-and-document-requests-conditions"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 6: Approve Business AML task",
+                    "item" : [
+                        {
+                            "name" : "6.1 Get task",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "var response = JSON.parse(responseBody);",
+                                            "",
+                                            "var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+                                            "postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+                                            "",
+                                            "pm.test(\"Response contains AML_Review_Activity\", function () {",
+                                            "    pm.expect(response[1].key).to.eql(\"AML_Review_Activity\");",
+                                            "});",
+                                            "",
+                                            "postman.setEnvironmentVariable(\"task-id\", response[1].id);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "GET",
+                                "header" : [ ],
+                                "url" : {
+                                    "raw" : "{{sme-onboarding-url}}/client-api/process/v2/task?caseKey={{case-key}}&withClosed=false&withOpen=true",
+                                    "host" : [
+                                        "{{sme-onboarding-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "process",
+                                        "v2",
+                                        "task"
+                                    ],
+                                    "query" : [
+                                        {
+                                            "key" : "caseKey",
+                                            "value" : "{{case-key}}"
+                                        },
+                                        {
+                                            "key" : "withClosed",
+                                            "value" : "false"
+                                        },
+                                        {
+                                            "key" : "withOpen",
+                                            "value" : "true"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "6.2 Approve - AML Business Review",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+                                            "postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+                                            "tests[\"Status code is ACCEPTED\"] = (responseCode.code === 202);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{cookieAnonValue}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n  \"taskData\": {\n    \"reviewApproved\": true,\n    \"riskLevel\": \"LOW\",\n    \"reviewApprovedReason\" :{\n        \"matchId\" : \"1\",\n        \"matchTypes\" : [\"pep\", \"other\"],\n        \"comment\" : \"some comment\"\n    }\n  }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-onboarding-url}}/client-api/process/v2/task/{{task-id}}/complete",
+                                    "host" : [
+                                        "{{sme-onboarding-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "process",
+                                        "v2",
+                                        "task",
+                                        "{{task-id}}",
+                                        "complete"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 7: Select Business Relations Type",
+                    "item" : [
+                        {
+                            "name" : "7.1. Select Relation Type",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n      \"relationType\":\"OWNER\"\n    }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/select-relation-type",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "select-relation-type"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 8: Business Owners",
+                    "item" : [
+                        {
+                            "name" : "8.1. Get Business Roles",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/get-business-roles",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "get-business-roles"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "8.2. Get Business Persons",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);",
+                                            "",
+                                            "var response = JSON.parse(responseBody);",
+                                            "postman.setEnvironmentVariable(\"person-id\", response.body[0].id);",
+                                            "",
+                                            "pm.test(\"body id is there\", function () {",
+                                            "    pm.expect(response.body[0]).to.have.property(\"id\");",
+                                            "});",
+                                            ""
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"relationType\": \"OWNER\"\n    }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/get-business-persons",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "get-business-persons"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "8.3. Update Owner/CEO",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"id\": \"{{person-id}}\",\n        \"firstName\": \"ONE\",\n        \"lastName\": \"ONE\",\n        \"email\": \"email@email.com\",\n        \"phone\": \"+31626687227\",\n        \"role\": \"CEO\",\n        \"ownershipPercentage\": 35\n    }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/update-current-user-owner",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "update-current-user-owner"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "8.4. Complete Business Owner",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n\n}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/complete-business-owners-step",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "complete-business-owners-step"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 9: Control Persons",
+                    "item" : [
+                        {
+                            "name" : "9.1. Get Business Roles",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/get-business-roles",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "get-business-roles"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "9.2. Get Business Persons",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);",
+                                            "",
+                                            "pm.test(\"Property is there\", function () {",
+                                            "    var response = JSON.parse(responseBody);",
+                                            "",
+                                            "    pm.expect(response.body[0]).to.have.property(\"id\");",
+                                            "});",
+                                            "",
+                                            "var response = JSON.parse(responseBody);",
+                                            "postman.setEnvironmentVariable(\"control-person-id\", response.body[0].id);",
+                                            ""
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"relationType\": \"OWNER\"\n    }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/get-business-persons",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "get-business-persons"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "9.3. Select Control Person",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"id\": \"{{control-person-id}}\"\n    }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/select-control-person",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "select-control-person"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 10: Business Summary",
+                    "item" : [
+                        {
+                            "name" : "10.1. Get Business Persons",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n      \"relationType\":\"OWNER\" }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/get-business-persons",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "get-business-persons"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "10.2. Complete Business Summary",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n  \n }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/complete-summary-step",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "complete-summary-step"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "10.3. Get tasks",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "var response = JSON.parse(responseBody);",
+                                            "",
+                                            "var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+                                            "postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+                                            "",
+                                            "pm.test(\"Response contains Activity_BR_Review_Information\", function () {",
+                                            "    pm.expect(response[3].key).to.eql(\"Activity_BR_Review_Information\");",
+                                            "});",
+                                            "",
+                                            "postman.setEnvironmentVariable(\"task-id\", response[3].id);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "GET",
+                                "header" : [ ],
+                                "url" : {
+                                    "raw" : "{{sme-onboarding-url}}/client-api/process/v2/task?caseKey={{case-key}}&withClosed=false&withOpen=true",
+                                    "host" : [
+                                        "{{sme-onboarding-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "process",
+                                        "v2",
+                                        "task"
+                                    ],
+                                    "query" : [
+                                        {
+                                            "key" : "caseKey",
+                                            "value" : "{{case-key}}"
+                                        },
+                                        {
+                                            "key" : "withClosed",
+                                            "value" : "false"
+                                        },
+                                        {
+                                            "key" : "withOpen",
+                                            "value" : "true"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "10.4. Approve - BRJ Review",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+                                            "postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+                                            "tests[\"Status code is ACCEPTED\"] = (responseCode.code === 202);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{cookieAnonValue}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n  \"taskData\": {\n    \"reviewApproved\": true\n  }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-onboarding-url}}/client-api/process/v2/task/{{task-id}}/complete",
+                                    "host" : [
+                                        "{{sme-onboarding-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "process",
+                                        "v2",
+                                        "task",
+                                        "{{task-id}}",
+                                        "complete"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 11: Documents Upload",
+                    "item" : [
+                        {
+                            "name" : "11.1. Load document requests list",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);",
+                                            "",
+                                            "var response = JSON.parse(responseBody);",
+                                            "",
+                                            "pm.test(\"Property is there\", function () {",
+                                            "    pm.expect(response.body.documentRequests[0]).to.have.property(\"groupId\");",
+                                            "    pm.expect(response.body.documentRequests[0]).to.have.property(\"internalId\");",
+                                            "});",
+                                            "",
+                                            "postman.setEnvironmentVariable(\"group-id\", response.body.documentRequests[0].groupId);",
+                                            "postman.setEnvironmentVariable(\"internal-id\", response.body.documentRequests[0].internalId);",
+                                            ""
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\"\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/load-document-requests",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "load-document-requests"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "11.2. Complete upload document task",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"tempGroupId\": \"{{group-id}}\",\n\t\t\"internalId\": \"{{internal-id}}\",\n        \"comment\": \"Some comment\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/complete-task",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "complete-task"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "11.3. Retrieve and set review task id",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);\r",
+                                            "\r",
+                                            "var response = JSON.parse(responseBody);\r",
+                                            "\r",
+                                            "pm.test(\"Response contains reviewDocumentsTask\", function () {\r",
+                                            "    pm.expect(response[2].key).to.eql(\"reviewDocumentsTask\");\r",
+                                            "});\r",
+                                            "\r",
+                                            "postman.setEnvironmentVariable(\"review-task-id\", response[2].id);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "protocolProfileBehavior" : {
+                                "disableBodyPruning" : true
+                            },
+                            "request" : {
+                                "method" : "GET",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"tempGroupId\": \"{{group-id}}\",\n\t\t\"internalId\": \"{{internal-id}}\",\n        \"comment\": \"Some comment\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-onboarding-url}}/client-api/process/v2/task?caseKey={{case-key}}&withClosed=false&withOpen=true",
+                                    "host" : [
+                                        "{{sme-onboarding-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "process",
+                                        "v2",
+                                        "task"
+                                    ],
+                                    "query" : [
+                                        {
+                                            "key" : "caseKey",
+                                            "value" : "{{case-key}}"
+                                        },
+                                        {
+                                            "key" : "withClosed",
+                                            "value" : "false"
+                                        },
+                                        {
+                                            "key" : "withOpen",
+                                            "value" : "true"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "11.4. Review document",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is ACCEPTED\"] = (responseCode.code === 202);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"taskData\": {\n        \"isApproved\": true\n    }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-onboarding-url}}/client-api/process/v2/task/{{review-task-id}}/complete",
+                                    "host" : [
+                                        "{{sme-onboarding-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "process",
+                                        "v2",
+                                        "task",
+                                        "{{review-task-id}}",
+                                        "complete"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "11.5. Submit Document Requests",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/submit-document-requests",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "submit-document-requests"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 12: Identity Verification",
+                    "item" : [
+                        {
+                            "name" : "12.1 IDV Initiation",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{cookieAnonValue}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t}\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/identity-verification-initiation",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "identity-verification-initiation"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "12.2 Approved - IDV Result",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Content-Type",
+                                        "name" : "Content-Type",
+                                        "type" : "text",
+                                        "value" : "application/json"
+                                    },
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{cookieAnonValue}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"verificationId\": \"approved\"\n\t}\n}"
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/identity-verification-result",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "identity-verification-result"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 13: Personal Details",
+                    "item" : [
+                        {
+                            "name" : "13.1. Submit Personal Address",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n        \"numberAndStreet\":\"17 E Jefferson St\",\n        \"apt\":\"41\",\n        \"zipCode\":\"22222\",\n        \"city\":\"Phoenix\",\n        \"state\":\"AZ\",\n        \"addressName\":\"Personal\"\n}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/submit-address",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "submit-address"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "13.2. Submit SSN",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n        \"ssn\": \"123456789\"\n}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/submit-ssn",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "submit-ssn"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "13.3. Landing",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "tests[\"Status code is 200\"] = (responseCode.code === 200);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n   \n}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-interaction}}/sme-onboarding-landing-data",
+                                    "host" : [
+                                        "{{sme-interaction}}"
+                                    ],
+                                    "path" : [
+                                        "sme-onboarding-landing-data"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 14: Approve Risk Assessment Review Task",
+                    "item" : [
+                        {
+                            "name" : "14.1 Get task",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "var response = JSON.parse(responseBody);",
+                                            "",
+                                            "var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+                                            "postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+                                            "",
+                                            "pm.test(\"Response contains Review_application\", function () {",
+                                            "    pm.expect(response[0].key).to.eql(\"Review_application\");",
+                                            "});",
+                                            "",
+                                            "postman.setEnvironmentVariable(\"task-id\", response[0].id);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "GET",
+                                "header" : [ ],
+                                "url" : {
+                                    "raw" : "{{sme-onboarding-url}}/client-api/process/v2/task?caseKey={{case-key}}&withClosed=false&withOpen=true",
+                                    "host" : [
+                                        "{{sme-onboarding-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "process",
+                                        "v2",
+                                        "task"
+                                    ],
+                                    "query" : [
+                                        {
+                                            "key" : "caseKey",
+                                            "value" : "{{case-key}}"
+                                        },
+                                        {
+                                            "key" : "withClosed",
+                                            "value" : "false"
+                                        },
+                                        {
+                                            "key" : "withOpen",
+                                            "value" : "true"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "14.2 Approve - Risk Assessment Review Task",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+                                            "postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+                                            "tests[\"Status code is ACCEPTED\"] = (responseCode.code === 202);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{cookieAnonValue}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n  \"taskData\": {\n    \"reviewApproved\": true,\n    \"riskLevel\": \"LOW\",\n    \"reviewApprovedReason\" :{\n        \"comment\" : \"Risk Assessment Journey approved comment\"\n    }\n  }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-onboarding-url}}/client-api/process/v2/task/{{task-id}}/complete",
+                                    "host" : [
+                                        "{{sme-onboarding-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "process",
+                                        "v2",
+                                        "task",
+                                        "{{task-id}}",
+                                        "complete"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Get case",
+                    "event" : [
+                        {
+                            "listen" : "test",
+                            "script" : {
+                                "exec" : [
+                                    "tests[\"Status code is 200\"] = (responseCode.code === 200);\r",
+                                    "var response = JSON.parse(responseBody);\r",
+                                    "tests[\"Case archived\"] = (response.archived == true);"
+                                ],
+                                "type" : "text/javascript"
+                            }
+                        }
+                    ],
+                    "request" : {
+                        "method" : "GET",
+                        "header" : [ ],
+                        "url" : {
+                            "raw" : "{{sme-onboarding-url}}/client-api/casedata/v3/cases/{{case-key}}",
+                            "host" : [
+                                "{{sme-onboarding-url}}"
+                            ],
+                            "path" : [
+                                "client-api",
+                                "casedata",
+                                "v3",
+                                "cases",
+                                "{{case-key}}"
+                            ]
+                        }
+                    },
+                    "response" : [ ]
+                }
+            ]
+        }
+    ]
+}

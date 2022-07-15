@@ -1,0 +1,124 @@
+{
+  "key": "company-lookup-idt",
+  "version": 7,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "sme",
+  "caseDefinitionVersion": 19,
+  "steps": [
+    {
+      "name": "business-structure",
+      "entryPoint": true,
+      "handlers": [
+        {
+          "name": "business-structure",
+          "transitions": [
+            {
+              "condition": "actionResult.isSuccessful() && actionResult.body.performCompanyLookup",
+              "step": "company-lookup"
+            },
+            {
+              "condition": "actionResult.isSuccessful() && !actionResult.body.performCompanyLookup",
+              "step": "business-details"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "company-lookup",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-structure"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "company-lookup"
+        },
+        {
+          "name": "company-details",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-details"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-details",
+      "back": [
+        {
+          "condition": "caseData.companyLookupInfo.performCompanyLookup",
+          "step": "company-lookup"
+        },
+        {
+          "condition": "false == caseData.companyLookupInfo.performCompanyLookup",
+          "step": "business-structure"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "business-details",
+          "postExecutions": [
+            {
+              "name": "check-business-relation"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-address"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-address",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-details"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "submit-address",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-identity"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-identity",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-address"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "business-identity",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

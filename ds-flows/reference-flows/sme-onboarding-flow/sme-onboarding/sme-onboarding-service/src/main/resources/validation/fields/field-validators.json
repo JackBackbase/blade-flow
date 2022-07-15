@@ -1,0 +1,107 @@
+[
+  {
+    "className": "AnchorRequestDto",
+    "fieldValidators": [
+      {
+        "field": "firstName",
+        "validators": [
+          {
+            "validator": "name"
+          },
+          {
+            "validator": "notNull"
+          }
+        ]
+      },
+      {
+        "field": "lastName",
+        "validators": [
+          {
+            "validator": "name"
+          },
+          {
+            "validator": "notNull"
+          }
+        ]
+      },
+      {
+        "field": "emailAddress",
+        "validators": [
+          {
+            "validator": "email"
+          },
+          {
+            "validator": "notNull"
+          }
+        ]
+      },
+      {
+        "field": "dateOfBirth",
+        "validators": [
+          {
+            "validator": "age"
+          },
+          {
+            "validator": "notNull"
+          }
+        ]
+      },
+      {
+        "field": "phoneNumber",
+        "validators": [
+          {
+            "validator": "phone",
+            "params": {
+              "defaultRegion": "US"
+            }
+          },
+          {
+            "validator": "notNull"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "className": "ApplicationCenterRequestDto",
+    "fieldValidators": [
+      {
+        "field": "id",
+        "validators": [
+          {
+            "validator": "notNull"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "className": "TermsConditionsRequestDto",
+    "fieldValidators": [
+      {
+        "field": "accepted",
+        "validators": [
+          {
+            "validator": "notNull"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "className": "SsnDto",
+    "fieldValidators": [
+      {
+        "field": "ssn",
+        "validators": [
+          {
+            "validator": "socialSecurityNumberUS"
+          },
+          {
+            "validator": "notNull"
+          }
+        ]
+      }
+    ]
+  }
+]

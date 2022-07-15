@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc/spec",
+    "module": "es2020",
+    "target": "es2015",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "exclude": [
+    "**/*.po.ts",
+    "node_modules",
+    "tmp"
+  ]
+}

@@ -1,0 +1,25 @@
+<bb-modal-ui [isOpen]="openDialog"
+             (confirm)="onConfirmDialog()"
+             (cancel)="onCloseDialog()">
+    <bb-modal-header-ui title="Select Product"></bb-modal-header-ui>
+    <bb-modal-body-ui>
+        <ng-template bbCustomModalBody>
+            <form [formGroup]="productSelectionForm">
+                <bb-input-radio-group-ui formControlName="product"
+                                         class="radio-button-group">
+                    <bb-input-radio-ui *ngFor="let product of products$ | async"
+                                       value="{{product.referenceId}}"
+                                       label="{{product.name}}"></bb-input-radio-ui>
+                </bb-input-radio-group-ui>
+            </form>
+        </ng-template>
+    </bb-modal-body-ui>
+    <bb-modal-footer-ui>
+        <ng-template bbCustomModalFooter>
+            <bb-load-button-ui (click)="onConfirmDialog()"
+                               [isLoading]="isLoading"
+                               [disabled]="allowToSubmit()"
+                               i18n>Submit</bb-load-button-ui>
+        </ng-template>
+    </bb-modal-footer-ui>
+</bb-modal-ui>

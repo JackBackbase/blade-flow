@@ -1,0 +1,16 @@
+# We are considering bb-fuel-flow as the default Access Control user provider for this Flow
+# The root legal entity imported by bb-fuel-flow has the following values:
+#   externalId: C000000
+#   name: Bank
+backbase:
+  flow:
+    integrations:
+      users:
+        basePath: http://user-integration-external-mock:8080
+      identity:
+        externalLegalEntity: backbase
+        realm: us-onboarding
+    iam:
+      impl: DBS
+      dbs:
+        externalLegalEntityId: backbase

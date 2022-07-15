@@ -1,0 +1,35 @@
+{
+  "key": "address-validation-idt",
+  "version": 1,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "onboarding",
+  "caseDefinitionVersion": 1,
+  "steps": [
+    {
+      "name": "address",
+      "entryPoint": true,
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "validate-address"
+        },
+        {
+          "name": "fetch-address"
+        },
+        {
+          "name": "submit-address",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

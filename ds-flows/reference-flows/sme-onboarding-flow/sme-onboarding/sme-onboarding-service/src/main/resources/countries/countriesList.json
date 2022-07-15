@@ -1,0 +1,295 @@
+[
+  {
+    "name": "United Kingdom of Great Britain and Northern Ireland",
+    "isoCode": "GB"
+  },
+  {
+    "name": "United States of America",
+    "synonyms": [
+      "USA",
+      "United States"
+    ],
+    "isoCode": "US",
+    "states": [
+      {
+        "name": "Alabama",
+        "isoCode": "US-AL",
+        "code": "AL"
+      },
+      {
+        "name": "Alaska",
+        "isoCode": "US-AK",
+        "code": "AK"
+      },
+      {
+        "name": "Arizona",
+        "isoCode": "US-AZ",
+        "code": "AZ"
+      },
+      {
+        "name": "Arkansas",
+        "isoCode": "US-AR",
+        "code": "AR"
+      },
+      {
+        "name": "California",
+        "isoCode": "US-CA",
+        "code": "CA"
+      },
+      {
+        "name": "Colorado",
+        "isoCode": "US-CO",
+        "code": "CO"
+      },
+      {
+        "name": "Connecticut",
+        "isoCode": "US-CT",
+        "code": "CT"
+      },
+      {
+        "name": "Delaware",
+        "isoCode": "US-DE",
+        "code": "DE"
+      },
+      {
+        "name": "District of Columbia",
+        "isoCode": "US-DC",
+        "code": "DC"
+      },
+      {
+        "name": "Florida",
+        "isoCode": "US-FL",
+        "code": "FL"
+      },
+      {
+        "name": "Georgia",
+        "isoCode": "US-GA",
+        "code": "GA"
+      },
+      {
+        "name": "Hawaii",
+        "isoCode": "US-HI",
+        "code": "HI"
+      },
+      {
+        "name": "Idaho",
+        "isoCode": "US-ID",
+        "code": "ID"
+      },
+      {
+        "name": "Illinois",
+        "isoCode": "US-IL",
+        "code": "IL"
+      },
+      {
+        "name": "Indiana",
+        "isoCode": "US-IN",
+        "code": "IN"
+      },
+      {
+        "name": "Iowa",
+        "isoCode": "US-IA",
+        "code": "IA"
+      },
+      {
+        "name": "Kansas",
+        "isoCode": "US-KS",
+        "code": "KS"
+      },
+      {
+        "name": "Kentucky",
+        "isoCode": "US-KY",
+        "code": "KY"
+      },
+      {
+        "name": "Lousiana",
+        "isoCode": "US-LA",
+        "code": "LA"
+      },
+      {
+        "name": "Maine",
+        "isoCode": "US-ME",
+        "code": "ME"
+      },
+      {
+        "name": "Maryland",
+        "isoCode": "US-MD",
+        "code": "MD"
+      },
+      {
+        "name": "Massachusetts",
+        "isoCode": "US-MA",
+        "code": "MA"
+      },
+      {
+        "name": "Michigan",
+        "isoCode": "US-MI",
+        "code": "MI"
+      },
+      {
+        "name": "Minnesota",
+        "isoCode": "US-MN",
+        "code": "MN"
+      },
+      {
+        "name": "Mississippi",
+        "isoCode": "US-MS",
+        "code": "MS"
+      },
+      {
+        "name": "Missouri",
+        "isoCode": "US-MO",
+        "code": "MO"
+      },
+      {
+        "name": "Montana",
+        "isoCode": "US-MT",
+        "code": "MT"
+      },
+      {
+        "name": "Nebraska",
+        "isoCode": "US-NE",
+        "code": "NE"
+      },
+      {
+        "name": "Nevada",
+        "isoCode": "US-NV",
+        "code": "NV"
+      },
+      {
+        "name": "New Hampshire",
+        "isoCode": "US-NH",
+        "code": "NH"
+      },
+      {
+        "name": "New Jersey",
+        "isoCode": "US-NJ",
+        "code": "NJ"
+      },
+      {
+        "name": "New Mexico",
+        "isoCode": "US-NM",
+        "code": "NM"
+      },
+      {
+        "name": "New York",
+        "isoCode": "US-NY",
+        "code": "NY"
+      },
+      {
+        "name": "North Carolina",
+        "isoCode": "US-NC",
+        "code": "NC"
+      },
+      {
+        "name": "North Dakota",
+        "isoCode": "US-ND",
+        "code": "ND"
+      },
+      {
+        "name": "Ohio",
+        "isoCode": "US-OH",
+        "code": "OH"
+      },
+      {
+        "name": "Oklahoma",
+        "isoCode": "US-OK",
+        "code": "OK"
+      },
+      {
+        "name": "Oregon",
+        "isoCode": "US-OR",
+        "code": "OR"
+      },
+      {
+        "name": "Pennsylvania",
+        "isoCode": "US-PA",
+        "code": "PA"
+      },
+      {
+        "name": "Rhode Island",
+        "isoCode": "US-RI",
+        "code": "RI"
+      },
+      {
+        "name": "South Carolina",
+        "isoCode": "US-SC",
+        "code": "SC"
+      },
+      {
+        "name": "South Dakota",
+        "isoCode": "US-SD",
+        "code": "SD"
+      },
+      {
+        "name": "Tennessee",
+        "isoCode": "US-TN",
+        "code": "TN"
+      },
+      {
+        "name": "Texas",
+        "isoCode": "US-TX",
+        "code": "TX"
+      },
+      {
+        "name": "Utah",
+        "isoCode": "US-UT",
+        "code": "UT"
+      },
+      {
+        "name": "Vermont",
+        "isoCode": "US-VT",
+        "code": "VT"
+      },
+      {
+        "name": "Virginia",
+        "isoCode": "US-VA",
+        "code": "VA"
+      },
+      {
+        "name": "Washington",
+        "isoCode": "US-WA",
+        "code": "WA"
+      },
+      {
+        "name": "West Virginia",
+        "isoCode": "US-WV",
+        "code": "WV"
+      },
+      {
+        "name": "Wisconsin",
+        "isoCode": "US-WI",
+        "code": "WI"
+      },
+      {
+        "name": "Wyoming",
+        "isoCode": "US-WY",
+        "code": "WY"
+      }
+    ]
+  },
+  {
+    "name": "Germany",
+    "isoCode": "DE"
+  },
+  {
+    "name": "France",
+    "isoCode": "FR"
+  },
+  {
+    "name": "Netherlands",
+    "isoCode": "NL"
+  },
+  {
+    "name": "Spain",
+    "isoCode": "ES"
+  },
+  {
+    "name": "Russian Federation",
+    "isoCode": "RU"
+  },
+  {
+    "name": "China",
+    "isoCode": "CN"
+  }
+]

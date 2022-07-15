@@ -1,0 +1,109 @@
+{
+  "$schema": "../../../node_modules/@backbase/sdlc-convert/node_modules/@backbase/sdlc-schema/experience.schema.json",
+  "name": "sme-onboarding-prospect",
+  "title": "SME Onboarding Prospect Application",
+  "locales": [
+    "en-US"
+  ],
+  "properties": {
+    "AccessDeniedPage": "sme-onboarding-prospect/login?error=accessdenied",
+    "DefaultLandingPage": "sme-onboarding-prospect/index",
+    "ErrorPage": "sme-onboarding-prospect/error",
+    "TypeOfTags": "tracking",
+    "thumbnailUrl": "/sme-onboarding-prospect/"
+  },
+  "cxSources": [
+    "node_modules/@backbase",
+    "collections/collection-bb-web-sdk-1.16.4.zip",
+    "dist"
+  ],
+  "contentDirs": {
+    "default": "apps/prospect/sdlc/content",
+    "shared": "apps/prospect/src/assets"
+  },
+  "environments": {
+    "docker": {
+      "provisioning": {
+        "type": "nginx",
+        "outputDir": "dist/experiences/sme-onboarding-prospect/docker",
+        "baseHref": "http://localhost:4201/sme-onboarding-prospect",
+        "apiRoot": "https://localhost/api"
+      },
+      "authorization": {
+        "authUrl": "http://localhost:8180/auth",
+        "clientId": "bb-web-client",
+        "scope": "openid",
+        "kind": "hybrid",
+        "realm": "backbase",
+        "landingPageUrl": "sme-onboarding-prospect/",
+        "loginPageUrl": "sme-onboarding-prospect/redirect",
+        "maxInactivityDuration": 300
+      }
+    },
+    "default": {
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "./dist/zoz/prospect",
+        "staticResourcesRoot": "/api/portal/static/items",
+        "linkRoot": "",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    }
+  },
+  "menus": {
+    "master-pages": [
+      {
+        "section": "page-bb-default",
+        "title": "Lean Page",
+        "page": {
+          "extends": "page-bb-default",
+          "name": "page-bb-default",
+          "children": [
+            {
+              "fragment": "../../sdlc-common/pages/lean-page.json"
+            }
+          ]
+        }
+      }
+    ],
+    "special-pages": [
+      {
+        "section": "error",
+        "title": "Error",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Something went wrong",
+          "children": [
+            {
+              "fragment": "../../sdlc-common/pages/something-went-wrong.json"
+            }
+          ]
+        }
+      }
+    ],
+    "main": [
+      {
+        "section": "index",
+        "friendlyUrl": "sme-onboarding-prospect",
+        "title": "SME Onboarding Prospect",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "SME Onboarding Prospect",
+          "children": [
+            {
+              "fragment": "./pages/home.json"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

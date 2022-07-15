@@ -1,0 +1,149 @@
+{
+  "$schema": "../$schema/SC_case-data-view-def.json",
+  "fieldsets": [
+    {
+      "title": "Business Information",
+      "fields": [
+        {
+          "title": "Legal name",
+          "viewHint": "string",
+          "pointer": "/business/legalName"
+        },
+        {
+          "title": "Known name",
+          "viewHint": "string",
+          "pointer": "/business/knownName"
+        },
+        {
+          "title": "Business type",
+          "viewHint": "string",
+          "pointer": "/business/businessType"
+        },
+        {
+          "title": "EIN",
+          "viewHint": "string",
+          "pointer": "/business/ein"
+        },
+        {
+          "title": "Date Established",
+          "viewHint": "string",
+          "pointer": "/business/establishedDate"
+        },
+        {
+          "title": "State Operating",
+          "viewHint": "string",
+          "pointer": "/business/operationState"
+        }
+      ]
+    },
+    {
+      "title": "Business Address",
+      "fields": [
+        {
+          "title": "Street",
+          "viewHint": "string",
+          "pointer": "/business/businessAddress/numberAndStreet"
+        },
+        {
+          "title": "Apt / Suite",
+          "viewHint": "string",
+          "pointer": "/business/businessAddress/apt"
+        },
+        {
+          "title": "City",
+          "viewHint": "string",
+          "pointer": "/business/businessAddress/city"
+        },{
+          "title": "State",
+          "viewHint": "string",
+          "pointer": "/business/businessAddress/state"
+        },
+        {
+          "title": "Zip code",
+          "viewHint": "string",
+          "pointer": "/business/businessAddress/zipCode"
+        }
+      ]
+    },
+    {
+      "title": "Business Identity",
+      "fields": [
+        {
+          "title": "Industry",
+          "viewHint": "string",
+          "pointer": "/business/industry/value"
+        },
+        {
+          "title": "Business Description",
+          "viewHint": "string",
+          "pointer": "/business/nature"
+        },
+        {
+          "title": "Company website",
+          "viewHint": "string",
+          "pointer": "/business/website"
+        }
+      ]
+    },
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "title": "First Name",
+          "viewHint": "string",
+          "pointer": "/registrar/firstName"
+        },
+        {
+          "title": "Last Name",
+          "viewHint": "string",
+          "pointer": "/registrar/lastName"
+        },
+        {
+          "title": "Date of Birth",
+          "viewHint": "string",
+          "pointer": "/registrar/dateOfBirth"
+        },
+        {
+          "title": "Email",
+          "viewHint": "string",
+          "pointer": "/registrar/emailAddress"
+        },
+        {
+          "title": "SSN",
+          "viewHint": "string",
+          "pointer": "/registrar/ssn"
+        }
+      ]
+    },
+    {
+      "title": "Personal Address",
+      "fields": [
+        {
+          "title": "Street",
+          "viewHint": "string",
+          "pointer": "/personalAddress/numberAndStreet"
+        },
+        {
+          "title": "Apt / Suite",
+          "viewHint": "string",
+          "pointer": "/personalAddress/apt"
+        },
+        {
+          "title": "City",
+          "viewHint": "string",
+          "pointer": "/personalAddress/city"
+        },
+        {
+          "title": "State",
+          "viewHint": "string",
+          "pointer": "/personalAddress/state"
+        },
+        {
+          "title": "Zip Code",
+          "viewHint": "string",
+          "pointer": "/personalAddress/zipCode"
+        }
+      ]
+    }
+  ]
+}

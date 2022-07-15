@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0lbrdio" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <decision id="decideOnRiskLevelApplication" name="[Application] 02_Decide on risk assessment application">
+    <decisionTable id="DecisionTable_1jyuy4d">
+      <input id="Input_1" label="Risk Score Application" biodi:width="192" camunda:inputVariable="riskScoreApplication">
+        <inputExpression id="InputExpression_1" typeRef="double">
+          <text>riskScoreApplication</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Risk Assessment Application" name="riskAssessmentApplication" typeRef="string" biodi:width="192">
+        <outputValues id="UnaryTests_028k31j">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_0lvn4vc" label="Review Required" name="reviewRequired" typeRef="boolean" />
+      <output id="OutputClause_042ptyi" label="Risk Score Application" name="riskScoreApplication" typeRef="double" />
+      <rule id="DecisionRule_0sfxz3g">
+        <inputEntry id="UnaryTests_13mzkxl">
+          <text>[1..3[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0tc7cm4">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uykerr">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0mi7e9j">
+          <text>riskScoreApplication</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0c4mxh7">
+        <inputEntry id="UnaryTests_02nf2rk">
+          <text>[3..7]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ig4onh">
+          <text>"medium"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_099tveo">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0zrogqi">
+          <text>riskScoreApplication</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1x7i6kc">
+        <inputEntry id="UnaryTests_0zl329z">
+          <text>&gt;7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11gkrhm">
+          <text>"high"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0tllou3">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0gsxaqe">
+          <text>riskScoreApplication</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sknkbi">
+        <inputEntry id="UnaryTests_03n7rb3">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1tkuabm">
+          <text>"undefined"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0n7sdlc">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05qqv7d">
+          <text>riskScoreApplication</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decideOnBusinessRiskLevel" name="[Business] 08_Decide on business risk level">
+    <decisionTable id="DecisionTable_1wz41mi">
+      <input id="InputClause_0ice9et" label="Business risk score" camunda:inputVariable="businessRiskScore">
+        <inputExpression id="LiteralExpression_0f22dnn" typeRef="double">
+          <text>businessRiskScore</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0i1splk" label="Business risk level" name="businessRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_0ew1u97">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_1n8i78w">
+        <inputEntry id="UnaryTests_0bj9ioe">
+          <text>[1..3[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11s5e58">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qnhfyi">
+        <inputEntry id="UnaryTests_0j5a83k">
+          <text>[3..7]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1aydhq6">
+          <text>"medium"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_12i666u">
+        <inputEntry id="UnaryTests_0afm5a4">
+          <text>&gt;7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05x0wel">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wr0cjw">
+        <inputEntry id="UnaryTests_1ez45jr">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12zh4ml">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decideOnPersonRiskLevel" name="[Person] 03_Decide on person risk level">
+    <decisionTable id="DecisionTable_0isxejq">
+      <input id="InputClause_06fpffj" label="Person risk score" biodi:width="192" camunda:inputVariable="riskScorePerson">
+        <inputExpression id="LiteralExpression_1gckc9o" typeRef="double">
+          <text>riskScorePerson</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0pkrhko" label="Person risk level" name="personRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_0kebjs1">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_123kegs">
+        <inputEntry id="UnaryTests_0bdqjt6">
+          <text>[1..3[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0468sx8">
+          <text>"low"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ig012c">
+        <inputEntry id="UnaryTests_1z00sbq">
+          <text>[3..7]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ctae1l">
+          <text>"medium"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0s5f01b">
+        <inputEntry id="UnaryTests_0if0tul">
+          <text>&gt; 7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16bdjp2">
+          <text>"high"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0lwts5x">
+        <inputEntry id="UnaryTests_0p0zu8z">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ei81op">
+          <text>"undefined"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decideOnPeopleRiskLevel" name="[People] 04_Decide on people risk level">
+    <decisionTable id="DecisionTable_0kja6lt">
+      <input id="InputClause_0yzta23" label="People risk score" biodi:width="192" camunda:inputVariable="peopleRiskScore">
+        <inputExpression id="LiteralExpression_1jfzim9" typeRef="double">
+          <text>peopleRiskScore</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1d7s9q1" label="People risk level" name="peopleRiskLevel" typeRef="string">
+        <outputValues id="UnaryTests_18qhdlv">
+          <text>"low","medium","high","undefined"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_0azgt2j" name="peopleRiskScore" typeRef="double" />
+      <rule id="DecisionRule_02nxzo5">
+        <inputEntry id="UnaryTests_0h35b76">
+          <text>[1..3[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nc9w2z">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0afv7pk">
+          <text>peopleRiskScore</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1l6270t">
+        <inputEntry id="UnaryTests_03z9vpr">
+          <text>[3..7]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0905xsp">
+          <text>"medium"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1aw94og">
+          <text>peopleRiskScore</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1qmqjs8">
+        <inputEntry id="UnaryTests_0f8i3jz">
+          <text>&gt; 7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13ez4s8">
+          <text>"high"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0olq3ip">
+          <text>peopleRiskScore</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1hnv0es">
+        <inputEntry id="UnaryTests_19xcnl9">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_01eyjoe">
+          <text>"undefined"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_199a77v">
+          <text>peopleRiskScore</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="decideOnRiskLevelApplication">
+        <dc:Bounds height="80" width="180" x="420" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0cu4vf1" dmnElementRef="decideOnBusinessRiskLevel">
+        <dc:Bounds height="80" width="180" x="160" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1na9d9q" dmnElementRef="decideOnPersonRiskLevel">
+        <dc:Bounds height="80" width="180" x="700" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0npht5j" dmnElementRef="decideOnPeopleRiskLevel">
+        <dc:Bounds height="80" width="180" x="980" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

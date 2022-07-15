@@ -1,0 +1,11 @@
+backbase:
+  audit:
+    enabled: true
+    mode: sync
+eureka:
+  client:
+    enabled: false
+
+spring:
+  main:
+    banner-mode: off

@@ -1,0 +1,6 @@
+@import '~@backbase/backbase-theme/scss/1-variables/variables';
+
+formly-form::ng-deep .ng-invalid.ng-touched .bb-phone > input.form-control:not(:focus)
+{
+    border-color: $color-danger;
+}

@@ -1,0 +1,13 @@
+backbase:
+  flow:
+    integrations:
+      one-time-password:
+        impl: MockOneTimePassword
+
+sso:
+  jwt:
+    internal:
+      signature:
+        key:
+          type: VALUE
+          value: "JWTSecretKeyDontUseInProduction!"

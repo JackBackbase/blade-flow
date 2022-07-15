@@ -1,0 +1,107 @@
+== US On-boarding
+
+To run the front end the following is needed on the system.
+
+=== NPM
+
+Make sure node and npm are installed on your system.
+After that you can setup the npm registry.
+
+Run the following command:
+[source,bash]
+
+----
+npm adduser --registry=https://repo.backbase.com/api/npm/npm-backbase/ --always-auth --scope=@backbase
+----
+
+When prompted, provide your Artifactory login credentials.
+
+Make sure you have access to https://repo.backbase.com - this assumes you will then have been provided with the credentials with access to the npm registry on it.
+
+== Standalone setup
+
+=== Build the project
+
+After the credentials are set, you can run the following command to install the needed node modules.
+
+[source,bash]
+----
+npm i
+----
+
+This will install all needed node_modules, in your current folder.
+
+Web SDK should be downloaded using the following script:
+
+[source,bash]
+----
+npm run sdlc:pull-web-sdk
+----
+
+Once the install is done, the libraries and the applications should be packaged.
+
+Run the following commands to package them:
+
+[source,bash]
+----
+npm run sdlc:build
+----
+
+After packaging, the simplified model should be generated.
+
+To generate the simplified model run the following command:
+
+[source,bash]
+----
+npm run sdlc:build-model:<prospect|case-manager>
+----
+
+===  Start Onboarding US
+
+To start the Onboarding US run the following command
+
+[source,bash]
+----
+npm run start:prospect
+----
+
+This will start the on-boarding journey running on http://localhost:4201/
+
+===  Start Co-applicant
+
+To start the Co-applicant flow run the following command
+
+[source,bash]
+----
+npm run start:co-applicant
+----
+
+This will start the on-boarding journey running on http://localhost:4203/
+
+=== Start Case Manager
+
+This project also provides the case manager. All is in the same project, and the case manager
+can be started next to the on-boarding journey.
+
+To start the Case Manager run the following command
+
+[source,bash]
+----
+npm run start:case-manager
+----
+
+The case manager can be reached on http://localhost:4202/
+
+The case manager uses persona's that has rights to do specific tasks in the case-manager.
+
+Persona's
+
+* The manager is allowed to view the cases, and statistics. But not allowed to complete tasks.
+ +
+Default user in the portal is *manager/manager*
+* The Customer Service Representative can view cases, and is allowed to close tasks. But cannot
+view statistics, process or dmn definitions. +
+Default user in the portal is *user/user*
+
+You need need authentication to make it work. This can be done by going directly to the authentication
+in IPS using the following url http://localhost:7777/api/auth/login

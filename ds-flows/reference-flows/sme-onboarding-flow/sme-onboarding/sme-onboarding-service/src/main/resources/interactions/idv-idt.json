@@ -1,0 +1,40 @@
+{
+  "key": "idv-idt",
+  "version": 6,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "sme",
+  "caseDefinitionVersion": 19,
+  "steps": [
+    {
+      "name": "identity-verification",
+      "entryPoint": true,
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "verification-type"
+        },
+        {
+          "name": "identity-verification-initiation"
+        },
+        {
+          "name": "identity-verification-result",
+          "postExecutions": [
+            {
+              "name": "idv-retrieve-results"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

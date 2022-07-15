@@ -1,0 +1,12 @@
+.radio-button-group::ng-deep{
+    
+    .bb-input-radio-group__list {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .bb-input-radio-group__radio {
+            min-width: 50%;
+            margin-bottom: 1rem;
+        }
+    }
+}

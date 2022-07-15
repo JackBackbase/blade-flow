@@ -1,0 +1,4 @@
+{
+  "$schema": "../../$schema/SC_Unit_RichText.json",
+  "content": "<h1>Oops! Something went wrong with your identity verification</h1><p class='bb-highlight bb-highlight--regular'>We are sorry but we encountered some issues while processing your ID verification.<p/><p class='bb-highlight bb-highlight--regular'>We’ll take you back to the identity verification screen so you can try again.</p>"
+}

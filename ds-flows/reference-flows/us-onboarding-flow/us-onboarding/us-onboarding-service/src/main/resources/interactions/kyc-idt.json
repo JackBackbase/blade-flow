@@ -1,0 +1,32 @@
+{
+  "key": "kyc-idt",
+  "version": 1,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "onboarding",
+  "caseDefinitionVersion": 1,
+  "steps": [
+    {
+      "name": "kyc",
+      "entryPoint": true,
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "kyc-questions-loader"
+        },
+        {
+          "name": "submit-kyc-data",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

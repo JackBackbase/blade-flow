@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0go8pan" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <decision id="company-lookup" name="Decide on company lookup">
+    <informationRequirement id="InformationRequirement_03qgo3d">
+      <requiredInput href="#InputData_0x3rymv" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0c1ikx8">
+      <requiredInput href="#InputData_1fxk6ya" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_06sto21">
+      <input id="Input_1" label="Business structure" camunda:inputVariable="type">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_04sm47v">
+          <text>"Sole proprietorship","Partnership","LLC","Corporation"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_03a2juu" label="Business Subtype" biodi:width="192" camunda:inputVariable="subtype">
+        <inputExpression id="LiteralExpression_0lxx5if" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_09rzdrp">
+          <text>"Limited","Joint venture","General"</text>
+        </inputValues>
+      </input>
+      <output id="Output_1" label="Perform company lookup" name="performCompanyLookup" typeRef="boolean" biodi:width="317" />
+      <rule id="DecisionRule_1of8ajx">
+        <inputEntry id="UnaryTests_035j9rk">
+          <text>"Sole proprietorship"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uib9x5">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0yuwalx">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1b0z7it">
+        <description></description>
+        <inputEntry id="UnaryTests_1xgse7d">
+          <text>"Partnership"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0f5himz">
+          <text>"General"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1p1y3g0">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1r01p3n">
+        <description></description>
+        <inputEntry id="UnaryTests_0a45959">
+          <text>"Partnership"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ysgy37">
+          <text>not("General")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rzsicq">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1grsnqx">
+        <inputEntry id="UnaryTests_14guco0">
+          <text>"Corporation"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07t5c8g">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1786hhi">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ec6lfz">
+        <inputEntry id="UnaryTests_0bttj4m">
+          <text>"LLC"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0c3fglx">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0f000x2">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0x3rymv" name="Business structure" />
+  <inputData id="InputData_1fxk6ya" name="Business subtype" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="company-lookup">
+        <dc:Bounds height="80" width="180" x="240" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_06irsof" dmnElementRef="InputData_0x3rymv">
+        <dc:Bounds height="45" width="125" x="157" y="207" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0oogc89" dmnElementRef="InformationRequirement_03qgo3d">
+        <di:waypoint x="220" y="207" />
+        <di:waypoint x="300" y="180" />
+        <di:waypoint x="300" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0z2fivh" dmnElementRef="InputData_1fxk6ya">
+        <dc:Bounds height="45" width="125" x="377" y="207" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0bljtvy" dmnElementRef="InformationRequirement_0c1ikx8">
+        <di:waypoint x="440" y="207" />
+        <di:waypoint x="360" y="180" />
+        <di:waypoint x="360" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

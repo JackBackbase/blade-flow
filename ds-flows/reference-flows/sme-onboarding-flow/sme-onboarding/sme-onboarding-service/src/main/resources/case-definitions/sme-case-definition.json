@@ -1,0 +1,1018 @@
+{
+  "$id": "sme",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Business Onboarding",
+  "type": "object",
+  "version": 19,
+  "additionalProperties": false,
+  "properties": {
+    "applicants": {
+      "title": "Applicants",
+      "type": "array",
+      "description": "A list of applicants.",
+      "items": {
+        "title": "Applicant",
+        "type": "object",
+        "description": "An applicant.",
+        "properties": {
+          "firstName": {
+            "title": "First name",
+            "type": "string",
+            "description": "The applicant's first name."
+          },
+          "lastName": {
+            "title": "Last name",
+            "type": "string",
+            "description": "The applicant's last name."
+          },
+          "personalAddress": {
+            "$ref": "#/definitions/address"
+          },
+          "dateOfBirth": {
+            "title": "Date of Birth",
+            "type": "string",
+            "format": "date",
+            "description": "The birth date of the applicant."
+          },
+          "id": {
+            "title": "Business person id",
+            "type": "string",
+            "description": "The Business person unique id (UUID)",
+            "_flow_audit": true
+          },
+          "role": {
+            "title": "Business person role",
+            "type": "string",
+            "description": "Role of business person.",
+            "_flow_audit": true
+          },
+          "other_role": {
+            "title": "Business person other role",
+            "type": "string",
+            "description": "Other role of business person. Should be mandatory when chosen role is 'Other'.",
+            "_flow_audit": true
+          },
+          "ownership_percentage": {
+            "title": "Ownership percentage",
+            "type": "number",
+            "description": "Ownership percentage given in number. Ownership sum of all owners cannot exceed 100%.",
+            "_flow_audit": true
+          },
+          "control_person": {
+            "title": "Control person",
+            "type": "boolean",
+            "description": "Flag indicating if business person is control person.",
+            "_flow_audit": true
+          },
+          "relation_type": {
+            "title": "Business relation type.",
+            "type": "string",
+            "enum": [
+              "OWNER",
+              "CONTROL_PERSON"
+            ],
+            "description": "Business relation type of person.",
+            "_flow_audit": true
+          },
+          "ssn": {
+            "type": "string",
+            "description": "Social Security Number"
+          },
+          "antiMoneyLaunderingInfo": {
+            "$ref": "#/definitions/amlInfo"
+          },
+          "isRegistrar": {
+            "title": "Is Registrar?",
+            "type": "boolean",
+            "description": "Flag indicating if current user who do onboarding."
+          },
+          "phoneNumber": {
+            "title": "Phone number",
+            "type": "string",
+            "description": "The applicant's phone number."
+          },
+          "phoneNumberVerified": {
+            "type": "boolean",
+            "description": "Indicates whether the phoneNumber is verified or not.",
+            "default": false
+          },
+          "email": {
+            "title": "Email address",
+            "type": "string",
+            "description": "The applicant's email address.",
+            "_flow_index": "email"
+          },
+          "emailVerified": {
+            "type": "boolean",
+            "description": "Indicates whether the email is verified or not.",
+            "default": false
+          },
+          "riskAssessmentInfo": {
+            "$ref": "#/definitions/riskAssessmentInfo"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "firstName",
+          "lastName",
+          "email"
+        ]
+      }
+    },
+    "companyLookupInfo": {
+      "$ref": "#/definitions/companyLookupInfo"
+    },
+    "termsAndConditions": {
+      "title": "Terms and conditions",
+      "type": "object",
+      "description": "Status for the acceptance of the terms and conditions",
+      "properties": {
+        "accepted": {
+          "type": "boolean",
+          "_flow_calculated_property": true,
+          "_flow_value": "termsAndConditions?.acceptanceDate != null"
+        },
+        "acceptanceDate": {
+          "title": "Acceptance date",
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time when the user accepted the terms and conditions."
+        },
+        "version": {
+          "title": "Version",
+          "type": "string",
+          "description": "Version of the terms the user agreed to."
+        }
+      },
+      "additionalProperties": false
+    },
+    "isLanded": {
+      "type": "boolean",
+      "description": "Indicates whether the interaction is in Landing page or not",
+      "default": false
+    },
+    "documentRequired": {
+      "type": "boolean",
+      "description": "Used for interaction back navigation",
+      "default": null
+    },
+    "businessRelationRequired": {
+      "type": "boolean",
+      "description": "Used for interaction back navigation",
+      "default": null
+    },
+    "productSelection": {
+      "title": "Product selection data",
+      "$ref": "#/definitions/productSelection"
+    },
+    "businessRelations": {
+      "$ref": "#/definitions/businessRelationsCaseData"
+    },
+    "identityVerificationInitiation": {
+      "$ref": "#/definitions/identityVerificationInitiation"
+    },
+    "identityVerificationResult": {
+      "$ref": "#/definitions/identityVerificationResult"
+    },
+    "verifiedPersonalDataResult": {
+      "$ref": "#/definitions/verifiedPersonalDataResult"
+    },
+    "riskAssessment": {
+      "$ref": "#/definitions/riskAssessmentCaseData"
+    }
+  },
+  "definitions": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "numberAndStreet": {
+          "title": "Number and Street",
+          "type": "string",
+          "description": "The Number and Street in address."
+        },
+        "apt": {
+          "title": "Apt",
+          "type": "string",
+          "description": "The apt/suit in address"
+        },
+        "zipCode": {
+          "title": "Zip Code",
+          "type": "string",
+          "description": "Zip code in address."
+        },
+        "city": {
+          "title": "City",
+          "type": "string",
+          "description": "City name in address"
+        },
+        "state": {
+          "title": "State",
+          "type": "string",
+          "description": "State in the address"
+        }
+      },
+      "additionalProperties": false
+    },
+    "amlInfo": {
+      "type": "object",
+      "properties": {
+        "reviewNeeded": {
+          "type": "boolean",
+          "description": "Set by DMN table based on the matchStatus value."
+        },
+        "reviewApproved": {
+          "type": "boolean",
+          "description": "Value set by user when 'reviewNeeded' is true."
+        },
+        "reviewApprovedReason": {
+          "type": "object",
+          "properties": {
+            "comment": {
+              "type": "string",
+              "description": "Value set when CSR approve AML review."
+            },
+            "matchTypes": {
+              "type": "array",
+              "description": "List of alerts associated with confirmed match",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "reviewDeclinedComment": {
+          "type": "string",
+          "description": "Value set when CSR decline AML review."
+        },
+        "status": {
+          "title": "Status",
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "IN_REVIEW",
+            "SUCCESS",
+            "FAILED"
+          ],
+          "description": "Status of AML verification."
+        },
+        "amlResult": {
+          "type": "object",
+          "properties": {
+            "requestDate": {
+              "type": "string",
+              "description": "Value get from AML response 'created_at' field."
+            },
+            "matchStatus": {
+              "type": "string",
+              "description": "Value get from AML response 'match_status' field."
+            },
+            "shareUrl": {
+              "type": "string",
+              "description": "AML search data url."
+            },
+            "matches": {
+              "type": "array",
+              "description": "Potential matches",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "matchId": {
+                    "type": "string"
+                  },
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "fullNameMatchStatus": {
+                    "type": "string"
+                  },
+                  "datesOfBirth": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "dateOfBirthMatchStatus": {
+                    "type": "string"
+                  },
+                  "entityType": {
+                    "type": "string"
+                  },
+                  "score": {
+                    "type": "number"
+                  },
+                  "peps": {
+                    "type": "array",
+                    "description": "PEP list.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "sanctions": {
+                    "type": "array",
+                    "description": "Sanctions list.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "listingStarted": {
+                          "type": "string"
+                        },
+                        "listingEnded": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "media": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string"
+                        },
+                        "snippet": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "confirmed": {
+                    "type": "boolean",
+                    "description": "Value set when CSR selects potential match."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "riskAssessmentInfo": {
+      "type": "object",
+      "properties": {
+        "personRiskScore": {
+          "title": "Person risk score",
+          "type": "number",
+          "description": "Person risk score."
+        },
+        "amlKycRiskLevel": {
+          "title": "Aml Kyc Risk Level",
+          "type": "string",
+          "description": "Person risk level."
+        },
+        "taskAmlKycResult": {
+          "title": "Task Aml Kyc Result",
+          "type": "string",
+          "description": "Person aml task outcome."
+        },
+        "personRiskLevel": {
+          "title": "Person risk level",
+          "type": "string",
+          "description": "Person risk level."
+        }
+      }
+    },
+    "productSelection": {
+      "type": "object",
+      "properties": {
+        "selectedProducts": {
+          "title": "Selected products",
+          "description": "Selected products",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "referenceId": {
+                "title": "Selected product Id",
+                "type": "string",
+                "description": "Selected product Id",
+                "_flow_audit": true
+              },
+              "productName": {
+                "title": "Selected product name",
+                "type": "string",
+                "description": "Selected product name",
+                "_flow_audit": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "businessRelationsCaseData": {
+      "type": "object",
+      "properties": {
+        "processInstanceId": {
+          "title": "Camunda process instance identifier.",
+          "type": "string",
+          "description": "Camunda process instance identifier."
+        },
+        "businessRelationType": {
+          "title": "Business relation type.",
+          "type": "string",
+          "enum": [
+            "OWNER",
+            "CONTROL_PERSON"
+          ],
+          "description": "Business relation type chosen by current user. Depends on chosen type the 'owners' or 'control_persons'.",
+          "_flow_audit": true
+        },
+        "status": {
+          "title": "Business relations status",
+          "type": "string",
+          "enum": [
+            "NEW",
+            "PENDING",
+            "IN_REVIEW",
+            "INCOMPLETE",
+            "COMPLETE"
+          ],
+          "description": "Status of Business Relations.",
+          "_flow_audit": true
+        },
+        "reviewInformation": {
+          "type": "object",
+          "description": "Business persons.",
+          "properties": {
+            "reviewApproved": {
+              "title": "Business relations approved flag.",
+              "type": "boolean",
+              "description": "Value set by user when approve Business Relations data."
+            },
+            "comment": {
+              "title": "Reject reason message.",
+              "type": "string",
+              "description": "Reject reason message.",
+              "_flow_audit": true
+            },
+            "rejectReasons": {
+              "type": "array",
+              "title": "List of review reject reasons.",
+              "description": "List of review reject reasons. Has values when Business Relations rejected.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "title": "Reject reason key.",
+                    "type": "string",
+                    "description": "Reject reason key.",
+                    "_flow_audit": true
+                  },
+                  "message": {
+                    "title": "Reject reason message.",
+                    "type": "string",
+                    "description": "Reject reason message.",
+                    "_flow_audit": true
+                  }
+                }
+              },
+              "rejectReasonComment": {
+                "title": "Reject reason message.",
+                "type": "string",
+                "description": "Should be mandatory when one of reviewRejectReasons has value 'Other'.",
+                "_flow_audit": true
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "companyLookupInfo": {
+      "type": "object",
+      "properties": {
+        "rawCompanyDetails": {
+          "$ref": "#/definitions/rawCompanyDetails"
+        },
+        "apiCompanyDetails": {
+          "$ref": "#/definitions/apiCompanyDetails"
+        },
+        "businessStructureInfo": {
+          "$ref": "#/definitions/businessStructureInfo"
+        },
+        "businessDetailsInfo": {
+          "$ref": "#/definitions/businessDetailsInfo"
+        },
+        "businessAddressInfo": {
+          "$ref": "#/definitions/businessAddressInfo"
+        },
+        "businessIdentityInfo": {
+          "$ref": "#/definitions/businessIdentityInfo"
+        },
+        "performCompanyLookup": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rawCompanyDetails": {
+      "javaType": "java.util.Map<String,Object>"
+    },
+    "businessStructureInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the business structure",
+          "enum": [
+            "Sole proprietorship",
+            "Partnership",
+            "Corporation",
+            "LLC"
+          ]
+        },
+        "subtype": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Subtype of the business structure",
+          "enum": [
+            "S Corp",
+            "C Corp",
+            "B Corp",
+            "Non profit",
+            "Close corp",
+            "General",
+            "Limited",
+            "Joint Venture",
+            "Single member",
+            "Multiple member"
+          ]
+        }
+      }
+    },
+    "businessDetailsInfo": {
+      "$ref": "#/definitions/businessDetails"
+    },
+    "apiCompanyDetails": {
+      "type": "object",
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/businessDetails"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "industries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/industry"
+          }
+        }
+      }
+    },
+    "industry": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Code of the industry."
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Description of the industry code."
+        }
+      }
+    },
+    "businessDetails": {
+      "type": "object",
+      "properties": {
+        "companyType": {
+          "title": "Company type",
+          "type": "string",
+          "description": "Type of the company."
+        },
+        "businessStructureInfo": {
+          "$ref": "#/definitions/businessStructureInfo"
+        },
+        "legalName": {
+          "title": "Legal name",
+          "type": "string",
+          "description": "Legal name of the company.",
+          "_flow_case_title": true
+        },
+        "dba": {
+          "title": "Doing business as",
+          "type": "string",
+          "description": "Doing business as."
+        },
+        "ein": {
+          "title": "Business number",
+          "type": "string",
+          "description": "Employer identification number"
+        },
+        "dateEstablished": {
+          "title": "Date established",
+          "type": "string",
+          "description": "Incorporation date"
+        },
+        "stateOperatingIn": {
+          "title": "State operating in",
+          "type": "string",
+          "description": "Operating in jurisdiction code"
+        },
+        "emailAddress": {
+          "title": "Email address",
+          "type": "string",
+          "description": "The official email address of the business."
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "antiMoneyLaunderingInfo": {
+          "$ref": "#/definitions/amlInfo"
+        },
+        "useDbaForAml": {
+          "title": "Use DBA for AML",
+          "type": "boolean",
+          "description": "Use DBA for AML business check"
+        },
+        "documentRequests": {
+          "title": "Document requests",
+          "type": "array",
+          "description": "A list of document requests.",
+          "items": {
+            "title": "Document request",
+            "type": "object",
+            "description": "A document request.",
+            "properties": {
+              "metadata": {
+                "type": "object",
+                "existingJavaType": "java.util.Map<String,Object>"
+              },
+              "documentType": {
+                "title": "Document type",
+                "type": "string",
+                "description": "The document type."
+              },
+              "initialNote": {
+                "title": "Initial note",
+                "type": "string",
+                "description": "The first note provided during the document request creation."
+              },
+              "cancellationNote": {
+                "title": "Cancellation note",
+                "type": "string",
+                "description": "The cancellation note provided during the cancellation of a document request."
+              },
+              "deadline": {
+                "title": "Deadline",
+                "type": "string",
+                "format": "date-time",
+                "description": "Document request deadline."
+              },
+              "sendReminderEmailDeadline": {
+                "title": "Send reminder email",
+                "type": "boolean",
+                "description": "Send a reminder email a day before the deadline."
+              },
+              "externalId": {
+                "title": "ID",
+                "type": "string",
+                "description": "A human readable ID of the document request. Not guaranteed to be unique."
+              },
+              "internalId": {
+                "title": "ID",
+                "type": "string",
+                "description": "ID of the document request."
+              },
+              "referenceId": {
+                "title": "Reference ID",
+                "type": "string",
+                "description": "ID to reference to",
+                "_flow_index": "referenceId"
+              },
+              "processInstanceId": {
+                "title": "Process instance ID",
+                "type": "string",
+                "description": "Identifier of the associated process instance"
+              },
+              "groupId": {
+                "title": "Group ID",
+                "type": "string",
+                "description": "Document requests that were submitted at the same time, share the same Group ID."
+              },
+              "filesetName": {
+                "title": "Fileset name",
+                "type": "string",
+                "description": "A name of a fileset associated with the document request."
+              },
+              "status": {
+                "title": "Status",
+                "type": "string",
+                "description": "Status of the document request",
+                "enum": [
+                  "Open",
+                  "Pending review",
+                  "Cancelled",
+                  "Approved",
+                  "Rejected"
+                ]
+              },
+              "creator": {
+                "title": "Creator",
+                "type": "object",
+                "description": "Creator of the Document Request.",
+                "properties": {
+                  "userId": {
+                    "title": "User ID",
+                    "type": "string",
+                    "description": "Creator's internal user id."
+                  },
+                  "fullName": {
+                    "title": "Full name",
+                    "type": "string",
+                    "description": "Creator's full name."
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "userId",
+                  "fullName"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "documentType",
+              "deadline"
+            ]
+          }
+        }
+      }
+    },
+    "businessIdentityInfo": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "title": "Business description",
+          "type": "string"
+        },
+        "website": {
+          "title": "Business website",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "industries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/industry"
+          }
+        }
+      }
+    },
+    "businessAddressInfo": {
+      "$ref": "#/definitions/address",
+      "additionalProperties": false
+    },
+    "identityVerificationInitiation": {
+      "type": "object",
+      "description": "Initiation ID's of Identity Verification Process",
+      "properties": {
+        "userReference": {
+          "type": "string",
+          "description": "Internally generated ID of the user. Unique for each case"
+        },
+        "transactionReference": {
+          "type": "string",
+          "description": "Internally generated ID of Jumio transaction. Unique for each IDV initiation request"
+        }
+      }
+    },
+    "identityVerificationResult": {
+      "type": "object",
+      "description": "Result of Identity Verification Process",
+      "properties": {
+        "verificationId": {
+          "type": "string",
+          "description": "Id for vendor verification process"
+        }
+      }
+    },
+    "verifiedPersonalDataResult": {
+      "type": "object",
+      "description": "Result of Personal Information Process",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "Document owner's first name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Document owner's last name"
+        },
+        "dob": {
+          "type": "string",
+          "description": "Document owner's date of birth"
+        },
+        "line1": {
+          "type": "string",
+          "description": "Document owner's address - line1"
+        },
+        "line2": {
+          "type": "string",
+          "description": "Document owner's address - line2"
+        },
+        "country": {
+          "type": "string",
+          "description": "Document owner's address - country"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Document owner's address - post code"
+        },
+        "city": {
+          "type": "string",
+          "description": "Document owner's address - city"
+        },
+        "formattedAddress": {
+          "type": "string",
+          "description": "Document owner's address - formattedAddress"
+        }
+      }
+    },
+    "riskAssessmentCaseData": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "title": "Risk assessment status.",
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "APPROVED",
+            "REJECTED"
+          ],
+          "description": "Risk assessment status."
+        },
+        "riskAssessmentApplicationRiskScore": {
+          "title": "Risk assessment application score.",
+          "type": "number",
+          "description": "Risk assessment application score."
+        },
+        "riskAssessmentApplicationRiskLevel": {
+          "title": "Risk assessment application level.",
+          "type": "string",
+          "description": "Risk assessment application level."
+        },
+        "reviewRequired": {
+          "title": "Review required.",
+          "type": "boolean",
+          "description": "Review required."
+        },
+        "businessInfo": {
+          "type": "object",
+          "description": "Business data details.",
+          "properties": {
+            "businessIndustryRiskScore": {
+              "title": "business industry risk score",
+              "type": "number",
+              "description": "Business industry risk score."
+            },
+            "businessIndustryRiskLevel": {
+              "title": "Business industry risk level",
+              "type": "string",
+              "description": "Business industry risk level."
+            },
+            "businessIndustriesResult": {
+              "title": "Business Industries risk assessment results",
+              "type": "array",
+              "description": "Business Industries risk assessment results.",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/riskAssessmentDataResult"
+              }
+            },
+            "businessCountryRegisteredInRiskScore": {
+              "title": "Business country registered in risk score",
+              "type": "number",
+              "description": "Business country registered in risk score."
+            },
+            "businessCountryRegisteredInRiskLevel": {
+              "title": "Business country registered in risk level",
+              "type": "string",
+              "description": "Business country registered in risk level."
+            },
+            "amlKybRiskScore": {
+              "title": "Aml Kyb risk level",
+              "type": "number",
+              "description": "Aml Kyb risk level."
+            },
+            "amlKybRiskLevel": {
+              "title": "Aml Kyb risk level",
+              "type": "string",
+              "description": "Aml Kyb risk level."
+            },
+            "taskAmlKybResult": {
+              "title": "Task Aml Kyb result",
+              "type": "string",
+              "description": "Task Aml Kyb result."
+            },
+            "businessRiskScore": {
+              "title": "Business risk score",
+              "type": "number",
+              "description": "Business risk score."
+            },
+            "businessRiskLevel": {
+              "title": "Business risk level",
+              "type": "string",
+              "description": "Business risk level."
+            }
+          }
+        },
+        "peopleInfo": {
+          "type": "object",
+          "description": "People info details.",
+          "properties": {
+            "peopleRiskScore": {
+              "title": "People risk score",
+              "type": "number",
+              "description": "People risk score."
+            },
+            "peopleRiskLevel": {
+              "title": "People risk level",
+              "type": "string",
+              "description": "People risk level."
+            }
+          }
+        },
+        "reviewInfo": {
+          "type": "object",
+          "description": "Business persons.",
+          "properties": {
+            "reviewApproved": {
+              "type": "boolean",
+              "description": "Value set by user when approving Risk Assessment application review."
+            },
+            "reviewRejectedComment": {
+              "type": "string",
+              "description": "Value set when CSR rejects Risk Assessment review."
+            },
+            "reviewApprovedComment": {
+              "type": "string",
+              "description": "Value set when CSR approve Risk Assessment review."
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "riskAssessmentDataResult": {
+      "type": "object",
+      "description": "Risk Assessment result.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value to check."
+        },
+        "riskScore": {
+          "type": "number",
+          "description": "Evaluated risk score."
+        },
+        "riskLevel": {
+          "type": "string",
+          "description": "Evaluated risk level."
+        },
+        "selected": {
+          "type": "boolean",
+          "description": "Selected is true if highest risk score value."
+        }
+      },
+      "additionalProperties": false
+    },
+    "additionalProperties": false
+  }
+}

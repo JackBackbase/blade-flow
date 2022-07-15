@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button-green {
+            background-color: #4CAF50;
+        }
+
+        /* Green */
+        .button-blue {
+            background-color: #008CBA;
+        }
+
+        /* Blue */
+        .button-red {
+            background-color: #f44336;
+        }
+
+        /* Red */
+        .button-gray {
+            background-color: #666666;
+        }
+
+        /* Gray */
+        .button-black {
+            background-color: #000000;
+        }
+
+        /* Black */
+    </style>
+</head>
+
+<body>
+    <h1>Identity Validation mock</h1>
+    <h3>Select the desired result to test it:</h3>
+    <button class="button button-green"
+            onclick="approved()">APPROVED</button>
+    <button class="button button-red"
+            onclick="denied()">DENIED</button>
+    <button class="button button-blue"
+            onclick="review()">REVIEW</button>
+    <button class="button button-gray"
+            onclick="approvedAfterRetry()">APPROVED AFTER RETRY</button>
+    <button class="button button-black"
+            onclick="noResult()">NO RESULT</button>
+</body>
+<script>
+    const targetWindow = window.opener || parent;
+    const defaultPayload = {
+        "authorizationToken": "dummy",
+        "transactionReference": "dummy",
+        "customerInternalReference": "dummy",
+        "eventType": 200,
+        "dateTime": "2020-06-28T02:00:00.000Z",
+        "payload": {
+            "value": "success",
+            "metainfo": "SUCCESS"
+        }
+    }
+
+    function approved() {
+        postString("approved");
+    }
+
+    function denied() {
+        postString("fail");
+    }
+
+    function review() {
+        postString("review");
+    }
+
+    function approvedAfterRetry() {
+        postString("approved_after_retry");
+    }
+
+    function noResult() {
+        postString("no_result");
+    }
+
+    function postString(aString) {
+        defaultPayload.transactionReference = aString;
+        targetWindow.postMessage(JSON.stringify(defaultPayload));
+    }
+</script>
+
+</html>

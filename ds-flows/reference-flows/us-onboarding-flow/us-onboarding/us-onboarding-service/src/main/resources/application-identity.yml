@@ -1,0 +1,10 @@
+backbase:
+  flow:
+    integrations:
+      identity:
+        enabled: true
+        clientId: admin-cli
+        serverUrl: http://identity-backbaseidentity:8080/auth
+        masterRealm: master
+        username: admin
+        password: admin

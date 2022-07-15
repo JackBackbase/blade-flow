@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalog>
+  <widget>
+    <name>bb-ds-anchor-journey-ang</name>
+    <properties>
+      <property name="classId">
+        <value>DsAnchorJourneyAngComponent</value>
+      </property>
+      <property name="src">
+        <value>$(itemRoot)/index.html</value>
+      </property>
+      <property name="render.requires">
+        <value>render-bb-widget-3</value>
+      </property>
+      <property name="title" label="Title" readonly="true" viewHint="admin,designModeOnly">
+        <value type="string">Digital Sales SMEO. Anchor Journey Widget</value>
+      </property>
+      <property name="thumbnailUrl">
+        <value>$(itemRoot)/icon.png</value>
+      </property>
+      <property name="tncTextDocument" label="TNC Text" viewHint="role=manager,input=content-ref:richtext,designModeOnly" type="contentref">
+        <value></value>
+      </property>
+      <property name="tncTermsConditionsLinkText" localizable="true" label="Terms and Conditions Link Text" viewHint="role=manager,input=text-input" type="string">
+        <value>Terms and Conditions</value>
+      </property>
+      <property name="tncTermsConditionsLinkUrl" localizable="true" label="Terms and Conditions Link URL" viewHint="role=manager,input=text-input" type="string">
+        <value>https://www.backbase.com/</value>
+      </property>
+      <property name="tncPrivacyStatementLinkText" localizable="true" label="Privacy Policy Link Text" viewHint="role=manager,input=text-input" type="string">
+        <value>Privacy Statement</value>
+      </property>
+      <property name="tncPrivacyStatementLinkUrl" localizable="true" label="Privacy Policy Link URL" viewHint="role=manager,input=text-input" type="string">
+        <value>https://www.backbase.com/</value>
+      </property>
+    </properties>
+  </widget>
+</catalog>

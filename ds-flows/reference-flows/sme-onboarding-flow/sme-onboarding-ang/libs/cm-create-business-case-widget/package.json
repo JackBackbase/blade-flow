@@ -1,0 +1,29 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@backbase/cm-create-business-case-widget",
+  "version": "0.0.3",
+  "description": "Case Manager Create Business Case Widget",
+  "peerDependencies": {
+    "@angular/common": "^11.2.0",
+    "@angular/core": "^11.2.0",
+    "@angular/forms": "^11.2.0",
+    "@backbase/foundation-ang": "6.11.0",
+    "@backbase/case-management-ui-ang": "^3.0.2",
+    "@backbase/universal-ang": "^7.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^9.0.2",
+    "rxjs": "6.6.2",
+    "@backbase/ui-ang": "^6.6.2",
+    "@backbase/ds-shared-ang": "^2.2.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts",
+      "umdModuleIds": {
+        "@backbase/cm-core-ang": "@backbase/cm-core-ang",
+        "@backbase/foundation-ang/core": "@backbase/foundation-ang/core",
+        "@backbase/ui-ang": "@backbase/ui-ang"
+      }
+    },
+    "dest": "../../dist/libs/cm-create-business-case-widget"
+  }
+}

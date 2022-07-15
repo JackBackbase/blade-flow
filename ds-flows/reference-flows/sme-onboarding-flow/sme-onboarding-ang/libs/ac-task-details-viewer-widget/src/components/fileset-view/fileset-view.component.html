@@ -1,0 +1,117 @@
+<ng-container *ngIf="hasFiles(); else emptyStateTpl">
+  <div class="table-responsive" data-role="fileset-view-data-state">
+    <table class="table border-0" [bbTable]="fileset.files">
+      <thead class="border-0">
+        <tr class="align-middle">
+          <th class="align-middle" scope="col">
+            <span i18n="@@bb.ac-task-details-viewer-widget.fileset-view.document-name-th-label" class="th-content">
+              Document
+            </span>
+          </th>
+          <th i18n="@@bb.ac-task-details-viewer-widget.fileset-view.upload-by-th-label" class="align-middle"
+            scope="col">
+            <span class="th-content">
+              Uploaded by
+            </span>
+          </th>
+          <th i18n="@@bb.ac-task-details-viewer-widget.fileset-view.upload-date-th-label" class="align-middle"
+            scope="col">
+            <span class="th-content">
+              Upload date
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row" [ngStyle]="{'opacity': fileData.status === fileStatus.ToBeDeleted ? '0.5' : '1' }"
+          *ngFor="let fileData of fileset.files" [bbRow]="fileData">
+          <td class="py-3">
+            <div class="d-flex">
+              <bb-icon-ui class="mr-2" [name]="getFileTypeIconName(fileData.mediaType)" size="md"></bb-icon-ui>
+              <div class="d-flex flex-column">
+                <a class="font-weight-bold" href="javascript:void(0);" role="button" aria-label="Download file"
+                  i18n-aria-label="@@bb.ac-task-details-viewer-widget.fileset-view.aria-label.download-file-btn"
+                  (click)="downloadFileData(fileData)">
+                  {{ fileData.name }}
+                </a>
+                <small class="d-block text-muted" style="opacity: 0.5" *ngIf="fileData.status === fileStatus.ToBeAdded"
+                  i18n="@@bb.ac-task-details-viewer-widget.fileset-view.file-name-cell.to-be-added-file-description">
+                  Complete to confirm upload
+                </small>
+              </div>
+            </div>
+          </td>
+          <td>
+            {{ fileData.createdBy | titlecase }}
+          </td>
+          <td>
+            {{ fileData.createdAt | date: 'short' }}
+          </td>
+          <td *ngIf="!readOnly">
+            <ng-container [ngSwitch]="fileData.status">
+              <button *ngSwitchCase="fileStatus.ToBeDeleted" aria-label="Restore file"
+                i18n-aria-label="@@bb.ac-task-details-viewer-widget.fileset-view.aria-label.restore-file-btn" bbButton
+                buttonSize="sm" color="link" (click)="restoreFileData(fileData.id)">
+                <bb-icon-ui [bbTooltip]="tooltipRestoreBtnTpl" placement="left" triggers="hover"
+                  [name]="isDeleting(fileData.id) ? 'loading' : 'restore'" size="md" color="secondary">
+                </bb-icon-ui>
+              </button>
+              <button *ngSwitchCase="fileStatus.ToBeAdded" aria-label="Delete temporary file"
+                i18n-aria-label="@@bb.ac-task-details-viewer-widget.fileset-view.aria-label.delete-temporary-file-btn"
+                bbButton buttonSize="sm" color="link" (click)="deleteFileData(fileData.id)">
+                <bb-icon-ui placement="left" triggers="hover" [name]="isDeleting(fileData.id) ? 'loading' : 'cancel'"
+                  size="md" color="secondary">
+                </bb-icon-ui>
+              </button>
+              <button *ngSwitchCase="fileStatus.Active" aria-label="Delete file"
+                i18n-aria-label="@@bb.ac-task-details-viewer-widget.fileset-view.aria-label.delete-file-btn" bbButton
+                buttonSize="sm" color="link" (click)="deleteFileData(fileData.id)">
+                <bb-icon-ui [bbTooltip]="tooltipDeleteBtnTpl" placement="left" triggers="hover"
+                  [name]="isDeleting(fileData.id) ? 'loading' : 'delete'" size="md" color="secondary">
+                </bb-icon-ui>
+              </button>
+              <button *ngSwitchCase="fileStatus.ToBeReplaced" aria-label="Restore original file"
+                i18n-aria-label="@@bb.ac-task-details-viewer-widget.fileset-view.aria-label.restore-original-file-btn"
+                bbButton buttonSize="sm" color="link" (click)="restoreFileData(fileData.id)">
+                <bb-icon-ui [bbTooltip]="tooltipRestoreOriginalFileBtnTpl" placement="left" triggers="hover"
+                  [name]="isDeleting(fileData.id) ? 'loading' : 'restore'" size="md" color="secondary">
+                </bb-icon-ui>
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+
+<ng-template #emptyStateTpl>
+  <div class="d-flex justify-content-center mt-3 mb-3 p-4 bg-light" data-role="fileset-view-empty-state"
+    #emptyStateContainerRef>
+    <small class="text-muted"
+      i18n="No files empty state text@@bb.ac-task-details-viewer-widget.fileset-view.fileset-view.empty.no-files">
+      No file(s) yet in this fileset
+    </small>
+  </div>
+</ng-template>
+
+<ng-template #tooltipRestoreBtnTpl>
+  <ng-container
+    i18n="Tooltip text for the restore button@@bb.ac-task-details-viewer-widget.fileset-view.restore-btn-tooltip">
+    Restore
+  </ng-container>
+</ng-template>
+
+<ng-template #tooltipDeleteBtnTpl>
+  <ng-container
+    i18n="Tooltip text for the delete button@@bb.ac-task-details-viewer-widget.fileset-view.delete-btn-tooltip">
+    Delete
+  </ng-container>
+</ng-template>
+
+<ng-template #tooltipRestoreOriginalFileBtnTpl>
+  <ng-container
+    i18n="Tooltip text for the restore original file button@@bb.ac-task-details-viewer-widget.fileset-view.restore-original-file-btn-tooltip">
+    Restore original file
+  </ng-container>
+</ng-template>

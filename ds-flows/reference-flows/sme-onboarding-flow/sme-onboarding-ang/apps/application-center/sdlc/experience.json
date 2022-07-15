@@ -1,0 +1,136 @@
+{
+  "$schema": "../../../node_modules/@backbase/sdlc-convert/node_modules/@backbase/sdlc-schema/experience.schema.json",
+  "name": "sme-onboarding-application-center",
+  "title": "SME Onboarding Application Center Application",
+  "locales": [
+    "en-US"
+  ],
+  "properties": {
+    "AccessDeniedPage": "sme-onboarding-application-center/login?error=accessdenied",
+    "DefaultLandingPage": "sme-onboarding-application-center/index",
+    "ErrorPage": "sme-onboarding-application-center/error",
+    "TypeOfTags": "tracking",
+    "thumbnailUrl": "/sme-onboarding-application-center/"
+  },
+  "cxSources": [
+    "node_modules/@backbase",
+    "collections/collection-bb-web-sdk-1.16.4.zip",
+    "dist"
+  ],
+  "contentDirs": {
+    "default": "apps/application-center/sdlc/content",
+    "shared": "apps/application-center/src/assets"
+  },
+  "environments": {
+    "docker": {
+      "provisioning": {
+        "type": "nginx",
+        "outputDir": "dist/experiences/sme-onboarding-application-center/docker",
+        "baseHref": "http://localhost:4202/sme-onboarding-application-center",
+        "apiRoot": "https://localhost/api"
+      },
+      "authorization": {
+        "authUrl": "http://localhost:8180/auth",
+        "clientId": "bb-web-client",
+        "scope": "openid",
+        "kind": "hybrid",
+        "realm": "backbase",
+        "landingPageUrl": "sme-onboarding-application-center/",
+        "loginPageUrl": "sme-onboarding-application-center/redirect",
+        "maxInactivityDuration": 300
+      }
+    },
+    "default": {
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "./dist/zoz/application-center",
+        "staticResourcesRoot": "/api/portal/static/items",
+        "linkRoot": "",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          },
+          "userConsumer": {
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    },
+    "bas": {
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "./dist/zoz/application-center",
+        "staticResourcesRoot": "/api/portal/static/items",
+        "linkRoot": "",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          },
+          "userConsumer": {
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    }
+  },
+  "menus": {
+    "master-pages": [
+      {
+        "section": "page-bb-default",
+        "title": "Lean Page",
+        "page": {
+          "extends": "page-bb-default",
+          "name": "page-bb-default",
+          "children": [
+            {
+              "fragment": "../../sdlc-common/pages/lean-page.json"
+            }
+          ]
+        }
+      }
+    ],
+    "special-pages": [
+      {
+        "section": "error",
+        "title": "Error",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Something went wrong",
+          "children": [
+            {
+              "fragment": "../../sdlc-common/pages/something-went-wrong.json"
+            }
+          ]
+        }
+      }
+    ],
+    "main": [
+      {
+        "section": "index",
+        "friendlyUrl": "sme-onboarding-application-center",
+        "title": "Sole Prop Application Center",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Sole Prop Application Center",
+          "children": [
+            {
+              "fragment": "./pages/home.json"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

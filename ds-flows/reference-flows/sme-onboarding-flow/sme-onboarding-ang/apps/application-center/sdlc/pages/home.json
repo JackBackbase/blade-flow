@@ -1,0 +1,94 @@
+{
+  "extends": "container-bb-manageable-area",
+  "children": [
+    {
+      "extends": "bb-application-center-ang",
+      "area": "0",
+      "children": [
+        {
+          "classId": "FlowInteractionContainerComponent",
+          "deploymentPath": "interactions",
+          "interactionName": "sme-application-center",
+          "apiVersion": "v2",
+          "servicePath": "sme-onboarding/client-api/interaction",
+          "children": [
+            {
+              "route": "application-center-init",
+              "classId": "DsInteractionInitAngComponent",
+              "action": "application-center-init"
+            },
+            {
+              "classId": "DsBackgroundContainerComponent",
+              "route": "otp-verification",
+              "backgroundImage": {
+                "kind": "content",
+                "path": "sme-onboarding/landing-background.jpg",
+                "repo": "shared"
+              },
+              "largeImage": true,
+              "children": [
+                {
+                  "classId": "OnoOtpVerificationJourneyAngComponent",
+                  "countryCodeEditable": "false",
+                  "input.countryCodeEditable": "model countryCodeEditable"
+                }
+              ]
+            },
+            {
+              "classId": "PanelContainerComponent",
+              "route": "sme-application-center",
+              "children": [
+                {
+                  "classId": "DsInteractionInitAngComponent",
+                  "action": "application-center-init"
+                },
+                {
+                  "classId": "PanelContainerComponent",
+                  "cssClasses": "container mt-5 col-md-8 col-lg-6",
+                  "children": [
+                    {
+                      "classId": "AcHeaderWidgetComponent",
+                      "subtitle": "Welcome to your application center. Here you can send us essential documents and you can track the progress of your application from the comfort of your own home."
+                    }
+                  ]
+                },
+                {
+                  "classId": "PanelContainerComponent",
+                  "cssClasses": "container mt-5 p-3 card card-body col-md-8 col-lg-6",
+                  "children": [
+                    {
+                      "classId": "DsStatusTrackingWidgetComponent",
+                      "bb.completeIcon": "check",
+                      "bb.milestoneOrder": "Application submitted, Documents Uploaded, Documents reviewed, Application completed",
+                      "bb.epicName": "Main"
+                    },
+                    {
+                      "classId": "HeadingWidgetComponent",
+                      "heading": "Business Onboarding",
+                      "headingType": "h3",
+                      "customClassName": "pl-1 pt-2 pb-1"
+                    },
+                    {
+                      "classId": "AcDocumentRequestViewerWidgetComponent",
+                      "output.documentRequestId": "navigation:bb-sidebar-overlay-container-ang-_-aafd8ac4eec1"
+                    }
+                  ]
+                },
+                {
+                  "name": "bb-sidebar-overlay-container-ang-_-aafd8ac4eec1",
+                  "classId": "SidebarOverlayContainerComponent",
+                  "bb.routeParamTrigger": "documentRequestId",
+                  "children": [
+                    {
+                      "classId": "AcTaskDetailsViewerWidgetComponent"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

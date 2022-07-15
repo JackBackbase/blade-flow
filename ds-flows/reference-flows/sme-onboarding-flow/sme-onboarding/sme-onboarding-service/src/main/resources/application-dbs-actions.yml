@@ -1,0 +1,10 @@
+backbase:
+  flow:
+    message:
+      impl: dbs-actions
+  activemq:
+    enabled: true
+
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616

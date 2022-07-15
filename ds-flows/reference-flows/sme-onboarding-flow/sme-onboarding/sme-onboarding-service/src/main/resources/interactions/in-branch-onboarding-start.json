@@ -1,0 +1,79 @@
+{
+  "key": "in-branch-onboarding-start",
+  "version": 9,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "sme",
+  "caseDefinitionVersion": 19,
+  "steps": [
+    {
+      "name": "in-branch-onboarding-start",
+      "entryPoint": true,
+      "handlers": [
+        {
+          "name": "sme-onboarding-anchor-data",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "in-branch-check-case"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "in-branch-check-case",
+      "handlers": [
+        {
+          "name": "sme-onboarding-check-case-exist",
+          "transitions": [
+            {
+              "condition": "!actionResult.body.caseExist",
+              "step": "select-products"
+            }
+          ]
+        },
+        {
+          "name": "existing-case",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "select-products",
+      "handlers": [
+        {
+          "name": "get-product-list",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "select-products"
+            }
+          ]
+        },
+        {
+          "name": "select-products",
+          "postExecutions": [
+            {
+              "name": "preliminary-case-promotion"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

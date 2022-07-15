@@ -1,0 +1,12 @@
+<bb-modal-header-ui title="Start a new case" i18n-title="Headline for a new case|Headline for a new case starting with personal informations@@bb.start-case-personal-information-ang.main-headline"></bb-modal-header-ui>
+<bb-modal-body-ui>
+  <ng-template bbCustomModalBody>
+    <formly-form [fields]="helper.fieldsConfig" [form]="helper.form" [model]="helper.value"></formly-form>
+  </ng-template>
+</bb-modal-body-ui>
+<bb-modal-footer-ui>
+  <ng-template bbCustomModalFooter>
+    <bb-button-ui ngbAutofocus color="secondary" (click)="cancel()" i18n="Cancel form|Label for Button to cancel form@@bb.start-case-personal-information-ang.cancel-btn"> Cancel </bb-button-ui>
+    <bb-load-button-ui [isLoading]="loading$ | async" [disabled]="submitted && helper.form.invalid" (click)="submit()" i18n="Next form|Label for Button to submit form and go to next form@@bb.start-case-personal-information-ang.next-btn"> Next </bb-load-button-ui>
+  </ng-template>
+</bb-modal-footer-ui>

@@ -1,0 +1,4 @@
+{
+  "$schema": "../$schema/SC_Unit_RichText.json",
+  "content": "<h1>Welcome to Bankbase!</h1><p>We are reviewing your application to make sure everything looks good. We’ll send an email to <strong>{email}</strong> once everything has been verified. <br><br>If you haven’t heard from us within 24 hours, you can use the link below to check the status of your application.</p>"
+}

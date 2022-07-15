@@ -1,0 +1,186 @@
+backbase:
+  audit:
+    enabled: false
+    mode: sync
+  activemq:
+    enabled: false
+  communication:
+    inbound: HTTP
+    outbound: HTTP
+  security:
+    public:
+      paths: "/actuator/metrics, /actuator/prometheus"
+  flow:
+    collections:
+      public-collections:
+        - products
+        - categories
+        - disclaimers
+    co-applicant:
+      notification:
+        base-link:
+          web: http://backbase/web/
+          ios: http://backbase/ios/
+          android: http://backbase/android/
+        template-id: #template-id
+    enable-legacy-dmn-engine: false
+    interactions:
+      location: classpath*:interactions/*.json
+    integrations:
+      email:
+        sendgrid:
+          api-key: #api-key
+          email-from: #email-from
+      preliminary:
+        enable: true
+      address-validation:
+        mapper:
+          impl: co_applicant_aware
+      identity-verification:
+        mapper:
+          impl: co_applicant_aware
+        mock:
+          path: "/api/contentservices/api/contentstream/resourceRepository/contextRoot/static/items/bb-us-journey-ang/assets/jumioMock.html"
+          case-manager-path: "/api/contentservices/api/contentstream/resourceRepository/contextRoot/static/items/bb-us-case-manager-ang/assets/jumioMock.html"
+      one-time-password:
+        mapper:
+          impl: co_applicant_aware
+        properties:
+          sms-enabled: true
+          email-enabled: true
+      product-selection:
+        file-config:
+          file-path: /products/productList.json
+          image-url-prefix: "{BB_GATEWAY_URL}/api/contentservices/api/contentstream/contentRepository/onboarding-us/product-selection/"
+    case-definitions:
+      definitions:
+        onboarding:
+          case-classes:
+            - name: com.backbase.flow.application.uso.casedata.Onboarding
+              version: 1
+          case-status-definitions:
+            - name: Primary case status
+              isPrimary: true
+              values:
+                - open
+                - closed
+              provider: com.backbase.flow.onboarding.us.process.status.provider.PrimaryCaseStatusProvider
+    iam:
+      anonymous:
+        cookie: anonymousUserId
+      impl: local
+      local:
+        # the following permissions are for the getTasks integration test
+        users:
+          - id: manager
+            fullName: Manager
+            permissions:
+              - case(view) on case-definition:onboarding
+              - case(start) on case-definition:onboarding
+              - case(edit) on case-definition:onboarding
+              - case(delete) on case-definition:onboarding
+              - case(create) on case-definition:onboarding
+              - case.changelog(view) on case-definition:onboarding
+              - case.statistics(view) on case-definition:onboarding
+              - case.comment(view) on case-definition:onboarding
+              - case.comment(edit) on case-definition:onboarding
+              - case.comment(delete) on case-definition:onboarding
+              - case.comment(create) on case-definition:onboarding
+              - task(view) on case-definition:onboarding
+              - task(view) on process-definition:us-onboarding
+              - task(view) on process-definition:aml
+              - task(view) on process-definition:idv
+              - task(execute) on process-definition:us-onboarding
+              - task(execute) on case-definition:onboarding
+              - task.dates(edit) on case-definition:onboarding
+              - task.assign(execute) on case-definition:onboarding
+              - task.statistics(view) on process-definition:us-onboarding
+              - task.statistics(view) on process-definition:aml
+              - task.statistics(view) on process-definition:idv
+              - journey.definitions(view) on process-definition:us-onboarding
+              - journey.definitions(view) on process-definition:aml
+              - journey.definitions(view) on process-definition:idv
+              - journey.definitions(view) on process-definition:archive-case
+              - journey.definitions(view) on process-definition:citizenship
+              - journey.definitions(view) on process-definition:enroll-customer
+              - journey.definitions(view) on process-definition:enrollment
+              - journey.definitions(view) on decision-definition:age-verification
+              - journey.definitions(view) on decision-definition:aml-check
+              - journey.definitions(view) on decision-definition:idv-check-full
+              - journey.definitions(view) on decision-definition:idv-check-id
+              - journey.definitions(view) on case-definition:onboarding
+              - journey.statistics(view) on process-definition:us-onboarding
+              - case.document(view) on case-definition:onboarding
+              - case.document(create) on case-definition:onboarding
+              - case.document(delete) on case-definition:onboarding
+
+          - id: user
+            fullName: Back Office
+            permissions:
+              - case(view) on case-definition:onboarding
+              - case(create) on case-definition:onboarding
+              - case(edit) on case-definition:onboarding
+              - case.comment(view) on case-definition:onboarding
+              - case.comment(create) on case-definition:onboarding
+              - task(view) on case-definition:onboarding
+              - task.dates(edit) on case-definition:onboarding
+              - task(execute) on case-definition:onboarding
+              - task(execute) on process-definition:us-onboarding
+              - task.assign(execute) on case-definition:onboarding
+              - journey.definitions(view) on case-definition:onboarding
+
+
+    comments:
+      case-thread:
+        enabled: true
+
+camunda:
+  bpm:
+    auto-deployment-enabled: true
+    enableXxeProcessing: false
+    authorization:
+      enabled: true
+
+definitions:
+  casedata:
+    schema: onboarding@1
+  process:
+    key: us-onboarding
+    maxNumberOfOpen: 0
+    maxNumberOfClosed: 3
+
+sso:
+  jwt:
+    internal:
+      signature:
+        key:
+          type: ENV
+          value: SIG_SECRET_KEY
+
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    root: INFO
+    org:
+      keycloak: INFO
+    com:
+      backbase:
+        flow:
+          interaction: DEBUG
+buildingblocks:
+  security:
+    csrf:
+      enabled: false
+
+spring:
+  cloud:
+    stream:
+      function:
+        autodetect: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+

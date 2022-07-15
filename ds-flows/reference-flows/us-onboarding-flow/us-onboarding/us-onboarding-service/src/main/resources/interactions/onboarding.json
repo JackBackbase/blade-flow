@@ -1,0 +1,467 @@
+{
+  "key": "onboarding",
+  "version": 1,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "onboarding",
+  "caseDefinitionVersion": 1,
+  "steps": [
+    {
+      "name": "init",
+      "enabled": "true",
+      "entryPoint": true,
+      "handlers": [
+        {
+          "name": "fetch-co-applicant",
+          "transitions": [
+            {
+              "condition": "success() && actionResult.body == null",
+              "step": "select-products"
+            },
+            {
+              "condition": "success() && actionResult.body != null",
+              "step": "terms-and-conditions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "select-products",
+      "handlers": [
+        {
+          "name": "get-product-list"
+        },
+        {
+          "name": "select-products",
+          "preExecutions": [
+            {
+              "name": "create-case"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "terms-and-conditions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "terms-and-conditions",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "agree-to-terms",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "anchor-data"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "anchor-data",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "prefill-anchor-data"
+        },
+        {
+          "name": "submit-anchor-data",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "otp-verification"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "otp-verification",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "true",
+          "step": "anchor-data"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "available-otp-channels"
+        },
+        {
+          "name": "fetch-otp-data"
+        },
+        {
+          "name": "request-otp"
+        },
+        {
+          "name": "verify-otp",
+          "postExecutions": [
+            {
+              "name": "resume-previous-case"
+            },
+            {
+              "name": "otp-verified-preliminary-case-promotion"
+            },
+            {
+              "name": "start-onboarding-process"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "identity-verification"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "identity-verification",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "verification-type"
+        },
+        {
+          "name": "identity-verification-initiation"
+        },
+        {
+          "name": "identity-verification-result",
+          "postExecutions": [
+            {
+              "name": "complete-idv-idt"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "address"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "address",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "validate-address"
+        },
+        {
+          "name": "fetch-address"
+        },
+        {
+          "name": "submit-address",
+          "postExecutions": [
+            {
+              "name": "complete-address-validation-idt"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success() && actionResult.body.get('isMainApplicantFlow') == false",
+              "step": "citizenship"
+            },
+            {
+              "condition": "success() && actionResult.body.get('isMainApplicantFlow') == true",
+              "step": "co-applicant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "co-applicant",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "account-type-selector",
+          "transitions": [
+            {
+              "condition": "success() && actionResult.body.isJointAccount",
+              "step": "co-applicant-data"
+            },
+            {
+              "condition": "success() && !actionResult.body.isJointAccount",
+              "step": "citizenship"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "co-applicant-data",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "submit-anchor-data",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "co-applicant-address"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "co-applicant-address",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "fetch-address"
+        },
+        {
+          "name": "submit-address",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "citizenship"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "citizenship",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "!caseData.isMainApplicantFlow",
+          "step": "address"
+        },
+        {
+          "condition": "caseData.isMainApplicantFlow",
+          "step": "co-applicant"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "fetch-citizenship-data"
+        },
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "citizenship-selector",
+          "transitions": [
+            {
+              "condition": "success() && (actionResult.body.citizenshipType.name() == 'US_CITIZEN' || actionResult.body.citizenshipType.name() == 'PERMANENT_RESIDENT')",
+              "step": "ssn"
+            },
+            {
+              "condition": "success() && actionResult.body.citizenshipType.name() == 'NON_RESIDENT_ALIEN'",
+              "step": "non-resident-data"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ssn",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "true",
+          "step": "citizenship"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "fetch-citizenship-data"
+        },
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "submit-ssn",
+          "postExecutions": [
+            {
+              "name": "complete-citizenship-idt"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "kyc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "non-resident-data",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "true",
+          "step": "citizenship"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "fetch-citizenship-data"
+        },
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "country-list"
+        },
+        {
+          "name": "submit-non-resident-data",
+          "postExecutions": [
+            {
+              "name": "complete-citizenship-idt"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "kyc"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "kyc",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "{'US_CITIZEN', 'PERMANENT_RESIDENT'}.contains((caseData.isMainApplicantFlow? caseData.mainApplicant: caseData.coApplicant).citizenship.citizenshipType.name())",
+          "step": "ssn"
+        },
+        {
+          "condition": "'NON_RESIDENT_ALIEN' == (caseData.isMainApplicantFlow? caseData.mainApplicant: caseData.coApplicant).citizenship.citizenshipType.name()",
+          "step": "non-resident-data"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "kyc-questions-loader"
+        },
+        {
+          "name": "submit-kyc-data",
+          "preExecutions": [
+            {
+              "name": "is-citizenship-review-needed"
+            },
+            {
+              "name": "idv-retrieve-results"
+            }
+          ],
+          "postExecutions": [
+            {
+              "name": "complete-kyc-idt"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success() && actionResult.body.identityVerificationResult.documentStatus != null && (actionResult.body.identityVerificationResult.documentStatus.equalsIgnoreCase('DENIED_FRAUD') || actionResult.body.identityVerificationResult.documentStatus.equalsIgnoreCase('DENIED_UNSUPPORTED_ID_COUNTRY')) || (actionResult.body.citizenshipReview.approved != null && !actionResult.body.citizenshipReview.approved)",
+              "step": "declined"
+            },
+            {
+              "condition": "success() && actionResult.body.antiMoneyLaunderingInfo.amlResult.matchStatus.equalsIgnoreCase('no_match') && actionResult.body.identityVerificationResult.documentStatus != null && actionResult.body.identityVerificationResult.documentStatus.equalsIgnoreCase('APPROVED_VERIFIED') && !actionResult.body.citizenshipReview.needed",
+              "step": "credentials"
+            },
+            {
+              "condition": "success() && !actionResult.body.antiMoneyLaunderingInfo.amlResult.matchStatus.equalsIgnoreCase('no_match') || actionResult.body.identityVerificationResult.documentStatus == null || (!actionResult.body.identityVerificationResult.documentStatus.equalsIgnoreCase('APPROVED_VERIFIED') && !actionResult.body.identityVerificationResult.documentStatus.equalsIgnoreCase('DENIED_FRAUD') && !actionResult.body.identityVerificationResult.documentStatus.equalsIgnoreCase('DENIED_UNSUPPORTED_ID_COUNTRY')) || actionResult.body.citizenshipReview.needed",
+              "step": "in-review-done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "credentials",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "fetch-co-applicant"
+        },
+        {
+          "name": "agree-to-terms"
+        },
+        {
+          "name": "setup-credentials",
+          "transitions": [
+            {
+              "condition": "success() && actionResult.body.isJointAccount && actionResult.body.isMainApplicantFlow",
+              "step": "successfully-done-co-applicant"
+            },
+            {
+              "condition": "success()",
+              "step": "successfully-done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "successfully-done",
+      "enabled": "true",
+      "exitPoint": true
+    },
+    {
+      "name": "successfully-done-co-applicant",
+      "enabled": "true",
+      "exitPoint": true
+    },
+    {
+      "name": "in-review-done",
+      "enabled": "true"
+    },
+    {
+      "name": "declined",
+      "enabled": "true",
+      "exitPoint": true
+    }
+  ]
+}

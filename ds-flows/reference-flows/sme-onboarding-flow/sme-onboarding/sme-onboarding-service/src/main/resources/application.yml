@@ -1,0 +1,250 @@
+backbase:
+  audit:
+    enabled: false
+    mode: sync
+  activemq:
+    enabled: false
+  security:
+    public:
+      paths: "/actuator/metrics, /actuator/prometheus"
+  flow:
+    integrations:
+      document-request:
+        default-journey-mapper:
+          enabled: false
+      one-time-password:
+        properties:
+          sms-enabled: true
+          email-enabled: true
+        mapper:
+          impl: otpJourneyMapper
+      address-validation:
+        mapper:
+          impl: addressValidationJourneyMapper
+      anti-money-laundering:
+        impl: MockAntiMoneyLaundering
+      business-relations:
+        default-journey-mapper:
+          enabled: false
+      product-selection:
+        file-config:
+          file-path: /products/productList.json
+          image-url-prefix: "{BB_GATEWAY_URL}/api/contentservices/api/contentstream/contentRepository/sme-onboarding/product-selection/"
+      preliminary:
+        enable: true
+      company-lookup:
+        impl: MockCompanyLookup
+        opencorporates-client:
+          api-token: "Put API token here and change impl to `Opencorporates` to use real API"
+          validation-at-startup: true
+      identity-verification:
+        impl: MockIdentityVerification
+        mock:
+          path: "/api/contentservices/api/contentstream/resourceRepository/contextRoot/static/items/bb-prospect-ang/assets/jumioMock.html"
+          case-manager-path: "/api/contentservices/api/contentstream/resourceRepository/contextRoot/static/items/bb-employee-ang/assets/jumioMock.html"
+      risk-assessment:
+        default-journey-mapper:
+          enabled: false
+    enable-legacy-dmn-engine: false
+    interactions:
+      location: classpath*:interactions/*.json
+    case-definitions:
+      definitions:
+        sme:
+          case-classes:
+            - name: com.backbase.flow.sme.onboarding.casedata.SmeCaseDefinition
+              version: 19
+          case-status-definitions:
+            - name: Primary case status
+              isPrimary: true
+              values:
+                - open
+              provider: com.backbase.flow.sme.onboarding.status.PrimaryCaseStatusProvider
+          status-tracking-definition:
+            epics:
+              - name: Main
+                milestones:
+                  - eventClass: com.backbase.flow.sme.onboarding.statustracking.event.ApplicationSubmittedMilestoneEvent
+                    name: Application submitted
+                  - eventClass: com.backbase.flow.sme.onboarding.statustracking.event.DocumentsUploadCompletedMilestoneEvent
+                    name: Documents Uploaded
+                  - eventClass: com.backbase.flow.sme.onboarding.statustracking.event.AllDocsVerifiedMilestoneEvent
+                    name: Documents reviewed
+                  - eventClass: com.backbase.flow.sme.onboarding.statustracking.event.DocumentRequestsCompletedMilestoneEvent
+                    name: Application completed
+
+    iam:
+      anonymous:
+        cookie: anonymousUserId
+      local:
+        users:
+          - id: manager
+            fullName: Manager
+            permissions:
+              - case(view) on case-definition:sme
+              - case(start) on case-definition:sme
+              - case(edit) on case-definition:sme
+              - case(delete) on case-definition:sme
+              - case(create) on case-definition:sme
+              - case.changelog(view) on case-definition:sme
+              - case.statistics(view) on case-definition:sme
+              - case.comment(view) on case-definition:sme
+              - case.comment(edit) on case-definition:sme
+              - case.comment(delete) on case-definition:sme
+              - case.comment(create) on case-definition:sme
+              - task(view) on case-definition:sme
+              - task(view) on process-definition:archive-case
+              - task(view) on process-definition:data-gathering
+              - task(view) on process-definition:docs-gathering
+              - task(view) on process-definition:kyc
+              - task(view) on process-definition:kyb
+              - task(view) on process-definition:app-onboarding
+              - task(view) on process-definition:aml
+              - task(view) on process-definition:company-lookup
+              - task(view) on process-definition:br-process
+              - task(view) on process-definition:doc-req-setup
+              - task(view) on process-definition:manual-review
+              - task(view) on process-definition:idv
+              - task(view) on process-definition:risk-assessment
+              - task(execute) on case-definition:sme
+              - task(execute) on process-definition:archive-case
+              - task(execute) on process-definition:data-gathering
+              - task(execute) on process-definition:docs-gathering
+              - task(execute) on process-definition:kyc
+              - task(execute) on process-definition:kyb
+              - task(execute) on process-definition:app-onboarding
+              - task(execute) on process-definition:aml
+              - task(execute) on process-definition:company-lookup
+              - task(execute) on process-definition:br-process
+              - task(execute) on process-definition:doc-req-setup
+              - task(execute) on process-definition:manual-review
+              - task(execute) on process-definition:idv
+              - task(execute) on process-definition:risk-assessment
+              - task.dates(edit) on case-definition:sme
+              - task.assign(execute) on case-definition:sme
+              - task.statistics(view) on process-definition:archive-case
+              - task.statistics(view) on process-definition:data-gathering
+              - task.statistics(view) on process-definition:docs-gathering
+              - task.statistics(view) on process-definition:kyc
+              - task.statistics(view) on process-definition:kyb
+              - task.statistics(view) on process-definition:app-onboarding
+              - task.statistics(view) on process-definition:aml
+              - task.statistics(view) on process-definition:company-lookup
+              - task.statistics(view) on process-definition:br-process
+              - task.statistics(view) on process-definition:doc-req-setup
+              - task.statistics(view) on process-definition:manual-review
+              - task.statistics(view) on process-definition:idv
+              - task.statistics(view) on process-definition:risk-assessment
+              - journey.definitions(view) on case-definition:sme
+              - journey.definitions(view) on process-definition:archive-case
+              - journey.definitions(view) on process-definition:data-gathering
+              - journey.definitions(view) on process-definition:docs-gathering
+              - journey.definitions(view) on process-definition:kyc
+              - journey.definitions(view) on process-definition:kyb
+              - journey.definitions(view) on process-definition:app-onboarding
+              - journey.definitions(view) on process-definition:aml
+              - journey.definitions(view) on process-definition:company-lookup
+              - journey.definitions(view) on process-definition:br-process
+              - journey.definitions(view) on process-definition:doc-req-setup
+              - journey.definitions(view) on process-definition:manual-review
+              - journey.definitions(view) on process-definition:idv
+              - journey.definitions(view) on process-definition:risk-assessment
+              - journey.statistics(view) on process-definition:archive-case
+              - journey.statistics(view) on process-definition:data-gathering
+              - journey.statistics(view) on process-definition:docs-gathering
+              - journey.statistics(view) on process-definition:kyc
+              - journey.statistics(view) on process-definition:kyb
+              - journey.statistics(view) on process-definition:app-onboarding
+              - journey.statistics(view) on process-definition:aml
+              - journey.statistics(view) on process-definition:company-lookup
+              - journey.statistics(view) on process-definition:br-process
+              - journey.statistics(view) on process-definition:doc-req-setup
+              - journey.statistics(view) on process-definition:manual-review
+              - journey.statistics(view) on process-definition:idv
+              - journey.statistics(view) on process-definition:risk-assessment
+              - case.document(view) on case-definition:sme
+              - case.document(create) on case-definition:sme
+              - case.document(delete) on case-definition:sme
+              - case.archive(execute) on case-definition:sme
+              - journey.definitions(view) on decision-definition:age-verification
+              - journey.definitions(view) on decision-definition:company-lookup
+              - journey.definitions(view) on decision-definition:decide-on-bizrel
+              - journey.definitions(view) on decision-definition:fileset
+              - journey.definitions(view) on decision-definition:handle-process
+              - journey.definitions(view) on decision-definition:decide-on-kyb
+              - journey.definitions(view) on decision-definition:decide-on-kyc
+              - journey.definitions(view) on decision-definition:business-license
+              - journey.definitions(view) on decision-definition:aml-check
+              - journey.definitions(view) on decision-definition:idv-check-id-and-identity
+              - journey.definitions(view) on decision-definition:idv-check-id-only
+              - journey.definitions(view) on decision-definition:decideOnRiskLevelApplication
+              - journey.definitions(view) on decision-definition:decideOnBusinessRiskLevel
+              - journey.definitions(view) on decision-definition:decideOnPersonRiskLevel
+              - journey.definitions(view) on decision-definition:decideOnPeopleRiskLevel
+              - journey.definitions(view) on decision-definition:Decision_0ps9psu
+              - journey.definitions(view) on decision-definition:Decision_1qevggk
+              - journey.definitions(view) on decision-definition:Decision_1v7b1q7
+              - journey.definitions(view) on decision-definition:Decision_0pbmyza
+              - journey.definitions(view) on decision-definition:Decision_1ak0t9a
+              - journey.definitions(view) on decision-definition:Decision_0d2wp1v
+              - journey.definitions(view) on decision-definition:calculateBusinessRiskScore
+              - journey.definitions(view) on decision-definition:calculatePersonRiskScore
+
+    comments:
+      case-thread:
+        enabled: true
+
+    collections:
+      public-collections:
+        - countries
+        - industries
+        - business-structures
+        - products
+        - roles
+
+eureka:
+  instance:
+    appname: ${spring.application.name}
+    healthCheckUrlPath: /production-support/health
+    statusPageUrlPath: /production-support/info
+    nonSecurePort: ${server.port}
+    metadata-map:
+      public: true
+      role: live
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://${REGISTRY_HOST:localhost}:${REGISTRY_PORT:8080}/registry/eureka/
+
+camunda:
+  bpm:
+    auto-deployment-enabled: true
+    enableXxeProcessing: false
+    authorization:
+      enabled: true
+
+sso:
+  jwt:
+    internal:
+      signature:
+        key:
+          type: ENV
+          value: SIG_SECRET_KEY
+
+buildingblocks:
+  security:
+    csrf:
+      enabled: false
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+  servlet:
+    multipart:
+      max-file-size: -1
+logging:
+  level:
+    root: INFO

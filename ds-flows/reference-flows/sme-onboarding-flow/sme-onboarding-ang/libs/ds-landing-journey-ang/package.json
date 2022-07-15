@@ -1,0 +1,17 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@backbase/ds-landing-journey-ang",
+  "version": "1.0.5",
+  "description": "DsLandingJourneyAng",
+  "peerDependencies": {
+    "@angular/common": "^10.2.0 || ^11.2.0",
+    "@angular/core": "^10.2.0 || ^11.2.0",
+    "@backbase/foundation-ang": "^6.9.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "dest": "../../dist/libs/ds-landing-journey-ang"
+  }
+}

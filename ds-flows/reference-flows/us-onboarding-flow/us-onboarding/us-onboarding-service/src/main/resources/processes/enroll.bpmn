@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1840zyj" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:collaboration id="Collaboration_06x8inn">
+    <bpmn:participant id="Participant_1x6nzlg" processRef="enroll-customer" />
+  </bpmn:collaboration>
+  <bpmn:process id="enroll-customer" name="Customer Enrollment" isExecutable="true">
+    <bpmn:startEvent id="Event_1wsr5qj">
+      <bpmn:outgoing>Flow_0sleavy</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_07b4j4m">
+      <bpmn:incoming>Flow_0rvqtqn</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:callActivity id="Activity_1fo61h7" name="Enrollment process" calledElement="enrollment">
+      <bpmn:incoming>Flow_0sleavy</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hs6334</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sendTask id="Activity_07kmee0" name="Notify customer on successful onboarding" camunda:expression="${emailService.sendEmail(execution)}">
+      <bpmn:incoming>Flow_1hs6334</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rvqtqn</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="Flow_0rvqtqn" sourceRef="Activity_07kmee0" targetRef="Event_07b4j4m" />
+    <bpmn:sequenceFlow id="Flow_1hs6334" sourceRef="Activity_1fo61h7" targetRef="Activity_07kmee0" />
+    <bpmn:sequenceFlow id="Flow_0sleavy" sourceRef="Event_1wsr5qj" targetRef="Activity_1fo61h7" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_06x8inn">
+      <bpmndi:BPMNShape id="Participant_1x6nzlg_di" bpmnElement="Participant_1x6nzlg" isHorizontal="true">
+        <dc:Bounds x="129" y="79" width="550" height="160" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0sleavy_di" bpmnElement="Flow_0sleavy">
+        <di:waypoint x="237" y="159" />
+        <di:waypoint x="269" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hs6334_di" bpmnElement="Flow_1hs6334">
+        <di:waypoint x="369" y="159" />
+        <di:waypoint x="439" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rvqtqn_di" bpmnElement="Flow_0rvqtqn">
+        <di:waypoint x="539" y="159" />
+        <di:waypoint x="611" y="159" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1wsr5qj_di" bpmnElement="Event_1wsr5qj">
+        <dc:Bounds x="201" y="141" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_07b4j4m_di" bpmnElement="Event_07b4j4m">
+        <dc:Bounds x="611" y="141" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1fo61h7_di" bpmnElement="Activity_1fo61h7">
+        <dc:Bounds x="269" y="119" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07kmee0_di" bpmnElement="Activity_07kmee0">
+        <dc:Bounds x="439" y="119" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

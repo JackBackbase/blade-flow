@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@backbase/address-validation-interactions-tasks",
+  "version": "0.0.2",
+  "description": "Address Validation Interaction Tasks",
+  "peerDependencies": {
+    "@angular/common": "^10.2.0 || ^11.2.0",
+    "@angular/core": "^10.2.0 || ^11.2.0",
+    "@backbase/foundation-ang": "^6.10.0",
+    "@backbase/ui-ang": "^6.0.0",
+    "@backbase/case-management-ui-ang": "^2.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "../../dist/libs/address-validation-interactions-tasks"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "dest": "../../dist/libs/address-validation-interactions-tasks"
+  }
+}

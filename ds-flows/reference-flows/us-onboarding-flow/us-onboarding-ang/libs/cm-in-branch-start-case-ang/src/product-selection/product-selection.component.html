@@ -1,0 +1,13 @@
+
+<bb-modal-header-ui title="Product selection" i18n-title="Product selection|Headline for product selection@@bb.start-case-product-selection-ang.main-headline"></bb-modal-header-ui>
+<bb-modal-body-ui>
+  <ng-template bbCustomModalBody>
+    <formly-form [fields]="helper.fieldsConfig" [form]="helper.form" [model]="helper.value"></formly-form>
+</ng-template>
+</bb-modal-body-ui>
+<bb-modal-footer-ui>
+  <ng-template bbCustomModalFooter>
+    <bb-button-ui ngbAutofocus color="secondary" (click)="cancel()" i18n="Cancel form|Label for Button to cancel form@@bb.start-case-product-selection-ang.cancel-btn"> Cancel </bb-button-ui>
+    <bb-load-button-ui [isLoading]="loading$ | async" [disabled]="submitted && helper.form.invalid" (click)="submit()" i18n="Submit form|Label for Button to submit form@@bb.start-case-product-selection-ang.next-btn"> Next </bb-load-button-ui>
+  </ng-template>
+</bb-modal-footer-ui>

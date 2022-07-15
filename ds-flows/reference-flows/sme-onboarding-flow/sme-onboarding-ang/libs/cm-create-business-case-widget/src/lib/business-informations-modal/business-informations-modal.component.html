@@ -1,0 +1,98 @@
+<bb-modal-ui [isOpen]="openDialog"
+             (confirm)="onConfirmDialog()"
+             (cancel)="onCloseDialog()">
+    <bb-modal-header-ui title="Start new case"></bb-modal-header-ui>
+    <bb-modal-body-ui>
+        <ng-template bbCustomModalBody>
+            <form [formGroup]="businessInformationsForm">
+                <div>
+                    <div class="row mt-2">
+                        <div class="col-md-6 mb-3">
+                            <bb-input-text-ui label="First name"
+                                              data-testid="first-name"
+                                              data-role="input-text"
+                                              formControlName="firstName">
+                            </bb-input-text-ui>
+                            <bb-input-validation-message-ui [showErrors]="firstName.touched && firstName.invalid">
+                                <span *ngIf="firstName.hasError('required')"
+                                      i18n>This field is required</span>
+                                <span *ngIf="firstName.hasError('flow')"
+                                      i18n>{{firstName.errors?.flow}}</span>
+                            </bb-input-validation-message-ui>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <bb-input-text-ui label="Last name"
+                                              data-testid="last-name"
+                                              data-role="input-text"
+                                              formControlName="lastName">
+                            </bb-input-text-ui>
+                            <bb-input-validation-message-ui [showErrors]="lastName.touched && lastName.invalid">
+                                <span *ngIf="lastName.hasError('required')"
+                                      i18n>This field is required</span>
+                                <span *ngIf="lastName.hasError('flow')"
+                                      i18n>{{lastName.errors?.flow}}</span>
+                            </bb-input-validation-message-ui>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <bb-input-divided-date [control]="dateOfBirth"
+                                                   data-testid="date-of-birth"
+                                                   data-role="input-divided-date"
+                                                   label="Date of birth">
+                            </bb-input-divided-date>
+                            <bb-input-validation-message-ui [showErrors]="dateOfBirth.touched">
+                                <span *ngIf="dateOfBirth.hasError('required')"
+                                      i18n="@@ds.anchor-widget-ang.date-of-birth.error.required">This field is
+                                    required</span>
+                                <span *ngIf="dateOfBirth.hasError('flow')"
+                                      i18n>{{dateOfBirth.errors?.flow}}</span>
+                            </bb-input-validation-message-ui>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-8 mb-3">
+                            <bb-input-text-ui label="Email address"
+                                              data-testid="email"
+                                              data-role="input-email"
+                                              formControlName="emailAddress">
+                            </bb-input-text-ui>
+                            <bb-input-validation-message-ui [showErrors]="emailAddress.touched && emailAddress.invalid">
+                                <span *ngIf="emailAddress.hasError('required')"
+                                      i18n>This field is required</span>
+                                <span *ngIf="emailAddress.hasError('flow')"
+                                      i18n>{{emailAddress.errors?.flow}}</span>
+                            </bb-input-validation-message-ui>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-8 mb-3">
+                            <bb-input-text-ui label="Phone Number"
+                                              data-testid="phone-number"
+                                              data-role="input-text"
+                                              formControlName="phoneNumber">
+                            </bb-input-text-ui>
+                            <bb-input-validation-message-ui [showErrors]="phoneNumber.touched && phoneNumber.invalid">
+                                <span *ngIf="phoneNumber.hasError('required')"
+                                      i18n>This field is required</span>
+                                <span *ngIf="phoneNumber.hasError('flow')"
+                                      i18n>{{phoneNumber.errors?.flow}}</span>
+                            </bb-input-validation-message-ui>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </ng-template>
+    </bb-modal-body-ui>
+    <bb-modal-footer-ui>
+        <ng-template bbCustomModalFooter>
+            <bb-button-ui color="secondary"
+                          (click)="onCloseDialog()"
+                          i18n>Cancel</bb-button-ui>
+            <bb-load-button-ui (click)="onConfirmDialog()"
+                               [disabled]="allowToSubmit()"
+                               [isLoading]="isLoading"
+                               i18n>Next</bb-load-button-ui>
+        </ng-template>
+    </bb-modal-footer-ui>
+</bb-modal-ui>

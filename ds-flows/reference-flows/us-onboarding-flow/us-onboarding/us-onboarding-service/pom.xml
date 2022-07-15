@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.backbase.flow.application.us-onboarding</groupId>
+        <artifactId>us-onboarding</artifactId>
+        <version>1.6.7.28</version>
+    </parent>
+
+    <organization>
+        <name>Backbase B.V.</name>
+        <url>http://www.backbase.com</url>
+    </organization>
+
+    <artifactId>us-onboarding-service</artifactId>
+  <version>1.6.7.28</version>
+    <packaging>jar</packaging>
+
+    <name>US Onboarding BE Service</name>
+
+    <properties>
+        <jsonschema2pojo.version>1.0.2</jsonschema2pojo.version>
+        <sql-maven-plugin.version>1.5</sql-maven-plugin.version>
+        <mysql-connector-java.version>8.0.22</mysql-connector-java.version>
+        <commons-validator.version>1.6</commons-validator.version>
+        <keycloak-admin-client.version>11.0.2</keycloak-admin-client.version>
+        <lombok.version>1.18.20</lombok.version>
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>clean-database</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <version>${sql-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>clean-db</id>
+                                <phase>clean</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <driver>com.mysql.jdbc.Driver</driver>
+                                    <url>jdbc:mysql://localhost:3306?useSSL=false</url>
+                                    <username>root</username>
+                                    <password>root</password>
+                                    <printResultSet>true</printResultSet>
+                                    <forceMojoExecution>true</forceMojoExecution>
+                                    <sqlCommand>
+                                        DROP
+                                        DATABASE IF EXISTS flow;
+                                        CREATE
+                                        DATABASE flow;
+                                    </sqlCommand>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <version>${mysql-connector-java.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+    <dependencies>
+        <!-- Flow platform -->
+        <dependency>
+            <groupId>${platform.groupId}.modules</groupId>
+            <artifactId>flow-journey-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${platform.groupId}.modules</groupId>
+            <artifactId>flow-liquibase-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${platform.groupId}.modules</groupId>
+            <artifactId>flow-comments-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${platform.groupId}.modules</groupId>
+            <artifactId>flow-dbs-actions-starter</artifactId>
+        </dependency>
+
+        <!-- Flow platform + DBS integration -->
+        <dependency>
+            <groupId>${platform.groupId}.modules</groupId>
+            <artifactId>flow-dbs-audit-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${platform.groupId}.modules</groupId>
+            <artifactId>flow-dbs-access-control-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${platform.groupId}.modules</groupId>
+            <artifactId>flow-dbs-common-starter</artifactId>
+        </dependency>
+
+        <!-- Database -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- Service Items and Integrations -->
+        <dependency>
+            <groupId>com.backbase.flow.journey.resume</groupId>
+            <artifactId>service-item-resume</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.one-time-password</groupId>
+            <artifactId>integration-core-one-time-password</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.one-time-password</groupId>
+            <artifactId>service-item-one-time-password</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.address-validation</groupId>
+            <artifactId>integration-core-address-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.address-validation</groupId>
+            <artifactId>service-item-address-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.anti-money-laundering</groupId>
+            <artifactId>integration-core-anti-money-laundering</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.anti-money-laundering</groupId>
+            <artifactId>service-item-anti-money-laundering</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.identity-verification</groupId>
+            <artifactId>integration-core-identity-verification</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.identity-verification</groupId>
+            <artifactId>service-item-identity-verification</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.product-selection</groupId>
+            <artifactId>integration-core-product-selection</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.product-selection</groupId>
+            <artifactId>service-item-product-selection</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sendgrid</groupId>
+            <artifactId>sendgrid-java</artifactId>
+            <version>4.7.2</version>
+        </dependency>
+
+        <!-- Code utils -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Utility -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${commons-validator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-admin-client</artifactId>
+            <version>${keycloak-admin-client.version}</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin.external.google</groupId>
+                    <artifactId>android-json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.journey.shared</groupId>
+            <artifactId>flow-test-shared</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <environmentVariables>
+                        <SIG_SECRET_KEY>JWTSecretKeyDontUseInProduction!</SIG_SECRET_KEY>
+                    </environmentVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>custom-build-info</id>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                        <configuration>
+                            <additionalProperties>
+                                <onboarding-service-us-version>${project.version}</onboarding-service-us-version>
+                                <flow-platforms-dep-version>${flow-platform.version}</flow-platforms-dep-version>
+                                <encoding.source>${project.build.sourceEncoding}</encoding.source>
+                                <java.version>${java.version}</java.version>
+                                <java.source>${maven.compiler.source}</java.source>
+                                <java.target>${maven.compiler.target}</java.target>
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>runnable-jar</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <executable>true</executable>
+                            <mainClass>com.backbase.flow.onboarding.us.UsOnboardingFlow</mainClass>
+                            <classifier>runnable</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>${jsonschema2pojo.version}</version>
+                <executions>
+                    <execution>
+                        <id>case-data</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${basedir}/src/main/resources/case-definitions</sourceDirectory>
+                            <targetPackage>com.backbase.flow.application.uso.casedata</targetPackage>
+                            <dateTimeType>java.time.OffsetDateTime</dateTimeType>
+                            <generateBuilders>true</generateBuilders>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>kyc-questions</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${basedir}/src/main/resources/kyc</sourceDirectory>
+                            <targetPackage>com.backbase.flow.application.uso.kyc</targetPackage>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok-mapstruct-binding.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+  <scm>
+    <tag>v1.6.7.28</tag>
+  </scm>
+</project>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0yq02dl" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:collaboration id="Collaboration_0o7j5am">
+    <bpmn:participant id="Participant_1cfcpyx" name="Archive  process" processRef="archive-case" />
+  </bpmn:collaboration>
+  <bpmn:process id="archive-case" name="Case archiving" isExecutable="true">
+    <bpmn:endEvent id="Event_07v6om6">
+      <bpmn:incoming>Flow_1mfa6ld</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1b9izh6" name="Archive case" camunda:class="com.backbase.flow.onboarding.us.process.handler.ArchiveCaseTaskHandler">
+      <bpmn:incoming>Flow_17xf331</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mfa6ld</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="Event_0privh4">
+      <bpmn:outgoing>Flow_17xf331</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1mfa6ld" sourceRef="Activity_1b9izh6" targetRef="Event_07v6om6" />
+    <bpmn:sequenceFlow id="Flow_17xf331" sourceRef="Event_0privh4" targetRef="Activity_1b9izh6" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0o7j5am">
+      <bpmndi:BPMNShape id="Participant_1cfcpyx_di" bpmnElement="Participant_1cfcpyx" isHorizontal="true">
+        <dc:Bounds x="129" y="80" width="358" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1mfa6ld_di" bpmnElement="Flow_1mfa6ld">
+        <di:waypoint x="380" y="155" />
+        <di:waypoint x="422" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17xf331_di" bpmnElement="Flow_17xf331">
+        <di:waypoint x="228" y="155" />
+        <di:waypoint x="280" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_07v6om6_di" bpmnElement="Event_07v6om6">
+        <dc:Bounds x="422" y="137" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1b9izh6_di" bpmnElement="Activity_1b9izh6">
+        <dc:Bounds x="280" y="115" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0privh4_di" bpmnElement="Event_0privh4">
+        <dc:Bounds x="192" y="137" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

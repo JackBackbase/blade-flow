@@ -1,0 +1,31 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "import-blacklist": [
+      true,
+      "rxjs/Rx",
+      {
+        "@angular/platform-browser": [
+          "BrowserModule"
+        ]
+      },
+      {
+        "@angular/platform-browser/animations": [
+          "BrowserAnimationsModule"
+        ]
+      },
+      {
+        "@angular/common/http": [
+          "HttpClientModule"
+        ]
+      }
+    ],
+    "no-implicit-dependencies": {
+      "severity": "warning",
+      "options": true
+    }
+  },
+  "linterOptions": {
+    "exclude": []
+  }
+}

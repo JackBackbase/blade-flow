@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://backbase.com/flow/case-manager/case-data-view-definition.json",
+  "definitions": {
+      "field": {
+          "type": "object",
+          "properties": {
+              "title": { "type": "string" },
+              "viewHint": {
+                  "type": "string",
+                  "enum": ["boolean", "string"]
+              },
+              "pointer": { "type": "string", "format": "json-pointer" }
+          },
+          "required": ["title", "pointer"]
+      },
+      "fieldset": {
+          "type": "object",
+          "properties": {
+              "title": {
+                  "type": "string"
+              },
+              "fields": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/field"
+                  },
+                  "minItems": 1
+              }
+          }
+      }
+  },
+  "type": "object",
+  "properties": {
+      "fieldsets": {
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/fieldset"
+          }
+      }
+  }
+}

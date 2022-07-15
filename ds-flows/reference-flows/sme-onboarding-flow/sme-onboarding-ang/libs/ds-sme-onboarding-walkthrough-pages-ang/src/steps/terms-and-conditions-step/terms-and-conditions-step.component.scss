@@ -1,0 +1,17 @@
+@import "~@backbase/backbase-theme/scss/1-variables/variables";
+@import "../styles/utilities-mixin";
+
+.checks {
+  @include icon-with-description;
+}
+
+.description {
+  @include description-text;
+}
+
+.panel {
+  background-color: $color-neutral-lightest;
+  border-radius: $border-radius;
+  padding: $spacer;
+  margin-top: $spacer-lg;
+}

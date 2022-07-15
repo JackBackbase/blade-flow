@@ -1,0 +1,8 @@
+<ng-container *ngIf="!(isLoading$ | async); else loaderTpl">
+  <bb-header [userName]="registrarDetails?.fullName" [subtitle]="subtitle$ | async"></bb-header>
+</ng-container>
+
+<ng-template #loaderTpl>
+  <bb-loading-indicator-ui data-role="header-loading-state" loaderSize="md">
+  </bb-loading-indicator-ui>
+</ng-template>

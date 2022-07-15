@@ -1,0 +1,121 @@
+= Digital Sales Reference Flows: Getting Started.
+
+This project template provides an easy way to organize, develop, build and configure Flows.
+
+== Downloading the Flow Catalog.
+
+First step is to download the source code of Flow Catalog. Follow the step below to get it up and running locally.
+
+=== 1. Configure Backbase Repo.
+
+All Flow SDK and Flow Catalog artifacts are available in *http://repo.backbase.com/*, which requires you to log in.
+
+Add this repo to your maven `settings.xml` file.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <activeProfiles>
+    <activeProfile>backbase</activeProfile>
+    <!--  other profiles if any -->
+  </activeProfiles>
+  <profiles>
+    <profile>
+      <id>backbase</id>
+      <repositories>
+        <repository>
+          <id>Backbase Repository</id>
+          <url>https://repo.backbase.com/repo</url>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>Backbase Repository</id>
+          <url>https://repo.backbase.com/repo</url>
+        </pluginRepository>
+      </pluginRepositories>
+      <properties>
+        <downloadSources>true</downloadSources>
+        <downloadJavadocs>true</downloadJavadocs>
+      </properties>
+    </profile>
+  </profiles>
+  <servers>
+    <server>
+      <id>Backbase Repository</id>
+      <username>username</username>
+      <password>password</password>
+    </server>
+  </servers>
+</settings>
+----
+
+=== 2. Pulling Flow Catalog source code.
+
+By default, this project template provides a Maven pom file that works as a seed to download all Flows source code from our catalog.
+
+Go to `ds-flows` folder and execute the following command to pull all Flows from our catalog:
+
+CAUTION: Using `-Pclean-catalog` profile wipes out all your local Flow Catalog's folders and also the related dependencies in your local repository.
+
+[source,bash]
+----
+mvn clean -Pclean-catalog,update-catalog
+----
+
+You will be able to see some file structure like this:
+
+[source,bash]
+----
+├── ds-flows
+│   ├── README.adoc
+│   ├── custom-flows
+│   │   └── README.adoc
+│   ├── pom.xml
+│   ├── reference-flows
+│   │   └── us-onboarding-flow
+│   │       ├── us-onboarding-ang
+│   │       │   ├── README.adoc
+│   │       │   ├── angular.json
+│   │       │   ├── apps
+│   │       │   ├── karma.conf.js
+│   │       │   ├── libs
+│   │       │   ├── package.json
+│   │       │   ├── portals
+│   │       │   ├── proxy.conf.js
+│   │       │   ├── scripts
+│   │       │   ├── tsconfig.json
+│   │       │   ├── tsconfig.spec.json
+│   │       │   ├── tslint.json
+│   │       │   └── unit-test-thresholds.json
+│   │       └── us-onboarding
+│   │           ├── README.adoc
+│   │           ├── lombok.config
+│   │           ├── pom.xml
+│   │           ├── target
+│   │           └── us-onboarding-service
+│   │   └── sme-onboarding-flow
+│   │       ├── sme-onboarding-ang
+│   │       │   ├── angular.json
+│   │       │   ├── api-extractor.json
+│   │       │   ├── apps
+│   │       │   ├── karma.conf.js
+│   │       │   ├── libs
+│   │       │   ├── package.json
+│   │       │   ├── proxy.conf.js
+│   │       │   ├── README.md
+│   │       │   ├── shared
+│   │       │   ├── tsconfig.json
+│   │       │   ├── tsconfig.spec.json
+│   │       │   ├── tslint.json
+│   │       │   ├── unit-test-thresholds.json
+│   │       └── sme-onboarding
+│   │           ├── README.adoc
+│   │           ├── lombok.config
+│   │           ├── pom.xml
+│   │           ├── postman
+│   │           └── sme-onboarding-service
+----
+
+For installation and customisation of the flows, just go for the READMEs inside each flow folder

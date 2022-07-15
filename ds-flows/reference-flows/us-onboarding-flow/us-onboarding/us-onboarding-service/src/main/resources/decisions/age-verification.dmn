@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1hbt7pc" name="age-verification" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.1.1">
+  <decision id="age-verification" name="Age Verification">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Age" camunda:inputVariable="age">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Age Accepted" name="age-accepted" typeRef="boolean" />
+      <rule id="DecisionRule_1va5nos">
+        <inputEntry id="UnaryTests_0o0d515" expressionLanguage="feel">
+          <text>[18..100]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o06mks">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1h2cwuq">
+        <inputEntry id="UnaryTests_1mdocsg" expressionLanguage="feel">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1voy29w">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1k2dsge">
+        <inputEntry id="UnaryTests_00ea3ql" expressionLanguage="feel">
+          <text>&gt; 100</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0g1tz16">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

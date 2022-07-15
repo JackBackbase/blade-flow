@@ -1,0 +1,46 @@
+<bb-header-ui headingType="h3" headingClasses="mb-4" heading="Documents"
+  i18n-heading="Text of the documents header@@bb.ac-task-details-viewer-widget.fileset-container.main-header">
+</bb-header-ui>
+
+<ng-container *ngIf="!(requestHttpError$ | async)">
+  <ng-container *ngIf="!readOnly; else notEditableViewTpl">
+    <bb-fileset-upload-view *ngIf="fileset$ | async as fileset" [fileset]="fileset" [uploadHandler]="uploadHandler"
+      [multiple]="true" (upload)="onUpload($event)">
+    </bb-fileset-upload-view>
+  </ng-container>
+
+  <ng-template #notEditableViewTpl>
+    <span class="d-flex align-items-center text-muted">
+      <bb-icon-ui class="mr-1" name="lock" size="sm">
+      </bb-icon-ui>
+      <small
+        i18n="Not editable fileset view text@@bb.ac-task-details-viewer-widget.fileset-container.fileset-not-editable-text">This
+        fileset
+        cannot be edited.</small>
+    </span>
+  </ng-template>
+
+  <div class="mt-1" *ngIf="!(requestLoading$ | async)">
+    <bb-fileset-view data-role="fileset-details-loaded-state" [fileset]="fileset$ | async" [readOnly]="readOnly"
+      [fileDataActions]="fileDataActions$ | async" (download)="downloadFile($event)" (delete)="deleteFile($event)"
+      (restore)="restoreFile($event)">
+    </bb-fileset-view>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="requestLoading$ | async">
+  <bb-loading-indicator-ui data-role="fileset-details-loading-state" loaderSize="lg"
+    i18n-text="Text of the loading indicator for the documents@@bb.ac-task-details-viewer-widget.fileset-container.documents-loading-text"
+    text="Loading files...">
+  </bb-loading-indicator-ui>
+</ng-container>
+
+<ng-container *ngIf="(requestHttpError$ | async) && !(requestLoading$ | async)">
+  <div data-role="fileset-details-http-error-state">
+    <bb-empty-state-ui title="Unknown Error"
+      i18n-title="@@bb.ac-task-details-viewer-widget.fileset-container.uknown-error-title"
+      subtitle="Try to reload the page or contact the system administrator" iconModifier="error-outline"
+      i18n-title="@@bb.ac-task-details-viewer-widget.fileset-container.uknown-error-subtitle" iconSize="xxl">
+    </bb-empty-state-ui>
+  </div>
+</ng-container>

@@ -1,0 +1,20 @@
+{
+  "key": "co-applicant-welcome",
+  "version": 1,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "onboarding",
+  "caseDefinitionVersion": 1,
+  "steps": [
+    {
+      "name": "fetch-co-applicant-data",
+      "entryPoint": true,
+      "exitPoint": true,
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "fetch-co-applicant-data"
+        }
+      ]
+    }
+  ]
+}

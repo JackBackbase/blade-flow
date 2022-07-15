@@ -1,0 +1,15 @@
+@import "~@backbase/backbase-theme/scss/1-variables/variables";
+@import "../styles/utilities-mixin";
+
+.color-primary {
+  color: $color-primary;
+}
+
+.checks {
+  @include icon-with-description;
+  margin-bottom: 0;
+}
+
+.description {
+  @include description-text;
+}

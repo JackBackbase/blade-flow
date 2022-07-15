@@ -1,0 +1,3 @@
+spring.datasource.url: jdbc:mysql://${CAMUNDA_MYSQL_HOST:localhost}:${CAMUNDA_MYSQL_PORT:3306}/${CAMUNDA_MYSQL_DATABASE_NAME:flow}
+spring.datasource.username: root
+spring.datasource.password: root

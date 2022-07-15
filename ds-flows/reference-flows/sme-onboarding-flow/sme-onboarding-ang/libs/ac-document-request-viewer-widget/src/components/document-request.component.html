@@ -1,0 +1,20 @@
+<div class="document-request p-3 border border-primary rounded flex-row d-flex"
+  [ngClass]="{'bg-primary shadow': actionable}">
+  <div class="mr-3">
+    <bb-avatar-ui [name]="assignee?.fullName" size="md"></bb-avatar-ui>
+  </div>
+  <div class="d-flex flex-fill flex-md-row flex-column">
+    <div class="body d-flex flex-fill flex-column">
+      <div [ngClass]="{'text-primary': !actionable}">
+        <b>{{documentRequest.documentType}}</b>
+        <span> for {{assignee?.fullName}}</span>
+      </div>
+      <small i18n="@@bb.ac-document-request-viewer-widget.document-request.deadline">Due {{documentRequest.deadline |
+        date: 'shortDate'}}</small>
+    </div>
+    <div class="status">
+      <bb-request-status-badge [text]="documentRequest.status" [status]="documentRequest.status">
+      </bb-request-status-badge>
+    </div>
+  </div>
+</div>

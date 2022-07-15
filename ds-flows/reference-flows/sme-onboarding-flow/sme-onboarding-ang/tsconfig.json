@@ -1,0 +1,34 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "target": "es5",
+    "module": "CommonJS",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@backbase/*": [
+        "libs/*/public_api.ts",
+        "node_modules/@backbase/*"
+      ]
+    },
+    "strict": true
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}

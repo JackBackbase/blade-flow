@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_115vyuc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1">
+  <bpmn:collaboration id="Collaboration_0lxohvo">
+    <bpmn:participant id="Participant_0uhz1ui" name="KYB" processRef="kyb" />
+  </bpmn:collaboration>
+  <bpmn:process id="kyb" name="KYB" isExecutable="true" camunda:versionTag="0.0.1">
+    <bpmn:sequenceFlow id="Flow_0btk1qa" sourceRef="Event_14722gu" targetRef="Event_10omn00" />
+    <bpmn:sequenceFlow id="Flow_1kepgh7" sourceRef="Event_10omn00" targetRef="Activity_05dyfqv" />
+    <bpmn:startEvent id="Event_14722gu">
+      <bpmn:outgoing>Flow_0btk1qa</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:intermediateThrowEvent id="Event_10omn00" name="Set KYB status pending">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="KYBPending" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0btk1qa</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kepgh7</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0ktdrtg" camunda:expression="${eventPublisher.publish(execution)}" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:parallelGateway id="Gateway_1ma9pxa">
+      <bpmn:incoming>Flow_04plr54</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jxis19</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1e2xy0g</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_0jxis19" sourceRef="Gateway_1ma9pxa" targetRef="Activity_08gxkif" />
+    <bpmn:sequenceFlow id="Flow_0mw7u39" sourceRef="Activity_08gxkif" targetRef="Activity_08s6j14" />
+    <bpmn:sequenceFlow id="Flow_1e2xy0g" sourceRef="Gateway_1ma9pxa" targetRef="Activity_0n332tu" />
+    <bpmn:sequenceFlow id="Flow_1yzgm1j" sourceRef="Activity_0n332tu" targetRef="Gateway_18rib3s" />
+    <bpmn:sequenceFlow id="Flow_04plr54" sourceRef="Activity_05dyfqv" targetRef="Gateway_1ma9pxa" />
+    <bpmn:callActivity id="Activity_05dyfqv" name="Company Lookup" calledElement="company-lookup">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1kepgh7</bpmn:incoming>
+      <bpmn:outgoing>Flow_04plr54</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_0ihinl8" sourceRef="Activity_08s6j14" targetRef="Gateway_0jc7k6z" />
+    <bpmn:exclusiveGateway id="Gateway_0jc7k6z" name="AML KYB required?" default="Flow_1q49mv9">
+      <bpmn:incoming>Flow_0ihinl8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0g8bxss</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1q49mv9</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:callActivity id="Activity_1hrh0nx" name="AML KYB" calledElement="aml">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="amlType">business</camunda:inputParameter>
+        </camunda:inputOutput>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0g8bxss</bpmn:incoming>
+      <bpmn:outgoing>Flow_172hpng</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:intermediateCatchEvent id="Event_1924nvv" name="AML successful">
+      <bpmn:incoming>Flow_0na5aze</bpmn:incoming>
+      <bpmn:outgoing>Flow_0s4ps63</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0vbqjiw" camunda:variableName="CASE_UPDATED">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${smeHelper.amlKybSucceeded(execution)}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateThrowEvent id="Event_09bu07s" name="AML KYB not required">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="KYBNotRequired" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1q49mv9</bpmn:incoming>
+      <bpmn:outgoing>Flow_1qn9wfd</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_08hzyfh" camunda:expression="${eventPublisher.publish(execution)}" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="Event_1olvz9h">
+      <bpmn:incoming>Flow_0wjhfx0</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0be1h01" errorRef="Error_0wlrif2" />
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_0s8pfu0">
+      <bpmn:incoming>Flow_1qn9wfd</bpmn:incoming>
+      <bpmn:incoming>Flow_0s4ps63</bpmn:incoming>
+      <bpmn:outgoing>Flow_0aaqzdb</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:intermediateThrowEvent id="Event_1cktoaf" name="KYB Complete">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="KYBComplete" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1b93cgd</bpmn:incoming>
+      <bpmn:outgoing>Flow_1h2jogw</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1mqn8wz" camunda:expression="${eventPublisher.publish(execution)}" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="Event_0xmm32l">
+      <bpmn:incoming>Flow_1h2jogw</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:eventBasedGateway id="Gateway_14ecutp">
+      <bpmn:incoming>Flow_172hpng</bpmn:incoming>
+      <bpmn:outgoing>Flow_0na5aze</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0z6t662</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="Event_135haq5" name="AML failed">
+      <bpmn:incoming>Flow_0z6t662</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wjhfx0</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0epg662" camunda:variableName="CASE_UPDATED">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${smeHelper.amlKybFailed(execution)}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:parallelGateway id="Gateway_1vku0qn">
+      <bpmn:incoming>Flow_0aaqzdb</bpmn:incoming>
+      <bpmn:incoming>Flow_1heds64</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b93cgd</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:exclusiveGateway id="Gateway_1pend97">
+      <bpmn:incoming>Flow_0836cco</bpmn:incoming>
+      <bpmn:incoming>Flow_1wf76nm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1heds64</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_18rib3s" name="Business relations required?">
+      <bpmn:incoming>Flow_1yzgm1j</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wy4bfo</bpmn:outgoing>
+      <bpmn:outgoing>Flow_040vr8l</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:eventBasedGateway id="Gateway_0wyfnyd">
+      <bpmn:incoming>Flow_07buqd7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1azgbdp</bpmn:outgoing>
+      <bpmn:outgoing>Flow_17x3uvt</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:endEvent id="Event_13514c9">
+      <bpmn:incoming>Flow_0or80yz</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1qbssmw" errorRef="Error_0klb4x0" />
+    </bpmn:endEvent>
+    <bpmn:callActivity id="Activity_01hjgbw" name="Bussiness relations" calledElement="br-process">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1wy4bfo</bpmn:incoming>
+      <bpmn:outgoing>Flow_07buqd7</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:intermediateCatchEvent id="Event_1t2lhgj" name="Status: complete">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="BusinessRelationCompletedEvent" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1azgbdp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0836cco</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0beqddn" camunda:variableName="CASE_UPDATED">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${smeHelper.businessRelationKybSucceeded(execution)}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Event_0zc2dyi" name="Status: incomplete">
+      <bpmn:incoming>Flow_17x3uvt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0or80yz</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_09yvvgo" camunda:variableName="CASE_UPDATED">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${smeHelper.businessRelationKybFailed(execution)}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateThrowEvent id="Event_0emyxn0" name="Business relations not required">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="NotRequiredBusinessRelationEvent" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_040vr8l</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wf76nm</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0r9tf2s" camunda:expression="${eventPublisher.publish(execution)}" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_0g8bxss" name="Yes" sourceRef="Gateway_0jc7k6z" targetRef="Activity_1hrh0nx">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${amlKybRequired.get("required")}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1q49mv9" name="No" sourceRef="Gateway_0jc7k6z" targetRef="Event_09bu07s" />
+    <bpmn:sequenceFlow id="Flow_172hpng" sourceRef="Activity_1hrh0nx" targetRef="Gateway_14ecutp" />
+    <bpmn:sequenceFlow id="Flow_0na5aze" sourceRef="Gateway_14ecutp" targetRef="Event_1924nvv" />
+    <bpmn:sequenceFlow id="Flow_0s4ps63" sourceRef="Event_1924nvv" targetRef="Gateway_0s8pfu0" />
+    <bpmn:sequenceFlow id="Flow_1qn9wfd" sourceRef="Event_09bu07s" targetRef="Gateway_0s8pfu0" />
+    <bpmn:sequenceFlow id="Flow_0wjhfx0" sourceRef="Event_135haq5" targetRef="Event_1olvz9h" />
+    <bpmn:sequenceFlow id="Flow_0aaqzdb" sourceRef="Gateway_0s8pfu0" targetRef="Gateway_1vku0qn" />
+    <bpmn:sequenceFlow id="Flow_1b93cgd" sourceRef="Gateway_1vku0qn" targetRef="Event_1cktoaf" />
+    <bpmn:sequenceFlow id="Flow_1h2jogw" sourceRef="Event_1cktoaf" targetRef="Event_0xmm32l" />
+    <bpmn:sequenceFlow id="Flow_0z6t662" sourceRef="Gateway_14ecutp" targetRef="Event_135haq5" />
+    <bpmn:sequenceFlow id="Flow_1heds64" sourceRef="Gateway_1pend97" targetRef="Gateway_1vku0qn" />
+    <bpmn:sequenceFlow id="Flow_0836cco" sourceRef="Event_1t2lhgj" targetRef="Gateway_1pend97" />
+    <bpmn:sequenceFlow id="Flow_1wf76nm" sourceRef="Event_0emyxn0" targetRef="Gateway_1pend97" />
+    <bpmn:sequenceFlow id="Flow_1wy4bfo" name="Yes" sourceRef="Gateway_18rib3s" targetRef="Activity_01hjgbw">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${businessRelationRequired}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_040vr8l" name="No" sourceRef="Gateway_18rib3s" targetRef="Event_0emyxn0">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!businessRelationRequired}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_07buqd7" sourceRef="Activity_01hjgbw" targetRef="Gateway_0wyfnyd" />
+    <bpmn:sequenceFlow id="Flow_1azgbdp" sourceRef="Gateway_0wyfnyd" targetRef="Event_1t2lhgj" />
+    <bpmn:sequenceFlow id="Flow_17x3uvt" sourceRef="Gateway_0wyfnyd" targetRef="Event_0zc2dyi" />
+    <bpmn:sequenceFlow id="Flow_0or80yz" sourceRef="Event_0zc2dyi" targetRef="Event_13514c9" />
+    <bpmn:serviceTask id="Activity_08s6j14" name="Save Decide on AML" camunda:expression="${smeHelper.saveUseDbaForAml(execution, amlKybRequired.get(&#34;useDba&#34;))}">
+      <bpmn:incoming>Flow_0mw7u39</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ihinl8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:businessRuleTask id="Activity_08gxkif" name="Decide on AML" camunda:resultVariable="amlKybRequired" camunda:decisionRef="decide-on-kyb" camunda:mapDecisionResult="singleResult">
+      <bpmn:incoming>Flow_0jxis19</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mw7u39</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:businessRuleTask id="Activity_0n332tu" name="Decide on business relation required" camunda:resultVariable="businessRelationRequired" camunda:decisionRef="decide-on-bizrel" camunda:mapDecisionResult="singleEntry">
+      <bpmn:incoming>Flow_1e2xy0g</bpmn:incoming>
+      <bpmn:outgoing>Flow_1yzgm1j</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+  </bpmn:process>
+  <bpmn:error id="Error_0wlrif2" name="data-gathering-failed" errorCode="data-gathering-failed" camunda:errorMessage="AML KYB failed" />
+  <bpmn:error id="Error_0klb4x0" name="data-gathering-failed" errorCode="data-gathering-failed" camunda:errorMessage="Business Relations failed" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0lxohvo">
+      <bpmndi:BPMNShape id="Participant_0uhz1ui_di" bpmnElement="Participant_0uhz1ui" isHorizontal="true">
+        <dc:Bounds x="150" y="80" width="1910" height="820" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0or80yz_di" bpmnElement="Flow_0or80yz">
+        <di:waypoint x="1418" y="740" />
+        <di:waypoint x="1502" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17x3uvt_di" bpmnElement="Flow_17x3uvt">
+        <di:waypoint x="1290" y="635" />
+        <di:waypoint x="1290" y="740" />
+        <di:waypoint x="1382" y="740" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1azgbdp_di" bpmnElement="Flow_1azgbdp">
+        <di:waypoint x="1315" y="610" />
+        <di:waypoint x="1382" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07buqd7_di" bpmnElement="Flow_07buqd7">
+        <di:waypoint x="1180" y="610" />
+        <di:waypoint x="1265" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_040vr8l_di" bpmnElement="Flow_040vr8l">
+        <di:waypoint x="990" y="635" />
+        <di:waypoint x="990" y="830" />
+        <di:waypoint x="1382" y="830" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1054" y="813" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wy4bfo_di" bpmnElement="Flow_1wy4bfo">
+        <di:waypoint x="1015" y="610" />
+        <di:waypoint x="1080" y="610" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1036" y="592" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1wf76nm_di" bpmnElement="Flow_1wf76nm">
+        <di:waypoint x="1418" y="830" />
+        <di:waypoint x="1570" y="830" />
+        <di:waypoint x="1570" y="635" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0836cco_di" bpmnElement="Flow_0836cco">
+        <di:waypoint x="1418" y="610" />
+        <di:waypoint x="1545" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1heds64_di" bpmnElement="Flow_1heds64">
+        <di:waypoint x="1595" y="610" />
+        <di:waypoint x="1690" y="610" />
+        <di:waypoint x="1690" y="425" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z6t662_di" bpmnElement="Flow_0z6t662">
+        <di:waypoint x="1290" y="375" />
+        <di:waypoint x="1290" y="250" />
+        <di:waypoint x="1382" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1h2jogw_di" bpmnElement="Flow_1h2jogw">
+        <di:waypoint x="1818" y="400" />
+        <di:waypoint x="1882" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1b93cgd_di" bpmnElement="Flow_1b93cgd">
+        <di:waypoint x="1715" y="400" />
+        <di:waypoint x="1782" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0aaqzdb_di" bpmnElement="Flow_0aaqzdb">
+        <di:waypoint x="1595" y="400" />
+        <di:waypoint x="1665" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wjhfx0_di" bpmnElement="Flow_0wjhfx0">
+        <di:waypoint x="1418" y="250" />
+        <di:waypoint x="1502" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qn9wfd_di" bpmnElement="Flow_1qn9wfd">
+        <di:waypoint x="1418" y="140" />
+        <di:waypoint x="1570" y="140" />
+        <di:waypoint x="1570" y="375" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0s4ps63_di" bpmnElement="Flow_0s4ps63">
+        <di:waypoint x="1418" y="400" />
+        <di:waypoint x="1545" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0na5aze_di" bpmnElement="Flow_0na5aze">
+        <di:waypoint x="1315" y="400" />
+        <di:waypoint x="1382" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_172hpng_di" bpmnElement="Flow_172hpng">
+        <di:waypoint x="1180" y="400" />
+        <di:waypoint x="1265" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q49mv9_di" bpmnElement="Flow_1q49mv9">
+        <di:waypoint x="990" y="375" />
+        <di:waypoint x="990" y="140" />
+        <di:waypoint x="1382" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1040" y="113" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g8bxss_di" bpmnElement="Flow_0g8bxss">
+        <di:waypoint x="1015" y="400" />
+        <di:waypoint x="1080" y="400" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1039" y="382" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ihinl8_di" bpmnElement="Flow_0ihinl8">
+        <di:waypoint x="921" y="400" />
+        <di:waypoint x="965" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04plr54_di" bpmnElement="Flow_04plr54">
+        <di:waypoint x="520" y="400" />
+        <di:waypoint x="585" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yzgm1j_di" bpmnElement="Flow_1yzgm1j">
+        <di:waypoint x="778" y="610" />
+        <di:waypoint x="965" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1e2xy0g_di" bpmnElement="Flow_1e2xy0g">
+        <di:waypoint x="610" y="425" />
+        <di:waypoint x="610" y="610" />
+        <di:waypoint x="678" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mw7u39_di" bpmnElement="Flow_0mw7u39">
+        <di:waypoint x="778" y="400" />
+        <di:waypoint x="821" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jxis19_di" bpmnElement="Flow_0jxis19">
+        <di:waypoint x="635" y="400" />
+        <di:waypoint x="678" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kepgh7_di" bpmnElement="Flow_1kepgh7">
+        <di:waypoint x="348" y="400" />
+        <di:waypoint x="420" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0btk1qa_di" bpmnElement="Flow_0btk1qa">
+        <di:waypoint x="248" y="400" />
+        <di:waypoint x="312" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_14722gu_di" bpmnElement="Event_14722gu">
+        <dc:Bounds x="212" y="382" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1smlzm3_di" bpmnElement="Event_10omn00">
+        <dc:Bounds x="312" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="294" y="425" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0situjc_di" bpmnElement="Gateway_1ma9pxa">
+        <dc:Bounds x="585" y="375" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16c3vbh_di" bpmnElement="Activity_05dyfqv">
+        <dc:Bounds x="420" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0jc7k6z_di" bpmnElement="Gateway_0jc7k6z" isMarkerVisible="true">
+        <dc:Bounds x="965" y="375" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="966" y="435" width="48" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16m9i2p_di" bpmnElement="Activity_1hrh0nx">
+        <dc:Bounds x="1080" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0rpin6z_di" bpmnElement="Event_1924nvv">
+        <dc:Bounds x="1382" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1363" y="425" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ak2y31_di" bpmnElement="Event_09bu07s">
+        <dc:Bounds x="1382" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1368" y="165" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0dbz64n_di" bpmnElement="Event_1olvz9h">
+        <dc:Bounds x="1502" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0s8pfu0_di" bpmnElement="Gateway_0s8pfu0" isMarkerVisible="true">
+        <dc:Bounds x="1545" y="375" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1206" y="245" width="48" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1w2tmj3_di" bpmnElement="Event_1cktoaf">
+        <dc:Bounds x="1782" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1764" y="425" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xmm32l_di" bpmnElement="Event_0xmm32l">
+        <dc:Bounds x="1882" y="382" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_06wfv00_di" bpmnElement="Gateway_14ecutp">
+        <dc:Bounds x="1265" y="375" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1dfxnnw_di" bpmnElement="Event_135haq5">
+        <dc:Bounds x="1382" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1375" y="275" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1rjkp6q_di" bpmnElement="Gateway_1vku0qn">
+        <dc:Bounds x="1665" y="375" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1pend97_di" bpmnElement="Gateway_1pend97" isMarkerVisible="true">
+        <dc:Bounds x="1545" y="585" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_18rib3s_di" bpmnElement="Gateway_18rib3s" isMarkerVisible="true">
+        <dc:Bounds x="965" y="585" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="947" y="555" width="90" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_056fbm0_di" bpmnElement="Gateway_0wyfnyd">
+        <dc:Bounds x="1265" y="585" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0cfymu7_di" bpmnElement="Event_13514c9">
+        <dc:Bounds x="1502" y="722" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1mdf8wj_di" bpmnElement="Activity_01hjgbw">
+        <dc:Bounds x="1080" y="570" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0h13k6n_di" bpmnElement="Event_1t2lhgj">
+        <dc:Bounds x="1382" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1362" y="635" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_19xz4k6_di" bpmnElement="Event_0zc2dyi">
+        <dc:Bounds x="1382" y="722" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1373" y="765" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0emyxn0_di" bpmnElement="Event_0emyxn0">
+        <dc:Bounds x="1382" y="812" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1360" y="855" width="90" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xpm7jd_di" bpmnElement="Activity_08s6j14">
+        <dc:Bounds x="821" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xvko1i_di" bpmnElement="Activity_08gxkif">
+        <dc:Bounds x="678" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0n332tu_di" bpmnElement="Activity_0n332tu">
+        <dc:Bounds x="678" y="570" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

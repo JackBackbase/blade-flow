@@ -1,0 +1,83 @@
+{
+  "key": "sme-application-center",
+  "version": 9,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "sme",
+  "caseDefinitionVersion": 19,
+  "steps": [
+    {
+      "name": "application-center-init",
+      "entryPoint": true,
+      "handlers": [
+        {
+          "name": "application-center-init",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "otp-verification"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "otp-verification",
+      "handlers": [
+        {
+          "name": "available-otp-channels"
+        },
+        {
+          "name": "request-otp"
+        },
+        {
+          "name": "fetch-otp-email"
+        },
+        {
+          "name": "verify-otp",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "sme-application-center"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sme-application-center",
+      "handlers": [
+        {
+          "name": "send-registrar-details"
+        },
+        {
+          "name": "load-document-requests"
+        },
+        {
+          "name": "load-document-request"
+        },
+        {
+          "name": "upload-document"
+        },
+        {
+          "name": "download-document"
+        },
+        {
+          "name": "complete-task"
+        },
+        {
+          "name": "delete-temp-document"
+        },
+        {
+          "name": "mark-document-for-deletion"
+        },
+        {
+          "name": "get-milestones"
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalog>
+  <widget>
+    <name>bb-ds-landing-journey-ang</name>
+    <properties>
+      <property name="classId">
+        <value>DsLandingJourneyAngComponent</value>
+      </property>
+      <property name="src">
+        <value>$(itemRoot)/index.html</value>
+      </property>
+      <property name="render.requires">
+        <value>render-bb-widget-3</value>
+      </property>
+      <property name="title" label="Title" readonly="true" viewHint="admin,designModeOnly">
+        <value type="string">DsLandingJourneyAng Widget</value>
+      </property>
+      <property name="thumbnailUrl">
+        <value>$(itemRoot)/icon.png</value>
+      </property>
+      <property name="label">
+        <value>Angular DsLandingJourneyAng Widget</value>
+      </property>
+      <property name="textDocument" label="Response Text" viewHint="role=manager,input=content-ref:richtext,designModeOnly" type="contentref">
+        <value></value>
+      </property>
+      <property name="linkNavigateTo">
+        <value type="string">/sme-onboarding-application-center#/application-center-init</value>
+      </property>
+    </properties>
+  </widget>
+</catalog>

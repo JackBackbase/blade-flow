@@ -1,0 +1,360 @@
+{
+  "extends": "container-bb-manageable-area",
+  "children": [
+    {
+      "extends": "bb-us-journey-ang",
+      "area": "0",
+      "children": [
+        {
+          "classId": "FlowInteractionContainerComponent",
+          "deploymentPath": "interactions",
+          "interactionName": "origination",
+          "apiVersion": "v2",
+          "servicePath": "us-onboarding/client-api/interaction",
+          "children": [
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "init",
+              "backgroundImageL": "",
+              "backgroundImageM":"",
+              "backgroundImageS": "",
+              "interactionName": "origination",
+              "children": [
+                {
+                  "classId": "OnoLoadingWidgetAngComponent",
+                  "fetchCustomer": true
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "select-products",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-savingaccount.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-savingaccount.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "interactionName": "origination",
+              "children": [
+                {
+                  "classId": "ProductSelectionJourneyAngComponent",
+                  "query": "{}",
+                  "product1": {
+                    "kind": "content",
+                    "path": "onboarding-us/product-selection/premium-savings.png",
+                    "repo": "shared"
+                  },
+                  "product2": {
+                    "kind": "content",
+                    "path": "onboarding-us/product-selection/online-saving.png",
+                    "repo": "shared"
+                  },
+                  "product3": {
+                    "kind": "content",
+                    "path": "onboarding-us/product-selection/cds.png",
+                    "repo": "shared"
+                  }
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "terms-and-conditions",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-step2.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-step2.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "interactionName": "origination",
+              "children": [
+                {
+                  "classId": "OnoTacJourneyAngComponent",
+                  "modalStepImage1": {
+                    "kind": "content",
+                    "path": "img-walkthrough-1.jpg",
+                    "repo": "default"
+                  },
+                  "modalStepImage2": {
+                    "kind": "content",
+                    "path": "img-walkthrough-2.jpg",
+                    "repo": "default"
+                  },
+                  "modalStepImage3": {
+                    "kind": "content",
+                    "path": "img-walkthrough-3.jpg",
+                    "repo": "default"
+                  },
+                  "tncTermsConditionsLinkText": "Terms and Conditions",
+                  "tncTermsConditionsLinkUrl": "https://www.backbase.com/",
+                  "tncPrivacyStatementLinkText": "Privacy Statement",
+                  "tncPrivacyStatementLinkUrl": "https://www.backbase.com/"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "address",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-step2.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-step2.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "interactionName": "origination",
+              "children": [
+                {
+                  "classId": "OnoAddressJourneyAngComponent"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "co-applicant",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-step2.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-step2.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "interactionName": "origination",
+              "children": [
+                {
+                  "classId": "OnoAddCoApplicantJourneyAngComponent"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "co-applicant-data",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-step1.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-step1.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "interactionName": "origination",
+              "children": [
+                {
+                  "classId": "OnoAnchorJourneyAngComponent",
+                  "isCoApplicant": true
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "co-applicant-address",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-step2.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-step2.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "interactionName": "origination",
+              "children": [
+                {
+                  "classId": "OnoAddressJourneyAngComponent",
+                  "isCoApplicant": true
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "kyc",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-step6.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-step6.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "interactionName": "origination",
+              "children": [
+                {
+                  "classId": "OnoKycJourneyAngComponent"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "title": "Response - OnoStepContainerAng Container",
+              "route": "successfully-done",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-onboarded.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-onboarded.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "notifyScreen": true,
+              "children": [
+                {
+                  "classId": "OnoResponseJourneyAngComponent",
+                  "primaryButtonAction": "go-to-my-account",
+                  "primaryButtonLabel": "Go to my account",
+                  "textDocument": {
+                    "kind": "content",
+                    "path": "documents/journey-successfully-done-message.json",
+                    "repo": "default"
+                  }
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "title": "Response - OnoStepContainerAng Container",
+              "route": "successfully-done-co-applicant",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-onboarded.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-onboarded.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "notifyScreen": true,
+              "children": [
+                {
+                  "classId": "OnoResponseJourneyAngComponent",
+                  "primaryButtonAction": "go-to-my-account",
+                  "primaryButtonLabel": "Ok, keep me posted!",
+                  "textDocument": {
+                    "kind": "content",
+                    "path": "documents/journey-successfully-done-co-applicant-message.json",
+                    "repo": "default"
+                  }
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "title": "Response - OnoStepContainerAng Container",
+              "route": "in-review-done",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-inreview.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-inreview.jpg",
+                "repo": "default"
+              },
+              "backgroundImageS": "",
+              "notifyScreen": true,
+              "children": [
+                {
+                  "classId": "OnoResponseJourneyAngComponent",
+                  "primaryButtonAction": "got-it",
+                  "primaryButtonLabel": "Got it",
+                  "textDocument": {
+                    "kind": "content",
+                    "path": "documents/journey-in-review-done-message.json",
+                    "repo": "default"
+                  }
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "title": "Response Retry - OnoStepContainerAng Container",
+              "route": "retry",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-retry.png",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-retry.png",
+                "repo": "default"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "img-small-retry.png",
+                "repo": "default"
+              },
+              "notifyScreen": true,
+              "children": [
+                {
+                  "classId": "OnoResponseRetryJourneyAngComponent",
+                  "textDocument": {
+                    "kind": "content",
+                    "path": "documents/journey-retry-message.json",
+                    "repo": "default"
+                  }
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "title": "Response Declined - OnoStepContainerAng Container",
+              "route": "declined",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-declined.jpg",
+                "repo": "default"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-medium-declined.jpg",
+                "repo": "default"
+              },
+              "notifyScreen": true,
+              "children": [
+                {
+                  "classId": "OnoResponseDeclinedJourneyAngComponent",
+                  "customerServiceUrl": "",
+                  "localBranchUrl": "",
+                  "productsListhUrl": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

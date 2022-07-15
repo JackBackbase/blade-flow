@@ -1,0 +1,14 @@
+.info-box {
+    background: rgba(0, 0, 0, .04);
+    margin: -2.1em 0 2.1em;
+    font-size: 95%;
+
+    p:last-child {
+        margin-bottom: 0;
+    }
+}
+
+bb-idt-view-component::ng-deep .card-img-left {
+    border-top-left-radius: 1rem !important;
+    border-bottom-left-radius: 1rem !important;
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0kqighg" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <decision id="fileset" name="Decide on Fileset" camunda:versionTag="0.3.0">
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="InputClause_0906c4s" label="Document Type" camunda:inputVariable="documentType">
+        <inputExpression id="LiteralExpression_0fpqvm3" typeRef="string" expressionLanguage="juel">
+          <text>${smeHelper.getDocumentType(variableContext)}</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Fileset Name" name="filesetName" typeRef="string">
+        <outputValues id="UnaryTests_19a0gcj">
+          <text>"Review process 1","Review process 2","Review process 3"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_13j535z" label="Max Number Of Files" name="maxNrOfFiles" typeRef="integer" />
+      <output id="OutputClause_06wzps9" label="Allowed Media Types" name="allowedMediaTypes" typeRef="string" />
+      <rule id="DecisionRule_01qxov8">
+        <inputEntry id="UnaryTests_12unhin">
+          <text>"DBA document"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0u5dnhc">
+          <text>"DBA document"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1jzbqyp">
+          <text>3</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ua90hm">
+          <text>"application/pdf,image/png,image/jpg,image/jpeg"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0pgs111">
+        <inputEntry id="UnaryTests_1tihxjv">
+          <text>"Business License"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0hvfhcl">
+          <text>"Business License"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05z79g6">
+          <text>3</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0f8x0tv">
+          <text>"application/pdf,image/png,image/jpg,image/jpeg"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0y6ktb1">
+        <inputEntry id="UnaryTests_0qrr3u0">
+          <text>"Business Structure"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1jj8j6g">
+          <text>"Business Structure"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0n6vxzd">
+          <text>3</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0529vli">
+          <text>"application/pdf,image/png,image/jpg,image/jpeg"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1mg4yy9">
+      <dmndi:DMNShape id="DMNShape_1hl7yxb" dmnElementRef="fileset">
+        <dc:Bounds height="80" width="180" x="460" y="130" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

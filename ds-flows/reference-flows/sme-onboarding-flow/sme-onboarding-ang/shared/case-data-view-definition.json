@@ -1,0 +1,35 @@
+{
+  "$schema": "./$schema/SC_case-data-view-def.json",
+  "fieldsets": [
+    {
+      "title": "Personal Info",
+      "fields": [
+        {
+          "title": "First name",
+          "viewHint": "string",
+          "pointer": "/customer/firstName"
+        },
+        {
+          "title": "Last name",
+          "viewHint": "string",
+          "pointer": "/customer/lastName"
+        },
+        {
+          "title": "Full Name",
+          "viewHint": "string",
+          "pointer": "/customer/fullName"
+        },
+        {
+          "title": "Email",
+          "viewHint": "string",
+          "pointer": "/customer/emailAddress"
+        },
+        {
+          "title": "Phone number",
+          "viewHint": "string",
+          "pointer": "/customer/phoneNumber"
+        }
+      ]
+    }
+  ]
+}

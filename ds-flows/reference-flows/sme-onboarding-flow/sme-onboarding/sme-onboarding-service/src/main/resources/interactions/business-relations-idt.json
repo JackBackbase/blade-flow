@@ -1,0 +1,189 @@
+{
+  "key": "business-relations-idt",
+  "version": 7,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "sme",
+  "caseDefinitionVersion": 19,
+  "steps": [
+    {
+      "name": "relation-type",
+      "entryPoint": true,
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "select-relation-type",
+          "transitions": [
+            {
+              "condition": "errors.size() == 0 and actionResult.body.relationType.equals('OWNER')",
+              "step": "update-current-user-owner-step"
+            },
+            {
+              "condition": "errors.size() == 0 and actionResult.body.relationType.equals('CONTROL_PERSON')",
+              "step": "update-current-user-control-person-step"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "update-current-user-owner-step",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "true",
+          "step": "relation-type"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-roles"
+        },
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "update-current-user-owner",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-owners"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "update-current-user-control-person-step",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "true",
+          "step": "relation-type"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-roles"
+        },
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "update-current-user-control-person",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-owners"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-owners",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "caseData.businessRelations.businessRelationType.name().equals('OWNER')",
+          "step": "update-current-user-owner-step"
+        },
+        {
+          "condition": "caseData.businessRelations.businessRelationType.name().equals('CONTROL_PERSON')",
+          "step": "update-current-user-control-person-step"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-roles"
+        },
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "update-owner"
+        },
+        {
+          "name": "delete-business-person"
+        },
+        {
+          "name": "complete-business-owners-step",
+          "transitions": [
+            {
+              "condition": "errors.size() == 0 and actionResult.body.relationType.equals('OWNER')",
+              "step": "control-persons"
+            },
+            {
+              "condition": "errors.size() == 0 and actionResult.body.relationType.equals('CONTROL_PERSON')",
+              "step": "business-summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "control-persons",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "true",
+          "step": "business-owners"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-roles"
+        },
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "update-control-person"
+        },
+        {
+          "name": "delete-business-person"
+        },
+        {
+          "name": "select-control-person",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "business-summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "business-summary",
+      "enabled": "true",
+      "back": [
+        {
+          "condition": "caseData.businessRelations.businessRelationType.name().equals('OWNER')",
+          "step": "control-persons"
+        },
+        {
+          "condition": "caseData.businessRelations.businessRelationType.name().equals('CONTROL_PERSON')",
+          "step": "business-owners"
+        }
+      ],
+      "handlers": [
+        {
+          "name": "get-business-persons"
+        },
+        {
+          "name": "complete-summary-step",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

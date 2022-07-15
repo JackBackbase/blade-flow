@@ -1,0 +1,15 @@
+@import "~@backbase/backbase-theme/scss/1-variables/variables";
+
+@mixin icon-with-description {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: $spacer-sm;
+  align-items: center;
+  margin: $spacer-xl 0;
+}
+
+@mixin description-text {
+  font-size: $font-size-subtitle;
+  color: $color-neutral-dark;
+  margin: 0;
+}

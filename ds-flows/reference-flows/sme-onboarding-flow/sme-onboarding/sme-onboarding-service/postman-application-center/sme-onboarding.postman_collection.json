@@ -1,0 +1,619 @@
+{
+    "info" : {
+        "_postman_id" : "462a666d-4eba-4f49-8a56-68df941350f9",
+        "name" : "SME Application Center",
+        "schema" : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item" : [
+        {
+            "name" : "Sole Prop Onboarding",
+            "item" : [
+                {
+                    "name" : "Step 1: Application Center Init",
+                    "item" : [
+                        {
+                            "name" : "1.1. Init Case",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "pm.test(\"Property is there\", function() {",
+                                            "    var body = JSON.parse(responseBody);",
+                                            "",
+                                            "    pm.response.to.have.status(200);",
+                                            "    pm.expect(body).to.have.property(\"interactionId\");",
+                                            "});",
+                                            "",
+                                            "var response = JSON.parse(responseBody);",
+                                            "postman.setEnvironmentVariable(\"interaction-id\", response.interactionId);",
+                                            ""
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{   \"payload\" : { \"id\":\"abc\"\n }\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/application-center-init",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "application-center-init"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ],
+                    "event" : [
+                        {
+                            "listen" : "prerequest",
+                            "script" : {
+                                "type" : "text/javascript",
+                                "exec" : [
+                                    ""
+                                ]
+                            }
+                        },
+                        {
+                            "listen" : "test",
+                            "script" : {
+                                "type" : "text/javascript",
+                                "exec" : [
+                                    ""
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 2: OTP Verification",
+                    "event" : [
+                        {
+                            "listen" : "test",
+                            "script" : {
+                                "exec" : [
+                                    "pm.test(\"Property is there\", function() {",
+                                    "    var body = JSON.parse(responseBody);",
+                                    "",
+                                    "    pm.response.to.have.status(200);",
+                                    "    pm.expect(body).to.have.property(\"interactionId\");",
+                                    "});",
+                                    "",
+                                    "var response = JSON.parse(responseBody);",
+                                    "postman.setEnvironmentVariable(\"interaction-id\", response.interactionId);",
+                                    ""
+                                ],
+                                "type" : "text/javascript"
+                            }
+                        }
+                    ],
+                    "item" : [
+                        {
+                            "name" : "2.1 Request OTP",
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"_comment\": \"The payload can either contain phoneNumber or email, not both. The channel is an enum. SMS and EMAIL for now.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"+123456789\",\n\t\t\"channel\": \"SMS\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/request-otp",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "request-otp"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "2.2 Verify OTP",
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"_comment\": \"Setting channel to SMS or EMAIL will set one of those fields to verified in caseData.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"recipient\": \"+123456789\",\n\t\t\"channel\": \"SMS\",\n\t\t\"otp\": \"123456\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/verify-otp",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "verify-otp"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "Step 3: Application Center",
+                    "item" : [
+                        {
+                            "name" : "3.0. Registrar Details",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "pm.test(\"Property is there\", function () {",
+                                            "    var body = JSON.parse(responseBody);",
+                                            "",
+                                            "    pm.response.to.have.status(200);",
+                                            "    pm.expect(body).to.have.property(\"body.documentRequests[0].groupId\");",
+                                            "    pm.expect(body).to.have.property(\"body.documentRequests[0].internalId\");",
+                                            "});",
+                                            "",
+                                            "var response = JSON.parse(responseBody);",
+                                            "postman.setEnvironmentVariable(\"group-id\", response.body.documentRequests[0].groupId);",
+                                            "postman.setEnvironmentVariable(\"internal-id\", response.body.documentRequests[0].internalId);",
+                                            ""
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\" : {\n   \n}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/send-registrar-details",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "send-registrar-details"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.1. Load document request list",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "pm.test(\"Property is there\", function () {",
+                                            "    var body = JSON.parse(responseBody);",
+                                            "",
+                                            "    pm.response.to.have.status(200);",
+                                            "    pm.expect(body).to.have.property(\"body.documentRequests[0].groupId\");",
+                                            "    pm.expect(body).to.have.property(\"body.documentRequests[0].internalId\");",
+                                            "});",
+                                            "",
+                                            "var response = JSON.parse(responseBody);",
+                                            "postman.setEnvironmentVariable(\"group-id\", response.body.documentRequests[0].groupId);",
+                                            "postman.setEnvironmentVariable(\"internal-id\", response.body.documentRequests[0].internalId);",
+                                            ""
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\"}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/load-document-requests",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "load-document-requests"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.2. Load document request data",
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n    \"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"tempGroupId\": \"{{group-id}}\",\n\t\t\"internalId\": \"{{internal-id}}\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/load-document-request",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "load-document-request"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.3. Upload document",
+                            "event" : [
+                                {
+                                    "listen" : "test",
+                                    "script" : {
+                                        "exec" : [
+                                            "var response = pm.response.json();",
+                                            "pm.environment.set(\"file-id\", response.body.files[0].id);"
+                                        ],
+                                        "type" : "text/javascript"
+                                    }
+                                }
+                            ],
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "value" : "anonymousUserId={{currentUser}}",
+                                        "type" : "text"
+                                    },
+                                    {
+                                        "key" : "Content-Type",
+                                        "value" : "multipart/form-data",
+                                        "type" : "text"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "formdata",
+                                    "formdata" : [
+                                        {
+                                            "key" : "interaction",
+                                            "value" : "{\"interactionId\": \"{{interaction-id}}\",\"payload\": {\"tempGroupId\": \"{{group-id}}\",\"internalId\": \"{{internal-id}}\"}}",
+                                            "contentType" : "application/json",
+                                            "type" : "text"
+                                        },
+                                        {
+                                            "key" : "files",
+                                            "contentType" : "image/jpeg",
+                                            "type" : "file",
+                                            "src" : "/Users/mohammadf/Desktop/1jar.jpg"
+                                        }
+                                    ],
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/files/upload-document",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "files",
+                                        "upload-document"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.4. Delete temp document",
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"tempGroupId\": \"{{group-id}}\",\n\t\t\"internalId\": \"{{internal-id}}\",\n        \"fileId\": \"{{file-id}}\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/delete-temp-document",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "delete-temp-document"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.5. Mark document for deletion",
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"tempGroupId\": \"{{group-id}}\",\n\t\t\"internalId\": \"{{internal-id}}\",\n        \"fileId\": \"{{file-id}}\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/mark-document-for-deletion",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "mark-document-for-deletion"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.6. Download document",
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"tempGroupId\": \"{{group-id}}\",\n\t\t\"internalId\": \"{{internal-id}}\",\n        \"fileId\": \"{{file-id}}\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/download-document",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "download-document"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.7. Complete task",
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"tempGroupId\": \"{{group-id}}\",\n\t\t\"internalId\": \"{{internal-id}}\",\n        \"comment\": \"Some comment\"\n\t}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/complete-task",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "complete-task"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        },
+                        {
+                            "name" : "3.8. Get Milestones",
+                            "request" : {
+                                "method" : "POST",
+                                "header" : [
+                                    {
+                                        "key" : "Cookie",
+                                        "type" : "text",
+                                        "value" : "anonymousUserId={{currentUser}}"
+                                    }
+                                ],
+                                "body" : {
+                                    "mode" : "raw",
+                                    "raw" : "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"epic\": \"MAIN\"}\n}",
+                                    "options" : {
+                                        "raw" : {
+                                            "language" : "json"
+                                        }
+                                    }
+                                },
+                                "url" : {
+                                    "raw" : "{{sme-base-url}}/client-api/interaction/v2/interactions/{{interaction-sme-onboarding}}/actions/get-milestones",
+                                    "host" : [
+                                        "{{sme-base-url}}"
+                                    ],
+                                    "path" : [
+                                        "client-api",
+                                        "interaction",
+                                        "v2",
+                                        "interactions",
+                                        "{{interaction-sme-onboarding}}",
+                                        "actions",
+                                        "get-milestones"
+                                    ]
+                                }
+                            },
+                            "response" : [ ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

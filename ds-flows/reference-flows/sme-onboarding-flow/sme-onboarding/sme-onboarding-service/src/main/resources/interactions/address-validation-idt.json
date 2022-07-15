@@ -1,0 +1,34 @@
+{
+  "key": "address-validation-idt",
+  "version": 6,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "sme",
+  "caseDefinitionVersion": 19,
+  "steps": [
+    {
+      "name": "sme-onboarding-personal-address",
+      "entryPoint": true,
+      "handlers": [
+        {
+          "name": "validate-address"
+        },
+        {
+          "name": "fetch-address"
+        },
+        {
+          "name": "submit-address",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "done",
+      "exitPoint": true
+    }
+  ]
+}

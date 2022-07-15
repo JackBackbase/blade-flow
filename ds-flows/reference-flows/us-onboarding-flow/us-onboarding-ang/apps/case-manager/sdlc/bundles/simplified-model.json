@@ -1,0 +1,1393 @@
+{
+  "name": "container-bb-manageable-area-_-ocjv8w",
+  "properties": {
+    "title": "Manageable Area",
+    "autoExtend": true
+  },
+  "children": [
+    {
+      "name": "bb-us-case-manager-ang-_-zs0gb5",
+      "properties": {
+        "title": "Case Manager Angular App Container",
+        "render.requires": "render-bb-ssr",
+        "render.strategy": "render-bb-widget-3",
+        "versionOfDependencies": "{\"case-management-ui-ang\":\"3.1.1\",\"cm-aml-results-widget\":\"0.3.1\",\"ds-shared-ang\":\"2.3.1\",\"flow-interaction-openapi-data\":\"2.0.20\",\"flow-interaction-sdk-ang\":\"3.0.0\",\"foundation-ang\":\"6.23.1\",\"ono-journey-collection-ang\":\"0.5.0\",\"ui-ang\":\"6.51.0\",\"universal-ang\":\"7.2.4\"}"
+      },
+      "children": [
+        {
+          "name": "bb-layout-container-flex-ang-_-tmu2yn",
+          "properties": {
+            "classId": "LayoutContainerComponent",
+            "title": "Universal Layout Container",
+            "contentColumnClasses": "",
+            "contentLayout": "single",
+            "layoutType": "fluid",
+            "navigationType": "vertical",
+            "render.requires": "render-bb-widget-3",
+            "showHeaderSection": "true",
+            "sidebarColumnClasses": "",
+            "version": "5.0.2",
+            "viewType": "PageLayout"
+          },
+          "children": [
+            {
+              "name": "bb-panel-container-ang-_-jrl8a",
+              "properties": {
+                "classId": "PanelContainerComponent",
+                "title": "Branding Area",
+                "appearance": "none",
+                "cssClasses": "d-block",
+                "navIcon": "",
+                "render.requires": "render-bb-widget-3",
+                "version": "5.0.1"
+              },
+              "children": []
+            },
+            {
+              "name": "bb-panel-container-ang-_-x8vg4b",
+              "properties": {
+                "classId": "PanelContainerComponent",
+                "title": "Right Topbar Area",
+                "appearance": "none",
+                "cssClasses": "d-block",
+                "navIcon": "",
+                "render.requires": "render-bb-widget-3",
+                "version": "5.0.1"
+              },
+              "children": [
+                {
+                  "name": "bb-logout-widget-ang-_-dt8g4h",
+                  "properties": {
+                    "classId": "CmLogoutWidgetComponent",
+                    "title": "LogoutWidget (Case Manager)",
+                    "render.requires": "render-bb-widget-3",
+                    "serviceUrl": "us-onboarding",
+                    "version": "2.0.3"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-panel-container-ang-_-54kca",
+              "properties": {
+                "classId": "PanelContainerComponent",
+                "title": "Sidebar Area",
+                "appearance": "none",
+                "cssClasses": "d-block",
+                "navIcon": "",
+                "render.requires": "render-bb-widget-3",
+                "version": "5.0.1"
+              },
+              "children": [
+                {
+                  "name": "bb-navigation-spa-widget-ang-_-g7yn68",
+                  "properties": {
+                    "classId": "NavigationSpaWidgetComponent",
+                    "title": "Universal Navigation SPA Widget",
+                    "displayDropdown": "true",
+                    "dividers": "",
+                    "header": "",
+                    "isSticky": "false",
+                    "navigationType": "vertical",
+                    "noOfVisibleLinks": "3",
+                    "render.requires": "render-bb-widget-3",
+                    "sourceRoutesName": "bb-deck-container-ang-_-5953cf11f91a",
+                    "version": "5.0.1"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-panel-container-ang-_-ux9pbp",
+              "properties": {
+                "classId": "PanelContainerComponent",
+                "title": "Header Area",
+                "appearance": "none",
+                "cssClasses": "d-block",
+                "navIcon": "",
+                "render.requires": "render-bb-widget-3",
+                "version": "5.0.1"
+              },
+              "children": []
+            },
+            {
+              "name": "bb-panel-container-ang-_-unjj6l",
+              "properties": {
+                "classId": "PanelContainerComponent",
+                "title": "Main Content Area",
+                "appearance": "none",
+                "cssClasses": "d-block",
+                "navIcon": "",
+                "render.requires": "render-bb-widget-3",
+                "version": "5.0.1"
+              },
+              "children": [
+                {
+                  "name": "bb-deck-container-ang-_-5953cf11f91a",
+                  "properties": {
+                    "classId": "DeckContainerComponent",
+                    "title": "Deck Container",
+                    "ariaLabel": "",
+                    "disableDefault": "false",
+                    "outletName": "",
+                    "render.requires": "render-bb-widget-3",
+                    "role": "",
+                    "version": "5.0.1"
+                  },
+                  "children": [
+                    {
+                      "name": "bb-panel-container-ang-_-e6332dbfb2d6",
+                      "properties": {
+                        "classId": "PanelContainerComponent",
+                        "title": "Dashboard",
+                        "route": "dashboard",
+                        "appearance": "none",
+                        "cssClasses": "",
+                        "navIcon": "dashboard",
+                        "render.requires": "render-bb-widget-3",
+                        "version": "5.0.1"
+                      },
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-zvhqm6",
+                          "properties": {
+                            "classId": "CmPlatformContainerComponent",
+                            "title": "PlatformContainer (Case Manager)",
+                            "bb.caseData.servicePath": "/us-onboarding",
+                            "bb.collections.servicePath": "",
+                            "bb.iam.servicePath": "/us-onboarding",
+                            "bb.interaction.apiVersion": "v2",
+                            "bb.interaction.deploymentPath": "interactions",
+                            "bb.interaction.servicePath": "/us-onboarding/client-api/interaction",
+                            "bb.journeyName": "onboarding",
+                            "bb.process.servicePath": "/us-onboarding",
+                            "render.requires": "render-bb-widget-3",
+                            "version": "3.0.3"
+                          },
+                          "children": [
+                            {
+                              "name": "bb-panel-container-ang-_-dhznn0e",
+                              "properties": {
+                                "classId": "PanelContainerComponent",
+                                "title": "Panel Container",
+                                "appearance": "none",
+                                "cssClasses": "d-block",
+                                "navIcon": "",
+                                "render.requires": "render-bb-widget-3",
+                                "version": "5.0.1"
+                              },
+                              "children": [
+                                {
+                                  "name": "bb-header-widget-ang-_-ul1b0a",
+                                  "properties": {
+                                    "classId": "CmHeaderWidgetComponent",
+                                    "title": "HeaderWidget (Case Manager)",
+                                    "render.requires": "render-bb-widget-3",
+                                    "subtitle": "",
+                                    "version": "3.0.3"
+                                  }
+                                },
+                                {
+                                  "name": "bb-column-container-ang-_-ypjch7",
+                                  "properties": {
+                                    "classId": "ColumnContainerComponent",
+                                    "title": "Column Container",
+                                    "containerClasses": "container-fluid d-block",
+                                    "render.requires": "render-bb-widget-3",
+                                    "version": "5.0.1"
+                                  },
+                                  "children": [
+                                    {
+                                      "name": "bb-panel-container-ang-_-muarha",
+                                      "properties": {
+                                        "classId": "PanelContainerComponent",
+                                        "title": "Column 1",
+                                        "appearance": "none",
+                                        "columnClass": "col-8",
+                                        "cssClasses": "d-block",
+                                        "navIcon": "",
+                                        "render.requires": "render-bb-widget-3",
+                                        "version": "5.0.1"
+                                      },
+                                      "children": [
+                                        {
+                                          "name": "bb-user-dashboard-widget-ang-_-r87p1j",
+                                          "properties": {
+                                            "classId": "CmUserDashboardWidgetComponent",
+                                            "title": "UserDashboardWidget (Case Manager)",
+                                            "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-0f792c190cb9",
+                                            "output.taskInstanceId": "navigation:bb-panel-container-ang-_-e6332dbfb2d6",
+                                            "render.requires": "render-bb-widget-3",
+                                            "version": "3.0.3"
+                                          }
+                                        },
+                                        {
+                                          "name": "bb-sidebar-overlay-container-ang-_-agc3ek",
+                                          "properties": {
+                                            "classId": "SidebarOverlayContainerComponent",
+                                            "title": "SidebarOverlayContainer",
+                                            "bb.routeParamTrigger": "taskInstanceId",
+                                            "render.requires": "render-bb-widget-3",
+                                            "version": "3.0.3"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "bb-task-details-widget-ang-_-w2oxvx",
+                                              "properties": {
+                                                "classId": "CmTaskDetailsWidgetComponent",
+                                                "title": "TaskDetailsWidget (Case Manager)",
+                                                "output.taskInstanceIdNotFound": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "3.0.3"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "bb-panel-container-ang-_-gzvgg",
+                                      "properties": {
+                                        "classId": "PanelContainerComponent",
+                                        "title": "Column 2",
+                                        "appearance": "none",
+                                        "columnClass": "col-4",
+                                        "cssClasses": "d-block",
+                                        "navIcon": "",
+                                        "render.requires": "render-bb-widget-3",
+                                        "version": "5.0.1"
+                                      },
+                                      "children": [
+                                        {
+                                          "name": "bb-panel-container-ang-_-brpgq",
+                                          "properties": {
+                                            "classId": "PanelContainerComponent",
+                                            "title": "Panel Container",
+                                            "appearance": "none",
+                                            "cssClasses": "d-block card card-body shadow-none",
+                                            "navIcon": "",
+                                            "render.requires": "render-bb-widget-3",
+                                            "version": "5.0.1"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "bb-task-count-summary-widget-ang-_-4ugrij",
+                                              "properties": {
+                                                "classId": "CmTaskCountSummaryWidgetComponent",
+                                                "title": "TaskCountSummaryWidget (Case Manager)",
+                                                "bb.processDefinitionId": "us-onboarding",
+                                                "bb.taskCountSummary.subtitle": "",
+                                                "bb.taskCountSummary.title": "Task Progress",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "3.0.3"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "bb-panel-container-ang-_-dz3zn8",
+                                          "properties": {
+                                            "classId": "PanelContainerComponent",
+                                            "title": "Panel Container",
+                                            "appearance": "none",
+                                            "cssClasses": "d-block card card-body shadow-none mt-4",
+                                            "navIcon": "",
+                                            "render.requires": "render-bb-widget-3",
+                                            "version": "5.0.1"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "bb-live-insights-widget-ang-_-m7i9hpk",
+                                              "properties": {
+                                                "classId": "CmLiveInsightsWidgetComponent",
+                                                "title": "LiveInsightsWidget (Case Manager)",
+                                                "bb.caseDefinitionKey": "onboarding@1",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "3.0.3"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-tdcc7",
+                      "properties": {
+                        "classId": "PanelContainerComponent",
+                        "title": "Retail Onboarding",
+                        "route": "retail-onboarding",
+                        "appearance": "none",
+                        "cssClasses": "d-block",
+                        "navIcon": "user",
+                        "render.requires": "render-bb-widget-3",
+                        "version": "5.0.1"
+                      },
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-eckvb",
+                          "properties": {
+                            "classId": "CmPlatformContainerComponent",
+                            "title": "PlatformContainer (Case Manager)",
+                            "bb.caseData.servicePath": "/us-onboarding",
+                            "bb.collections.servicePath": "",
+                            "bb.comments.servicePath": "/us-onboarding",
+                            "bb.iam.servicePath": "/us-onboarding",
+                            "bb.interaction.apiVersion": "v2",
+                            "bb.interaction.deploymentPath": "interactions",
+                            "bb.interaction.servicePath": "/us-onboarding/client-api/interaction",
+                            "bb.journeyName": "onboarding",
+                            "bb.process.servicePath": "/us-onboarding",
+                            "render.requires": "render-bb-widget-3",
+                            "version": "3.0.3"
+                          },
+                          "children": [
+                            {
+                              "name": "bb-deck-container-ang-_-6do4yg",
+                              "properties": {
+                                "classId": "DeckContainerComponent",
+                                "title": "Deck Container",
+                                "ariaLabel": "",
+                                "disableDefault": "false",
+                                "outletName": "",
+                                "render.requires": "render-bb-widget-3",
+                                "role": "",
+                                "version": "5.0.1"
+                              },
+                              "children": [
+                                {
+                                  "name": "bb-panel-container-ang-_-ydnec",
+                                  "properties": {
+                                    "classId": "PanelContainerComponent",
+                                    "title": "CaseDefinitionOverview",
+                                    "route": "",
+                                    "appearance": "none",
+                                    "cssClasses": "d-block",
+                                    "navIcon": "",
+                                    "render.requires": "render-bb-widget-3",
+                                    "version": "5.0.1"
+                                  },
+                                  "children": [
+                                    {
+                                      "name": "bb-panel-container-ang-_-ibvn4e",
+                                      "properties": {
+                                        "classId": "PanelContainerComponent",
+                                        "title": "Panel Container",
+                                        "appearance": "none",
+                                        "cssClasses": "",
+                                        "navIcon": "",
+                                        "render.requires": "render-bb-widget-3",
+                                        "version": "5.0.1"
+                                      },
+                                      "children": [
+                                        {
+                                          "name": "cm-in-branch-start-case-ang-_-gpn7rb",
+                                          "properties": {
+                                            "classId": "CmInBranchStartCaseAngComponent",
+                                            "title": "CmInBranchStartCaseAngComponent Widget",
+                                            "apiVersion": "v2",
+                                            "customClassName": "float-right",
+                                            "deploymentPath": "interactions",
+                                            "interactionName": "in-branch-onboarding",
+                                            "output.caseInstanceKey": "navigation:bb-case-overview-container-ang-_-31a522bb4c8b",
+                                            "render.requires": "render-bb-widget-3",
+                                            "servicePath": "us-onboarding/client-api/interaction",
+                                            "version": "0.0.1"
+                                          }
+                                        },
+                                        {
+                                          "name": "bb-heading-widget-ang-_-n1jzl",
+                                          "properties": {
+                                            "classId": "HeadingWidgetComponent",
+                                            "title": "Universal Heading Widget",
+                                            "buttonActionEventBusName": "",
+                                            "buttonClasses": "btn btn-link",
+                                            "buttonTitle": "",
+                                            "customClassName": "d-flex justify-content-between p-0",
+                                            "heading": "Retail onboarding",
+                                            "headingClasses": "",
+                                            "headingType": "h1",
+                                            "iconClasses": "",
+                                            "output.buttonAction": "navigation:",
+                                            "render.requires": "render-bb-widget-3",
+                                            "rootLink": "",
+                                            "showButton": true,
+                                            "useButtonActionEventBus": false,
+                                            "useFirstLinkAsDefault": false,
+                                            "version": "5.0.2"
+                                          }
+                                        },
+                                        {
+                                          "name": "bb-tab-container-ang-_-91d12",
+                                          "properties": {
+                                            "classId": "TabContainerComponent",
+                                            "title": "Tab Container",
+                                            "maxCounterValue": "99",
+                                            "outletName": "",
+                                            "render.requires": "render-bb-widget-3",
+                                            "version": "5.0.2"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "bb-panel-container-ang-_-28wifbv",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Cases",
+                                                "route": "",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-panel-container-ang-_-u4odls",
+                                                  "properties": {
+                                                    "classId": "PanelContainerComponent",
+                                                    "title": "Panel Container",
+                                                    "appearance": "none",
+                                                    "cssClasses": "d-block card card-body mt-4",
+                                                    "navIcon": "",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "5.0.1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-case-overview-list-widget-ang-_-zligfk",
+                                                      "properties": {
+                                                        "classId": "CmCaseOverviewListWidgetComponent",
+                                                        "title": "CaseOverviewListWidget (Case Manager)",
+                                                        "bb.caseDefinitionKey": "onboarding@1",
+                                                        "bb.caseInstanceList.maxNavPages": 3,
+                                                        "bb.caseInstanceList.pageSize": 10,
+                                                        "bb.includeArchived": true,
+                                                        "output.caseInstanceKey": "navigation:bb-case-overview-container-ang-_-31a522bb4c8b",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "3.0.3"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-db178c061d8c",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Tasks",
+                                                "route": "",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block card card-body",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-modal-overlay-container-ang-_-132e1p",
+                                                  "properties": {
+                                                    "classId": "ModalOverlayContainerComponent",
+                                                    "title": "ModalOverlayContainer (Case Manager)",
+                                                    "bb.close.modal-overlay-container": "bb.close.modal-overlay-container",
+                                                    "bb.open.modal-overlay-container": "bb.open.modal-overlay-container",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "2.0.3"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-view-interaction-task-widget-ang-_-hsszq",
+                                                      "properties": {
+                                                        "classId": "CmViewInteractionTaskWidgetComponent",
+                                                        "title": "ViewInteractionTaskWidgetComponent (Case Manager)",
+                                                        "apiVersion": "v2",
+                                                        "bb.showStepper": true,
+                                                        "deploymentPath": "interactions",
+                                                        "interactionName": "address-validation-idt",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "servicePath": "us-onboarding/client-api/interaction",
+                                                        "version": "2.1.0"
+                                                      }
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-sidebar-overlay-container-ang-_-f3apoi",
+                                                  "properties": {
+                                                    "classId": "SidebarOverlayContainerComponent",
+                                                    "title": "SidebarOverlayContainer",
+                                                    "bb.routeParamTrigger": "taskInstanceId",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "3.0.3"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-task-details-widget-ang-_-pm1y0s",
+                                                      "properties": {
+                                                        "classId": "CmTaskDetailsWidgetComponent",
+                                                        "title": "TaskDetailsWidget (Case Manager)",
+                                                        "output.taskInstanceIdNotFound": "",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "3.0.3"
+                                                      }
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-task-overview-list-widget-ang-_-61bdj",
+                                                  "properties": {
+                                                    "classId": "CmTaskOverviewListWidgetComponent",
+                                                    "title": "TaskOverviewListWidget (Case Manager)",
+                                                    "bb.taskInstanceList.maxNavPages": 3,
+                                                    "bb.taskInstanceList.pageSize": 10,
+                                                    "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-0f792c190cb9",
+                                                    "output.taskInstanceId": "navigation:bb-panel-container-ang-_-db178c061d8c",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "3.0.3"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "bb-panel-container-ang-_-b4w3ov",
+                                  "properties": {
+                                    "classId": "PanelContainerComponent",
+                                    "title": "CaseOverview",
+                                    "route": "",
+                                    "appearance": "none",
+                                    "cssClasses": "d-block",
+                                    "navIcon": "",
+                                    "render.requires": "render-bb-widget-3",
+                                    "version": "5.0.1"
+                                  },
+                                  "children": [
+                                    {
+                                      "name": "bb-case-overview-container-ang-_-31a522bb4c8b",
+                                      "properties": {
+                                        "classId": "CmCaseOverviewContainerComponent",
+                                        "title": "CaseOverviewContainer (Case Manager)",
+                                        "render.requires": "render-bb-widget-3",
+                                        "version": "3.0.3"
+                                      },
+                                      "children": [
+                                        {
+                                          "name": "bb-tab-container-ang-_-ob14g",
+                                          "properties": {
+                                            "classId": "TabContainerComponent",
+                                            "title": "Tab Container",
+                                            "maxCounterValue": "99",
+                                            "outletName": "",
+                                            "render.requires": "render-bb-widget-3",
+                                            "version": "5.0.2"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "bb-panel-container-ang-_-d8c990d86348",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Overview",
+                                                "route": "",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-panel-container-ang-_-g12owq",
+                                                  "properties": {
+                                                    "classId": "PanelContainerComponent",
+                                                    "title": "Panel Container",
+                                                    "appearance": "none",
+                                                    "cssClasses": "d-block card card-body mb-4",
+                                                    "navIcon": "",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "5.0.1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-case-info-widget-ang-_-d2wit",
+                                                      "properties": {
+                                                        "classId": "CmCaseInfoWidgetComponent",
+                                                        "title": "CaseInfoWidget (Case Manager)",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "3.0.3"
+                                                      }
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-column-container-ang-_-69d4xp",
+                                                  "properties": {
+                                                    "classId": "ColumnContainerComponent",
+                                                    "title": "Column Container",
+                                                    "containerClasses": "px-0",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "5.0.1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-zp86uo",
+                                                      "properties": {
+                                                        "classId": "PanelContainerComponent",
+                                                        "title": "Column 1",
+                                                        "appearance": "none",
+                                                        "columnClass": "col",
+                                                        "cssClasses": "col mt-4",
+                                                        "navIcon": "",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "5.0.1"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-case-data-overview-widget-ang-_-2sz1ak",
+                                                          "properties": {
+                                                            "classId": "CmCaseDataOverviewWidgetComponent",
+                                                            "title": "CaseDataOverviewWidget (Case Manager)",
+                                                            "render.requires": "render-bb-widget-3",
+                                                            "showApplicants": false,
+                                                            "version": "2.1.1"
+                                                          }
+                                                        },
+                                                        {
+                                                          "name": "bb-cm-applicants-list-widget-ang-_-g4lfwb",
+                                                          "properties": {
+                                                            "classId": "CmApplicantsListWidgetComponent",
+                                                            "title": "Applicants List Widget (Case Manager)",
+                                                            "render.requires": "render-bb-widget-3",
+                                                            "showGoToApplicantLink": true,
+                                                            "version": "2.0.4"
+                                                          }
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-80u4dk",
+                                                      "properties": {
+                                                        "classId": "PanelContainerComponent",
+                                                        "title": "Column 2",
+                                                        "appearance": "none",
+                                                        "columnClass": "col",
+                                                        "cssClasses": "col mt-4",
+                                                        "navIcon": "",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "5.0.1"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-panel-container-ang-_-98pfau",
+                                                          "properties": {
+                                                            "classId": "PanelContainerComponent",
+                                                            "title": "Panel Container",
+                                                            "appearance": "none",
+                                                            "cssClasses": "d-block card card-body",
+                                                            "navIcon": "",
+                                                            "render.requires": "render-bb-widget-3",
+                                                            "version": "5.0.1"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "name": "bb-modal-overlay-container-ang-_-1w14f",
+                                                              "properties": {
+                                                                "classId": "ModalOverlayContainerComponent",
+                                                                "title": "ModalOverlayContainer (Case Manager)",
+                                                                "bb.close.modal-overlay-container": "bb.close.modal-overlay-container",
+                                                                "bb.open.modal-overlay-container": "bb.open.modal-overlay-container",
+                                                                "render.requires": "render-bb-widget-3",
+                                                                "version": "2.0.3"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "name": "bb-view-interaction-task-widget-ang-_-0b7s4",
+                                                                  "properties": {
+                                                                    "classId": "CmViewInteractionTaskWidgetComponent",
+                                                                    "title": "ViewInteractionTaskWidgetComponent (Case Manager)",
+                                                                    "apiVersion": "v2",
+                                                                    "bb.showStepper": true,
+                                                                    "deploymentPath": "interactions",
+                                                                    "interactionName": "address-validation-idt",
+                                                                    "render.requires": "render-bb-widget-3",
+                                                                    "servicePath": "us-onboarding/client-api/interaction",
+                                                                    "version": "2.1.0"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "name": "bb-sidebar-overlay-container-ang-_-mfeekc",
+                                                              "properties": {
+                                                                "classId": "SidebarOverlayContainerComponent",
+                                                                "title": "SidebarOverlayContainer",
+                                                                "bb.routeParamTrigger": "taskInstanceId",
+                                                                "render.requires": "render-bb-widget-3",
+                                                                "version": "3.0.3"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "name": "bb-task-details-widget-ang-_-fhusl7",
+                                                                  "properties": {
+                                                                    "classId": "CmTaskDetailsWidgetComponent",
+                                                                    "title": "TaskDetailsWidget (Case Manager)",
+                                                                    "output.taskInstanceIdNotFound": "",
+                                                                    "render.requires": "render-bb-widget-3",
+                                                                    "version": "3.0.3"
+                                                                  }
+                                                                },
+                                                                {
+                                                                  "name": "bb-panel-container-ang-_-046r9y",
+                                                                  "properties": {
+                                                                    "classId": "PanelContainerComponent",
+                                                                    "title": "Panel Container",
+                                                                    "appearance": "none",
+                                                                    "cssClasses": "d-block my-4 container",
+                                                                    "navIcon": "",
+                                                                    "render.requires": "render-bb-widget-3",
+                                                                    "version": "5.0.1"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "name": "bb-cm-comments-widget-ang-_-oupmerk",
+                                                                      "properties": {
+                                                                        "classId": "CmCommentsWidgetComponent",
+                                                                        "title": "CommentsWidget (Case Manager)",
+                                                                        "addNewCommentPosition": "bottom",
+                                                                        "bb.caseDefinitionKey": "onboarding@1",
+                                                                        "bb.showThreadsSelect": false,
+                                                                        "render.requires": "render-bb-widget-3",
+                                                                        "version": "3.0.4"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "name": "bb-events-and-tasks-widget-ang-_-pc0ojt",
+                                                              "properties": {
+                                                                "classId": "CmEventsAndTasksWidgetComponent",
+                                                                "title": "EventsAndTasksWidget (Case Manager)",
+                                                                "output.eventLogLinkClick": "navigation:bb-panel-container-ang-_-c30035fdaa08",
+                                                                "output.taskInstanceId": "navigation:bb-panel-container-ang-_-d8c990d86348",
+                                                                "render.requires": "render-bb-widget-3",
+                                                                "version": "2.0.3"
+                                                              }
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "name": "bb-panel-container-ang-_-i0cjx2",
+                                                          "properties": {
+                                                            "classId": "PanelContainerComponent",
+                                                            "title": "Panel Container",
+                                                            "appearance": "none",
+                                                            "cssClasses": "d-block card card-body my-4",
+                                                            "navIcon": "",
+                                                            "render.requires": "render-bb-widget-3",
+                                                            "version": "5.0.1"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "name": "bb-cm-comments-widget-ang-_-97mhf4s",
+                                                              "properties": {
+                                                                "classId": "CmCommentsWidgetComponent",
+                                                                "title": "CommentsWidget (Case Manager)",
+                                                                "addNewCommentPosition": "bottom",
+                                                                "bb.caseDefinitionKey": "onboarding@1",
+                                                                "bb.showThreadsSelect": false,
+                                                                "render.requires": "render-bb-widget-3",
+                                                                "version": "3.0.4"
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-d8c990d86300",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Applicants",
+                                                "route": "applicants",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-column-container-ang-_-y89yw",
+                                                  "properties": {
+                                                    "classId": "ColumnContainerComponent",
+                                                    "title": "Column Container",
+                                                    "containerClasses": "px-0",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "5.0.1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-6cb9k",
+                                                      "properties": {
+                                                        "classId": "PanelContainerComponent",
+                                                        "title": "Column 1",
+                                                        "appearance": "none",
+                                                        "columnClass": "col",
+                                                        "cssClasses": "d-block col-md-6 mt-4",
+                                                        "navIcon": "",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "5.0.1"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-case-data-overview-widget-ang-_-ve202o",
+                                                          "properties": {
+                                                            "classId": "CmCaseDataOverviewWidgetComponent",
+                                                            "title": "CaseDataOverviewWidget (Case Manager)",
+                                                            "render.requires": "render-bb-widget-3",
+                                                            "showApplicants": true,
+                                                            "version": "2.1.1"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-cac43754f1f6",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Tasks",
+                                                "route": "",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block m-5",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-modal-overlay-container-ang-_-mikvkk",
+                                                  "properties": {
+                                                    "classId": "ModalOverlayContainerComponent",
+                                                    "title": "ModalOverlayContainer (Case Manager)",
+                                                    "bb.close.modal-overlay-container": "bb.close.modal-overlay-container",
+                                                    "bb.open.modal-overlay-container": "bb.open.modal-overlay-container",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "2.0.3"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-view-interaction-task-widget-ang-_-0b9fah",
+                                                      "properties": {
+                                                        "classId": "CmViewInteractionTaskWidgetComponent",
+                                                        "title": "ViewInteractionTaskWidgetComponent (Case Manager)",
+                                                        "apiVersion": "v2",
+                                                        "bb.showStepper": true,
+                                                        "deploymentPath": "interactions",
+                                                        "interactionName": "address-validation-idt",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "servicePath": "us-onboarding/client-api/interaction",
+                                                        "version": "2.1.0"
+                                                      }
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-sidebar-overlay-container-ang-_-mixrg",
+                                                  "properties": {
+                                                    "classId": "SidebarOverlayContainerComponent",
+                                                    "title": "SidebarOverlayContainer",
+                                                    "bb.routeParamTrigger": "taskInstanceId",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "3.0.3"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-task-details-widget-ang-_-fay9io",
+                                                      "properties": {
+                                                        "classId": "CmTaskDetailsWidgetComponent",
+                                                        "title": "TaskDetailsWidget (Case Manager)",
+                                                        "output.taskInstanceIdNotFound": "",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "3.0.3"
+                                                      }
+                                                    },
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-i95s1",
+                                                      "properties": {
+                                                        "classId": "PanelContainerComponent",
+                                                        "title": "Panel Container",
+                                                        "appearance": "none",
+                                                        "cssClasses": "d-block my-4 container",
+                                                        "navIcon": "",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "5.0.1"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-cm-comments-widget-ang-_-ifxac",
+                                                          "properties": {
+                                                            "classId": "CmCommentsWidgetComponent",
+                                                            "title": "CommentsWidget (Case Manager)",
+                                                            "addNewCommentPosition": "bottom",
+                                                            "bb.caseDefinitionKey": "",
+                                                            "bb.showThreadsSelect": false,
+                                                            "render.requires": "render-bb-widget-3",
+                                                            "version": "3.0.4"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-panel-container-ang-_-88950t",
+                                                  "properties": {
+                                                    "classId": "PanelContainerComponent",
+                                                    "title": "Tasks",
+                                                    "appearance": "none",
+                                                    "cssClasses": "d-block card card-body m-5",
+                                                    "navIcon": "",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "5.0.1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-case-task-list-widget-ang-_-14d0al",
+                                                      "properties": {
+                                                        "classId": "CmCaseTaskListWidgetComponent",
+                                                        "title": "CaseTaskListWidget (Case Manager)",
+                                                        "filter": "open",
+                                                        "output.taskInstanceId": "navigation:bb-panel-container-ang-_-cac43754f1f6",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "3.0.3"
+                                                      }
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-panel-container-ang-_-dmyzbk",
+                                                  "properties": {
+                                                    "classId": "PanelContainerComponent",
+                                                    "title": "Tasks",
+                                                    "appearance": "none",
+                                                    "cssClasses": "d-block card card-body m-5",
+                                                    "navIcon": "",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "5.0.1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-case-task-list-widget-ang-_-pkiti7",
+                                                      "properties": {
+                                                        "classId": "CmCaseTaskListWidgetComponent",
+                                                        "title": "CaseTaskListWidget (Case Manager)",
+                                                        "filter": "done",
+                                                        "output.taskInstanceId": "navigation:",
+                                                        "render.requires": "render-bb-widget-3",
+                                                        "version": "3.0.3"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-unjcbv",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Diagram",
+                                                "route": "",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-process-diagram-widget-ang-_-hwhehb",
+                                                  "properties": {
+                                                    "classId": "CmProcessDiagramWidgetComponent",
+                                                    "title": "ProcessDiagramWidget (Case Manager)",
+                                                    "bb.journeyName": "onboarding",
+                                                    "bb.processDefinitionIds": "us-onboarding,aml,idv,archive-case,enroll-customer,enrollment",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "3.0.3"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-pfds8",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Documents",
+                                                "route": "",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block card-body",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-case-fileset-list-widget-ang-_-85bp7",
+                                                  "properties": {
+                                                    "classId": "CmCaseFilesetListWidgetComponent",
+                                                    "title": "CaseFilesetListWidget (Case Manager)",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "3.0.4"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-2x22vj",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Comments",
+                                                "route": "",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block p-4 container--fixed-width m-auto",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-cm-comments-widget-ang-_-j33j94",
+                                                  "properties": {
+                                                    "classId": "CmCommentsWidgetComponent",
+                                                    "title": "CommentsWidget (Case Manager)",
+                                                    "addNewCommentPosition": "bottom",
+                                                    "bb.caseDefinitionKey": "onboarding@1",
+                                                    "bb.showThreadsSelect": true,
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "3.0.4"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-c30035fdaa08",
+                                              "properties": {
+                                                "classId": "PanelContainerComponent",
+                                                "title": "Event Logs",
+                                                "route": "",
+                                                "appearance": "none",
+                                                "cssClasses": "d-block p-4 container--fixed-width m-auto",
+                                                "navIcon": "",
+                                                "render.requires": "render-bb-widget-3",
+                                                "version": "5.0.1"
+                                              },
+                                              "children": [
+                                                {
+                                                  "name": "bb-event-log-widget-ang-_-rjrj7",
+                                                  "properties": {
+                                                    "classId": "CmEventLogWidgetComponent",
+                                                    "title": "EventLogWidget (Case Manager)",
+                                                    "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-d8c990d86348",
+                                                    "output.taskInstanceId": "navigation:",
+                                                    "render.requires": "render-bb-widget-3",
+                                                    "version": "3.0.3"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-83tyoa",
+                      "properties": {
+                        "classId": "PanelContainerComponent",
+                        "title": "Insights Dashboard",
+                        "route": "insights-dashboard",
+                        "appearance": "none",
+                        "cssClasses": "",
+                        "navIcon": "dashboard",
+                        "render.requires": "render-bb-widget-3",
+                        "version": "5.0.1"
+                      },
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-gvbnfd",
+                          "properties": {
+                            "classId": "CmPlatformContainerComponent",
+                            "title": "PlatformContainer (Case Manager)",
+                            "bb.caseData.servicePath": "/us-onboarding",
+                            "bb.collections.servicePath": "",
+                            "bb.iam.servicePath": "/us-onboarding",
+                            "bb.interaction.apiVersion": "",
+                            "bb.interaction.deploymentPath": "",
+                            "bb.interaction.servicePath": "",
+                            "bb.journeyName": "",
+                            "bb.process.servicePath": "/us-onboarding",
+                            "render.requires": "render-bb-widget-3",
+                            "version": "3.0.3"
+                          },
+                          "children": [
+                            {
+                              "name": "bb-panel-container-ang-_-ez8n6",
+                              "properties": {
+                                "classId": "PanelContainerComponent",
+                                "title": "Panel Container",
+                                "appearance": "none",
+                                "cssClasses": "d-block",
+                                "navIcon": "",
+                                "render.requires": "render-bb-widget-3",
+                                "version": "5.0.1"
+                              },
+                              "children": [
+                                {
+                                  "name": "bb-header-widget-ang-_-8eaukq",
+                                  "properties": {
+                                    "classId": "CmHeaderWidgetComponent",
+                                    "title": "HeaderWidget (Case Manager)",
+                                    "render.requires": "render-bb-widget-3",
+                                    "subtitle": "",
+                                    "version": "3.0.3"
+                                  }
+                                },
+                                {
+                                  "name": "bb-process-overview-container-ang-_-84c03o",
+                                  "properties": {
+                                    "classId": "CmProcessOverviewContainerComponent",
+                                    "title": "ProcessOverviewContainer (Case Manager)",
+                                    "output.dmnInsights": "navigation:bb-panel-container-ang-_-91e1aadf95bb",
+                                    "output.processesInsights": "navigation:bb-panel-container-ang-_-42f102d17706",
+                                    "render.requires": "render-bb-widget-3",
+                                    "version": "3.0.3"
+                                  },
+                                  "children": [
+                                    {
+                                      "name": "bb-panel-container-ang-_-znamh",
+                                      "properties": {
+                                        "classId": "PanelContainerComponent",
+                                        "title": "Panel Container",
+                                        "appearance": "none",
+                                        "cssClasses": "d-block card card-body",
+                                        "navIcon": "",
+                                        "render.requires": "render-bb-widget-3",
+                                        "version": "5.0.1"
+                                      },
+                                      "children": [
+                                        {
+                                          "name": "bb-process-insights-card-widget-ang-_-s5dmjl",
+                                          "properties": {
+                                            "classId": "CmProcessInsightsCardWidgetComponent",
+                                            "title": "ProcessInsightsCardWidget [Case Manager]",
+                                            "bb.caseDefinitionKey": "onboarding@1",
+                                            "bb.journeyName": "Retail onboarding",
+                                            "render.requires": "render-bb-widget-3",
+                                            "version": "3.0.3"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-42f102d17706",
+                      "properties": {
+                        "classId": "PanelContainerComponent",
+                        "title": "Process Definitions",
+                        "route": "process-definitions",
+                        "appearance": "none",
+                        "cssClasses": "",
+                        "navIcon": "label",
+                        "render.requires": "render-bb-widget-3",
+                        "version": "5.0.1"
+                      },
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-mkco3s",
+                          "properties": {
+                            "classId": "CmPlatformContainerComponent",
+                            "title": "PlatformContainer (Case Manager)",
+                            "bb.caseData.servicePath": "/us-onboarding",
+                            "bb.collections.servicePath": "",
+                            "bb.iam.servicePath": "/us-onboarding",
+                            "bb.interaction.apiVersion": "",
+                            "bb.interaction.deploymentPath": "",
+                            "bb.interaction.servicePath": "",
+                            "bb.journeyName": "",
+                            "bb.process.servicePath": "/us-onboarding",
+                            "render.requires": "render-bb-widget-3",
+                            "version": "3.0.3"
+                          },
+                          "children": [
+                            {
+                              "name": "bb-heading-widget-ang-_-j6kode",
+                              "properties": {
+                                "classId": "HeadingWidgetComponent",
+                                "title": "Universal Heading Widget",
+                                "buttonActionEventBusName": "",
+                                "buttonClasses": "btn btn-link",
+                                "buttonTitle": "",
+                                "customClassName": "d-flex justify-content-between p-0 mb-3",
+                                "heading": "Retail onboarding",
+                                "headingClasses": "",
+                                "headingType": "h1",
+                                "iconClasses": "",
+                                "output.buttonAction": "navigation:",
+                                "render.requires": "render-bb-widget-3",
+                                "rootLink": "",
+                                "showButton": true,
+                                "useButtonActionEventBus": false,
+                                "useFirstLinkAsDefault": false,
+                                "version": "5.0.2"
+                              }
+                            },
+                            {
+                              "name": "bb-panel-container-ang-_-116so",
+                              "properties": {
+                                "classId": "PanelContainerComponent",
+                                "title": "Panel Container",
+                                "appearance": "none",
+                                "cssClasses": "card card-body",
+                                "navIcon": "",
+                                "render.requires": "render-bb-widget-3",
+                                "version": "5.0.1"
+                              },
+                              "children": [
+                                {
+                                  "name": "bb-process-diagram-selector-widget-ang-_-eoks1",
+                                  "properties": {
+                                    "classId": "CmProcessDiagramSelectorWidgetComponent",
+                                    "title": "ProcessDiagramSelectorWidget (Case Manager)",
+                                    "render.requires": "render-bb-widget-3",
+                                    "version": "3.0.3"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-91e1aadf95bb",
+                      "properties": {
+                        "classId": "PanelContainerComponent",
+                        "title": "Decision Definitions",
+                        "route": "decision-definitions",
+                        "appearance": "none",
+                        "cssClasses": "",
+                        "navIcon": "line-style",
+                        "render.requires": "render-bb-widget-3",
+                        "version": "5.0.1"
+                      },
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-73q1u",
+                          "properties": {
+                            "classId": "CmPlatformContainerComponent",
+                            "title": "PlatformContainer (Case Manager)",
+                            "bb.caseData.servicePath": "/us-onboarding",
+                            "bb.collections.servicePath": "",
+                            "bb.iam.servicePath": "/us-onboarding",
+                            "bb.interaction.apiVersion": "",
+                            "bb.interaction.deploymentPath": "",
+                            "bb.interaction.servicePath": "",
+                            "bb.journeyName": "",
+                            "bb.process.servicePath": "/us-onboarding",
+                            "render.requires": "render-bb-widget-3",
+                            "version": "3.0.3"
+                          },
+                          "children": [
+                            {
+                              "name": "bb-heading-widget-ang-_-e8g3os",
+                              "properties": {
+                                "classId": "HeadingWidgetComponent",
+                                "title": "Universal Heading Widget",
+                                "buttonActionEventBusName": "",
+                                "buttonClasses": "btn btn-link",
+                                "buttonTitle": "",
+                                "customClassName": "d-flex justify-content-between p-0 mb-3",
+                                "heading": "Retail onboarding",
+                                "headingClasses": "",
+                                "headingType": "h1",
+                                "iconClasses": "",
+                                "output.buttonAction": "navigation:",
+                                "render.requires": "render-bb-widget-3",
+                                "rootLink": "",
+                                "showButton": true,
+                                "useButtonActionEventBus": false,
+                                "useFirstLinkAsDefault": false,
+                                "version": "5.0.2"
+                              }
+                            },
+                            {
+                              "name": "bb-panel-container-ang-_-gd975j",
+                              "properties": {
+                                "classId": "PanelContainerComponent",
+                                "title": "Panel Container",
+                                "appearance": "none",
+                                "cssClasses": "card card-body",
+                                "navIcon": "",
+                                "render.requires": "render-bb-widget-3",
+                                "version": "5.0.1"
+                              },
+                              "children": [
+                                {
+                                  "name": "bb-dmn-insights-widget-ang-_-x7vjsn",
+                                  "properties": {
+                                    "classId": "CmDmnInsightsWidgetComponent",
+                                    "title": "DmnInsightsWidget (Case Manager)",
+                                    "render.requires": "render-bb-widget-3",
+                                    "version": "3.0.3"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

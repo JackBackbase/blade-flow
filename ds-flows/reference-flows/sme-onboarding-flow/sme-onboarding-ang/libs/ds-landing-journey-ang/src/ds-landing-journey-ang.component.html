@@ -1,0 +1,15 @@
+<div class="content tab-view mb-4">
+     <h1>{{heading}}</h1>
+     <p>We are reviewing your application to make sure everything looks good. We’ll send an email to
+          <strong>{{emailText}}</strong> once everything has been verified. <br><br>
+          If you haven’t heard from us within
+          24
+          hours, you can use the link below to check the status of your application.
+     </p>
+</div>
+<bb-load-button-ui *ngIf="linkNavigateTo"
+                   (click)="onButtonClick(linkNavigateTo)"
+                   color="primary"
+                   i18n="landing journey proceed button|A button to procced after a flow has been completed@@bb.ds-landing-journey.button.text">
+     Track your application status
+</bb-load-button-ui>

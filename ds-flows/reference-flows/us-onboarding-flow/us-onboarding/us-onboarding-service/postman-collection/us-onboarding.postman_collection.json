@@ -1,0 +1,4389 @@
+{
+	"info": {
+		"_postman_id": "6370bd14-4a55-457e-9843-229dce0c055b",
+		"name": "US Onboarding",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "Login as User - IPS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+									"postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+									"var jwtToken = postman.getResponseCookie(\"Authorization\").value;",
+									"postman.setEnvironmentVariable(\"jwtToken\", jwtToken);",
+									"postman.setEnvironmentVariable(\"user-id\", \"user\");",
+									"tests[\"Status code is 200\"] = (responseCode.code === 200);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "user",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "user",
+									"type": "text"
+								},
+								{
+									"key": "submit",
+									"value": "Login",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/auth/login",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login to Gateway as user"
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Manager - IPS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+									"postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+									"var jwtToken = postman.getResponseCookie(\"Authorization\").value;",
+									"postman.setEnvironmentVariable(\"jwtToken\", jwtToken);",
+									"postman.setEnvironmentVariable(\"user-id\", \"manager\");",
+									"tests[\"Status code is 200\"] = (responseCode.code === 200);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "manager",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "manager",
+									"type": "text"
+								},
+								{
+									"key": "submit",
+									"value": "Login",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/auth/login",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login to Gateway as manager"
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Admin - Identity (master)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();",
+									"postman.setEnvironmentVariable(\"jwtToken\", responseJson.access_token);",
+									"tests[\"Status code is 200\"] = (responseCode.code === 200);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic Og=="
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "admin-cli",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{identity-host}}/auth/realms/master/protocol/openid-connect/token",
+							"host": [
+								"{{identity-host}}"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"master",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Manager - Identity (backbase)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();",
+									"postman.setEnvironmentVariable(\"jwtToken\", responseJson.access_token);",
+									"tests[\"Status code is 200\"] = (responseCode.code === 200);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic Og=="
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "MNG00001",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "MNG00001",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "admin-cli",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{identity-host}}/auth/realms/backbase/protocol/openid-connect/token",
+							"host": [
+								"{{identity-host}}"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"backbase",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Customer - Identity (us-onboarding)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseJson = pm.response.json();",
+									"postman.setEnvironmentVariable(\"jwtToken\", responseJson.access_token);",
+									"tests[\"Status code is 200\"] = (responseCode.code === 200);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic Og=="
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "kendra_saunders",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "kendra_saunders",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "admin-cli",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{identity-host}}/auth/realms/us-onboarding/protocol/openid-connect/token",
+							"host": [
+								"{{identity-host}}"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"us-onboarding",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "US Onboarding Flow",
+			"item": [
+				{
+					"name": "Step 1: Check for co-applicant",
+					"item": [
+						{
+							"name": "1.1 Fetch co-applicant data (main applicant)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var response = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"interaction-id\", response.interactionId);",
+											"postman.setEnvironmentVariable(\"resume-code\", response.resumeCode);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "anonymousUserId={{cookieAnonValue}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"payload\": {}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/fetch-co-applicant",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"fetch-co-applicant"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1.1 Fetch co-applicant data (co-applicant)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var response = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"interaction-id\", response.interactionId);",
+											"postman.setEnvironmentVariable(\"resume-code\", response.resumeCode);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "anonymousUserId={{cookieAnonValue}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"payload\": {\n\t\t\"coApplicantId\": \"3ec249f3-9a96-4858-8d45-fe711dc4b0f4\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/fetch-co-applicant",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"fetch-co-applicant"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Step 2: Product Selection",
+					"item": [
+						{
+							"name": "2.1 Get Product List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "anonymousUserId={{cookieAnonValue}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"productType\": \"Saving account\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/get-product-list",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"get-product-list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2.2 Select Products",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Cookie",
+										"value": "anonymousUserId={{cookieAnonValue}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"selection\": [\n            {\n                \"referenceId\": \"premium-savings\",\n                \"productName\": \"High-Rate Savings\",\n                \"quantity\": 1\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/select-products",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"select-products"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Step 3: Policies Agreement",
+					"item": [
+						{
+							"name": "3.1 Policies Agreement",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"agreedToTerms\": true\n    }\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/agree-to-terms",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"agree-to-terms"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Step 4: Anchor Data",
+					"item": [
+						{
+							"name": "4.1 Fetch Anchor Data (optional)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "anonymousUserId={{cookieAnonValue}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/prefill-anchor-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"prefill-anchor-data"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4.2 Submit Anchor Data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "anonymousUserId={{cookieAnonValue}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"firstName\": \"Harry\",\n\t\t\"lastName\": \"Potter\",\n\t\t\"dateOfBirth\": \"1990-01-01\",\n        \"email\": \"harry@example.com\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-anchor-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-anchor-data"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4.2 Submit Anchor Data (as co-applicant)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "anonymousUserId={{cookieAnonValue}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"firstName\": \"Hermione\",\n\t\t\"lastName\": \"Granger\",\n\t\t\"dateOfBirth\": \"1991-02-02\",\n        \"email\": \"hermione@example.com\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-anchor-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-anchor-data"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 5: Mobile verification",
+					"item": [
+						{
+							"name": "5.1 Get Available Channels (optional)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/available-otp-channels",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"available-otp-channels"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5.2 Get OTP data (optional)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/fetch-otp-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"fetch-otp-data"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5.3 Request OTP",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_comment\": \"The payload can either contain phoneNumber or email, not both. The channel is an enum. SMS and EMAIL for now.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"+123456789\",\n\t\t\"channel\": \"SMS\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/request-otp",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"request-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5.4 Verify OTP",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_comment\": \"Setting channel to SMS or EMAIL will set one of those fields to verified in caseData.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"+123456789\",\n\t\t\"channel\": \"SMS\",\n\t\t\"otp\": \"123456\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/verify-otp",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"verify-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5.4 Verify OTP (generate and save number)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var response = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"phone-number\", response.body.phoneNumber);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_comment\": \"Setting channel to SMS or EMAIL will set one of those fields to verified in caseData.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"+1{{$randomInt}}{{$randomInt}}{{$randomInt}}\",\n\t\t\"channel\": \"SMS\",\n\t\t\"otp\": \"123456\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/verify-otp",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"verify-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5.4 Verify OTP (resume with saved number)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_comment\": \"Setting channel to SMS or EMAIL will set one of those fields to verified in caseData.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"{{phone-number}}\",\n\t\t\"channel\": \"SMS\",\n\t\t\"otp\": \"123456\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/verify-otp",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"verify-otp"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 6: Identity Verification",
+					"item": [
+						{
+							"name": "6.1 Submit IDV Initiation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/identity-verification-initiation",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"identity-verification-initiation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6.2 Submit Approved IDV Result",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"verificationId\": \"approved\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/identity-verification-result",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"identity-verification-result"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6.3 (alternative) Submit Review IDV Result",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"verificationId\": \"review\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/identity-verification-result",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"identity-verification-result"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6.4  (alternative) Submit Denied IDV Result",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"verificationId\": \"fail\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/identity-verification-result",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"identity-verification-result"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6.5  (alternative) Submit Approved After Retry IDV Result",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"verificationId\": \"approved_after_retry\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/identity-verification-result",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"identity-verification-result"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6.5  (alternative) Submit No IDV Result",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"verificationId\": \"no_result\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/identity-verification-result",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"identity-verification-result"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Step 7: Address",
+					"item": [
+						{
+							"name": "7.0 Fetch Address (optional)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"numberAndStreet\": \"someStreet\",\n\t\t\"apt\": \"2B\",\n\t\t\"zipCode\": \"12345\",\n\t\t\"city\": \"someCity\",\n\t\t\"state\": \"NY\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/fetch-address",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"fetch-address"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "7.1 Submit Address",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"numberAndStreet\": \"someStreet\",\n\t\t\"apt\": \"2B\",\n\t\t\"zipCode\": \"12345\",\n\t\t\"city\": \"someCity\",\n\t\t\"state\": \"NY\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-address",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-address"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "7.1 Submit Address (alternative address for co-applicant)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"numberAndStreet\": \"Hermiones Street\",\n        \"zipCode\": \"54321\",\n        \"city\": \"Hog whartz\",\n        \"state\": \"NY\",\n        \"apt\": \"31337\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-address",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-address"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 8: Co-applicant",
+					"item": [
+						{
+							"name": "8.1 Account Type Selection (Joint)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"isJointAccount\": true\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/account-type-selector",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"account-type-selector"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "8.1 Account Type Selection (Individual)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"isJointAccount\": false\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/account-type-selector",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"account-type-selector"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "8.2 Co applicant data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"firstName\": \"Hermione\",\n        \"lastName\": \"Granger\",\n        \"dateOfBirth\": \"1989-01-01\",\n        \"email\": \"hermione@example.com\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-anchor-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-anchor-data"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "8.3 Co applicant address",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n\t\t\"numberAndStreet\": \"HERMIONES STREET\",\n\t\t\"apt\": \"99999999\",\n\t\t\"zipCode\": \"54321\",\n\t\t\"city\": \"HOG WHARTZ\",\n\t\t\"state\": \"NY\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-address",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-address"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 9: Citizenship Selection",
+					"item": [
+						{
+							"name": "9.1 Fetch Citizenship Data (Optional)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/fetch-citizenship-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"fetch-citizenship-data"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "9.2 Submit US Citizenship",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"type\": \"US_CITIZEN\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/citizenship-selector",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"citizenship-selector"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "9.2 (alternative) Submit Permanent Resident",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"type\": \"PERMANENT_RESIDENT\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/citizenship-selector",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"citizenship-selector"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "9.2 (alternative) Submit Non Resident Alien",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"type\": \"NON_RESIDENT_ALIEN\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/citizenship-selector",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"citizenship-selector"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 10: (alternative) Social Security Number",
+					"item": [
+						{
+							"name": "10.1 Fetch Citizenship Data (Optional)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/fetch-citizenship-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"fetch-citizenship-data"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10.2 Submit SSN",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"ssn\": \"123456789\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-ssn",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-ssn"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10.2 (alternative) Submit SSN longer than 9 digits",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"ssn\": \"1234567890\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-ssn",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-ssn"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10.2 (alternative) Submit SSN less than 9 digits",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"ssn\": \"12345678\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-ssn",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-ssn"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10.2 (alternative) Submit SSN containing hyphens",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"ssn\": \"123-45-67890\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-ssn",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-ssn"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 10: (alternative) Submit Non Resident Data",
+					"item": [
+						{
+							"name": "10.1 (optional) Get Country List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/country-list",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"country-list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10.2 Submit Non Resident Data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"interactionId\": \"{{interaction-id}}\",\n  \"payload\": {\n    \"citizenshipCountryCode\": \"AFG\",\n    \"residencyAddress\": {\n      \"countryCode\": \"ALA\",\n      \"numberAndStreet\": \"12 Street-somewhere\",\n      \"city\": \"Some-City Example\",\n      \"zipCode\": \"12-Example Zip\"\n    },\n    \"nationalTin\": \"bbb321321BBB!\",\n    \"foreignTin\": \"aaa123123AAA!\",\n    \"withholdingTaxAccepted\": true,\n    \"w8benAccepted\": true\n  }\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-non-resident-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-non-resident-data"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 11: Know Your Customer",
+					"item": [
+						{
+							"name": "11.1 Submit KYC data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"answers\": [\n\t\t\t{\n\t\t\t\t\"id\": \"occupation\",\n\t\t\t\t\"selectedOptions\": [\"Clerical\"]\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"sourceOfIncome\",\n\t\t\t\t\"selectedOptions\": [\"Payroll\"]\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"purpose\",\n\t\t\t\t\"selectedOptions\": [\"Salary and salary compensation\"]\n\t\t\t}\n\t\t]\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-kyc-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-kyc-data"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "11.1 Submit KYC data (AML match)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"answers\": [\n\t\t\t{\n\t\t\t\t\"id\": \"occupation\",\n\t\t\t\t\"selectedOptions\": [\"Clerical\"]\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"sourceOfIncome\",\n\t\t\t\t\"selectedOptions\": [\"Payroll\"]\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"purpose\",\n\t\t\t\t\"selectedOptions\": [\"Salary and salary compensation\"]\n\t\t\t},\n            {\n\t\t\t\t\"id\": \"transferTiming\",\n\t\t\t\t\"selectedOptions\": [\"1-5\"]\n\t\t\t},\n            {\n\t\t\t\t\"id\": \"totalAmount\",\n\t\t\t\t\"selectedOptions\": [\"1-1000\"]\n\t\t\t},\n            {\n\t\t\t\t\"id\": \"internationalTransfer\",\n\t\t\t\t\"selectedOptions\": [\"false\"]\n\t\t\t}\n\t\t]\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/submit-kyc-data",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"submit-kyc-data"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 12: Set up credentials",
+					"item": [
+						{
+							"name": "12.1 Identity Verified",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"email\": \"some@email.com\",\n\t\t\"password\": \"thisAaaaa1\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/empty-handler",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"empty-handler"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "12.2 Setup credentials",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"interactionId\": \"{{interaction-id}}\",\n    \"payload\": {\n        \"password\": \"thisAaaaa1\"\n    }\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/setup-credentials",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"setup-credentials"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "12.2 (alternative) Setup credentials: pwd < 8",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"email\": \"some@email.com\",\n\t\t\"password\": \"myPwd1\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/setup-credentials",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"setup-credentials"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "12.2 (alternative) Setup credentials: pwd has no digits",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"email\": \"some@email.com\",\n\t\t\"password\": \"myPassword\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/setup-credentials",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"setup-credentials"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "12.2 (alternative) Setup credentials: pwd has no uppercase",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"email\": \"some@email.com\",\n\t\t\"password\": \"mypassword789\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/setup-credentials",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"setup-credentials"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "12.2 (alternative) Setup credentials: all error messages",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"email\": \"some@email.com\",\n\t\t\"password\": \"mpwd\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{new-customer-interaction-actions-url}}/setup-credentials",
+									"host": [
+										"{{new-customer-interaction-actions-url}}"
+									],
+									"path": [
+										"setup-credentials"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Step 13 (alternative): Finalize onboarding",
+					"item": [
+						{
+							"name": "13.1 Request OTP",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var response = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"interaction-id\", response.interactionId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_comment\": \"The payload can either contain phoneNumber or email, not both. The channel is an enum. SMS and EMAIL for now.\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"+123456789\",\n\t\t\"channel\": \"SMS\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{finalize-interaction-actions-url}}/request-otp",
+									"host": [
+										"{{finalize-interaction-actions-url}}"
+									],
+									"path": [
+										"request-otp"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "13.2 Verify OTP",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_comment\": \"Setting channel to SMS or EMAIL will set one of those fields to verified in caseData.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"+123456789\",\n\t\t\"channel\": \"SMS\",\n\t\t\"otp\": \"123456\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{finalize-interaction-actions-url}}/verify-otp-finalize",
+									"host": [
+										"{{finalize-interaction-actions-url}}"
+									],
+									"path": [
+										"verify-otp-finalize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "13.2 Verify OTP (with saved number)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_comment\": \"Setting channel to SMS or EMAIL will set one of those fields to verified in caseData.\",\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"phoneNumber\": \"{{phone-number}}\",\n\t\t\"channel\": \"SMS\",\n\t\t\"otp\": \"123456\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{finalize-interaction-actions-url}}/verify-otp-finalize",
+									"host": [
+										"{{finalize-interaction-actions-url}}"
+									],
+									"path": [
+										"verify-otp-finalize"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "13.3 Setup credentials",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"type": "text",
+										"value": "anonymousUserId={{cookieAnonValue}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"interactionId\": \"{{interaction-id}}\",\n\t\"payload\": {\n\t\t\"email\": \"some@email.com\",\n\t\t\"password\": \"thisAaaaa1\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{finalize-interaction-actions-url}}/setup-credentials",
+									"host": [
+										"{{finalize-interaction-actions-url}}"
+									],
+									"path": [
+										"setup-credentials"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "US Onboarding Co-applicant Welcome",
+			"item": [
+				{
+					"name": "Step 1: Fetch Co-applicant Data",
+					"item": [
+						{
+							"name": "Fetch Co-Applicant Data",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var response = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"interaction-id\", response.interactionId);",
+											"postman.setEnvironmentVariable(\"resume-code\", response.resumeCode);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Cookie",
+										"value": "anonymousUserId={{cookieAnonValue}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"payload\": {\n\t\t\"coApplicantId\": \"9abaee6e-7683-4c7e-97c8-80a2e7881a00\"\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{co-applicant-welcome-interaction-actions-url}}/fetch-co-applicant-data",
+									"host": [
+										"{{co-applicant-welcome-interaction-actions-url}}"
+									],
+									"path": [
+										"fetch-co-applicant-data"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "US Onboarding Flow - In Branch",
+			"item": [
+				{
+					"name": "Login as Manager - IPS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var csrfTokenValue = postman.getResponseCookie(\"XSRF-TOKEN\").value;",
+									"postman.setEnvironmentVariable(\"csrfTokenValue\", csrfTokenValue);",
+									"var jwtToken = postman.getResponseCookie(\"Authorization\").value;",
+									"postman.setEnvironmentVariable(\"jwtToken\", jwtToken);",
+									"postman.setEnvironmentVariable(\"user-id\", \"manager\");",
+									"tests[\"Status code is 200\"] = (responseCode.code === 200);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "manager",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "manager",
+									"type": "text"
+								},
+								{
+									"key": "submit",
+									"value": "Login",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/auth/login",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login to Gateway as manager"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"in-branch-interaction-id\", response.interactionId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payload\": {\n        \"productType\": \"Saving account\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/in-branch-onboarding/actions/get-product-list",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"in-branch-onboarding",
+								"actions",
+								"get-product-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Products",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interactionId\": \"{{in-branch-interaction-id}}\",\n    \"payload\": {\n        \"selection\": [\n            {\n                \"referenceId\": \"premium-savings\",\n                \"productName\": \"High-Rate Savings\",\n                \"quantity\": 1\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/in-branch-onboarding/actions/select-products",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"in-branch-onboarding",
+								"actions",
+								"select-products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Personal Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"in-branch-interaction-id\", response.interactionId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interactionId\": \"{{in-branch-interaction-id}}\",\n\t\"payload\": {\n\t\t\"firstName\": \"James\",\n\t\t\"lastName\": \"Bond\",\n\t\t\"dateOfBirth\": \"1968-02-03\",\n        \"email\": \"james@bond.com\",\n        \"phoneNumber\": \"+11111111\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/in-branch-onboarding/actions/submit-personal-info",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"in-branch-onboarding",
+								"actions",
+								"submit-personal-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit In Branch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interactionId\": \"{{in-branch-interaction-id}}\",\n    \"payload\": {\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/in-branch-onboarding/actions/submit-in-branch",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"in-branch-onboarding",
+								"actions",
+								"submit-in-branch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/process/v2/task",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"process",
+								"v2",
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Open Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"idt-jobId\", response.jobId);",
+									"postman.setEnvironmentVariable(\"idt-taskId\", pm.variables.replaceIn(pm.request.url.path[6]));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/process/v2/task/07ee8a65-3262-11ec-acdf-821f291afc66/open",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"process",
+								"v2",
+								"task",
+								"07ee8a65-3262-11ec-acdf-821f291afc66",
+								"open"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"idt-resourceId\", response.resourceId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/process/v2/task/{{idt-taskId}}/job/{{idt-jobId}}",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"process",
+								"v2",
+								"task",
+								"{{idt-taskId}}",
+								"job",
+								"{{idt-jobId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Interaction",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/{{idt-resourceId}}",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"{{idt-resourceId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Address",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "Bearer {{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"interactionId\": \"{{idt-resourceId}}\",\n\t\"payload\": {\n\t\t\"numberAndStreet\": \"someStreet\",\n\t\t\"apt\": \"2B\",\n\t\t\"zipCode\": \"12345\",\n\t\t\"city\": \"someCity\",\n\t\t\"state\": \"NY\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/address-validation-idt/actions/submit-address",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"address-validation-idt",
+								"actions",
+								"submit-address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit IDV Initiation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "Bearer {{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"interactionId\": \"{{idt-resourceId}}\",\n\t\"payload\": {\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/idv-idt/actions/identity-verification-initiation",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"idv-idt",
+								"actions",
+								"identity-verification-initiation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Approved IDV Result",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "Bearer {{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"interactionId\": \"{{idt-resourceId}}\",\n\t\"payload\": {\n\t\t\"verificationId\": \"approved\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/idv-idt/actions/identity-verification-result",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"idv-idt",
+								"actions",
+								"identity-verification-result"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit KYC data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "Bearer {{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"interactionId\": \"{{idt-resourceId}}\",\n\t\"payload\": {\n\t\t\"answers\": [\n\t\t\t{\n\t\t\t\t\"id\": \"occupation\",\n\t\t\t\t\"selectedOptions\": [\"Clerical\"]\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"sourceOfIncome\",\n\t\t\t\t\"selectedOptions\": [\"Payroll\"]\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"purpose\",\n\t\t\t\t\"selectedOptions\": [\"Salary and salary compensation\"]\n\t\t\t}\n\t\t]\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/kyc-idt/actions/submit-kyc-data",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"kyc-idt",
+								"actions",
+								"submit-kyc-data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit US Citizenship",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "Bearer {{jwtToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"interactionId\": \"{{idt-resourceId}}\",\n    \"payload\": {\n        \"type\": \"US_CITIZEN\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/citizenship-idt/actions/citizenship-selector",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"citizenship-idt",
+								"actions",
+								"citizenship-selector"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit SSN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"type": "text",
+								"value": "anonymousUserId={{cookieAnonValue}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"interactionId\": \"{{idt-resourceId}}\",\n\t\"payload\": {\n\t\t\"ssn\": \"123456789\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{gateway-url}}/api/us-onboarding/client-api/interaction/v2/interactions/citizenship-idt/actions/submit-ssn",
+							"host": [
+								"{{gateway-url}}"
+							],
+							"path": [
+								"api",
+								"us-onboarding",
+								"client-api",
+								"interaction",
+								"v2",
+								"interactions",
+								"citizenship-idt",
+								"actions",
+								"submit-ssn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Interaction API",
+			"item": [
+				{
+					"name": "Perform an action",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resumeCode = JSON.parse(responseBody).resumeCode;",
+									"postman.setEnvironmentVariable(\"resumeCode\", resumeCode);",
+									"tests[\"Status code is 200\"] = (responseCode.code === 200);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"payload\": {\n\t\t\"_comment\": \"Provide your payload here.\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{interaction-actions-url}}/{{action-name}}",
+							"host": [
+								"{{interaction-actions-url}}"
+							],
+							"path": [
+								"{{action-name}}"
+							]
+						},
+						"description": "Perform an action via a call to Gateway"
+					},
+					"response": []
+				},
+				{
+					"name": "Get interaction by resume code",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"type": "text",
+								"value": "{{csrfTokenValue}}"
+							}
+						],
+						"url": {
+							"raw": "{{journey-service-url}}/api/interaction/v1/interactions/{{resume-code}}",
+							"host": [
+								"{{journey-service-url}}"
+							],
+							"path": [
+								"api",
+								"interaction",
+								"v1",
+								"interactions",
+								"{{resume-code}}"
+							]
+						},
+						"description": "Get interaction by resume code via call to Gateway"
+					},
+					"response": []
+				},
+				{
+					"name": "Save interaction with temporary data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"type": "text",
+								"value": "{{csrfTokenValue}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"payload\": {\n\t\t\"firstName\": \"John\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{journey-service-url}}/api/interaction/v1/interactions/save",
+							"host": [
+								"{{journey-service-url}}"
+							],
+							"path": [
+								"api",
+								"interaction",
+								"v1",
+								"interactions",
+								"save"
+							]
+						},
+						"description": "Get interaction by resume code via call to Gateway"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Process API",
+			"item": [
+				{
+					"name": "Get list of open tasks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var latestTask = JSON.parse(responseBody)[0].id;",
+									"postman.setEnvironmentVariable(\"latest-task\", latestTask);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{process-url}}/task",
+							"host": [
+								"{{process-url}}"
+							],
+							"path": [
+								"task"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{process-url}}/task/{{latest-task}}",
+							"host": [
+								"{{process-url}}"
+							],
+							"path": [
+								"task",
+								"{{latest-task}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete latest task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"taskData\": {\n        \"decision\": \"approved\",\n        \"customerApproved\": true\n    }\n}"
+						},
+						"url": {
+							"raw": "{{process-url}}/task/{{latest-task}}/complete",
+							"host": [
+								"{{process-url}}"
+							],
+							"path": [
+								"task",
+								"{{latest-task}}",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete latest task (Citizenship Review)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"taskData\": {\n        \"approved\": true,\n        \"comment\": null\n    }\n}"
+						},
+						"url": {
+							"raw": "{{process-url}}/task/{{latest-task}}/complete",
+							"host": [
+								"{{process-url}}"
+							],
+							"path": [
+								"task",
+								"{{latest-task}}",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Case Data API",
+			"item": [
+				{
+					"name": "Get list of cases for a case definition",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var latestCase = JSON.parse(responseBody)[0].id;",
+									"postman.setEnvironmentVariable(\"latest-case\", latestCase);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{case-data-url}}/case-definitions/{{case-definition}}@{{case-definition-version}}/cases",
+							"host": [
+								"{{case-data-url}}"
+							],
+							"path": [
+								"case-definitions",
+								"{{case-definition}}@{{case-definition-version}}",
+								"cases"
+							]
+						},
+						"description": "For pagination use query params: `?firstResult=0&maxResults=10`\n\nTo include archived cases: `?includeArchived=true`"
+					},
+					"response": []
+				},
+				{
+					"name": "Get count of cases for a case definition",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{case-data-url}}/case-definitions/{{case-definition}}@{{case-definition-version}}/cases/count",
+							"host": [
+								"{{case-data-url}}"
+							],
+							"path": [
+								"case-definitions",
+								"{{case-definition}}@{{case-definition-version}}",
+								"cases",
+								"count"
+							]
+						},
+						"description": "To include archived cases: `?includeArchived=true`"
+					},
+					"response": []
+				},
+				{
+					"name": "Get latest case data by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{case-data-url}}/cases/{{latest-case}}",
+							"host": [
+								"{{case-data-url}}"
+							],
+							"path": [
+								"cases",
+								"{{latest-case}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get latest case events",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{case-data-url}}/cases/{{latest-case}}/events",
+							"host": [
+								"{{case-data-url}}"
+							],
+							"path": [
+								"cases",
+								"{{latest-case}}",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get latest case status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{case-data-url}}/cases/{{latest-case}}/status",
+							"host": [
+								"{{case-data-url}}"
+							],
+							"path": [
+								"cases",
+								"{{latest-case}}",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get latest case filesets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{case-data-url}}/cases/{{latest-case}}/filesets",
+							"host": [
+								"{{case-data-url}}"
+							],
+							"path": [
+								"cases",
+								"{{latest-case}}",
+								"filesets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create fileset on latest case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var testFileset = JSON.parse(responseBody).name;",
+									"postman.setEnvironmentVariable(\"test-fileset\", testFileset);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"allowedMediaTypes\": [\n    \"image/png\",\n    \"image/jpg\",\n    \"image/jpeg\",\n    \"text/plain\",\n    \"application/pdf\"\n  ],\n  \"disallowedMediaTypes\": [],\n  \"maxFiles\": 1,\n  \"name\": \"Test Fileset\"\n}"
+						},
+						"url": {
+							"raw": "{{case-data-url}}/cases/{{latest-case}}/filesets",
+							"host": [
+								"{{case-data-url}}"
+							],
+							"path": [
+								"cases",
+								"{{latest-case}}",
+								"filesets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete last created fileset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{case-data-url}}/cases/{{latest-case}}/filesets/{{test-fileset}}",
+							"host": [
+								"{{case-data-url}}"
+							],
+							"path": [
+								"cases",
+								"{{latest-case}}",
+								"filesets",
+								"{{test-fileset}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users API",
+			"item": [
+				{
+					"name": "Get logged in user profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{journey-service-url}}/api/iam/v1/users/{{user-id}}/profile",
+							"host": [
+								"{{journey-service-url}}"
+							],
+							"path": [
+								"api",
+								"iam",
+								"v1",
+								"users",
+								"{{user-id}}",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get logged user permissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{journey-service-url}}/api/iam/v1/users/me/permissions",
+							"host": [
+								"{{journey-service-url}}"
+							],
+							"path": [
+								"api",
+								"iam",
+								"v1",
+								"users",
+								"me",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

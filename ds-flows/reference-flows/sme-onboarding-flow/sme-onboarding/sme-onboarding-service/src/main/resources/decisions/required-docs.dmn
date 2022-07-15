@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0xe5nn8" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <inputData id="InputData_16un48s" name="DBA_Field" />
+  <inputData id="InputData_0aicq23" name="Jurisdiction" />
+  <inputData id="InputData_1sop0u2" name="BusinessIndustry" />
+  <decision id="business-license" name="Decide on business license" camunda:versionTag="0.1.0">
+    <informationRequirement id="InformationRequirement_14v9b2i">
+      <requiredInput href="#InputData_0aicq23" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0ck99oa">
+      <requiredInput href="#InputData_1sop0u2" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1qcm9y3">
+      <input id="InputClause_1aljgro" label="Business_Industry" camunda:inputVariable="businessIndustry">
+        <inputExpression id="LiteralExpression_1bjv1qb" typeRef="string" expressionLanguage="juel">
+          <text>${smeHelper.getIndustry(variableContext)}</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_16whpf4" label="Jurisdiction" camunda:inputVariable="businessOprState">
+        <inputExpression id="LiteralExpression_1lnq1zb" typeRef="string" expressionLanguage="juel">
+          <text>${smeHelper.getOperationState(variableContext)}</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_02ohwno" label="Business_license_required" name="businessLicenseRequired" typeRef="boolean" />
+      <rule id="DecisionRule_0twx0er">
+        <description>Mining and drilling</description>
+        <inputEntry id="UnaryTests_0ktnoz0">
+          <text>"21"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02c5awv">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0s2mv37">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16dqp1i">
+        <description>Transportation and Warehousing general</description>
+        <inputEntry id="UnaryTests_1ro4dxm">
+          <text>"48"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dehwlw">
+          <text>"WA","TX","WI"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dd2zh8">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1wh8kc5">
+        <description>Transportation and Warehousing general</description>
+        <inputEntry id="UnaryTests_178cagm">
+          <text>"48"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fzgk0g">
+          <text>not("WA","TX","WI")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17g65x1">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_07zbvhx">
+        <inputEntry id="UnaryTests_0qylffk">
+          <text>not("21","48")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hw5vsb">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hauax0">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="required-docs" name="Decide on required documents" camunda:versionTag="0.1.1">
+    <informationRequirement id="InformationRequirement_1a09m37">
+      <requiredDecision href="#business-license" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_03zpcy4">
+      <requiredDecision href="#biz-struc" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0n74t21">
+      <requiredDecision href="#dba-doc" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0jgpqq3" hitPolicy="FIRST">
+      <input id="InputClause_00g9xar" label="DBA Required" biodi:width="191" camunda:inputVariable="dbaRequired">
+        <inputExpression id="LiteralExpression_1fobl3j" typeRef="boolean" expressionLanguage="feel">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_056pkir" label="Business_license_required" biodi:width="248" camunda:inputVariable="businessLicenseRequired">
+        <inputExpression id="LiteralExpression_03x4n81" typeRef="boolean">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_015nx0x" label="Business_structure_document _required" camunda:inputVariable="businessStructureDocumentsRequired">
+        <inputExpression id="LiteralExpression_1wbgte4" typeRef="boolean">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_001kuyn" label="Documents Required" name="documentsRequired" typeRef="boolean" biodi:width="192" />
+      <rule id="DecisionRule_0vltu6s">
+        <inputEntry id="UnaryTests_0i3f0ti">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_020do8c">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04e6t7t">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_06od1x2">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_11d8b78">
+        <inputEntry id="UnaryTests_1w8v482">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s3gzyy">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16i9vgz">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lu48gi">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_03ann38">
+        <inputEntry id="UnaryTests_1d9j79y">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1uoj0lk">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0cbzith">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xkxemj">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_10ul3hf">
+        <inputEntry id="UnaryTests_1rz452a">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0i677jq">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ylgwo5">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lgvb67">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="biz-struc" name="Decide on business structure required documents" camunda:versionTag="0.1.0">
+    <informationRequirement id="InformationRequirement_16408ah">
+      <requiredInput href="#InputData_1pek4wb" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0rcspzi">
+      <requiredInput href="#InputData_0ib6tt5" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0ysfd6a">
+      <input id="InputClause_1575spd" label="businessType" camunda:inputVariable="businessStructure">
+        <inputExpression id="LiteralExpression_0z8u0o9" typeRef="string" expressionLanguage="juel">
+          <text>${smeHelper.getBusinessType(variableContext)}</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_10wajbk">
+          <text>"Corporation","LLC","Partnership","Sole proprietorship"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_06vplhs" label="businessSubtype">
+        <inputExpression id="LiteralExpression_021qee4" typeRef="string" expressionLanguage="juel">
+          <text>${smeHelper.getBusinessSubtype(variableContext)}</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1tlntex">
+          <text>"General","Limited","LLC Single Member","Sole Proprietorship"</text>
+        </inputValues>
+      </input>
+      <output id="OutputClause_0r3uukm" label="Business Structure documents required" name="businessStructureDocumentsRequired" typeRef="boolean" />
+      <output id="OutputClause_0lw8z38" label="Articles of Organization" name="articlesOrganization" typeRef="boolean" />
+      <output id="OutputClause_1agpmqh" label="Articles of Incorporation" name="articlesIncorporation" typeRef="boolean" />
+      <output id="OutputClause_0lz3800" label="Operating Agreeement" name="operatingAgreement" typeRef="boolean" />
+      <output id="OutputClause_12g4zsa" label="Partnership Agreement" name="partnershipAgreement" typeRef="boolean" />
+      <rule id="DecisionRule_1vq4juo">
+        <inputEntry id="UnaryTests_1y7goqn">
+          <text>"Sole proprietorship"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04c910p">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1bxcdae">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0xami2t">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06e1iic">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qoo9ww">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11htllq">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wlffb5">
+        <inputEntry id="UnaryTests_04qoihi">
+          <text>"Partnership"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gc964d">
+          <text>"General","Limited"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ur972y">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0kc8cek">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ooap5r">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0jcrutb">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0pajp1o">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1fxls61">
+        <inputEntry id="UnaryTests_0sl9w3c">
+          <text>"Partnership"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_110wzc7">
+          <text>not("General","Limited")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0khha0c">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_03qujlq">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cfv32w">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0iubm3p">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0czsuya">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1mr3qnu">
+        <inputEntry id="UnaryTests_1jwc26k">
+          <text>"LLC"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08watok">
+          <text>"LLC Single Member"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14fzkvb">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19o16a9">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_04pnloo">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0bs9iyn">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0yra9le">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0hpdmwx">
+        <inputEntry id="UnaryTests_0lgt7oa">
+          <text>"LLC"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_186zwvg">
+          <text>not("LLC Single Member")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1iikrub">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1kemj2p">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ee4l3v">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1aa0z32">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_11859if">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0uq8ukj">
+        <inputEntry id="UnaryTests_0pnhpxb">
+          <text>"Corporation"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ertah7">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fktcb2">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1s9uxs6">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_03hbwaq">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_13uvx2p">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_193kl1l">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0ib6tt5" name="businessType" />
+  <inputData id="InputData_1pek4wb" name="businessSubtype" />
+  <decision id="dba-doc" name="Decide on DBA required document" camunda:versionTag="0.1.0">
+    <informationRequirement id="InformationRequirement_0cj8sje">
+      <requiredInput href="#InputData_16un48s" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0ur1gw3">
+      <input id="InputClause_1xph8lf" label="DBA_filled" camunda:inputVariable="dba">
+        <inputExpression id="LiteralExpression_1tjdtpw" typeRef="boolean" expressionLanguage="juel">
+          <text>${smeHelper.hasKnownName(variableContext)}</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_17e9in0" label="DBA document" name="dbaRequired" typeRef="boolean" />
+      <rule id="DecisionRule_14vevaf">
+        <inputEntry id="UnaryTests_1a5ud5n">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hd0na7">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1w7ihn2">
+        <inputEntry id="UnaryTests_1l0ti1f">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_176bbm4">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_0glfx8e" dmnElementRef="InputData_16un48s">
+        <dc:Bounds height="45" width="125" x="157" y="439" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_11wtvkq" dmnElementRef="InputData_0aicq23">
+        <dc:Bounds height="45" width="125" x="527" y="438" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_03sz3jl" dmnElementRef="InformationRequirement_14v9b2i">
+        <di:waypoint x="590" y="438" />
+        <di:waypoint x="570" y="370" />
+        <di:waypoint x="570" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0m1yt78" dmnElementRef="InputData_1sop0u2">
+        <dc:Bounds height="45" width="125" x="367" y="438" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0qve8dm" dmnElementRef="InformationRequirement_0ck99oa">
+        <di:waypoint x="430" y="438" />
+        <di:waypoint x="510" y="370" />
+        <di:waypoint x="510" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0jysn9p" dmnElementRef="business-license">
+        <dc:Bounds height="80" width="180" x="450" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0m0djr3" dmnElementRef="InformationRequirement_1a09m37">
+        <di:waypoint x="540" y="270" />
+        <di:waypoint x="390" y="200" />
+        <di:waypoint x="390" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0wkszay" dmnElementRef="required-docs">
+        <dc:Bounds height="80" width="180" x="300" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_13a4fjo" dmnElementRef="biz-struc">
+        <dc:Bounds height="80" width="180" x="650" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1u2r4eq" dmnElementRef="InformationRequirement_03zpcy4">
+        <di:waypoint x="740" y="270" />
+        <di:waypoint x="435" y="200" />
+        <di:waypoint x="435" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0sdsqh6" dmnElementRef="InputData_0ib6tt5">
+        <dc:Bounds height="45" width="125" x="678" y="439" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1m3d4ih" dmnElementRef="InputData_1pek4wb">
+        <dc:Bounds height="45" width="125" x="828" y="439" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1potj1g" dmnElementRef="InformationRequirement_16408ah">
+        <di:waypoint x="891" y="439" />
+        <di:waypoint x="770" y="370" />
+        <di:waypoint x="770" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0gs14h8" dmnElementRef="InformationRequirement_0rcspzi">
+        <di:waypoint x="741" y="439" />
+        <di:waypoint x="710" y="370" />
+        <di:waypoint x="710" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0p3rg0y" dmnElementRef="dba-doc">
+        <dc:Bounds height="80" width="180" x="240" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_02fak6n" dmnElementRef="InformationRequirement_0cj8sje">
+        <di:waypoint x="220" y="439" />
+        <di:waypoint x="330" y="370" />
+        <di:waypoint x="330" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_041wy6n" dmnElementRef="InformationRequirement_0n74t21">
+        <di:waypoint x="330" y="270" />
+        <di:waypoint x="345" y="200" />
+        <di:waypoint x="345" y="180" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -1,0 +1,8 @@
+backbase:
+  flow:
+    integrations:
+      anti-money-laundering:
+        impl: ComplyAdvantageAntiMoneyLaundering
+        comply-advantage:
+          service-url: https://api.complyadvantage.com
+          api-key: LBBvLHb4ILlBTIZmNUlZ53gxSiRr2xZB

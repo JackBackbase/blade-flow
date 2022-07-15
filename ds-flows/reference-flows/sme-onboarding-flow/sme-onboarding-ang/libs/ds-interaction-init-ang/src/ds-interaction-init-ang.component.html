@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center justify-content-center mt-5">
+  <bb-loading-indicator-ui data-role="action-loading-indicator" *ngIf="isLoading$ | async" loaderSize="lg">
+  </bb-loading-indicator-ui>
+
+  <bb-empty-state-ui data-role="action-http-error" *ngIf="!(isLoading$ | async) && (isHttpError$ | async)"
+    title="Something went wrong" i18n-title="Unknown http error title@@bb.ds-interaction-init-ang.uknown-error-title"
+    subtitle="Try to reload the page or contact the system administrator"
+    i18n-subtitle="Unknown http error subtitle@@bb.ds-interaction-init-ang.uknown-error-subtitle" iconSize="xxl"
+    iconModifier="error-outline">
+  </bb-empty-state-ui>
+</div>

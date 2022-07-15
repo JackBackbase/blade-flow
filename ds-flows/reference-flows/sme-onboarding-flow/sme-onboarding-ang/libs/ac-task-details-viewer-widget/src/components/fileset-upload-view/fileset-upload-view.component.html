@@ -1,0 +1,25 @@
+<ng-container *ngIf="hasMaxFilesLimit(); else fileUploadUiTpl">
+  <small class="text-muted"
+         i18n="Message text when maximum number of uploaded files is reached@@bb.ac-task-details-viewer-widget.fileset-upload-view.max-files-reached-text"
+         data-role="fileset-upload-view-max-files-reached-text">
+    The maximum number of files for this fileset is reached.
+  </small>
+</ng-container>
+
+<ng-template #fileUploadUiTpl>
+  <bb-file-upload-ui data-role="fileset-upload-view-file-upload-component"
+                     [accept]="allowedMediaTypes"
+                     [multiple]="multiple"
+                     [uploadHandler]="uploadHandler"
+                     [filesLimit]="filesLimit"
+                     [maxFileSize]="maxFileSize"
+                     (upload)="upload.emit($event)">
+    <span slot="description"
+          i18n="Description text of the file upload zone@@bb.ac-task-details-viewer-widget.fileset-upload-view.file-upload-zone-description">This
+      fileset can
+      contain a maximum of {maxFiles,
+      plural, =1 {{{maxFiles}} file} other {{{maxFiles}} files}}. Only {{allowedMediaTypesFormatted}} files are
+      supported<ng-container *ngIf="maxFileSize">, with a maximum size of {{ maxFileSize | bbFileSize: 1 }} per file
+      </ng-container></span>
+  </bb-file-upload-ui>
+</ng-template>

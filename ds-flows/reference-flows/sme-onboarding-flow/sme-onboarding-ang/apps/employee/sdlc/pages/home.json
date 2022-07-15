@@ -1,0 +1,878 @@
+{
+  "extends": "container-bb-manageable-area",
+  "area": "0",
+  "children": [
+    {
+      "extends": "bb-employee-ang",
+      "area": "0",
+      "children": [
+        {
+          "name": "bb-layout-container-flex-ang_4037a804-cbbf-409e-9889-65ab11ff2da5-_-89b97a8a6308",
+          "extends": "bb-layout-container-flex-ang",
+          "area": "0",
+          "children": [
+            {
+              "name": "bb-panel-container-ang-_-243c989c39ff",
+              "extends": "bb-panel-container-ang",
+              "title": "Branding Area",
+              "area": "0",
+              "children": [
+                {
+                  "name": "bb-content-widget-ang-_-asdasdasd",
+                  "classId": "ContentWidgetComponent",
+                  "content-defaultContent": {
+                    "kind": "content",
+                    "path": "logo-emblem.svg"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bb-panel-container-ang-_-a9ccf42a24c1",
+              "extends": "bb-panel-container-ang",
+              "title": "Right Topbar Area",
+              "area": "0",
+              "children": [
+                {
+                  "name": "bb-panel-container-ang-_-a9ccf42a13c6",
+                  "extends": "bb-panel-container-ang",
+                  "cssClasses": "d-inline-block",
+                  "area": "0"
+                },
+                {
+                  "name": "bb-panel-container-ang-_-a9ccf42a76c6",
+                  "extends": "bb-panel-container-ang",
+                  "cssClasses": "d-inline-block",
+                  "area": "0",
+                  "children": [
+                    {
+                      "name": "bb-logout-widget-ang-_-asdasdasd",
+                      "classId": "CmLogoutWidgetComponent",
+                      "serviceUrl": "sme-onboarding"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "bb-panel-container-ang-_-daef3ce7b59f",
+              "extends": "bb-panel-container-ang",
+              "title": "Sidebar Area",
+              "area": "0",
+              "children": [
+                {
+                  "name": "bb-navigation-spa-widget-ang-_-afba7120ec2e",
+                  "extends": "bb-navigation-spa-widget-ang",
+                  "area": "0",
+                  "sourceRoutesName": "bb-deck-container-ang-_-5953cf11f91a"
+                }
+              ]
+            },
+            {
+              "name": "bb-panel-container-ang-_-37accdd678d5",
+              "extends": "bb-panel-container-ang",
+              "title": "Header Area",
+              "area": "0",
+              "children": []
+            },
+            {
+              "name": "bb-panel-container-ang-_-cc1593a58dc2",
+              "extends": "bb-panel-container-ang",
+              "title": "Main Content Area",
+              "area": "0",
+              "children": [
+                {
+                  "name": "bb-deck-container-ang-_-5953cf11f91a",
+                  "extends": "bb-deck-container-ang",
+                  "area": "0",
+                  "children": [
+                    {
+                      "name": "bb-panel-container-ang-_-e6332dbfb2d6",
+                      "extends": "bb-panel-container-ang",
+                      "title": "Dashboard",
+                      "route": "dashboard",
+                      "area": "0",
+                      "cssClasses": "",
+                      "navIcon": "dashboard",
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-1c898eb5419b",
+                          "extends": "bb-platform-container-ang",
+                          "area": "0",
+                          "bb.caseData.servicePath": "/sme-onboarding",
+                          "bb.iam.servicePath": "/sme-onboarding",
+                          "bb.interaction.apiVersion": "v1",
+                          "bb.interaction.deploymentPath": "interactions",
+                          "bb.interaction.servicePath": "/sme-onboarding/api/interaction",
+                          "bb.journeyName": "sme-onboarding",
+                          "bb.process.servicePath": "/sme-onboarding",
+                          "children": [
+                            {
+                              "name": "bb-panel-container-ang-_-84015ab291d0",
+                              "extends": "bb-panel-container-ang",
+                              "area": "0",
+                              "children": [
+                                {
+                                  "name": "bb-header-widget-ang-_-da798cc39095",
+                                  "extends": "bb-header-widget-ang",
+                                  "area": "0"
+                                },
+                                {
+                                  "name": "bb-column-container-ang-_-ff31524641ec",
+                                  "extends": "bb-column-container-ang",
+                                  "area": "0",
+                                  "children": [
+                                    {
+                                      "name": "bb-panel-container-ang-_-479fdd8af109",
+                                      "extends": "bb-panel-container-ang",
+                                      "title": "Column 1",
+                                      "area": "0",
+                                      "columnClass": "col-8",
+                                      "children": [
+                                        {
+                                          "name": "bb-user-dashboard-widget-ang-_-02f79ca5cf89",
+                                          "extends": "bb-user-dashboard-widget-ang",
+                                          "area": "0",
+                                          "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-0f792c190cb9",
+                                          "output.taskInstanceId": "navigation:bb-panel-container-ang-_-e6332dbfb2d6"
+                                        },
+                                        {
+                                          "name": "bb-sidebar-overlay-container-ang-_-885d46e66940",
+                                          "extends": "bb-sidebar-overlay-container-ang",
+                                          "area": "0",
+                                          "bb.routeParamTrigger": "taskInstanceId",
+                                          "children": [
+                                            {
+                                              "name": "bb-task-details-widget-ang-_-3ce48575d96a",
+                                              "extends": "bb-task-details-widget-ang",
+                                              "area": "0"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "bb-panel-container-ang-_-60ddf22d692e",
+                                      "extends": "bb-panel-container-ang",
+                                      "title": "Column 2",
+                                      "area": "0",
+                                      "columnClass": "col-4",
+                                      "children": [
+                                        {
+                                          "name": "bb-panel-container-ang-_-1a459f01e116",
+                                          "extends": "bb-panel-container-ang",
+                                          "area": "0",
+                                          "cssClasses": "d-block card card-body shadow-none",
+                                          "children": [
+                                            {
+                                              "name": "bb-task-count-summary-widget-ang-_-b06defd9a4ff",
+                                              "extends": "bb-task-count-summary-widget-ang",
+                                              "area": "0",
+                                              "bb.processDefinitionId": "docs-gathering",
+                                              "bb.taskCountSummary.subtitle": "",
+                                              "bb.taskCountSummary.title": "Task Progress"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "bb-panel-container-ang-_-5b324667144f",
+                                          "extends": "bb-panel-container-ang",
+                                          "area": "0",
+                                          "cssClasses": "d-block card card-body shadow-none mt-4",
+                                          "children": [
+                                            {
+                                              "name": "bb-live-insights-widget-ang-_-20313ae5f9ad",
+                                              "extends": "bb-live-insights-widget-ang",
+                                              "area": "0",
+                                              "bb.caseDefinitionKey": "sme"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-594ba9b7feca",
+                      "extends": "bb-panel-container-ang",
+                      "title": "Business Onboarding",
+                      "route": "sme-onboarding",
+                      "area": "0",
+                      "navIcon": "insert-drive-file",
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-4bda3ab9f9d6",
+                          "extends": "bb-platform-container-ang",
+                          "area": "0",
+                          "bb.caseData.servicePath": "/sme-onboarding",
+                          "bb.comments.servicePath": "/sme-onboarding",
+                          "bb.iam.servicePath": "/sme-onboarding",
+                          "bb.interaction.apiVersion": "v1",
+                          "bb.interaction.deploymentPath": "interactions",
+                          "bb.interaction.servicePath": "/sme-onboarding/api/interaction",
+                          "bb.journeyName": "sme-onboarding",
+                          "bb.process.servicePath": "/sme-onboarding",
+                          "children": [
+                            {
+                              "name": "bb-deck-container-ang-_-12c9d829a04b",
+                              "extends": "bb-deck-container-ang",
+                              "area": "0",
+                              "children": [
+                                {
+                                  "name": "bb-panel-container-ang-_-539638102933",
+                                  "extends": "bb-panel-container-ang",
+                                  "title": "CaseDefinitionOverview",
+                                  "route": "",
+                                  "area": "0",
+                                  "children": [
+                                    {
+                                      "name": "bb-panel-container-ang-_-da870d6e145b",
+                                      "extends": "bb-panel-container-ang",
+                                      "area": "0",
+                                      "cssClasses": "",
+                                      "children": [
+                                        {
+                                          "classId": "FlowInteractionContainerComponent",
+                                          "apiVersion": "v2",
+                                          "deploymentPath": "interactions",
+                                          "servicePath": "sme-onboarding/client-api/interaction",
+                                          "interactionName": "in-branch-onboarding-start",
+                                          "outletName": "bb-flow-interaction-container-_-000d9djd9s",
+                                          "children": [
+                                            {
+                                              "name": "bb-cm-create-business-case-widget-ang-_-98155d5cd979",
+                                              "classId": "CmCreateBusinessCaseWidgetComponent",
+                                              "output.caseInstanceKey": "navigation:bb-case-overview-container-ang-_-31a522bb4c8b"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "bb-heading-widget-ang-_-216f8ebfaa42",
+                                          "extends": "bb-heading-widget-ang",
+                                          "area": "0",
+                                          "customClassName": "d-flex justify-content-between p-0",
+                                          "heading": "Business Onboarding",
+                                          "headingType": "h1"
+                                        },
+                                        {
+                                          "name": "bb-panel-container-ang-_-c2845a3c71f8",
+                                          "extends": "bb-panel-container-ang",
+                                          "area": "0",
+                                          "cssClasses": "d-block",
+                                          "children": [
+                                            {
+                                              "name": "bb-tab-container-ang-_-80552e41d9c8",
+                                              "extends": "bb-tab-container-ang",
+                                              "area": "0",
+                                              "children": [
+                                                {
+                                                  "name": "bb-panel-container-ang-_-8b6085a810c3",
+                                                  "extends": "bb-panel-container-ang",
+                                                  "title": "Cases",
+                                                  "route": "",
+                                                  "area": "0",
+                                                  "cssClasses": "d-block card card-body",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-case-overview-list-widget-ang-_-b15f841c2597",
+                                                      "extends": "bb-case-overview-list-widget-ang",
+                                                      "area": "0",
+                                                      "bb.caseDefinitionKey": "sme",
+                                                      "output.caseInstanceKey": "navigation:bb-case-overview-container-ang-_-31a522bb4c8b"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-panel-container-ang-_-db178c061d8c",
+                                                  "extends": "bb-panel-container-ang",
+                                                  "title": "Tasks",
+                                                  "route": "",
+                                                  "area": "0",
+                                                  "cssClasses": "d-block card card-body",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-modal-overlay-container-ang-_-a22bc925d74f",
+                                                      "extends": "bb-modal-overlay-container-ang",
+                                                      "area": "0",
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-view-interaction-task-widget-ang-_-1055f7caf93b",
+                                                          "extends": "bb-view-interaction-task-widget-ang",
+                                                          "apiVersion": "v1",
+                                                          "area": "0",
+                                                          "bb.showStepper": true,
+                                                          "deploymentPath": "interactions",
+                                                          "interactionName": "simple-interaction",
+                                                          "servicePath": "sme-onboarding/api/interaction"
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "name": "bb-sidebar-overlay-container-ang-_-9972b0e088ae",
+                                                      "extends": "bb-sidebar-overlay-container-ang",
+                                                      "area": "0",
+                                                      "bb.routeParamTrigger": "taskInstanceId",
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-task-details-widget-ang-_-8a5470964b6d",
+                                                          "extends": "bb-task-details-widget-ang",
+                                                          "area": "0"
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "name": "bb-task-overview-list-widget-ang-_-7fc1e7654e64",
+                                                      "extends": "bb-task-overview-list-widget-ang",
+                                                      "area": "0",
+                                                      "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-0f792c190cb9",
+                                                      "output.taskInstanceId": "navigation:bb-panel-container-ang-_-db178c061d8c"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "bb-panel-container-ang-_-0f792c190cb9",
+                                  "extends": "bb-panel-container-ang",
+                                  "title": "CaseOverview",
+                                  "route": "",
+                                  "area": "0",
+                                  "children": [
+                                    {
+                                      "name": "bb-case-overview-container-ang-_-31a522bb4c8b",
+                                      "extends": "bb-case-overview-container-ang",
+                                      "area": "0",
+                                      "children": [
+                                        {
+                                          "classId": "CmStatusTrackingWidgetComponent",
+                                          "bb.completeIcon": "beenhere",
+                                          "bb.milestoneOrder": "Application submitted, Documents Uploaded, Documents reviewed, Application completed",
+                                          "bb.epicName": "Main",
+                                          "cssClasses": "d-block mb-3"
+                                        },
+                                        {
+                                          "name": "bb-tab-container-ang-_-e6ff1abab4b2",
+                                          "extends": "bb-tab-container-ang",
+                                          "area": "0",
+                                          "children": [
+                                            {
+                                              "name": "bb-panel-container-ang-_-d8c990d86348",
+                                              "extends": "bb-panel-container-ang",
+                                              "title": "Overview",
+                                              "route": "",
+                                              "area": "0",
+                                              "children": [
+                                                {
+                                                  "name": "bb-panel-container-ang-_-d7d9da7326fe",
+                                                  "extends": "bb-panel-container-ang",
+                                                  "area": "0",
+                                                  "cssClasses": "d-block card card-body mb-4",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-case-info-widget-ang-_-f120502334f2",
+                                                      "extends": "bb-case-info-widget-ang",
+                                                      "area": "0"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-column-container-ang-_-851e061541f8",
+                                                  "extends": "bb-column-container-ang",
+                                                  "area": "0",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-c3ee82127a09",
+                                                      "extends": "bb-panel-container-ang",
+                                                      "title": "Column 1",
+                                                      "area": "0",
+                                                      "columnClass": "col",
+                                                      "cssClasses": "col mt-4 mx-2",
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-case-data-overview-widget-ang-_-asdasdasd",
+                                                          "classId": "CmCaseDataOverviewWidgetComponent"
+                                                        },
+                                                        {
+                                                          "name": "bb-cm-applicants-list-widget-_-20djkwkj",
+                                                          "classId": "CmApplicantsListWidgetComponent",
+                                                          "showGoToApplicantLink": true
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-a2dfc07e47a7",
+                                                      "extends": "bb-panel-container-ang",
+                                                      "title": "Column 2",
+                                                      "area": "0",
+                                                      "columnClass": "col",
+                                                      "cssClasses": "col mt-4",
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-panel-container-ang-_-bdd49d1094bc",
+                                                          "extends": "bb-panel-container-ang",
+                                                          "area": "0",
+                                                          "cssClasses": "d-block card card-body",
+                                                          "children": [
+                                                            {
+                                                              "name": "bb-modal-overlay-container-ang-_-c7d1968e8ac4",
+                                                              "extends": "bb-modal-overlay-container-ang",
+                                                              "area": "0",
+                                                              "children": [
+                                                                {
+                                                                  "name": "bb-view-interaction-task-widget-ang-_-24f2bf5d69f7",
+                                                                  "extends": "bb-view-interaction-task-widget-ang",
+                                                                  "apiVersion": "v1",
+                                                                  "area": "0",
+                                                                  "bb.showStepper": "true",
+                                                                  "deploymentPath": "interactions",
+                                                                  "servicePath": "sme-onboarding/api/interaction"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "name": "bb-sidebar-overlay-container-ang-_-1a2fe1ad530b",
+                                                              "extends": "bb-sidebar-overlay-container-ang",
+                                                              "area": "0",
+                                                              "bb.routeParamTrigger": "taskInstanceId",
+                                                              "children": [
+                                                                {
+                                                                  "name": "bb-task-details-widget-ang-_-b31c4893d6e5",
+                                                                  "extends": "bb-task-details-widget-ang",
+                                                                  "area": "0"
+                                                                },
+                                                                {
+                                                                  "name": "bb-panel-container-ang-_-b99887cbddef",
+                                                                  "extends": "bb-panel-container-ang",
+                                                                  "area": "0",
+                                                                  "cssClasses": "d-block my-4 container"
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "name": "bb-events-and-tasks-widget-ang-_-fdc523b1f23b",
+                                                              "extends": "bb-events-and-tasks-widget-ang",
+                                                              "area": "0",
+                                                              "output.eventLogLinkClick": "navigation:bb-panel-container-ang-_-c30035fdaa08",
+                                                              "output.taskInstanceId": "navigation:bb-panel-container-ang-_-d8c990d86348"
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "name": "bb-panel-container-ang-_-48b214be8839",
+                                                          "extends": "bb-panel-container-ang",
+                                                          "area": "0",
+                                                          "cssClasses": "d-block card card-body my-4",
+                                                          "children": [
+                                                            {
+                                                              "name": "bb-cm-comments-widget-ang-_-c578870f55e6",
+                                                              "extends": "bb-cm-comments-widget-ang",
+                                                              "area": "0",
+                                                              "bb.caseDefinitionKey": "sme"
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-asdasda2138",
+                                              "extends": "bb-panel-container-ang",
+                                              "title": "Applicants",
+                                              "route": "applicants",
+                                              "area": "0",
+                                              "children": [
+                                                {
+                                                  "name": "bb-column-container-ang-_-8512361541f8",
+                                                  "extends": "bb-column-container-ang",
+                                                  "area": "0",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-c3e232327a09",
+                                                      "extends": "bb-panel-container-ang",
+                                                      "title": "Column 1",
+                                                      "area": "0",
+                                                      "columnClass": "col",
+                                                      "cssClasses": "col mt-4 mx-2",
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-case-data-overview-widget-ang-_-asd123asd",
+                                                          "classId": "CmCaseDataOverviewWidgetComponent",
+                                                          "showApplicants": true
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-a2d1527e47a7",
+                                                      "extends": "bb-panel-container-ang",
+                                                      "title": "Column 2",
+                                                      "area": "0",
+                                                      "columnClass": "col",
+                                                      "cssClasses": "col mt-4",
+                                                      "children": [
+                                                        {
+                                                          "name": "bb-panel-container-ang-_-bdd4920394bc",
+                                                          "extends": "bb-panel-container-ang",
+                                                          "area": "0",
+                                                          "cssClasses": "d-block card card-body",
+                                                          "children": [
+                                                            {
+                                                              "name": "bb-sidebar-overlay-container-ang-_-1a2293ad530b",
+                                                              "extends": "bb-sidebar-overlay-container-ang",
+                                                              "area": "0",
+                                                              "bb.routeParamTrigger": "taskInstanceId",
+                                                              "children": [
+                                                                {
+                                                                  "name": "bb-task-details-widget-ang-_-b31c4129d6e5",
+                                                                  "extends": "bb-task-details-widget-ang",
+                                                                  "area": "0"
+                                                                },
+                                                                {
+                                                                  "name": "bb-panel-container-ang-_-b9988129ddef",
+                                                                  "extends": "bb-panel-container-ang",
+                                                                  "area": "0",
+                                                                  "cssClasses": "d-block my-4 container",
+                                                                  "children": [
+                                                                    {
+                                                                      "name": "bb-cm-comments-widget-ang-_-1a77023296e8",
+                                                                      "extends": "bb-cm-comments-widget-ang",
+                                                                      "area": "0",
+                                                                      "bb.caseDefinitionKey": "sme"
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "name": "bb-events-and-tasks-widget-ang-_-fdc123m1f23b",
+                                                              "extends": "bb-events-and-tasks-widget-ang",
+                                                              "area": "0",
+                                                              "output.eventLogLinkClick": "navigation:bb-panel-container-ang-_-c30035fdaa08",
+                                                              "output.taskInstanceId": "navigation:bb-panel-container-ang-_-d8c990d86348"
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-cac43754f1f6",
+                                              "extends": "bb-panel-container-ang",
+                                              "title": "Tasks",
+                                              "route": "",
+                                              "area": "0",
+                                              "cssClasses": "d-block m-5",
+                                              "children": [
+                                                {
+                                                  "name": "bb-modal-overlay-container-ang-_-8104f8e7d4e5",
+                                                  "extends": "bb-modal-overlay-container-ang",
+                                                  "area": "0",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-view-interaction-task-widget-ang-_-573e358ddca9",
+                                                      "extends": "bb-view-interaction-task-widget-ang",
+                                                      "apiVersion": "v1",
+                                                      "area": "0",
+                                                      "bb.showStepper": "true",
+                                                      "deploymentPath": "interactions",
+                                                      "servicePath": "sme-onboarding/api/interaction"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-sidebar-overlay-container-ang-_-980f62f71039",
+                                                  "extends": "bb-sidebar-overlay-container-ang",
+                                                  "area": "0",
+                                                  "bb.routeParamTrigger": "taskInstanceId",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-task-details-widget-ang-_-af06e7d753d3",
+                                                      "extends": "bb-task-details-widget-ang",
+                                                      "area": "0"
+                                                    },
+                                                    {
+                                                      "name": "bb-panel-container-ang-_-96859eae1596",
+                                                      "extends": "bb-panel-container-ang",
+                                                      "area": "0",
+                                                      "cssClasses": "d-block my-4 container"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-panel-container-ang-_-0c8e129c2f00",
+                                                  "extends": "bb-panel-container-ang",
+                                                  "title": "Tasks",
+                                                  "area": "0",
+                                                  "cssClasses": "d-block card card-body m-5",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-case-task-list-widget-ang-_-71397ef5e137",
+                                                      "extends": "bb-case-task-list-widget-ang",
+                                                      "area": "0",
+                                                      "output.taskInstanceId": "navigation:bb-panel-container-ang-_-cac43754f1f6"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "bb-panel-container-ang-_-ead4dccb17a4",
+                                                  "extends": "bb-panel-container-ang",
+                                                  "title": "Tasks",
+                                                  "area": "0",
+                                                  "cssClasses": "d-block card card-body m-5",
+                                                  "children": [
+                                                    {
+                                                      "name": "bb-case-task-list-widget-ang-_-ddcb4c5fe22a",
+                                                      "extends": "bb-case-task-list-widget-ang",
+                                                      "area": "0",
+                                                      "filter": "done",
+                                                      "output.taskInstanceId": "navigation:bb-panel-container-ang-_-cac43754f1f6"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-1987b1a2cb90",
+                                              "extends": "bb-panel-container-ang",
+                                              "title": "Diagram",
+                                              "route": "",
+                                              "area": "0",
+                                              "cssClasses": "d-block",
+                                              "children": [
+                                                {
+                                                  "name": "bb-process-diagram-widget-ang-_-32f969cd2d00",
+                                                  "extends": "bb-process-diagram-widget-ang",
+                                                  "area": "0",
+                                                  "bb.journeyName": "sme-onboarding",
+                                                  "bb.processDefinitionIds": "data-gathering,kyb,kyc,docs-gathering,company-lookup,aml,br-process,app-onboarding,idv,doc-req-setup,risk-assessment,manual-review,archive-case"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-50ba455f36f0",
+                                              "extends": "bb-panel-container-ang",
+                                              "title": "Documents",
+                                              "route": "",
+                                              "area": "0",
+                                              "cssClasses": "d-block card-body",
+                                              "children": [
+                                                {
+                                                  "name": "bb-case-fileset-list-widget-ang-_-7104d2ef3a59",
+                                                  "extends": "bb-case-fileset-list-widget-ang",
+                                                  "area": "0"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-4ef41a98fdf0",
+                                              "extends": "bb-panel-container-ang",
+                                              "title": "Comments",
+                                              "route": "",
+                                              "area": "0",
+                                              "cssClasses": "d-block p-4 container--fixed-width m-auto",
+                                              "children": [
+                                                {
+                                                  "name": "bb-cm-comments-widget-ang-_-d9265d056f2c",
+                                                  "extends": "bb-cm-comments-widget-ang",
+                                                  "area": "0",
+                                                  "bb.caseDefinitionKey": "sme",
+                                                  "bb.showThreadsSelect": true
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "bb-panel-container-ang-_-c30035fdaa08",
+                                              "extends": "bb-panel-container-ang",
+                                              "title": "Event Logs",
+                                              "route": "",
+                                              "area": "0",
+                                              "cssClasses": "d-block p-4 container--fixed-width m-auto",
+                                              "children": [
+                                                {
+                                                  "name": "bb-event-log-widget-ang-_-1f3d7e34810f",
+                                                  "extends": "bb-event-log-widget-ang",
+                                                  "area": "0",
+                                                  "output.caseInstanceKey": "navigation:bb-panel-container-ang-_-d8c990d86348"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-e27bc383849c",
+                      "extends": "bb-panel-container-ang",
+                      "title": "Insights Dashboard",
+                      "route": "insights-dashboard",
+                      "area": "0",
+                      "cssClasses": "",
+                      "navIcon": "dashboard",
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-add715d415d4",
+                          "extends": "bb-platform-container-ang",
+                          "area": "0",
+                          "bb.caseData.servicePath": "/sme-onboarding",
+                          "bb.iam.servicePath": "/sme-onboarding",
+                          "bb.process.servicePath": "/sme-onboarding",
+                          "children": [
+                            {
+                              "name": "bb-panel-container-ang-_-a1b40a3eb374",
+                              "extends": "bb-panel-container-ang",
+                              "area": "0",
+                              "children": [
+                                {
+                                  "name": "bb-header-widget-ang-_-7049d323587c",
+                                  "extends": "bb-header-widget-ang",
+                                  "area": "0"
+                                },
+                                {
+                                  "name": "bb-process-overview-container-ang-_-cd7f2e3d5ea9",
+                                  "extends": "bb-process-overview-container-ang",
+                                  "area": "0",
+                                  "output.dmnInsights": "navigation:bb-panel-container-ang-_-91e1aadf95bb",
+                                  "output.processesInsights": "navigation:bb-panel-container-ang-_-42f102d17706",
+                                  "children": [
+                                    {
+                                      "name": "bb-panel-container-ang-_-0f5c495db7e7",
+                                      "extends": "bb-panel-container-ang",
+                                      "area": "0",
+                                      "cssClasses": "d-block card card-body",
+                                      "children": [
+                                        {
+                                          "name": "bb-process-insights-card-widget-ang-_-87903057a941",
+                                          "extends": "bb-process-insights-card-widget-ang",
+                                          "area": "0",
+                                          "bb.caseDefinitionKey": "sme",
+                                          "bb.journeyName": "Business Onboarding"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-42f102d17706",
+                      "extends": "bb-panel-container-ang",
+                      "title": "Process Definitions",
+                      "route": "process-definitions",
+                      "area": "0",
+                      "cssClasses": "",
+                      "navIcon": "label",
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-42cc465640e9",
+                          "extends": "bb-platform-container-ang",
+                          "area": "0",
+                          "bb.caseData.servicePath": "/sme-onboarding",
+                          "bb.iam.servicePath": "/sme-onboarding",
+                          "bb.process.servicePath": "/sme-onboarding",
+                          "children": [
+                            {
+                              "name": "bb-heading-widget-ang-_-cd0907a6f23c",
+                              "extends": "bb-heading-widget-ang",
+                              "area": "0",
+                              "customClassName": "d-flex justify-content-between p-0 mb-3",
+                              "heading": "Process Definitions",
+                              "headingType": "h1"
+                            },
+                            {
+                              "name": "bb-panel-container-ang-_-203518d0135f",
+                              "extends": "bb-panel-container-ang",
+                              "area": "0",
+                              "cssClasses": "card card-body",
+                              "children": [
+                                {
+                                  "name": "bb-process-diagram-selector-widget-ang-_-1d457d65b96a",
+                                  "extends": "bb-process-diagram-selector-widget-ang",
+                                  "area": "0"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "bb-panel-container-ang-_-91e1aadf95bb",
+                      "extends": "bb-panel-container-ang",
+                      "title": "Decision Definitions",
+                      "route": "decision-definitions",
+                      "area": "0",
+                      "cssClasses": "",
+                      "navIcon": "table-chart",
+                      "children": [
+                        {
+                          "name": "bb-platform-container-ang-_-bbabe2f680d2",
+                          "extends": "bb-platform-container-ang",
+                          "area": "0",
+                          "bb.caseData.servicePath": "/sme-onboarding",
+                          "bb.iam.servicePath": "/sme-onboarding",
+                          "bb.process.servicePath": "/sme-onboarding",
+                          "children": [
+                            {
+                              "name": "bb-heading-widget-ang-_-d79c0ffb42dd",
+                              "extends": "bb-heading-widget-ang",
+                              "area": "0",
+                              "customClassName": "d-flex justify-content-between p-0 mb-3",
+                              "heading": "Decision Definitions",
+                              "headingType": "h1"
+                            },
+                            {
+                              "name": "bb-panel-container-ang-_-3906abe3a04d",
+                              "extends": "bb-panel-container-ang",
+                              "area": "0",
+                              "cssClasses": "card card-body",
+                              "children": [
+                                {
+                                  "name": "bb-dmn-insights-widget-ang-_-0a9f41e7b254",
+                                  "extends": "bb-dmn-insights-widget-ang",
+                                  "area": "0"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

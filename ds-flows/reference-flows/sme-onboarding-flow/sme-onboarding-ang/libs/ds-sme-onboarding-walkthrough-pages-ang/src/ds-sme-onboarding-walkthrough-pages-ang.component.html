@@ -1,0 +1,21 @@
+<bb-modal-stepper (complete)="onWalkthroughModalComplete()">
+  <cdk-step>
+    <bb-introduction-modal-step1></bb-introduction-modal-step1>
+  </cdk-step>
+  <cdk-step>
+    <bb-introduction-modal-step2></bb-introduction-modal-step2>
+  </cdk-step>
+  <cdk-step>
+    <bb-introduction-modal-step3></bb-introduction-modal-step3>
+  </cdk-step>
+  <cdk-step>
+    <bb-introduction-modal-step4></bb-introduction-modal-step4>
+  </cdk-step>
+  <cdk-step [completed]="tncCompleted">
+    <bb-terms-and-conditions-step [(complete)]="tncCompleted"
+                                  [privacyLink]="privacyLink"
+                                  [privacyLinkText]="privacyLinkText"
+                                  [tncLink]="tncLink"
+                                  [tncLinkText]="tncLinkText"></bb-terms-and-conditions-step>
+  </cdk-step>
+</bb-modal-stepper>

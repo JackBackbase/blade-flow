@@ -1,0 +1,182 @@
+{
+  "$schema": "../../../node_modules/@bb-cli/bb/node_modules/@backbase/sdlc-schema/experience.schema.json",
+  "name": "onboarding-us",
+  "title": "Onboarding US",
+  "locales": [
+    "en-US"
+  ],
+  "properties": {
+    "AccessDeniedPage": "onboarding-us/login?error=accessdenied",
+    "DefaultLandingPage": "onboarding-us/index",
+    "LoginPage": "onboarding-us/login",
+    "RedirectLoginPage": "onboarding-us/redirect",
+    "ErrorPage": "onboarding-us/error",
+    "TypeOfTags": "tracking"
+  },
+  "cxSources": [
+    "node_modules/@backbase",
+    "dist",
+    "collections/collection-bb-web-sdk-1.16.4.zip"
+  ],
+  "contentDirs": {
+    "default": "apps/journey/sdlc/content",
+    "shared": "shared"
+  },
+  "environments": {
+    "default": {
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "dist/experience/journey",
+        "staticResourcesRoot": "/api/portal/static/items",
+        "linkRoot": "",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          },
+          "userConsumer": {
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    },
+    "bas": {
+      "provisioning": {
+        "type": "cx",
+        "outputDir": "dist/experience/journey",
+        "staticResourcesRoot": "/api/portal/static/items",
+        "linkRoot": "",
+        "permissions": {
+          "anonymousConsumer": {
+            "ROLE_ANONYMOUS": "CONSUMER",
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          },
+          "userConsumer": {
+            "ROLE_group_admin": "ADMIN",
+            "ROLE_group_manager": "ADMIN",
+            "ROLE_group_master page designer": "ADMIN",
+            "ROLE_group_user": "CONSUMER"
+          }
+        }
+      }
+    },
+    "docker": {
+      "provisioning": {
+        "type": "nginx", 
+        "outputDir": "dist/experience/journey-docker",
+        "baseHref": "http://localhost:4201",
+        "apiRoot": "http://localhost/api"
+      },
+      "authorization": {
+        "authUrl": "http://localhost:8180/auth",
+        "clientId": "bb-web-client",
+        "scope": "openid",
+        "kind": "hybrid",
+        "realm": "backbase",
+        "landingPageUrl": "onboarding-us/",
+        "loginPageUrl": "onboarding-us/redirect",
+        "maxInactivityDuration": 300
+      }
+    }
+  },
+  "menus": {
+    "master-pages": [
+      {
+        "section": "page-bb-default",
+        "title": "Lean Page",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "name": "page-bb-default",
+          "permission": "anonymousConsumer",
+          "children": [
+            {
+              "fragment": "./pages/lean-page.json"
+            }
+          ]
+        }
+      }
+    ],
+    "special-pages": [
+      {
+        "section": "login",
+        "title": "Login",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Login",
+          "children": [
+            {
+              "fragment": "./pages/login.json"
+            }
+          ]
+        }
+      },
+      {
+        "section": "redirect",
+        "title": "Redirect",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Redirect",
+          "permission": "anonymousConsumer"
+        }
+      },
+      {
+        "section": "error",
+        "title": "Error",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Something went wrong",
+          "children": [
+            {
+              "fragment": "./pages/something-went-wrong.json"
+            }
+          ]
+        }
+      }
+    ],
+    "main": [
+      {
+        "section": "index",
+        "friendlyUrl": "onboarding-us",
+        "title": "Prospect",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Prospect",
+          "children": [
+            {
+              "fragment": "./pages/prospect.json"
+            }
+          ]
+        }
+      },
+      {
+        "section": "co-applicant",
+        "friendlyUrl": "co-applicant",
+        "title": "Co Applicant",
+        "permission": "anonymousConsumer",
+        "page": {
+          "extends": "page-bb-default",
+          "title": "Co Applicant",
+          "children": [
+            {
+              "fragment": "./pages/co-applicant.json"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

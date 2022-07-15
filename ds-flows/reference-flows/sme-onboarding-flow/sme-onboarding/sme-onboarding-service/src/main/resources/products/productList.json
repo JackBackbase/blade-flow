@@ -1,0 +1,41 @@
+[
+  {
+    "referenceId": "product-1",
+    "name": "Business Checking",
+    "description": "Essential tool for small businesses",
+    "benefits": [
+      "Online & Mobile Banking",
+      "Business Debit card with Total Security protection",
+      "Business savings account"
+    ],
+    "costsFrequency": "monthly",
+    "cost": {
+      "value": 17.95,
+      "currency": "$"
+    },
+    "annualPercentageRate": 9.99,
+    "imageName": "businessChecking.jpg",
+    "detailedProductDescriptionUrl": "https://www.backbase.com/",
+    "productType": "Business Checking"
+  },
+  {
+    "referenceId": "product-2",
+    "name": "Business Checking Plus",
+    "description": "Premium tool for large or growing businesses",
+    "benefits": [
+      "All the Business Checking features",
+      "Easy QuickBooks integration",
+      "Accounts access and employee permissions customization",
+      "Additional Business checking account included"
+    ],
+    "costsFrequency": "monthly",
+    "cost": {
+      "value": 29.95,
+      "currency": "$"
+    },
+    "annualPercentageRate": 9.99,
+    "imageName": "businessCheckingPlus.jpg",
+    "detailedProductDescriptionUrl": "https://www.backbase.com/",
+    "productType": "Business Checking Plus"
+  }
+]

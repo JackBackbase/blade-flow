@@ -1,0 +1,9 @@
+# This enables the use of CXS Content Services
+
+backbase.flow.storage:
+  impl: cs
+  cs:
+    repository:
+      id: smeOnboardingStorage
+      name: SME Onboarding Storage
+      description: SME Onboarding repository.

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0go8pan" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+  <inputData id="InputData_0x3rymv" name="Business structure" />
+  <inputData id="InputData_0lm6k07" name="DBA filled" />
+  <decision id="decide-on-kyb" name="Decide on AML KYB" camunda:versionTag="0.1.0">
+    <informationRequirement id="InformationRequirement_1oa8415">
+      <requiredInput href="#InputData_0lm6k07" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0ftq4ce">
+      <requiredInput href="#InputData_0x3rymv" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0tjsw48">
+      <input id="InputClause_1xfopx2" label="Business Structure" camunda:inputVariable="businessStructure">
+        <inputExpression id="LiteralExpression_10f8ubh" typeRef="string" expressionLanguage="juel">
+          <text>${smeHelper.getBusinessType(variableContext)}</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_14cvw0k">
+          <text>"Sole proprietorship"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1shgpd2" label="DBA_filled" camunda:inputVariable="dbaFilled">
+        <inputExpression id="LiteralExpression_1eeq4rg" typeRef="boolean" expressionLanguage="juel">
+          <text>${smeHelper.hasKnownName(variableContext)}</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_05l8g4u" label="AML KYB required" name="required" typeRef="boolean" biodi:width="192" />
+      <output id="OutputClause_1douj7g" label="AML DBA Applicable" name="useDba" typeRef="boolean" />
+      <rule id="DecisionRule_052satq">
+        <description>use DBA name to run AML</description>
+        <inputEntry id="UnaryTests_1x22i85">
+          <text>"Sole proprietorship"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xb5qm5">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_09x34c5">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1mrhywq">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0o3bwbi">
+        <description>the business name is the same as the owner and that is covered through running AML KYC</description>
+        <inputEntry id="UnaryTests_0hspmzl">
+          <text>"Sole proprietorship"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t3udzv">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12q6ht0">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ee8p1n">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0mka34p">
+        <description>use Business legal name to run AML</description>
+        <inputEntry id="UnaryTests_1grnblk">
+          <text>not("Sole proprietorship")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jcodkl">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1h9oxj5">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_19ua1sw">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_06irsof" dmnElementRef="InputData_0x3rymv">
+        <dc:Bounds height="45" width="125" x="387" y="247" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0qwmv5z" dmnElementRef="InputData_0lm6k07">
+        <dc:Bounds height="45" width="125" x="157" y="247" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0wkniwv" dmnElementRef="decide-on-kyb">
+        <dc:Bounds height="80" width="180" x="240" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1wecsen" dmnElementRef="InformationRequirement_1oa8415">
+        <di:waypoint x="220" y="247" />
+        <di:waypoint x="300" y="180" />
+        <di:waypoint x="300" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1dz35b8" dmnElementRef="InformationRequirement_0ftq4ce">
+        <di:waypoint x="450" y="247" />
+        <di:waypoint x="360" y="180" />
+        <di:waypoint x="360" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

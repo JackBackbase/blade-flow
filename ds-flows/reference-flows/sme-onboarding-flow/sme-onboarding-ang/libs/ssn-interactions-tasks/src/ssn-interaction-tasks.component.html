@@ -1,0 +1,15 @@
+<div class="p-5 info-box">
+  <p
+     i18n="Info helping to finish applicants form|Info text for upcoming form@@bb.task-details-view-ui.in-branch-ssn.info-body">
+    Help this applicant in completing the profile information.</p>
+</div>
+<div class="pt-4">
+  <bb-idt-view-component (triggerIDT)="loadTaskJob()"
+                         header="Complete SSN"
+                         i18n-header="SSN|Headline for ssn@@bb.task-details-view-ui.in-branch-ssn.main-headline"
+                         description="Provide information about the applicant."
+                         i18n-description="Applicant information|Info text to provide information@@bb.task-details-view-ui.in-branch-ssn.main-description"
+                         [iconsConfig]="iconsConfig"
+                         progress="0"
+                         [imageUrl]="idtImage"></bb-idt-view-component>
+</div>

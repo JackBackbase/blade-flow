@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0w43yqr" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.11.1">
+  <bpmn:collaboration id="Collaboration_13zdvit">
+    <bpmn:participant id="Participant_1gmktsf" name="Documents Gathering" processRef="docs-gathering" />
+  </bpmn:collaboration>
+  <bpmn:process id="docs-gathering" name="Documents Gathering" isExecutable="true" camunda:versionTag="0.0.2">
+    <bpmn:sequenceFlow id="Flow_06idd8j" sourceRef="Activity_1mmw5n6" targetRef="Gateway_0et1mnw" />
+    <bpmn:sequenceFlow id="Flow_1nfpn9r" sourceRef="Event_0ruqyfa" targetRef="Activity_1mmw5n6" />
+    <bpmn:sequenceFlow id="Flow_1kns8gc" sourceRef="Event_0g4qsj3" targetRef="Event_0ruqyfa" />
+    <bpmn:sequenceFlow id="Flow_1lahqtl" name="yes" sourceRef="Gateway_0et1mnw" targetRef="generateDocumentRequests">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decidedDocuments.get(0).get("documentsRequired") == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1hcuy41" name="No" sourceRef="Gateway_0et1mnw" targetRef="Event_1jfu2w4">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decidedDocuments.get(0).get("documentsRequired") == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:startEvent id="Event_0g4qsj3">
+      <bpmn:outgoing>Flow_1kns8gc</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent id="Event_0ruqyfa" name="business information available">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="DocumentsGathering" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1kns8gc</bpmn:incoming>
+      <bpmn:outgoing>Flow_1nfpn9r</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0wvn870" camunda:variableName="CASE_UPDATED">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${smeHelper.readyForDocumentGathering(execution)}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:businessRuleTask id="Activity_1mmw5n6" name="Decide on Required Documents" camunda:resultVariable="decidedDocuments" camunda:decisionRef="required-docs">
+      <bpmn:incoming>Flow_1nfpn9r</bpmn:incoming>
+      <bpmn:outgoing>Flow_06idd8j</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:exclusiveGateway id="Gateway_0et1mnw" name="Any docs required?">
+      <bpmn:incoming>Flow_06idd8j</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hcuy41</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1lahqtl</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="generateDocumentRequests" name="Generate Document Requests" camunda:expression="${generateDocumentRequests.generateDocRequests(execution)}">
+      <bpmn:incoming>Flow_1lahqtl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vnqepi</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0rx04yl" sourceRef="Event_0cjr0by" targetRef="Event_0jfphm7" />
+    <bpmn:intermediateCatchEvent id="Event_0cjr0by" name="Documents Approved">
+      <bpmn:incoming>Flow_1dz935r</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rx04yl</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1fuaakc" camunda:variableName="CASE_UPDATED">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${smeHelper.isDocumentsApproved(execution)}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_1vnqepi" sourceRef="generateDocumentRequests" targetRef="Activity_0lhrdj0" />
+    <bpmn:sequenceFlow id="Flow_1dz935r" sourceRef="Activity_0lhrdj0" targetRef="Event_0cjr0by" />
+    <bpmn:callActivity id="Activity_0lhrdj0" name="Doc request setup process" calledElement="doc-req-setup">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1vnqepi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1dz935r</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="Event_1jfu2w4" name="No Docs Required">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="NoDocsRequired" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1hcuy41</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_04f39bt" messageRef="Message_1y4nldj" camunda:expression="${eventPublisher.publish(execution)}" camunda:resultVariable="NO_DOCS_REQUIRED" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_0jfphm7" name="All Docs Verified">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="eventName" value="AllDocsVerified" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0rx04yl</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1mtkt99" camunda:expression="${eventPublisher.publish(execution)}" />
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:message id="Message_1y4nldj" name="Message_0h3u5t2" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_13zdvit">
+      <bpmndi:BPMNShape id="Participant_1gmktsf_di" bpmnElement="Participant_1gmktsf" isHorizontal="true">
+        <dc:Bounds x="140" y="40" width="1180" height="330" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1dz935r_di" bpmnElement="Flow_1dz935r">
+        <di:waypoint x="1040" y="205" />
+        <di:waypoint x="1122" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vnqepi_di" bpmnElement="Flow_1vnqepi">
+        <di:waypoint x="830" y="205" />
+        <di:waypoint x="940" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rx04yl_di" bpmnElement="Flow_0rx04yl">
+        <di:waypoint x="1158" y="205" />
+        <di:waypoint x="1232" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1hcuy41_di" bpmnElement="Flow_1hcuy41">
+        <di:waypoint x="630" y="230" />
+        <di:waypoint x="630" y="292" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="638" y="242" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1lahqtl_di" bpmnElement="Flow_1lahqtl">
+        <di:waypoint x="655" y="205" />
+        <di:waypoint x="730" y="205" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="684" y="187" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kns8gc_di" bpmnElement="Flow_1kns8gc">
+        <di:waypoint x="268" y="205" />
+        <di:waypoint x="332" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nfpn9r_di" bpmnElement="Flow_1nfpn9r">
+        <di:waypoint x="368" y="205" />
+        <di:waypoint x="440" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06idd8j_di" bpmnElement="Flow_06idd8j">
+        <di:waypoint x="540" y="205" />
+        <di:waypoint x="605" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0g4qsj3_di" bpmnElement="Event_0g4qsj3">
+        <dc:Bounds x="232" y="187" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_16otwkr_di" bpmnElement="Event_0ruqyfa">
+        <dc:Bounds x="332" y="187" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="324" y="230" width="55" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1o2dsky_di" bpmnElement="Activity_1mmw5n6">
+        <dc:Bounds x="440" y="165" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0et1mnw_di" bpmnElement="Gateway_0et1mnw" isMarkerVisible="true">
+        <dc:Bounds x="605" y="180" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="608" y="137" width="47" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0x1bqf7_di" bpmnElement="generateDocumentRequests">
+        <dc:Bounds x="730" y="165" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rma9s1_di" bpmnElement="Event_0cjr0by">
+        <dc:Bounds x="1122" y="187" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1114" y="230" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0lhrdj0_di" bpmnElement="Activity_0lhrdj0">
+        <dc:Bounds x="940" y="165" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ck8l8r_di" bpmnElement="Event_1jfu2w4">
+        <dc:Bounds x="612" y="292" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="587" y="335" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0htvr50_di" bpmnElement="Event_0jfphm7">
+        <dc:Bounds x="1232" y="187" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1211" y="230" width="81" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

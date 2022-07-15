@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fi88qe"
+                  targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+    <bpmn:collaboration id="Collaboration_0uzmspq">
+        <bpmn:participant id="Participant_0b03sn3" name="Archive Case" processRef="archive-case"/>
+    </bpmn:collaboration>
+    <bpmn:process id="archive-case" name="Archive Case" isExecutable="true" camunda:versionTag="0.0.1">
+        <bpmn:sequenceFlow id="Flow_14ucftz" sourceRef="StartEvent_1" targetRef="Activity_04fmx6f"/>
+        <bpmn:sequenceFlow id="Flow_01cmh2x" sourceRef="Activity_04fmx6f" targetRef="Event_1p1gs9n"/>
+        <bpmn:startEvent id="StartEvent_1">
+            <bpmn:outgoing>Flow_14ucftz</bpmn:outgoing>
+        </bpmn:startEvent>
+        <bpmn:endEvent id="Event_1p1gs9n">
+            <bpmn:incoming>Flow_01cmh2x</bpmn:incoming>
+        </bpmn:endEvent>
+        <bpmn:serviceTask id="Activity_04fmx6f" name="Archive Case"
+                          camunda:class="com.backbase.flow.sme.onboarding.process.handler.ArchiveCaseTaskHandler">
+            <bpmn:incoming>Flow_14ucftz</bpmn:incoming>
+            <bpmn:outgoing>Flow_01cmh2x</bpmn:outgoing>
+        </bpmn:serviceTask>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0uzmspq">
+            <bpmndi:BPMNShape id="Participant_0b03sn3_di" bpmnElement="Participant_0b03sn3" isHorizontal="true">
+                <dc:Bounds x="170" y="82" width="330" height="158"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="Flow_01cmh2x_di" bpmnElement="Flow_01cmh2x">
+                <di:waypoint x="400" y="160"/>
+                <di:waypoint x="432" y="160"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_14ucftz_di" bpmnElement="Flow_14ucftz">
+                <di:waypoint x="268" y="160"/>
+                <di:waypoint x="300" y="160"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+                <dc:Bounds x="232" y="142" width="36" height="36"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Event_1p1gs9n_di" bpmnElement="Event_1p1gs9n">
+                <dc:Bounds x="432" y="142" width="36" height="36"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_1effq8t_di" bpmnElement="Activity_04fmx6f">
+                <dc:Bounds x="300" y="120" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>

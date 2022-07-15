@@ -1,0 +1,21 @@
+@import "~@backbase/backbase-theme/scss/1-variables/variables";
+@import "../styles/utilities-mixin";
+
+.documents {
+  @include icon-with-description;
+  margin-bottom: $spacer;
+
+  .document-description {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.description {
+  @include description-text;
+}
+
+.astericts-description {
+  font-size: $font-size-subheader;
+  margin-left: $spacer-xl;
+}

@@ -1,0 +1,7 @@
+backbase.identity:
+  enabled: true
+  client-id: admin-cli
+  server-url: http://identity-backbaseidentity:8080/auth
+  master-realm: master
+  username: admin
+  password: admin

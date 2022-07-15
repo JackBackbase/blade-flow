@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<catalog>
+  <widget>
+    <name>cm-in-branch-start-case-ang</name>
+    <properties>
+      <property name="classId">
+        <value>CmInBranchStartCaseAngComponent</value>
+      </property>
+      <property name="src">
+        <value>$(itemRoot)/index.html</value>
+      </property>
+      <property name="render.requires">
+        <value>render-bb-widget-3</value>
+      </property>
+      <property name="title" label="Title" readonly="true" viewHint="admin,designModeOnly">
+        <value type="string">CmInBranchStartCaseAngComponent Widget</value>
+      </property>
+      <property name="thumbnailUrl">
+        <value>$(itemRoot)/icon.png</value>
+      </property>
+      <property name="label">
+        <value>Angular CmInBranchStartCaseAngComponent Widget</value>
+      </property>
+      <property name="apiVersion">
+        <value></value>
+      </property>
+      <property name="servicePath">
+        <value></value>
+      </property>
+      <property name="deploymentPath">
+        <value></value>
+      </property>
+      <property name="interactionName">
+        <value></value>
+      </property>
+      <property name="customClassName">
+        <value></value>
+      </property>
+    </properties>
+  </widget>
+</catalog>

@@ -1,0 +1,10 @@
+backbase:
+  flow:
+    iam:
+      impl: DBS
+      dbs:
+        externalLegalEntityId: backbase
+  sme-onboarding:
+    credentials.impl: DBS
+    customer:
+      externalLegalEntity: sme-customers

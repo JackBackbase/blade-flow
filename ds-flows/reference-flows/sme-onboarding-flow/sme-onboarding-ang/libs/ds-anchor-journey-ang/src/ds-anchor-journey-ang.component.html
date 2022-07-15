@@ -1,0 +1,25 @@
+<h1 class="mb-4"
+    i18n="Anchor Heading | Anchor page header text@@bb.ds-anchor-journey-ang.header.text">Nice to meet you</h1>
+<div class="card">
+  <div class="card-body">
+    <p i18n="Anchor Journey | Card info text to show on the anchor journey@@bb.ds-anchor-journey-ang.card-info-text">
+      Let's get your account set up. Just a couple quick questions and you'll be ready to go.</p>
+    <div class="row">
+      <div class="col">
+        <formly-form [fields]="helper.fieldsConfig"
+                     [form]="helper.form"
+                     [model]="helper.value"></formly-form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bb-button-bar bb-button-bar--spacing-xl">
+  <bb-load-button-ui [isLoading]="helper.loading$ | async"
+                     color="primary"
+                     class="bb-button-bar__button"
+                     i18n="Continue button | Continue button text@@bb.ds-anchor-journey-ang.continue-btn.text"
+                     (click)="submitAction()"
+                     id="continue-button">
+    Continue
+  </bb-load-button-ui>
+</div>

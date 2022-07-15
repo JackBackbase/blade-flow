@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0ahuvqy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+  <bpmn:collaboration id="Collaboration_1fv1bmr">
+    <bpmn:participant id="Participant_107v3kv" name="Citizenship" processRef="citizenship" />
+  </bpmn:collaboration>
+  <bpmn:process id="citizenship" name="Citizenship" isExecutable="true">
+    <bpmn:startEvent id="Event_1hp8qab" name="Citizenship Step triggered">
+      <bpmn:outgoing>Flow_16y4mva</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent id="Event_0y0tybi" name="Citizenship data available">
+      <bpmn:incoming>Flow_16y4mva</bpmn:incoming>
+      <bpmn:outgoing>Flow_19ghoms</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_12wxhds" camunda:variableName="CASE_UPDATED">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${citizenshipConditionalHandler.citizenshipDataReadyForReview(execution)}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="Gateway_16wwufe" name="Review Needed?" default="Flow_0z1hekc">
+      <bpmn:incoming>Flow_19ghoms</bpmn:incoming>
+      <bpmn:outgoing>Flow_0trz9tq</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0z1hekc</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0xe9ovs" name="Non-Resident Alien Info Valid?" default="Flow_0nfi795">
+      <bpmn:incoming>Flow_0tu24or</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qgvu6n</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0nfi795</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_11up1k5">
+      <bpmn:incoming>Flow_0z1hekc</bpmn:incoming>
+      <bpmn:incoming>Flow_0qgvu6n</bpmn:incoming>
+      <bpmn:outgoing>Flow_1in5whs</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_065bcyk" name="Success">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">execution.setVariable("citizenshipResult", "successful");</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1in5whs</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0sq1opf" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_0aqsxia" name="Fail">
+      <bpmn:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="javascript">execution.setVariable("citizenshipResult", "failed");</camunda:script>
+        </camunda:executionListener>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0nfi795</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1fm884m" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_19ghoms" sourceRef="Event_0y0tybi" targetRef="Gateway_16wwufe" />
+    <bpmn:sequenceFlow id="Flow_16y4mva" sourceRef="Event_1hp8qab" targetRef="Event_0y0tybi" />
+    <bpmn:sequenceFlow id="Flow_0tu24or" sourceRef="Citizenship_Review_Activity" targetRef="Gateway_0xe9ovs" />
+    <bpmn:sequenceFlow id="Flow_0qgvu6n" name="Yes" sourceRef="Gateway_0xe9ovs" targetRef="Gateway_11up1k5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${citizenshipDataApproved}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0nfi795" name="No" sourceRef="Gateway_0xe9ovs" targetRef="Event_0aqsxia" />
+    <bpmn:sequenceFlow id="Flow_0trz9tq" name="Yes" sourceRef="Gateway_16wwufe" targetRef="Citizenship_Review_Activity">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${citizenshipConditionalHandler.isReviewNeeded(execution)}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0z1hekc" name="No" sourceRef="Gateway_16wwufe" targetRef="Gateway_11up1k5" />
+    <bpmn:sequenceFlow id="Flow_1in5whs" sourceRef="Gateway_11up1k5" targetRef="Event_065bcyk" />
+    <bpmn:userTask id="Citizenship_Review_Activity" name="Decide on validity of data from W-8BEN form" camunda:formKey="embed:wa3:CmNonResidentTaskWidgetComponent">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="userTaskHandlerBeanName" value="verifyNonResidentDataUserTaskHandler" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0trz9tq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tu24or</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1fv1bmr">
+      <bpmndi:BPMNShape id="Participant_107v3kv_di" bpmnElement="Participant_107v3kv" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="850" height="290" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_19ghoms_di" bpmnElement="Flow_19ghoms">
+        <di:waypoint x="368" y="160" />
+        <di:waypoint x="435" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16y4mva_di" bpmnElement="Flow_16y4mva">
+        <di:waypoint x="258" y="160" />
+        <di:waypoint x="332" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tu24or_di" bpmnElement="Flow_0tu24or">
+        <di:waypoint x="670" y="280" />
+        <di:waypoint x="755" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qgvu6n_di" bpmnElement="Flow_0qgvu6n">
+        <di:waypoint x="780" y="255" />
+        <di:waypoint x="780" y="185" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="786" y="228" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nfi795_di" bpmnElement="Flow_0nfi795">
+        <di:waypoint x="805" y="280" />
+        <di:waypoint x="892" y="280" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="841" y="262" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0trz9tq_di" bpmnElement="Flow_0trz9tq">
+        <di:waypoint x="460" y="185" />
+        <di:waypoint x="460" y="280" />
+        <di:waypoint x="570" y="280" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="436" y="221" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z1hekc_di" bpmnElement="Flow_0z1hekc">
+        <di:waypoint x="485" y="160" />
+        <di:waypoint x="755" y="160" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="613" y="142" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1in5whs_di" bpmnElement="Flow_1in5whs">
+        <di:waypoint x="805" y="160" />
+        <di:waypoint x="892" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1hp8qab_di" bpmnElement="Event_1hp8qab">
+        <dc:Bounds x="222" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="200" y="185" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nwd0a6_di" bpmnElement="Event_0y0tybi">
+        <dc:Bounds x="332" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="312" y="185" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_16wwufe_di" bpmnElement="Gateway_16wwufe" isMarkerVisible="true">
+        <dc:Bounds x="435" y="135" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="418" y="111" width="84" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0xe9ovs_di" bpmnElement="Gateway_0xe9ovs" isMarkerVisible="true">
+        <dc:Bounds x="755" y="255" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="740" y="315" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_11up1k5_di" bpmnElement="Gateway_11up1k5" isMarkerVisible="true">
+        <dc:Bounds x="755" y="135" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1yd27s4_di" bpmnElement="Event_065bcyk">
+        <dc:Bounds x="892" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="889" y="185" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1057qzb_di" bpmnElement="Event_0aqsxia">
+        <dc:Bounds x="892" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="901" y="305" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ps9aex_di" bpmnElement="Citizenship_Review_Activity">
+        <dc:Bounds x="570" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

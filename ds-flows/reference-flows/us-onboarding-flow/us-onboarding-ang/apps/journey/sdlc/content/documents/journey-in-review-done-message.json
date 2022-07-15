@@ -1,0 +1,4 @@
+{
+  "$schema": "../../$schema/SC_Unit_RichText.json",
+  "content": "<h1>Your application is in review.</h1><p class='bb-highlight bb-highlight--regular'>To guarantee your security, we have decided to review your application.<p/><p class='bb-highlight bb-highlight--regular'>You will receive an email notification about the status within X working days.</p>"
+}

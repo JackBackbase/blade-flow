@@ -1,0 +1,409 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "case-manager": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "apps/case-manager",
+      "sourceRoot": "apps/case-manager/src",
+      "prefix": "bb-us",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/case-manager",
+            "index": "apps/case-manager/src/index.html",
+            "main": "apps/case-manager/src/main.ts",
+            "polyfills": "apps/case-manager/src/polyfills.ts",
+            "tsConfig": "apps/case-manager/tsconfig.app.json",
+            "assets": [
+              {
+                "input": "dist/custom-project-assets",
+                "glob": "**/*",
+                "output": "assets"
+              },
+              {
+                "input": "apps/case-manager/sdlc/content",
+                "glob": "**/*",
+                "output": "assets"
+              },
+              "apps/case-manager/src/favicon.ico",
+              "apps/case-manager/src/assets"
+            ],
+            "styles": [
+              "node_modules/@backbase/backbase-theme/scss/main.scss",
+              "node_modules/@backbase/backbase-theme-retail-preset/scss/main.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/case-manager/src/environments/environment.ts",
+                  "with": "apps/case-manager/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "10mb"
+                }
+              ]
+            },
+            "shared": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/case-manager/src/environments/environment.ts",
+                  "with": "apps/case-manager/src/environments/environment.shared.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "case-manager:build",
+            "proxyConfig": "apps/case-manager/proxy.conf.js"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "case-manager:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "case-manager:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/case-manager/src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "apps/case-manager/src/polyfills.ts",
+            "tsConfig": "apps/case-manager/src/../../../tsconfig.spec.json",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/case-manager/**/*.ts",
+              "apps/case-manager/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "journey": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "apps/journey",
+      "sourceRoot": "apps/journey/src",
+      "prefix": "bb-us",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/journey",
+            "index": "apps/journey/src/index.html",
+            "main": "apps/journey/src/main.ts",
+            "polyfills": "apps/journey/src/polyfills.ts",
+            "tsConfig": "apps/journey/tsconfig.app.json",
+            "preserveSymlinks": true,
+            "assets": [
+              {
+                "input": "dist/custom-project-assets",
+                "glob": "**/*",
+                "output": "assets"
+              },
+              {
+                "input": "apps/journey/sdlc/content",
+                "glob": "**/*",
+                "output": "assets"
+              },
+              {
+                "input": "shared",
+                "glob": "**/*",
+                "output": "assets"
+              },
+              "apps/journey/src/favicon.ico",
+              "apps/journey/src/assets"
+            ],
+            "styles": [
+              "apps/journey/src/styles.scss",
+              "node_modules/@backbase/backbase-theme/scss/main.scss",
+              "node_modules/@backbase/backbase-theme-retail-preset/scss/main.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/journey/src/environments/environment.ts",
+                  "with": "apps/journey/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "8mb"
+                }
+              ]
+            },
+            "shared": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/journey/src/environments/environment.ts",
+                  "with": "apps/journey/src/environments/environment.shared.ts"
+                }
+              ]
+            },
+            "co-applicant": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/journey/src/environments/environment.ts",
+                  "with": "apps/journey/src/environments/environment.co-applicant.ts"
+                }
+              ]
+            },
+            "prospect": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/journey/src/environments/environment.ts",
+                  "with": "apps/journey/src/environments/environment.prospect.ts"
+                }
+              ]
+            },
+            "prospect-ru": {
+              "localize": [
+                "ru-RU"
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/journey/src/environments/environment.ts",
+                  "with": "apps/journey/src/environments/environment.prospect-ru.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "journey:build",
+            "proxyConfig": "apps/journey/proxy.conf.js"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "journey:build:production"
+            },
+            "prospect": {
+              "browserTarget": "journey:build:prospect"
+            },
+            "co-applicant": {
+              "browserTarget": "journey:build:co-applicant"
+            },
+            "prospect-ru": {
+              "browserTarget": "journey:build:prospect-ru"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "journey:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/journey/src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "apps/journey/src/polyfills.ts",
+            "tsConfig": "apps/journey/src/../../../tsconfig.spec.json",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/journey/**/*.ts",
+              "apps/journey/**/*.html"
+            ]
+          }
+        }
+      },
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "ru-RU": "locales/messages.ru-RU.xlf"
+        }
+      }
+    },
+    "ono-credentials-journey-ang": {
+      "root": "libs/ono-credentials-journey-ang",
+      "sourceRoot": "libs/ono-credentials-journey-ang/src",
+      "projectType": "library",
+      "prefix": "bb",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/ono-credentials-journey-ang/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "libs/ono-credentials-journey-ang/polyfills.ts",
+            "tsConfig": "libs/ono-credentials-journey-ang/tsconfig.spec.json",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ono-credentials-journey-ang/**/*.ts",
+              "libs/ono-credentials-journey-ang/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "cm-in-branch-start-case-ang": {
+      "projectType": "library",
+      "root": "libs/cm-in-branch-start-case-ang",
+      "sourceRoot": "libs/cm-in-branch-start-case-ang/src",
+      "prefix": "bb",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/cm-in-branch-start-case-ang/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "libs/cm-in-branch-start-case-ang/polyfills.ts",
+            "tsConfig": "libs/cm-in-branch-start-case-ang/tsconfig.spec.json",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/cm-in-branch-start-case-ang/**/*.ts",
+              "libs/cm-in-branch-start-case-ang/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@angular-eslint/schematics"
+  },
+  "schematics": {
+    "@bb-cli/schematics:widget": {
+      "npmScope": "backbase"
+    },
+    "@bb-cli/schematics:library": {
+      "npmScope": "backbase"
+    },
+    "@bb-cli/schematics:data-module": {
+      "npmScope": "backbase"
+    }
+  },
+  "defaultProject": "journey"
+}

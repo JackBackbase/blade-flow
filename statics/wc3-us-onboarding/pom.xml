@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.backbase</groupId>
+        <artifactId>statics</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>wc3-us-onboarding</artifactId>
+
+    <packaging>pom</packaging>
+
+    <name>Backbase :: Statics :: WC3 US Onboarding Flow</name>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.backbase.flow</groupId>
+                <artifactId>flow-catalog-release-bom</artifactId>
+                <version>2022.01</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.backbase.flow.application.us-onboarding</groupId>
+            <artifactId>us-onboarding-ang</artifactId>
+            <type>zip</type>
+            <classifier>employee-app</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.application.us-onboarding</groupId>
+            <artifactId>us-onboarding-ang</artifactId>
+            <type>zip</type>
+            <classifier>prospect-app</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.application.us-onboarding</groupId>
+            <artifactId>us-onboarding-ang</artifactId>
+            <type>zip</type>
+            <classifier>employee-portal</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.backbase.flow.application.us-onboarding</groupId>
+            <artifactId>us-onboarding-ang</artifactId>
+            <type>zip</type>
+            <classifier>prospect-portal</classifier>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.backbase.maven.plugins</groupId>
+                <artifactId>bb-maven-plugin</artifactId>
+                <configuration>
+                    <enableExtPackage>true</enableExtPackage>
+                    <maxAttempts>400</maxAttempts>
+                    <backOffPeriod>5000</backOffPeriod>
+                    <widgetCollections>
+                        <widgetCollection>
+                            <groupId>com.backbase.flow.application.us-onboarding</groupId>
+                            <artifactId>us-onboarding-ang</artifactId>
+                            <classifier>employee-app</classifier>
+                        </widgetCollection>
+                        <widgetCollection>
+                            <groupId>com.backbase.flow.application.us-onboarding</groupId>
+                            <artifactId>us-onboarding-ang</artifactId>
+                            <classifier>prospect-app</classifier>
+                        </widgetCollection>
+                    </widgetCollections>
+                    <experiencePackages>
+                        <experiencePackage>
+                            <groupId>com.backbase.flow.application.us-onboarding</groupId>
+                            <artifactId>us-onboarding-ang</artifactId>
+                            <classifier>employee-portal</classifier>
+                        </experiencePackage>
+                        <experiencePackage>
+                            <groupId>com.backbase.flow.application.us-onboarding</groupId>
+                            <artifactId>us-onboarding-ang</artifactId>
+                            <classifier>prospect-portal</classifier>
+                        </experiencePackage>
+                    </experiencePackages>
+                    <importPackages>
+                    </importPackages>
+               </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

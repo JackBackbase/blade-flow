@@ -1,0 +1,58 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "@backbase/sme-onboarding-ui-ang",
+  "version": "2.0.5",
+  "description": "Collection of libraries for SME Onboarding",
+  "keywords": [
+    "backbase",
+    "collection",
+    "sme-onboarding",
+    "web",
+    "wa3"
+  ],
+  "dependencies": {
+    "@backbase/ds-landing-journey-ang": "^1.0.5",
+    "@backbase/ds-anchor-journey-ang": "^2.0.5",
+    "@backbase/ds-call-action-ang": "^1.0.5",
+    "@backbase/ds-interaction-init-ang": "^1.0.5",
+    "@backbase/ac-common-ang": "^2.0.4",
+    "@backbase/ac-document-request-viewer-widget": "^2.0.4",
+    "@backbase/ac-header-widget": "^2.0.4",
+    "@backbase/ac-task-details-viewer-widget": "^2.0.4",
+    "@backbase/cm-create-business-case-widget": "0.0.2"
+  },
+  "peerDependencies": {
+    "@angular/common": "^10.2.0 || ^11.2.0",
+    "@angular/core": "^10.2.0 || ^11.2.0",
+    "@angular/router": "^10.2.0 || ^11.2.0",
+    "@angular/cdk": "^10.2.0 || ^11.2.0",
+    "@angular/forms": "^10.2.0 || ^11.2.0",
+    "rxjs": "~6.6.6",
+    "@ngrx/effects": "^11.1.1",
+    "@ngrx/store": "^11.1.1",
+    "@backbase/foundation-ang": "^6.9.0",
+    "@backbase/ui-ang": "^6.0.0",
+    "@backbase/universal-ang": "^7.0.0",
+    "@backbase/case-management-ui-ang": "^3.0.0",
+    "@backbase/flow-interaction-sdk-ang": "^3.0.0",
+    "@backbase/ono-journey-collection-ang": "^0.3.0",
+    "@backbase/ds-shared-ang": "^2.0.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "whitelistedNonPeerDependencies": [
+      "@backbase/ds-landing-journey-ang",
+      "@backbase/ds-anchor-journey-ang",
+      "@backbase/ds-call-action-ang",
+      "@backbase/ds-interaction-init-ang",
+      "@backbase/ac-common-ang",
+      "@backbase/ac-document-request-viewer-widget",
+      "@backbase/ac-header-widget",
+      "@backbase/ac-task-details-viewer-widget",
+      "@backbase/cm-create-business-case-widget"
+    ],
+    "dest": "../../dist/libs/sme-onboarding-ui-ang"
+  }
+}

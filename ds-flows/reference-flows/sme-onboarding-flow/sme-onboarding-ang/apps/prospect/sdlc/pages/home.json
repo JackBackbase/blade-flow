@@ -1,0 +1,426 @@
+{
+  "extends": "container-bb-manageable-area",
+  "children": [
+    {
+      "extends": "bb-prospect-ang",
+      "area": "0",
+      "children": [
+        {
+          "classId": "FlowInteractionContainerComponent",
+          "deploymentPath": "interactions",
+          "interactionName": "sme-onboarding",
+          "apiVersion": "v2",
+          "servicePath": "sme-onboarding/client-api/interaction",
+          "children": [
+            {
+              "classId": "DsBackgroundContainerComponent",
+              "route": "sme-onboarding-walkthrough",
+              "backgroundImage": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-walkthrough.jpg",
+                "repo": "shared"
+              },
+              "logo": {
+                "kind": "content",
+                "path": "sme-onboarding/logo.svg",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "SmeOnboardingWalkthroughPagesComponent",
+                  "modalStepImage1": {
+                    "kind": "content",
+                    "path": "sme-onboarding/walkthrough-modal/step1.png",
+                    "repo": "shared"
+                  },
+                  "modalStepImage2": {
+                    "kind": "content",
+                    "path": "sme-onboarding/walkthrough-modal/step2.png",
+                    "repo": "shared"
+                  },
+                  "modalStepImage3": {
+                    "kind": "content",
+                    "path": "sme-onboarding/walkthrough-modal/step3.png",
+                    "repo": "shared"
+                  },
+                  "modalStepImage4": {
+                    "kind": "content",
+                    "path": "sme-onboarding/walkthrough-modal/step4.png",
+                    "repo": "shared"
+                  },
+                  "modalStepImage5": {
+                    "kind": "content",
+                    "path": "sme-onboarding/walkthrough-modal/terms-and-conditions-step.png",
+                    "repo": "shared"
+                  },
+                  "tncLinkText": "Terms and Conditions",
+                  "tncLink": "https://www.backbase.com/",
+                  "privacyLinkText": "Privacy Statement",
+                  "privacyLink": "https://www.backbase.com/"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "sme-onboarding-anchor",
+              "interactionName": "sme-onboarding",
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-walkthrough.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-walkthrough.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-walkthrough.jpg",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "DsAnchorJourneyAngComponent"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "otp-verification",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "OnoOtpVerificationJourneyAngComponent",
+                  "header": "Security at your fingertips",
+                  "countryCodeEditable": "false",
+                  "input.countryCodeEditable": "model countryCodeEditable",
+                  "fetchEmailHandler": "fetch-otp-email"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "sme-onboarding-check-case",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "DsCallActionAngComponent",
+                  "actionName": "sme-onboarding-check-case-exist"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "select-products",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-product.png",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-product.png",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-product.png",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "ProductSelectionJourneyAngComponent",
+                  "query": "{}",
+                  "product1": {
+                    "kind": "content",
+                    "path": "sme-onboarding/product-selection/businessChecking.jpg",
+                    "repo": "shared"
+                  },
+                  "product2": {
+                    "kind": "content",
+                    "path": "sme-onboarding/product-selection/businessCheckingPlus.jpg",
+                    "repo": "shared"
+                  }
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "company-lookup",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-identity.png",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-identity.png",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-identity.png",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "CompanyLookupJourneyAngModule"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "check-business-relation-and-document-request",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-otp.jpg",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "DsCallActionAngComponent",
+                  "actionName": "check-business-relation-and-document-requests-conditions"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "business-relations",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-identity.png",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-identity.png",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-identity.png",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "DsBusinessRelationsJourneyAngModule"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "document-request-journey",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-documents.png",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-documents.png",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-documents.png",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "DocumentRequestJourneyAngModule",
+                  "prevStepName": "sme-onboarding-business-identity"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "identity-verification-initiation",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "img-large-IDV.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "img-large-IDV.jpg",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "img-large-IDV.jpg",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "OnoIdvJumioJourneyAngComponent",
+                  "stepName": "identity-verification-initiation"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "sme-onboarding-personal-address",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-address.png",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-address.png",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-address.png",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "DsAddressJourneyAngComponent",
+                  "addressName": "Personal",
+                  "header": "Where do you live?",
+                  "shouldFetchAddress": "true",
+                  "fetchedAddressType": "Business",
+                  "showCheckbox": "true",
+                  "savedAnotherAddressCdoKey": "",
+                  "asAnotherAddressCheckboxText": "Same as my business address"
+                }
+              ]
+            },
+            {
+              "classId": "DsLayoutContainerAngComponent",
+              "route": "sme-onboarding-ssn",
+              "interactionName": "sme-onboarding",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImageL": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-address.png",
+                "repo": "shared"
+              },
+              "backgroundImageM": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-address.png",
+                "repo": "shared"
+              },
+              "backgroundImageS": {
+                "kind": "content",
+                "path": "sme-onboarding/img-large-address.png",
+                "repo": "shared"
+              },
+              "children": [
+                {
+                  "classId": "DsSsnJourneyAngComponent",
+                  "header": "Let's verify your identity",
+                  "stepName": "sme-onboarding-ssn"
+                }
+              ]
+            },
+            {
+              "classId": "DsBackgroundContainerComponent",
+              "route": "done",
+              "route.canActivate": [
+                "ProtectRouteGuard"
+              ],
+              "backgroundImage": {
+                "kind": "content",
+                "path": "sme-onboarding/landing-background.jpg",
+                "repo": "shared"
+              },
+              "logo": {
+                "kind": "content",
+                "path": "sme-onboarding/logo.svg",
+                "repo": "shared"
+              },
+              "largeImage": true,
+              "children": [
+                {
+                  "classId": "DsLandingJourneyAngComponent",
+                  "linkNavigateTo": "/sme-onboarding-application-center#/application-center-init",
+                  "heading": "Welcome to Bankbase!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

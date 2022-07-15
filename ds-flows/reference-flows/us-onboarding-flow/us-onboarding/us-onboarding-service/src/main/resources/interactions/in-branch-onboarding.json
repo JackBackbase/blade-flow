@@ -1,0 +1,78 @@
+{
+  "key": "in-branch-onboarding",
+  "version": 1,
+  "schemaId": "interaction-definition-schema@1",
+  "caseDefinitionKey": "onboarding",
+  "caseDefinitionVersion": 1,
+  "steps": [
+    {
+      "name": "select-products",
+      "enabled": "true",
+      "entryPoint": true,
+      "handlers": [
+        {
+          "name": "get-product-list"
+        },
+        {
+          "name": "select-products",
+          "preExecutions": [
+            {
+              "name": "create-case"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "personal-info"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "personal-info",
+      "handlers": [
+        {
+          "name": "submit-personal-info",
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "submit-in-branch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "submit-in-branch",
+      "enabled": "true",
+      "handlers": [
+        {
+          "name": "submit-in-branch",
+          "postExecutions": [
+            {
+              "name": "preliminary-case-promotion"
+            },
+            {
+              "name": "start-onboarding-process"
+            },
+            {
+              "name": "accept-terms-and-conditions"
+            }
+          ],
+          "transitions": [
+            {
+              "condition": "success()",
+              "step": "successfully-done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "successfully-done",
+      "enabled": "true",
+      "exitPoint": true
+    }
+  ]
+}

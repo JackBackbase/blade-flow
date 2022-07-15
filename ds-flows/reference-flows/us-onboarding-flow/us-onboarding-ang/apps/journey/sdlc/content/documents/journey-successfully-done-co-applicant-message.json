@@ -1,0 +1,4 @@
+{
+  "$schema": "../../$schema/SC_Unit_RichText.json",
+  "content": "<h1>Congrats {firstName}!</h1><p class='bb-highlight bb-highlight--regular'>Your profile is created!<br>A request to complete this application has been sent also to the co-applicant.<br>You will be able to use your account as soon the co-applicant has finalised his part.</p>"
+}

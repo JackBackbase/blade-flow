@@ -1,0 +1,71 @@
+{
+  "name": "container-bb-manageable-area-_-pmp5vg",
+  "properties": {
+    "title": "Manageable Area",
+    "autoExtend": true
+  },
+  "children": [
+    {
+      "name": "bb-us-journey-ang-_-xzqwe",
+      "properties": {
+        "title": "Journey Angular App Container",
+        "render.requires": "render-bb-ssr",
+        "render.strategy": "render-bb-widget-3",
+        "versionOfDependencies": "{\"case-management-ui-ang\":\"3.1.1\",\"cm-aml-results-widget\":\"0.3.1\",\"ds-shared-ang\":\"2.3.1\",\"flow-interaction-openapi-data\":\"2.0.20\",\"flow-interaction-sdk-ang\":\"3.0.0\",\"foundation-ang\":\"6.23.1\",\"ono-journey-collection-ang\":\"0.5.0\",\"ui-ang\":\"6.51.0\",\"universal-ang\":\"7.2.4\"}"
+      },
+      "children": [
+        {
+          "name": "bb-flow-interaction-container-ang-_-fg0f1b",
+          "properties": {
+            "classId": "FlowInteractionContainerComponent",
+            "title": "Flow Interaction Container",
+            "apiVersion": "v2",
+            "deploymentPath": "interactions",
+            "input.apiVersion": "model apiVersion",
+            "input.deploymentPath": "model deploymentPath",
+            "input.interactionName": "model interactionName",
+            "input.servicePath": "model servicePath",
+            "interactionName": "co-applicant-welcome",
+            "outletName": "",
+            "render.requires": "render-bb-widget-3",
+            "servicePath": "us-onboarding/client-api/interaction",
+            "version": "2.0.0"
+          },
+          "children": [
+            {
+              "name": "bb-us-ds-layout-container-ang-_-7t7r53",
+              "properties": {
+                "classId": "DsLayoutContainerAngComponent",
+                "title": "DsLayoutContainerAng Container",
+                "route": "welcome",
+                "backgroundImageL": "cs:@portalRepository:586e8dab192007321e92de54ed592f52",
+                "backgroundImageM": "cs:@portalRepository:68bb434bbe64662143c9e970792ddad2",
+                "backgroundImageS": "cs:@portalRepository:f924485611cc51574132fe9d1fb35673",
+                "headline": "",
+                "interactionName": "co-applicant-welcome",
+                "notifyScreen": true,
+                "render.requires": "render-bb-widget-3",
+                "showChildren": "",
+                "version": "1.0.4"
+              },
+              "children": [
+                {
+                  "name": "bb-ono-co-applicant-welcome-journey-ang-_-f17iw9",
+                  "properties": {
+                    "classId": "OnoCoApplicantWelcomeJourneyAngComponent",
+                    "title": "OnoCoApplicantWelcomeJourneyAng Widget",
+                    "getStartedUrl": "/onboarding-us",
+                    "input.getStartedUrl": "model getStartedUrl",
+                    "productImage": "cs:@portalRepository:f924485611cc51574132fe9d1fb35673",
+                    "render.requires": "render-bb-widget-3",
+                    "version": "1.0.1"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

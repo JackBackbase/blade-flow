@@ -1,0 +1,9 @@
+backbase:
+  flow:
+    integrations:
+      identity-verification:
+        retry-delay-durations: PT1S, PT2S, PT3S
+camunda:
+  bpm:
+    job-execution:
+      max-wait: 1000

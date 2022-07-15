@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0kqighg" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <decision id="handle-process" name="Decide on handling process" camunda:versionTag="0.3.0">
+    <decisionTable id="decisionTable_1" hitPolicy="FIRST">
+      <input id="InputClause_0906c4s" label="Document Type" camunda:inputVariable="documentType">
+        <inputExpression id="LiteralExpression_0fpqvm3" typeRef="string" expressionLanguage="juel">
+          <text>${smeHelper.getDocumentType(variableContext)}</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Handling Process" typeRef="string">
+        <outputValues id="UnaryTests_19a0gcj">
+          <text>"Review process 1","Review process 2"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_01qxov8">
+        <inputEntry id="UnaryTests_12unhin">
+          <text>"DBA document"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0u5dnhc">
+          <text>"manual-review"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06tsz2w">
+        <inputEntry id="UnaryTests_1ubb4tg">
+          <text>"Business License"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0n86e06">
+          <text>"manual-review"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_110c92w">
+        <inputEntry id="UnaryTests_0n4855v">
+          <text>"Business Structure"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05w53fa">
+          <text>"manual-review"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_14ahj8u">
+      <dmndi:DMNShape id="DMNShape_1u5qhhy" dmnElementRef="handle-process">
+        <dc:Bounds height="80" width="180" x="150" y="150" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

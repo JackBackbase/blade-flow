@@ -1,0 +1,62 @@
+<div class="col-3 p-0 d-flex justify-content-end float-right">
+    <button bbButton
+            type="button"
+            (click)="createNewCase()">
+        <bb-icon-ui name="add"
+                    i18n
+                    class="mr-2"
+                    size="m"></bb-icon-ui>
+        Start new case
+    </button>
+</div>
+
+<ng-container *ngIf="isCreateNewCaseModalOpen$ | async">
+    <bb-cm-business-informations-modal [usaStates]="usaStates$ | async"
+                                       *ngIf="currentStep === 'business-informations'"
+                                       (caseKey)="getCaseKey($event)"
+                                       (checkIsCaseExsist)="checkIsCaseExsist()"
+                                       (cancel)="openCreateNewCaseModal(false)"></bb-cm-business-informations-modal>
+
+    <bb-cm-exsisting-case-modal *ngIf="currentStep === 'check-exsisting-case'"
+                                [instanceKey]="caseKey"
+                                (goToExsistingCase)="goToCreatedCase(caseKey)"
+                                (startFromBeginning)="goToStep($event)"
+                                (cancel)="openCreateNewCaseModal(false)"></bb-cm-exsisting-case-modal>
+
+    <bb-cm-product-selection-modal (confirm)="createNewCase()"
+                                   *ngIf="currentStep === 'product-selection'"
+                                   (finish)="finish()"
+                                   (startFromBeginning)="goToStep($event)"
+                                   (cancel)="openCreateNewCaseModal(false)"></bb-cm-product-selection-modal>
+</ng-container>
+
+<ng-template #notificationSuccessTpl>
+    <div class="d-flex flex-column">
+        <h4 i18n>Case
+            created successfully!</h4>
+        <span class="text-break"
+              i18n>
+            View in the newly created case
+        </span>
+        <button class="align-self-end mt-3"
+                bbButton
+                color="primary"
+                i18n
+                type="button"
+                data-testid="go-to-case-btn"
+                data-role="sme-create-case-notification-view-btn"
+                (click)="goToCreatedCase(caseKey)">
+            Go to case
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #notificationErrorTpl>
+    <div class="d-flex flex-column">
+        <h4 i18n>Something went wrong!</h4>
+        <span class="text-break"
+              i18n>
+            Please try to create case again.
+        </span>
+    </div>
+</ng-template>
